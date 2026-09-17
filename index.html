@@ -143,7 +143,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <span id="dossier-count-badge" class="ml-1.5 px-1.5 py-0.2 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
                         </button>
                         <button id="tab-codex" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
-                        <button id="tab-manual" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('manual')">Field Manual</button>
+                        <button id="tab-manual" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('manual')"><span>Field Manual &amp; How-To</span></button>
                     </nav>
                     <a href="https://github.com/jdlikert-hash/bridgecraft" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center text-xs text-slate-400 hover:text-white bg-slate-700/50 hover:bg-slate-700 border border-slate-600/80 px-2.5 py-1.5 rounded-md transition-colors" title="View Source & License on GitHub">
                         <svg class="w-3.5 h-3.5 mr-1 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
@@ -197,6 +197,13 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 </div>
                 <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors">
                 <datalist id="subject-datalist"></datalist>
+                <div class="flex items-center justify-between text-xs text-slate-400 mt-2 px-1">
+                    <span>Select observation cues below to calibrate live de-escalation talk tracks.</span>
+                    <a href="javascript:void(0)" onclick="switchTab('manual')" class="theme-accent-text hover:underline flex items-center font-medium">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>60-Sec How-To Guide &rarr;</span>
+                    </a>
+                </div>
             </div>
 
             <!-- LEVEL 1 -->
@@ -453,6 +460,101 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         A tactical crisis communication, de-escalation, and multi-observer alignment system designed for 
                         Incident Management, Technical Support, and Engineering Leadership.
                     </p>
+                </div>
+
+                <!-- QUICK-START OPERATIONAL HOW-TO (HIGH-LEVEL) -->
+                <section class="bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900 rounded-2xl p-5 sm:p-6 border theme-border-accent shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/80 pb-3">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-base">⚡</span>
+                            <div>
+                                <h3 class="text-lg font-bold text-white tracking-tight">How to Use BridgeCraft (Field Quick-Start)</h3>
+                                <p class="text-xs text-slate-400">High-level operational summary — no manual reading or GitHub visit required.</p>
+                            </div>
+                        </div>
+                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 self-start sm:self-auto">
+                            6 Core Workflows
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-1 text-xs">
+                        <!-- Workflow 1 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-indigo-500/20 theme-accent-text flex items-center justify-center font-bold text-xs">1</span>
+                                <strong class="text-slate-100 text-sm">30-Second Active Triage</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Enter a stakeholder name (optional), select 2–3 observable audio or video cues, and click <strong>Calibrate Playbook</strong>. You instantly get immediate "Say This" vs. "Avoid" live talk tracks and a 1-click status template.
+                            </p>
+                            <span class="text-[11px] theme-accent-text font-semibold block pt-0.5">Tip: Use Camera-Off cues for Slack, phone calls, and audio bridges.</span>
+                        </div>
+
+                        <!-- Workflow 2 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">2</span>
+                                <strong class="text-slate-100 text-sm">Switch Operational Lenses</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Use the top <strong>Operational Lens</strong> bar to tailor vocabulary and de-escalation scripts to your scenario: <strong>IT Ops</strong> (Sev-1 outages), <strong>CRM &amp; Sales</strong> (churn &amp; renewal saves), <strong>Banking Hardship</strong>, or <strong>Crisis Counseling</strong>.
+                            </p>
+                            <span class="text-[11px] text-emerald-400 font-semibold block pt-0.5">Tip: Each lens adopts its own calming, dedicated color scheme.</span>
+                        </div>
+
+                        <!-- Workflow 3 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">3</span>
+                                <strong class="text-slate-100 text-sm">Customize Your Talk Tracks</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Want to use your company's own phrasing? Click <strong>Edit Battlecard</strong> (on any Codex card or directly on the Active Console results card) to edit "Say This", "Avoid", and communication templates. Changes persist in your browser.
+                            </p>
+                            <span class="text-[11px] text-amber-400 font-semibold block pt-0.5">Tip: Use "Reset Domain Defaults" to restore factory scripts anytime.</span>
+                        </div>
+
+                        <!-- Workflow 4 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xs">4</span>
+                                <strong class="text-slate-100 text-sm">Stakeholder Intelligence</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                In <strong>Field Archive</strong>, click <strong>Edit Intel</strong> on any person to record known <strong>Hot Buttons &amp; Taboos</strong> and <strong>Bespoke Talk Tracks</strong>. Next time you profile them, their personal intel auto-surfaces above the tactical playbook!
+                            </p>
+                            <span class="text-[11px] text-rose-400 font-semibold block pt-0.5">Tip: You can also click "+ Add Stakeholder Intel" directly from Active Console.</span>
+                        </div>
+
+                        <!-- Workflow 5 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs">5</span>
+                                <strong class="text-slate-100 text-sm">Multi-Observer Drill History</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                After team triage exercises, click <strong>Save to Archive</strong> or <strong>Import Playbooks</strong> to aggregate multiple observer perspectives. The archive detects consensus vs. situational adaptation, and includes a 1-click <strong>Merge</strong> tool for typos.
+                            </p>
+                            <span class="text-[11px] text-purple-400 font-semibold block pt-0.5">Tip: Click "Load Sample Multi-Domain Drill Data" to explore realistic examples.</span>
+                        </div>
+
+                        <!-- Workflow 6 -->
+                        <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 hover:border-slate-600 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs">6</span>
+                                <strong class="text-slate-100 text-sm">Zero-Cloud Privacy &amp; Offline Export</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                BridgeCraft runs 100% locally in your browser memory. No names, notes, or data ever leave your machine. Need an offline single-file app for incident go-bags? Press <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-mono text-[10px] text-slate-200">Ctrl+Shift+E</kbd> to bundle and download.
+                            </p>
+                            <span class="text-[11px] text-cyan-400 font-semibold block pt-0.5">Tip: Complete JSON backups export and import with 1 click in Field Archive.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="pt-2 border-t border-slate-700/80">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Theoretical Foundations &amp; Architecture Reference</h3>
+                    <p class="text-xs text-slate-500">For operators and educators who want to understand the underlying psychological and behavioral models:</p>
                 </div>
 
                 <!-- Section 1: Executive Summary -->
