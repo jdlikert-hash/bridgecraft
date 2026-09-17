@@ -166,3 +166,19 @@ A premier use case for **The Behavioral Profiler** is team training exercises. W
 1. **The Platinum Rule:** The Golden Rule says *"Treat others how you want to be treated."* The Platinum Rule of incident management says *"Treat others how they need to be treated to stay calm and functional."*
 2. **Profiles are States, Not Life Sentences:** A person's phase shifts depending on sleep, pressure, life circumstances, and organizational safety. Always profile the *interaction*, not just the *person*.
 3. **Strict Client-Side Privacy:** This application runs 100% locally in the browser memory. No data, names, notes, or profile assessments are ever transmitted over a network.
+
+---
+
+## 9. Intellectual Property, Independent Authorship & Workplace Notice
+
+**Copyright (c) 2026 Jack Likert. All Rights Reserved.**
+
+### Declaration of Independent Invention:
+This Software, documentation, heuristics, scoring engine, and architecture were conceived, authored, and reduced to practice solely and independently by **Jack Likert** on personal, non-work time, utilizing exclusively personal equipment, personal software licenses, and personal resources, without the use of any employer, client, or third-party facilities, equipment, supplies, confidential information, trade secrets, or funding.
+
+### Not a Work Made for Hire & Workplace Disclaimer:
+1. **Not a Work-for-Hire:** Under no circumstances shall this Software, or any portion thereof, be construed as a "work made for hire" under the United States Copyright Act (17 U.S.C. § 101) or any international equivalent.
+2. **Workplace Demonstration:** The Author may demonstrate, pilot, or share this tool within workplace environments, incident response teams, or live-fire drills for non-commercial evaluation. **Such demonstration, hosting, or use does not convey, assign, license, or transfer any intellectual property rights, shop rights, patent rights, or claims of ownership to any employer, client, corporation, or entity.**
+3. **Evaluation License:** Individual support personnel and incident commanders are granted a limited, personal, non-exclusive, revocable license to execute the Software for non-commercial incident triage and team training. All other rights, including commercial redistribution, sublicensing, or integration into proprietary enterprise products, are strictly reserved by Jack Likert.
+
+See the [LICENSE](file:///c:/profiler/LICENSE) file for the complete legal terms.
