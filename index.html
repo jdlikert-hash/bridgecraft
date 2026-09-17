@@ -174,11 +174,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </button>
                 </div>
             </div>
-            <div class="flex items-center space-x-2 self-end sm:self-auto">
-                <button type="button" onclick="exportStandaloneLensApp()" class="text-slate-400 hover:text-slate-200 transition-colors flex items-center space-x-1 bg-slate-800/60 hover:bg-slate-800 border border-slate-700 px-2 py-1 rounded text-[11px]" title="Export this domain as a self-contained single-file HTML tool">
-                    <svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    <span>Export Domain App</span>
-                </button>
+            <div class="flex items-center space-x-2 self-end sm:self-auto text-[11px] text-slate-400">
+                <span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700 font-mono text-[10px] text-slate-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>Active Domain: <strong id="active-lens-indicator" class="ml-1 text-white">IT Ops</strong>
+                </span>
             </div>
         </div>
     </div>
@@ -416,12 +415,20 @@ employer, client, or third party. See LICENSE file for full legal terms.
         <!-- VIEW 3: THE CODEX -->
         <div id="view-codex" class="hidden space-y-6">
             <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
-                <div class="border-b border-slate-700 pb-4 mb-6">
-                    <h2 class="text-2xl font-bold text-white mb-1">The BridgeCraft Codex & Tactical Playbooks</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        A dual-lens reference combining <strong>Process Communication Model (PCM)</strong> distress dynamics with <strong>DISC Leadership Alignment</strong>. 
-                        In live incidents, use these battlecards to select exact vocabulary and avoid trigger phrases.
-                    </p>
+                <div class="border-b border-slate-700 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-1">The BridgeCraft Codex & Tactical Playbooks</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            A dual-lens reference combining <strong>Process Communication Model (PCM)</strong> distress dynamics with <strong>DISC Leadership Alignment</strong>. 
+                            Customize any battlecard to match your team's vocabulary using the <strong>Edit Battlecard</strong> button.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button type="button" onclick="resetAllPlaybooksToDefault()" class="text-slate-400 hover:text-amber-300 text-xs px-3 py-1.5 rounded bg-slate-900/80 hover:bg-slate-900 border border-slate-700 flex items-center transition-colors shadow-sm" title="Reset all battlecards in this domain to factory defaults">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span>Reset Domain Defaults</span>
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="codex-grid">
@@ -665,6 +672,121 @@ employer, client, or third party. See LICENSE file for full legal terms.
             <div class="flex justify-end space-x-3 pt-3 border-t border-slate-700">
                 <button onclick="closeMergeModal()" class="px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white">Cancel</button>
                 <button onclick="confirmMergeSubjects()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-semibold shadow">Confirm Merge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT PLAYBOOK / BATTLECARD MODAL -->
+    <div id="modal-edit-playbook" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 max-w-2xl w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <div>
+                    <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                        <span class="text-indigo-400">✏️</span>
+                        <span>Customize Battlecard:</span>
+                        <span id="edit-playbook-archetype-title" class="theme-accent-text font-bold"></span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        Domain: <strong id="edit-playbook-lens-name" class="text-slate-200"></strong> • Changes persist in your browser and override default suggestions.
+                    </p>
+                </div>
+                <button onclick="closeEditPlaybookModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
+            </div>
+
+            <div class="space-y-4 max-h-[65vh] overflow-y-auto pr-1">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-emerald-400 mb-1">
+                        Green Light: "Say This" Scripts (One talk track per line)
+                    </label>
+                    <textarea id="edit-playbook-dosay" rows="4" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Enter custom de-escalation talk tracks, one per line..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-rose-400 mb-1">
+                        Red Line: "Never Say This" / Avoid (One phrase per line)
+                    </label>
+                    <textarea id="edit-playbook-dontsay" rows="3" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-rose-500" placeholder="Enter triggers and phrases to strictly avoid, one per line..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide theme-accent-text mb-1">
+                        Executive Action / Status Communication Template
+                    </label>
+                    <textarea id="edit-playbook-action" rows="6" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter custom email, Slack, or memo template..."></textarea>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-3 border-t border-slate-700">
+                <button type="button" onclick="resetCurrentPlaybookToDefault()" class="text-xs text-amber-400 hover:text-amber-300 transition-colors flex items-center">
+                    <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Restore Factory Defaults
+                </button>
+                <div class="flex items-center space-x-2 self-end sm:self-auto">
+                    <button onclick="closeEditPlaybookModal()" class="px-3 py-1.5 rounded-md text-xs text-slate-400 hover:text-white">Cancel</button>
+                    <button onclick="saveCustomPlaybookFromModal()" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-xs font-semibold shadow">Save Battlecard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT STAKEHOLDER INTEL & BESPOKE TALK TRACKS MODAL -->
+    <div id="modal-edit-intel" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 max-w-2xl w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <div>
+                    <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                        <span class="text-indigo-400">👤</span>
+                        <span>Stakeholder Intelligence:</span>
+                        <span id="edit-intel-subject-name" class="theme-accent-text font-bold"></span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        Record hot buttons, taboos, and bespoke personal talk tracks that auto-surface on the Active Console.
+                    </p>
+                </div>
+                <button onclick="closeEditIntelModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
+            </div>
+
+            <div class="space-y-4 max-h-[65vh] overflow-y-auto pr-1">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-300 mb-1">
+                        Stakeholder Context & Background Notes
+                    </label>
+                    <input type="text" id="edit-intel-notes" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. VP of Sales at Acme Corp. Primary executive sponsor for Q4 renewal.">
+                </div>
+
+                <!-- HOT BUTTONS & TABOOS -->
+                <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700 space-y-2">
+                    <label class="block text-xs font-bold uppercase tracking-wide text-rose-400">
+                        ⚠️ Known Hot Buttons, Sensitivities & Taboos (One per line)
+                    </label>
+                    <p class="text-[11px] text-slate-400">
+                        Things that trigger acute friction with this person (e.g. <em>"Hates technical weeds"</em>, <em>"Stressed about Thursday board meeting"</em>).
+                    </p>
+                    <textarea id="edit-intel-hotbuttons" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-md py-2 px-3 text-slate-200 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-rose-500" placeholder="Hates technical architecture jargon&#10;Stressed about Thursday board presentation&#10;Needs direct VP commitments"></textarea>
+                </div>
+
+                <!-- BESPOKE PERSONAL TALK TRACKS -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wide text-emerald-400">
+                                💬 Bespoke Personal Talk Tracks
+                            </label>
+                            <p class="text-[11px] text-slate-400">Customized scripts crafted specifically for this individual.</p>
+                        </div>
+                        <button type="button" onclick="addPersonalTalkTrackRow()" class="px-2.5 py-1 bg-indigo-600/80 hover:bg-indigo-600 text-white rounded text-xs font-medium flex items-center transition-colors">
+                            + Add Talk Track
+                        </button>
+                    </div>
+                    <div id="intel-talk-tracks-container" class="space-y-3">
+                        <!-- Populated dynamically with talk track edit blocks -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-3 border-t border-slate-700">
+                <button onclick="closeEditIntelModal()" class="px-4 py-2 rounded-md text-xs text-slate-400 hover:text-white">Cancel</button>
+                <button onclick="saveStakeholderIntelFromModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-xs font-semibold shadow">Save Stakeholder Intel</button>
             </div>
         </div>
     </div>
@@ -937,19 +1059,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         actionTemplate: `*INCIDENT STATUS UPDATE (VERIFIED TELEMETRY)*\n• *Status:* Root cause mitigation in progress.\n• *Telemetry Snapshot:* Error rates decreased from 14.2% to 1.9% following pool restart.\n• *Next Checkpoint:* [Time] with latency & CPU delta.\n• *Artifacts:* Raw debug logs attached in thread.`
                     },
                     crm_sales: {
-                        templateTitle: "Executive Account Save & Remediation Timeline",
-                        templateName: "Executive Technical Brief",
+                        templateTitle: "Commercial Milestone Audit & Delivery Schedule",
+                        templateName: "Executive Commercial Audit",
                         doSay: [
-                            "Here is our milestone audit: Root cause is isolated to the auth gateway, and remediation will deploy at 14:00 UTC with zero downtime.",
-                            "We have verified the exact error telemetry affecting your team: 2.1% of transactions over 42 minutes.",
-                            "Let's review the SLA credit calculations line-by-line so you have total financial clarity."
-                        ],
+                            "Here is our verified milestone checklist: We have audited the onboarding timeline and isolated the delivery blocker to custom data mapping.",
+                            "Let's review the contractual deliverable schedule and SLA credit calculation line-by-line so you have complete financial clarity.",
+                            "What specific milestone criteria or sign-offs does your executive steering committee need before the upcoming quarterly review?"
+],
                         dontSay: [
-                            "Trust us, our developers are working super hard and we feel good about it.",
-                            "You're getting too caught up in contractual technicalities.",
-                            "We can't commit to any exact timelines right now."
-                        ],
-                        actionTemplate: `Subject: Verified Technical Review & Remediation Timeline — [Account Name]\n\nDear [Name],\n\nHere is the verified technical audit regarding today's service degradation:\n1. Root Cause: Memory leak in authentication service v2.4.1 (isolated at 11:22 AM).\n2. Scope of Impact: 2.1% of active sessions affected between 10:45 AM and 11:30 AM.\n3. Remediation: Hotfix deployed and verified in staging; production rollout scheduled for 14:00 UTC.\n4. Contractual SLA Audit: Telemetry logs and contractual credit calculation will be delivered by EOD tomorrow.\n\nNext scheduled checkpoint: 14:30 UTC with post-deployment metrics.\n\nBest regards,\n[Your Name]`
+                            "Trust us, our sales and account team has a good feeling about this and you shouldn't worry.",
+                            "You're getting too caught up in contract legalities and milestone technicalities.",
+                            "We can't commit to any firm dates or SLA figures right now."
+],
+                        actionTemplate: `Subject: Commercial Milestone Audit & Delivery Schedule — [Account Name]\n\nDear [Name],\n\nHere is our verified commercial deliverable audit regarding your account onboarding:\n1. Deliverables Audit: Data integration completed at 98.4% accuracy (target: 99.0%). Final reconciliation scheduled for [Date].\n2. Dedicated Allocation: Professional services hours increased by 40 hours at zero cost to guarantee go-live before [Milestone Date].\n3. Contractual SLA Audit: Line-item review of delivery milestones and contractual credits will be submitted to your procurement office by [Date].\n4. Executive Checkpoint: Next formal milestone checkpoint with our VP of Customer Success is scheduled for [Date/Time].\n\nWe remain strictly committed to delivering according to your enterprise contract standards.\n\nSincerely,\n[Your Name]\n[Title]`
                     },
                     financial_hardship: {
                         templateTitle: "Loss Mitigation Workout Outline (Verified Financial Data)",
@@ -1015,18 +1137,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     },
                     crm_sales: {
                         templateTitle: "Partnership Alignment & Standards Commitment",
-                        templateName: "Executive Standards Brief",
+                        templateName: "Executive Governance Memo",
                         doSay: [
-                            "We entered this customer partnership with a mutual commitment to your mission, and I want to personally honor that standard.",
-                            "We share your high bar for software excellence; what is your opinion on whether we delay the rollout to guarantee 100% stability?",
-                            "Thank you for holding us accountable to the governance framework we agreed upon."
-                        ],
+                            "We entered this customer partnership with a mutual commitment to your organization's mission, and I want to personally honor that standard.",
+                            "We share your high bar for vendor integrity and governance; what is your perspective on our proposed quality safeguards?",
+                            "Thank you for holding us accountable to the standard of excellence your team was promised."
+],
                         dontSay: [
-                            "Let's just sweep this bug under the rug so we can hit our quarterly renewal deadline.",
-                            "You're taking the contract principles way too seriously.",
-                            "It's just software, things break all the time."
-                        ],
-                        actionTemplate: `Subject: Partnership Alignment & Standards Commitment — [Account Name]\n\nDear [Name],\n\nI am writing to you directly because I hold our partnership to the highest standard of accountability. When you chose to partner with us, you trusted our commitment to your organization's mission and reliability.\n\nToday's service disruption fell below that standard. We do not make excuses.\n\nHere is how we are taking principled ownership:\n1. Architecture Integrity: A dedicated engineering task force is conducting a security and reliability audit of the affected subsystem.\n2. Governance Review: We are submitting an executive post-incident report detailing root cause and prevention safeguards by [Date].\n3. Leadership Alignment: I would welcome 15 minutes with you tomorrow to review our corrective actions and ensure they align with your standards.\n\nThank you for holding us to the excellence your team deserves.\n\nRespectfully,\n[Your Name]`
+                            "Let's just sweep this hiccup under the rug so we can get your contract renewed by quarter-end.",
+                            "You're taking the governance principles way too seriously; every vendor has friction.",
+                            "At the end of the day, it's just software\u2014things slip all the time."
+],
+                        actionTemplate: `Subject: Partnership Alignment & Standards Commitment — [Account Name]\n\nDear [Name],\n\nI am writing to you directly because I hold our customer partnership to the highest standard of accountability. When you chose our platform, you trusted our commitment to your team's mission and reliability.\n\nRecent delivery friction fell below that standard. We do not make excuses.\n\nHere is how we are taking principled ownership:\n1. Executive Accountability: Our executive leadership team has initiated a complete review of account deliverables and support responsiveness.\n2. Governance Review: We are submitting an executive account action plan detailing contractual commitments, deliverables schedule, and executive oversight by [Date].\n3. Leadership Alignment: I would welcome 15 minutes with you tomorrow to review our corrective actions and ensure they align with your standards.\n\nThank you for holding us to the excellence your team deserves.\n\nRespectfully,\n[Your Name]\n[Title]`
                     },
                     financial_hardship: {
                         templateTitle: "Loss Mitigation Workout Outline (Respect & Integrity)",
@@ -1094,16 +1216,16 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         templateTitle: "Personal Support & Partnership Reassurance",
                         templateName: "High-EQ Relationship Save",
                         doSay: [
-                            "I recognize how much personal stress this outage has caused you and your team with your internal stakeholders.",
+                            "I recognize how much personal stress this friction has caused you and your team with your internal leadership.",
                             "We are in this together. I will personally manage this account daily so you don't have to carry this burden alone.",
-                            "How are you and your team holding up? Let's take the temperature before we dive into the action items."
-                        ],
+                            "How are you and your team holding up? Let's take the temperature before we dive into the tactical review."
+],
                         dontSay: [
-                            "Stop getting emotional about a business software glitch.",
-                            "Our contract explicitly disclaims customer emotional stress.",
-                            "You need to calm your users down on your own."
-                        ],
-                        actionTemplate: `Subject: We are with you: Personal support & update for [Account Name]\n\nHi [Name],\n\nFirst and most importantly: I know how deeply stressful the past few hours have been for you and your team. You have advocated tirelessly for your end-users, and I recognize that today's disruption put unfair pressure on your shoulders.\n\nI want you to know that our entire leadership team is standing behind you. We are treating your team's success as our personal priority.\n\nHere is what we are doing to take the pressure off you:\n• Dedicated Technical Lead: Assigned [Name] to monitor your instance 24/7 through the weekend.\n• Executive Communication: If it would help relieve pressure with your leadership, I am glad to join an internal call with your VP to explain the vendor-side resolution.\n\nPlease take a deep breath. We are going to get through this together.\n\nWarm regards,\n[Your Name]`
+                            "Stop getting emotional about a business software timeline.",
+                            "Our contract explicitly disclaims any responsibility for your team's internal pressure.",
+                            "You need to calm your internal executives down on your own."
+],
+                        actionTemplate: `Subject: We are in your corner: Personal support & update for [Account Name]\n\nHi [Name],\n\nFirst and most importantly: I know how deeply stressful the past few weeks have been for you and your team. You have advocated tirelessly for your end-users, and I recognize that this implementation friction put unfair pressure on your shoulders.\n\nI want you to know that our entire leadership team is standing behind you. We are treating your team's success as our personal priority.\n\nHere is what we are doing to take the pressure off you:\n• Dedicated Account Advocate: Assigned senior team coverage to monitor your workflows daily and eliminate ticket delays.\n• Executive Cover: If it would help relieve pressure with your internal leadership, I am glad to join an internal meeting with your VP to shoulder the vendor accountability and present our joint remediation plan.\n\nPlease take a deep breath. We are going to get through this together.\n\nWarm regards,\n[Your Name]\n[Title]`
                     },
                     financial_hardship: {
                         templateTitle: "Borrower Stabilization Protocol (Compassion & Agency)",
@@ -1169,18 +1291,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     },
                     crm_sales: {
                         templateTitle: "Creative Commercial Alignment & Unconventional Fix",
-                        templateName: "Unconventional Solution Offer",
+                        templateName: "Unconventional Commercial Offer",
                         doSay: [
-                            "Let's ditch the boring corporate deck—what unconventional commercial solution would actually blow your team away?",
-                            "Do you want to run an exclusive pilot on our beta features, or would you rather we invent a custom pricing tier to make this fun?",
-                            "I appreciate your candid honesty; let's cut through the red tape and fix this together."
-                        ],
+                            "Let's ditch the boring corporate deck\u2014what unconventional commercial solution would actually blow your team away?",
+                            "Do you want to run an exclusive pilot on our next-gen release, or would you rather we create a custom pricing tier to make this a win?",
+                            "I appreciate your candid honesty; let's cut through the red tape and fix this together right now."
+],
                         dontSay: [
-                            "Our enterprise legal master agreement explicitly forbids any customization.",
-                            "Please stop using emojis and informal language in our email chain.",
-                            "You must submit Ticket Form 402 and wait 10 business days."
-                        ],
-                        actionTemplate: `Subject: No corporate fluff: Let's fix this creatively for [Account Name]\n\nHey [Name],\n\nI know you're completely exhausted by generic vendor apologies and standard corporate non-answers. Let's skip the script.\n\nHere is where things stand and what we can actually do:\n• The Issue: Our standard pipeline choked on your high-volume import. Frustrating? Absolutely.\n• Unconventional Fix: Instead of waiting for the sprint release next week, our lead engineer built a custom webhook listener in sandbox today.\n• The Offer: We want to give you early VIP access to bypass the bottleneck entirely, plus credit your team 3 free months of premium analytics.\n\nDo you want to hop on a quick 10-minute screenshare and test it out together, or should I have the team spin it up directly?\n\nCheers,\n[Your Name]`
+                            "Our standard master services agreement strictly forbids any commercial concessions.",
+                            "Please maintain formal corporate decorum and submit Ticket Form 402.",
+                            "You have to wait 10 business days for the standard committee review."
+],
+                        actionTemplate: `Subject: No corporate fluff: Let's fix this creatively for [Account Name]\n\nHey [Name],\n\nI know you're completely exhausted by generic vendor apologies and standard corporate non-answers. Let's skip the script.\n\nHere is where things stand and what we can actually do:\n• The Reality: Our standard onboarding process moved way too slow for your team's pace. Frustrating? Absolutely.\n• Unconventional Fix: Instead of waiting for procurement red tape, our VP of Product approved custom commercial terms and dedicated onboarding bandwidth to bypass the bottleneck entirely.\n• The Offer: We want to waive the integration fee, give your team early VIP access to next-gen analytics, and credit your renewal.\n\nDo you want to hop on a quick 10-minute call to look at the numbers together, or should I just have legal draft the amendment right away?\n\nCheers,\n[Your Name]\n[Title]`
                     },
                     financial_hardship: {
                         templateTitle: "Borrower Empowerment Plan (Rapid Unconventional Restoration)",
@@ -1245,19 +1367,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         actionTemplate: `*INCIDENT STATUS UPDATE (BOTTOM-LINE IMPACT)*\n• *Bottom Line:* 95% user impact eliminated via regional isolation.\n• *Immediate Action:* Triggering failover to restore remaining 5% of traffic.\n• *Win Condition:* Full green recovery projected in < 5 minutes.\n• *Next Checkpoint:* [Time].`
                     },
                     crm_sales: {
-                        templateTitle: "Executive Action & Bottom-Line Resolution",
-                        templateName: "Executive Action Memo",
+                        templateTitle: "Executive Action & Bottom-Line Deal Resolution",
+                        templateName: "Executive Bottom-Line Memo",
                         doSay: [
                             "Bottom line: We will credit 25% of your annual contract value today and guarantee executive engineering coverage until resolution.",
-                            "Here is the win: We pull our principal architect onto your deployment in 15 minutes, and your pipeline is green before your board meeting.",
+                            "Here is the win: We pull our principal solutions director onto your deployment in 15 minutes, and your pipeline is green before your board meeting.",
                             "What does a complete win look like for you by 5 PM today? Let's make it happen."
-                        ],
+],
                         dontSay: [
-                            "Let's schedule a committee meeting next Tuesday to draft a preliminary exploration.",
-                            "You need to understand our internal engineering resource constraints.",
-                            "Please be patient and follow normal support ticketing queues."
-                        ],
-                        actionTemplate: `Subject: Executive Action & Bottom-Line Resolution — [Account Name]\n\n[Name],\n\nBottom Line:\nWe have deployed our principal architect to your account as of 12:00 PM. We will have your core pipeline restored before your executive review at 4:00 PM today.\n\nImmediate Deliverables:\n1. Dedicated Engineering SWAT: 4 senior engineers dedicated to your cluster until latency drops below 80ms.\n2. Commercial Credit: 25% annual credit credited to your invoice today, authorized directly by our VP.\n3. Executive Escalation: You have my direct mobile phone number below. Call me directly at any time.\n\nNext update: 14:00 PM sharp.\n\n[Your Name]\n[Direct Phone]`
+                            "Let's schedule an exploratory committee meeting next Tuesday to review hypotheticals.",
+                            "You need to understand our internal staffing constraints and submit a ticket.",
+                            "Please be patient and let our support queue process your ticket sequentially."
+],
+                        actionTemplate: `Subject: Executive Action & Bottom-Line Resolution — [Account Name]\n\n[Name],\n\nBottom Line:\nWe have assigned our Principal Solutions Director to your account as of 12:00 PM. We will have your core pipeline restored and verified before your executive review at 4:00 PM today.\n\nImmediate Deliverables:\n1. Dedicated Executive Escalation: Our VP of Customer Operations is personally championing your deployment through final sign-off.\n2. Commercial Guarantee: 25% SLA credit applied directly to your account statement today, authorized by executive leadership.\n3. Direct Access: You have my direct mobile phone number below. We cut the red tape—call me anytime.\n\nNext update: 14:00 PM sharp.\n\n[Your Name]\n[Direct Mobile]`
                     },
                     financial_hardship: {
                         templateTitle: "Loss Mitigation Term Sheet (Bottom-Line Workout)",
@@ -1322,19 +1444,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         actionTemplate: `*INCIDENT STATUS UPDATE (DEEP INVESTIGATION)*\n• *Current Focus:* Deep heap and thread profiling running in isolated container.\n• *Protocol:* Channel noise kept to a minimum to allow focused analysis.\n• *Expected Readout:* [Time] with core dump diagnostic.`
                     },
                     crm_sales: {
-                        templateTitle: "Asynchronous Review & Executive Summary",
-                        templateName: "Low-Pressure Asynchronous Brief",
+                        templateTitle: "Low-Pressure Asynchronous Brief & Executive Summary",
+                        templateName: "Low-Pressure Commercial Brief",
                         doSay: [
-                            "I will send you a concise written summary of the solution so you can review it quietly on your own schedule.",
-                            "Take all the time you need to review the staging environment. No need to respond to this email until tomorrow afternoon.",
-                            "I will handle all the vendor coordination internally so you don't have to join any noisy alignment calls."
-                        ],
+                            "I will send you a concise written summary of the renewal options so you can review it quietly on your own schedule.",
+                            "Take all the time you need to review the commercial proposals. No need to respond to this message until tomorrow afternoon.",
+                            "I will handle all vendor and internal coordination so you don't have to join any noisy alignment calls."
+],
                         dontSay: [
-                            "Why aren't you answering my 6 Slack pings and 3 phone calls?!",
-                            "Hop on this 20-person Zoom war room right now!",
-                            "Give me your final purchasing decision right this second!"
-                        ],
-                        actionTemplate: `Subject: Asynchronous Review & Summary — [Account Name]\n\nHi [Name],\n\nNo need to reply to this message immediately. I wanted to give you a clear, quiet summary of where things stand so you can review at your own convenience.\n\nSummary of Status:\n• The configuration update has been isolated in your sandbox.\n• All test queries are passing with zero errors.\n• Detailed release documentation is linked here: [Link].\n\nTake your time reviewing. Whenever you are ready, simply send me a short note with your thoughts. I will protect your team from any unnecessary meetings in the meantime.\n\nBest,\n[Your Name]`
+                            "Why haven't you answered my 4 Slack messages and 2 phone calls today?!",
+                            "Hop on this 15-person executive alignment call right now!",
+                            "We need your signature on this contract amendment within the next hour!"
+],
+                        actionTemplate: `Subject: Asynchronous Review & Summary — [Account Name]\n\nHi [Name],\n\nNo need to reply to this message immediately. I wanted to give you a clear, quiet summary of where things stand so you can review at your own convenience.\n\nSummary of Commercial Proposal:\n• All renewal terms and multi-year options have been summarized in a 1-page executive brief: [Link].\n• Contractual deliverables and milestone commitments are itemized for quiet review without meeting pressure.\n• All pricing protections through 2027 are locked in.\n\nTake your time reviewing. Whenever you are ready, simply send me a short note with your thoughts. I will protect your calendar from unnecessary meetings in the meantime.\n\nBest,\n[Your Name]\n[Title]`
                     },
                     financial_hardship: {
                         templateTitle: "Borrower Gentle Step Intake (Low-Stimulation Workout)",
@@ -1408,6 +1530,271 @@ employer, client, or third party. See LICENSE file for full legal terms.
             } catch (e) {
                 return 'it_ops';
             }
+        }
+
+        
+        // ================= HTML SANITIZATION & STAKEHOLDER HELPERS =================
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function createAndEditIntelForName(name) {
+            if (!name || !name.trim()) return;
+            const subName = name.trim();
+            let subject = findSubjectByNameOrAlias(subName);
+            if (!subject) {
+                const subId = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+                subject = {
+                    id: subId,
+                    canonicalName: subName,
+                    aliases: [subName],
+                    notes: '',
+                    hotButtons: [],
+                    personalTalkTracks: [],
+                    createdAt: new Date().toISOString()
+                };
+                dossier.subjects[subId] = subject;
+                saveDossier();
+            }
+            openEditIntelModal(subject.id);
+        }
+
+        // ================= CUSTOM PLAYBOOK & STAKEHOLDER INTEL ENGINE =================
+        const CUSTOM_PLAYBOOKS_KEY = 'bridgecraft_custom_playbooks_v1';
+        let customPlaybooks = {};
+        let activeEditingArchetype = null;
+        let activeEditingSubjectId = null;
+
+        function loadCustomPlaybooks() {
+            try {
+                const raw = localStorage.getItem(CUSTOM_PLAYBOOKS_KEY);
+                customPlaybooks = raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                console.warn('Failed to parse custom playbooks from localStorage:', e);
+                customPlaybooks = {};
+            }
+        }
+
+        function saveCustomPlaybooks() {
+            try {
+                localStorage.setItem(CUSTOM_PLAYBOOKS_KEY, JSON.stringify(customPlaybooks));
+            } catch (e) {
+                console.warn('Failed to save custom playbooks:', e);
+            }
+        }
+
+        function getEffectivePlaybook(archetypeKey, lensKey) {
+            const lens = lensKey || currentLens || 'it_ops';
+            const baseArch = archetypes[archetypeKey];
+            if (!baseArch) return null;
+            const defaultPb = baseArch.playbooks[lens] || baseArch.playbooks['it_ops'];
+            const custom = customPlaybooks[lens]?.[archetypeKey];
+            if (!custom) return { ...defaultPb, isCustomized: false };
+
+            return {
+                templateTitle: custom.templateTitle || defaultPb.templateTitle,
+                templateName: custom.templateName || defaultPb.templateName,
+                doSay: Array.isArray(custom.doSay) && custom.doSay.length > 0 ? custom.doSay : defaultPb.doSay,
+                dontSay: Array.isArray(custom.dontSay) && custom.dontSay.length > 0 ? custom.dontSay : defaultPb.dontSay,
+                actionTemplate: (custom.actionTemplate !== undefined && custom.actionTemplate.trim() !== '') ? custom.actionTemplate : defaultPb.actionTemplate,
+                isCustomized: true
+            };
+        }
+
+        function openEditPlaybookModal(archetypeKey) {
+            activeEditingArchetype = archetypeKey;
+            const arch = archetypes[archetypeKey];
+            if (!arch) return;
+            const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
+            const effectivePb = getEffectivePlaybook(archetypeKey, currentLens);
+
+            document.getElementById('edit-playbook-archetype-title').textContent = `${arch.name} (${arch.disc.badge})`;
+            document.getElementById('edit-playbook-lens-name').textContent = `${cfg.name} (${cfg.shortBadge})`;
+            document.getElementById('edit-playbook-dosay').value = effectivePb.doSay.join('\n');
+            document.getElementById('edit-playbook-dontsay').value = effectivePb.dontSay.join('\n');
+            document.getElementById('edit-playbook-action').value = effectivePb.actionTemplate;
+
+            document.getElementById('modal-edit-playbook').classList.remove('hidden');
+        }
+
+        function closeEditPlaybookModal() {
+            document.getElementById('modal-edit-playbook').classList.add('hidden');
+            activeEditingArchetype = null;
+        }
+
+        function saveCustomPlaybookFromModal() {
+            if (!activeEditingArchetype) return;
+            const doSayText = document.getElementById('edit-playbook-dosay').value;
+            const dontSayText = document.getElementById('edit-playbook-dontsay').value;
+            const actionText = document.getElementById('edit-playbook-action').value;
+
+            const doSay = doSayText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const dontSay = dontSayText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+            if (!customPlaybooks[currentLens]) {
+                customPlaybooks[currentLens] = {};
+            }
+
+            customPlaybooks[currentLens][activeEditingArchetype] = {
+                doSay: doSay,
+                dontSay: dontSay,
+                actionTemplate: actionText
+            };
+
+            saveCustomPlaybooks();
+            populateCodex();
+            if (currentAnalysis.phase && !document.getElementById('results-card').classList.contains('hidden')) {
+                renderAnalysisCard();
+            }
+
+            showToast(`Saved custom battlecard for ${archetypes[activeEditingArchetype].name}!`);
+            closeEditPlaybookModal();
+        }
+
+        function resetCurrentPlaybookToDefault() {
+            if (!activeEditingArchetype) return;
+            if (customPlaybooks[currentLens] && customPlaybooks[currentLens][activeEditingArchetype]) {
+                delete customPlaybooks[currentLens][activeEditingArchetype];
+                if (Object.keys(customPlaybooks[currentLens]).length === 0) {
+                    delete customPlaybooks[currentLens];
+                }
+                saveCustomPlaybooks();
+            }
+
+            const defaultPb = archetypes[activeEditingArchetype].playbooks[currentLens] || archetypes[activeEditingArchetype].playbooks['it_ops'];
+            document.getElementById('edit-playbook-dosay').value = defaultPb.doSay.join('\n');
+            document.getElementById('edit-playbook-dontsay').value = defaultPb.dontSay.join('\n');
+            document.getElementById('edit-playbook-action').value = defaultPb.actionTemplate;
+
+            populateCodex();
+            if (currentAnalysis.phase && !document.getElementById('results-card').classList.contains('hidden')) {
+                renderAnalysisCard();
+            }
+            showToast(`Restored default battlecard for ${archetypes[activeEditingArchetype].name}.`);
+        }
+
+        function resetAllPlaybooksToDefault() {
+            if (!confirm(`Are you sure you want to reset all custom battlecards for the ${DOMAIN_CONFIGS[currentLens]?.shortBadge || currentLens} domain back to factory defaults?`)) {
+                return;
+            }
+            if (customPlaybooks[currentLens]) {
+                delete customPlaybooks[currentLens];
+                saveCustomPlaybooks();
+            }
+            populateCodex();
+            if (currentAnalysis.phase && !document.getElementById('results-card').classList.contains('hidden')) {
+                renderAnalysisCard();
+            }
+            showToast(`All battlecards in ${DOMAIN_CONFIGS[currentLens]?.shortBadge || currentLens} restored to defaults.`);
+        }
+
+        // --- STAKEHOLDER INTELLIGENCE HELPERS ---
+        function findSubjectByName(name) {
+            if (!name || !dossier.subjects) return null;
+            const clean = name.trim().toLowerCase();
+            if (!clean || clean === 'observed stakeholder') return null;
+            return Object.values(dossier.subjects).find(s => {
+                if (!s) return false;
+                if (s.canonicalName && s.canonicalName.toLowerCase() === clean) return true;
+                if (s.aliases && s.aliases.some(a => a && a.toLowerCase() === clean)) return true;
+                return false;
+            }) || null;
+        }
+
+        function openEditIntelModal(subjectId) {
+            const sub = dossier.subjects[subjectId];
+            if (!sub) return;
+            activeEditingSubjectId = subjectId;
+
+            document.getElementById('edit-intel-subject-name').textContent = sub.canonicalName;
+            document.getElementById('edit-intel-notes').value = sub.notes || '';
+            document.getElementById('edit-intel-hotbuttons').value = (sub.hotButtons || []).join('\n');
+
+            const container = document.getElementById('intel-talk-tracks-container');
+            container.innerHTML = '';
+
+            const tracks = sub.personalTalkTracks || [];
+            if (tracks.length === 0) {
+                addPersonalTalkTrackRow();
+            } else {
+                tracks.forEach(t => addPersonalTalkTrackRow(t.trigger, t.script, t.avoid));
+            }
+
+            document.getElementById('modal-edit-intel').classList.remove('hidden');
+        }
+
+        function closeEditIntelModal() {
+            document.getElementById('modal-edit-intel').classList.add('hidden');
+            activeEditingSubjectId = null;
+        }
+
+        function addPersonalTalkTrackRow(trigger = '', script = '', avoid = '') {
+            const container = document.getElementById('intel-talk-tracks-container');
+            const rowId = 'tt_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+            const div = document.createElement('div');
+            div.id = rowId;
+            div.className = 'bg-slate-900/90 p-3.5 rounded-xl border border-slate-700 space-y-2 relative';
+            div.innerHTML = `
+                <button type="button" onclick="document.getElementById('${rowId}').remove()" class="absolute top-2 right-2 text-slate-500 hover:text-rose-400 text-xs p-1" title="Remove Talk Track">
+                    &times; Remove
+                </button>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">Scenario / Encounter Trigger</label>
+                    <input type="text" class="tt-trigger-input w-full bg-slate-950 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="e.g. When pushing for impossible delivery turnaround" value="${escapeHtml(trigger)}">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-emerald-400 mb-1">Bespoke Talk Track ("Say This")</label>
+                    <textarea class="tt-script-input w-full bg-slate-950 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500" rows="2" placeholder="e.g. Marcus, I hear you—your board presentation on Thursday is our #1 priority...">${escapeHtml(script)}</textarea>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-rose-400 mb-1">Avoid ("Don't Say")</label>
+                    <input type="text" class="tt-avoid-input w-full bg-slate-950 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500" placeholder="e.g. Don't mention engineering sprint backlog limits" value="${escapeHtml(avoid)}">
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function saveStakeholderIntelFromModal() {
+            if (!activeEditingSubjectId) return;
+            const sub = dossier.subjects[activeEditingSubjectId];
+            if (!sub) return;
+
+            sub.notes = document.getElementById('edit-intel-notes').value.trim();
+            const hotButtonsText = document.getElementById('edit-intel-hotbuttons').value;
+            sub.hotButtons = hotButtonsText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+            const container = document.getElementById('intel-talk-tracks-container');
+            const trackRows = container.querySelectorAll('.bg-slate-900\/90');
+            const newTracks = [];
+            trackRows.forEach(row => {
+                const trigger = row.querySelector('.tt-trigger-input')?.value.trim() || '';
+                const script = row.querySelector('.tt-script-input')?.value.trim() || '';
+                const avoid = row.querySelector('.tt-avoid-input')?.value.trim() || '';
+                if (trigger || script || avoid) {
+                    newTracks.push({
+                        id: 'tt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+                        trigger: trigger,
+                        script: script,
+                        avoid: avoid
+                    });
+                }
+            });
+
+            sub.personalTalkTracks = newTracks;
+            saveDossier();
+            renderDossier();
+            if (currentAnalysis.phase && !document.getElementById('results-card').classList.contains('hidden')) {
+                renderAnalysisCard();
+            }
+
+            showToast(`Saved stakeholder intelligence for ${sub.canonicalName}!`);
+            closeEditIntelModal();
         }
 
         function setDomainLens(lensKey) {
@@ -1817,7 +2204,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
         function renderAnalysisCard() {
             if (!currentAnalysis.base || !currentAnalysis.phase) return;
             const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
-            const playbook = currentAnalysis.phase.playbooks[currentLens] || currentAnalysis.phase.playbooks['it_ops'];
+            const playbook = getEffectivePlaybook(currentAnalysis.phaseKey, currentLens);
             const isPure = currentAnalysis.baseKey === currentAnalysis.phaseKey;
             const titleText = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
 
@@ -1866,6 +2253,85 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </p>
                 </div>
 
+                ${(() => {
+                    const matchedSub = findSubjectByName(currentSubjectName) || findSubjectByNameOrAlias(currentSubjectName);
+                    if (!matchedSub) {
+                        if (currentSubjectName && currentSubjectName !== 'Observed Stakeholder') {
+                            const safeSubName = currentSubjectName.replace(/'/g, "\\'");
+                            return `
+                            <!-- CREATE STAKEHOLDER INTELLIGENCE PROMPT -->
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/60 flex items-center justify-between text-xs shadow-sm">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-indigo-400 font-bold">👤</span>
+                                    <span class="text-slate-300">Add bespoke hot buttons &amp; talk tracks for <strong>${escapeHtml(currentSubjectName)}</strong>:</span>
+                                </div>
+                                <button onclick="createAndEditIntelForName('${safeSubName}')" class="bg-indigo-600/80 hover:bg-indigo-600 text-white px-2.5 py-1 rounded transition-colors text-xs font-medium flex items-center space-x-1 shadow-sm">
+                                    <span>+ Add Stakeholder Intel</span>
+                                </button>
+                            </div>
+                            `;
+                        }
+                        return '';
+                    }
+                    const hotButtons = matchedSub.hotButtons || [];
+                    const talkTracks = matchedSub.personalTalkTracks || [];
+
+                    const hotButtonsHtml = hotButtons.length > 0 
+                        ? hotButtons.map(hb => `<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-rose-500/10 text-rose-300 border border-rose-500/30 mr-1.5 mb-1.5">⚠️ ${escapeHtml(hb)}</span>`).join('')
+                        : '<span class="text-xs text-slate-400 italic">No specific hot buttons recorded yet.</span>';
+
+                    const talkTracksHtml = talkTracks.length > 0
+                        ? talkTracks.map(tt => `
+                            <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 text-xs">
+                                <div class="flex items-center justify-between text-slate-400 font-semibold">
+                                    <span>Trigger / Scenario: <span class="text-amber-300">${escapeHtml(tt.trigger || 'General High-Stakes')}</span></span>
+                                </div>
+                                <div class="text-slate-200">
+                                    <strong class="text-emerald-400 font-bold">Personal Script:</strong> "${escapeHtml(tt.script || '')}"
+                                </div>
+                                ${tt.avoid ? `<div class="text-slate-400"><strong class="text-rose-400 font-bold">Avoid:</strong> ${escapeHtml(tt.avoid)}</div>` : ''}
+                            </div>
+                        `).join('')
+                        : '<span class="text-xs text-slate-400 italic">No bespoke personal scripts recorded yet.</span>';
+
+                    return `
+                    <!-- STAKEHOLDER INTELLIGENCE BANNER -->
+                    <div class="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 p-4 rounded-xl border border-indigo-500/50 shadow-xl space-y-3">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-indigo-900/60 pb-2.5">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-sm">👤</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white flex items-center space-x-2">
+                                        <span>Stakeholder Intelligence:</span>
+                                        <span class="theme-accent-text">${escapeHtml(matchedSub.canonicalName)}</span>
+                                    </h4>
+                                    <span class="text-[11px] text-slate-400">${escapeHtml(matchedSub.notes || 'Field Archive Profile')}</span>
+                                </div>
+                            </div>
+                            <button onclick="openEditIntelModal('${matchedSub.id}')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-2.5 py-1 rounded flex items-center space-x-1 transition-colors self-start sm:self-auto shadow-sm">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                                <span>Edit Intel &amp; Scripts</span>
+                            </button>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-rose-400 block mb-1">Known Hot Buttons &amp; Taboos:</span>
+                                <div class="flex flex-wrap items-center">
+                                    ${hotButtonsHtml}
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 block mb-1.5">Bespoke Personal Talk Tracks:</span>
+                                <div class="space-y-2">
+                                    ${talkTracksHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                })()}
+
                 <!-- CORE READOUT -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
@@ -1885,8 +2351,16 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <!-- TACTICAL PLAYBOOK (DO'S & DON'TS) -->
                 <div class="space-y-2">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">${cfg.shortBadge} Tactical Scripts (Live De-Escalation)</h3>
-                        <span class="text-xs text-slate-400">Alignment Protocol</span>
+                        <div class="flex items-center space-x-2">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">${cfg.shortBadge} Tactical Scripts (Live De-Escalation)</h3>
+                            ${playbook.isCustomized ? '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Customized Battlecard</span>' : ''}
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="openEditPlaybookModal('${currentAnalysis.phaseKey}')" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center space-x-1" title="Customize this battlecard">
+                                <svg class="w-3.5 h-3.5 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                <span>Edit Battlecard</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- SAY THIS -->
@@ -1975,7 +2449,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
         function exportToMarkdown() {
             if (!currentAnalysis.base || !currentAnalysis.phase) return;
             const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
-            const playbook = currentAnalysis.phase.playbooks[currentLens] || currentAnalysis.phase.playbooks['it_ops'];
+            const playbook = getEffectivePlaybook(currentAnalysis.phaseKey, currentLens);
             const date = new Date().toISOString().split('T')[0];
             const safeName = currentSubjectName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
             const fileName = `${safeName}_bridgecraft_${currentLens}_${date}.md`;
@@ -2198,6 +2672,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
+                            <button onclick="openEditIntelModal('${sub.id}')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-2.5 py-1.5 rounded flex items-center transition-colors shadow-sm" title="Edit stakeholder hot buttons and bespoke talk tracks">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                Edit Intel
+                            </button>
                             <button onclick="profileSubjectInActive('${sub.canonicalName}')" class="theme-btn-accent text-xs px-2.5 py-1.5 rounded flex items-center transition-colors">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                 Calibrate Playbook
@@ -2211,6 +2689,32 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             </button>
                         </div>
                     </div>
+
+                    <!-- STAKEHOLDER INTEL & HOT BUTTONS PREVIEW -->
+                    ${(sub.hotButtons && sub.hotButtons.length > 0) || (sub.personalTalkTracks && sub.personalTalkTracks.length > 0) ? `
+                    <div class="bg-slate-900/90 rounded-xl p-3.5 border border-slate-700/80 space-y-2.5">
+                        ${sub.hotButtons && sub.hotButtons.length > 0 ? `
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400 block mb-1">Known Hot Buttons &amp; Taboos:</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                ${sub.hotButtons.map(hb => `<span class="px-2 py-0.5 rounded text-xs bg-rose-500/10 text-rose-300 border border-rose-500/20">⚠️ ${escapeHtml(hb)}</span>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        ${sub.personalTalkTracks && sub.personalTalkTracks.length > 0 ? `
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">Bespoke Personal Talk Tracks (${sub.personalTalkTracks.length}):</span>
+                            <div class="space-y-1.5">
+                                ${sub.personalTalkTracks.map(tt => `
+                                    <div class="text-xs text-slate-300 border-l-2 border-emerald-500 pl-2 py-0.5">
+                                        <span class="text-amber-300 font-semibold">${escapeHtml(tt.trigger || 'General')}:</span> "${escapeHtml(tt.script || '')}"
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
 
                     <!-- CONSENSUS & DIVERGENCE INTELLIGENCE BANNER -->
                     ${totalObs > 0 && topBase ? `
@@ -2423,6 +2927,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 const parsed = JSON.parse(content);
                                 if (parsed.subjects && parsed.observations) {
                                     Object.assign(dossier.subjects, parsed.subjects);
+                                    if (parsed.customPlaybooks) {
+                                        customPlaybooks = Object.assign(customPlaybooks, parsed.customPlaybooks);
+                                        saveCustomPlaybooks();
+                                    }
                                     parsed.observations.forEach(obs => {
                                         if (!dossier.observations.some(o => o.id === obs.id)) {
                                             dossier.observations.push(obs);
@@ -2517,6 +3025,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 canonicalName: "Sarah Chen",
                 aliases: ["Sarah Chen", "Sarah (VP Eng)", "Sarha", "Sarah"],
                 notes: "VP of Engineering. High-stakes executive decision maker.",
+                hotButtons: [
+                    "Rejects gut feelings and unverified ETAs during Sev-1 outages",
+                    "Zero tolerance for unverified production hotfixes",
+                    "Requires comparative telemetry delta before authorizing failovers"
+                ],
+                personalTalkTracks: [
+                    {
+                        id: "tt_sarah_1",
+                        trigger: "When requesting mitigation approval during high-stakes outage",
+                        script: "Sarah, here is the telemetry delta over the last 15 minutes: error rates dropped from 14.2% to 1.8% after the pool restart. Next checkpoint is at 14:30 with CPU latency deltas.",
+                        avoid: "Never say 'it should probably work now'."
+                    }
+                ],
                 createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
             };
 
@@ -2533,6 +3054,25 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 canonicalName: "Marcus Vance",
                 aliases: ["Marcus Vance", "Marcus (VP Sales)", "Marcus"],
                 notes: "Enterprise VP of Sales. Under pressure from at-risk enterprise renewal.",
+                hotButtons: [
+                    "Hates technical architecture weeds and engineering jargon",
+                    "Deeply stressed about Thursday Board of Directors presentation",
+                    "Requires direct C-level commitments and immediate bottom-line outcomes"
+                ],
+                personalTalkTracks: [
+                    {
+                        id: "tt_marcus_1",
+                        trigger: "When demanding unrealistic turnaround before board meeting",
+                        script: "Marcus, I hear you—your board presentation on Thursday is our #1 priority. Let's lock in the executive summary slides today so you look great in front of the CEO.",
+                        avoid: "Don't cite engineering sprint velocity or Jira backlog limits."
+                    },
+                    {
+                        id: "tt_marcus_2",
+                        trigger: "At-Risk Enterprise Renewal Escalation",
+                        script: "Marcus, we are treating your renewal as an executive partnership. I have authorized our VP to join the call and approve a 20% SLA credit toward your expansion tier.",
+                        avoid: "Never cite standard legal contract clauses or ticket policies."
+                    }
+                ],
                 createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
             };
 
@@ -2646,7 +3186,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             let html = '';
             
             Object.entries(archetypes).forEach(([key, p]) => {
-                const playbook = p.playbooks[currentLens] || p.playbooks['it_ops'];
+                const playbook = getEffectivePlaybook(key, currentLens);
                 const doList = playbook.doSay.map(s => `<li class="text-xs text-slate-300">• "${s}"</li>`).join('');
                 const dontList = playbook.dontSay.map(s => `<li class="text-xs text-slate-300">• "${s}"</li>`).join('');
 
@@ -2658,6 +3198,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <span class="text-xs text-slate-400">${p.disc.summary}</span>
                         </div>
                         <div class="flex items-center space-x-2">
+                            <button onclick="openEditPlaybookModal('${key}')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs flex items-center space-x-1 transition-colors shadow-sm" title="Edit this archetype's battlecard">
+                                <svg class="w-3 h-3 text-indigo-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                <span>Edit Battlecard</span>
+                            </button>
+                            ${playbook.isCustomized ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Customized</span>' : ''}
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${cfg.badgeClass}">${cfg.shortBadge}</span>
                             <span class="px-3 py-1 rounded-full text-xs font-bold border ${p.disc.style}">${p.disc.badge}</span>
                         </div>
@@ -2710,8 +3255,17 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         // ================= APPLICATION INITIALIZATION =================
         document.addEventListener('DOMContentLoaded', () => {
+            loadCustomPlaybooks();
             loadDossier();
             setDomainLens(currentLens);
+        });
+
+        // Secret offline export hotkey for Jack: Ctrl+Shift+E
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+                e.preventDefault();
+                exportStandaloneLensApp();
+            }
         });
     </script>
 </body>

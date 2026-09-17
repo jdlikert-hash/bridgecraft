@@ -137,12 +137,42 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 
 1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
 2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per person. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
-3. **The Codex & Playbooks:** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards.
+3. **The Codex & Playbooks:** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
 4. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 
 ---
 
-## 8. Live-Fire Drills & Multi-Observer Intelligence
+## 8. Custom Talk Tracks & Stakeholder Intelligence
+
+BridgeCraft includes a zero-latency, private customization layer allowing teams to tailor the engine to their organization's unique voice and individual relationships:
+
+### A. Global Playbook Customization (Domain-Level)
+* **Battlecard Inline Editor:** On "The Codex" tab or directly from the Active Console results card, click **Edit Battlecard** on any archetype.
+* **Full Template Control:** Edit "Say This" scripts, "Never Say This" triggers, and the full communication template (e.g., custom Slack, email, or executive memo formats).
+* **Graceful Factory Resets:** Reset an individual archetype or click **Reset Domain Defaults** to instantly restore factory defaults without losing stakeholder dossiers.
+* **Portable Backups:** All customized battlecards export automatically with JSON backups and restore seamlessly during data migration.
+
+### B. Per-Person Stakeholder Intelligence
+High-stakes communication is always personal. BridgeCraft allows users to attach bespoke intelligence to individual stakeholders in The Field Archive:
+* **Known Hot Buttons & Taboos:** Record sensitive triggers (e.g., *"Hates technical jargon"*, *"Stressed about Thursday board meeting"*, *"Needs direct VP commitments"*).
+* **Bespoke Personal Talk Tracks:** Record scenario-specific scripts with a Trigger, Custom Script ("Say This"), and Avoid notes.
+* **Active Console Auto-Surfacing:** Whenever a recognized stakeholder is profiled on the Active Console, an expandable **Stakeholder Intelligence Banner** auto-surfaces above the tactical playbook, presenting their hot buttons and tailored scripts in real time.
+
+### C. Commercial CRM & Sales Realignment
+The **CRM & Sales** operational lens provides authentic commercial and relationship talk tracks:
+* **Thinker (CRM):** Commercial milestone checklists, implementation audits, SLA credit calculations, and clear chronological deliverable roadmaps.
+* **Persister (CRM):** Partnership ethics, vendor integrity, executive accountability, and long-term governance.
+* **Harmonizer (CRM):** High-EQ empathy, taking personal responsibility, providing executive cover with internal VPs, and collaborative relationship preservation.
+* **Rebel (CRM):** Direct candid dialogue, cutting corporate red tape, creative commercial concessions, early VIP beta access, and waived fees.
+* **Promoter (CRM):** Immediate bottom-line deliverables, dedicated VP sponsor involvement, and commercial deal protection by 5 PM.
+* **Imaginer (CRM):** Low-pressure 1-page asynchronous summaries, quiet review windows, and shielding the client from chaotic vendor alignment calls.
+
+### D. Private Offline App Bundler (`Ctrl+Shift+E`)
+To protect against unauthorized site cloning, the public header export button has been removed. The author and designated incident commanders can trigger the single-file self-contained domain bundler at any time using the keyboard shortcut **`Ctrl+Shift+E`** (or `Cmd+Shift+E`).
+
+---
+
+## 9. Live-Fire Drills & Multi-Observer Intelligence
 
 A premier use case for **BridgeCraft** is team training exercises. When training frontline support engineers or managers in a live-fire incident simulation:
 
@@ -155,7 +185,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 
 ---
 
-## 9. Ethical Code & Field Guidelines
+## 10. Ethical Code & Field Guidelines
 
 > *"The purpose of BridgeCraft is not manipulation, labeling, or pigeonholing. The purpose is empathy in high-friction environments."*
 
@@ -165,7 +195,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 
 ---
 
-## 10. Intellectual Property, Independent Authorship & Workplace Notice
+## 11. Intellectual Property, Independent Authorship & Workplace Notice
 
 **Copyright (c) 2026 Jack Likert. All Rights Reserved.**
 
