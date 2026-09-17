@@ -82,18 +82,76 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             <!-- LEVEL 1 -->
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
-                <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
-                    <h2 class="text-lg font-semibold text-indigo-400">Level 1: Base Observations (Communication Channel)</h2>
-                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Perceptual Filter</span>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-3 mb-4 gap-2">
+                    <div>
+                        <h2 class="text-lg font-semibold text-indigo-400">Level 1: Base Observations (Communication Channel)</h2>
+                        <span class="text-xs text-slate-400 font-medium">Perceptual Filter &bull; How they absorb and process information</span>
+                    </div>
+                    <!-- CAMERA ON / OFF TOGGLE -->
+                    <div class="flex items-center space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-700 self-start sm:self-auto text-xs font-medium">
+                        <button type="button" id="btn-mode-camera-off" onclick="setObservationMode('audio')" class="px-2.5 py-1 rounded-md transition-colors flex items-center bg-indigo-600 text-white shadow-sm" title="Optimize cues for Slack and voice bridges">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                            Camera Off (Voice &amp; Slack)
+                        </button>
+                        <button type="button" id="btn-mode-camera-on" onclick="setObservationMode('video')" class="px-2.5 py-1 rounded-md transition-colors flex items-center text-slate-400 hover:text-slate-200" title="Optimize cues for physical video posture">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            Camera On (Video)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- EXPANDABLE AUDIO & SLACK DECODER CHEATSHEET -->
+                <div class="mb-5 bg-slate-900/60 p-3 rounded-xl border border-slate-700/80">
+                    <button type="button" onclick="toggleAudioSlackCheatSheet()" class="w-full flex items-center justify-between text-xs font-semibold text-indigo-300 hover:text-indigo-200">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Camera-Off Quick Decoder: How to spot these cues in Slack &amp; Audio Bridges</span>
+                        </span>
+                        <span id="cheat-sheet-arrow" class="text-slate-400">&darr;</span>
+                    </button>
+                    <div id="audio-slack-cheat-sheet" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-blue-300 block">Thinker (High C)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Monotone, calm cadence, precise enunciation.</p>
+                                <p><span class="text-slate-400">Slack:</span> Numbered lists, timestamps, error % rates, formal punctuation.</p>
+                            </div>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-purple-300 block">Persister (High D/C)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Clipped, firm, authoritative tone; audible sighs.</p>
+                                <p><span class="text-slate-400">Slack:</span> "Should/Must/SLA", long paragraphs, questions protocol.</p>
+                            </div>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-emerald-300 block">Harmonizer (High S)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Soft, gentle, rising end-inflection, over-apologizes.</p>
+                                <p><span class="text-slate-400">Slack:</span> Emojis, "sorry to bug you", "we" and team-welfare focus.</p>
+                            </div>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-amber-300 block">Rebel (High I)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Animated, theatrical, laughs/groans out loud, interrupts.</p>
+                                <p><span class="text-slate-400">Slack:</span> Memes/GIFs, informal casing, "wtf/lol", short punchy bursts.</p>
+                            </div>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-rose-300 block">Promoter (High D)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Booming, fast, cuts people off, demands quick calls.</p>
+                                <p><span class="text-slate-400">Slack:</span> Skips greetings, straight to "ETA NOW", ALL CAPS fragments.</p>
+                            </div>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 space-y-1">
+                                <strong class="text-cyan-300 block">Imaginer (High C/S)</strong>
+                                <p><span class="text-slate-400">Audio:</span> Long 5-10s pauses before replying, quiet, speaks in few words.</p>
+                                <p><span class="text-slate-400">Slack:</span> Sparse single words ("Looking", "Ack"), long delays between posts.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="mb-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Speech Tempo & Typing Cadence</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">Rate of speech, message frequency, and processing pace.</p>
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Speech Tempo &amp; Typing Cadence</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">Rate of speech, message frequency, and Slack reply processing pace.</p>
                     <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent">Fast / Urgent</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate">Measured / Deliberate</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Variable / Emotional">Variable / Emotional</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent">Fast / Urgent (Rapid speech / quick multi-message bursts)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate">Measured / Deliberate (Calculated cadence / 1 composed update)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Variable / Emotional">Variable / Emotional (Pitch &amp; speed fluctuate with stress)</button>
                     </div>
                 </div>
 
@@ -102,21 +160,31 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <p class="text-xs text-slate-500 mb-2 mt-1">Where do they instinctively anchor the conversation?</p>
                     <div class="flex flex-wrap gap-2">
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="People / Relationships">People / Relationships</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks">Things / Tasks (Data)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Ideas / Concepts">Ideas / Concepts (Values)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks">Things / Tasks (Data &amp; Logic)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Ideas / Concepts">Ideas / Concepts (Values &amp; Standards)</button>
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Action">Action (Bottom Line)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Spontaneous">Spontaneous (Reactions)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Concepts / Solo">Concepts / Solo (Reflection)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Spontaneous">Spontaneous (Reactions &amp; Fun)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Concepts / Solo">Concepts / Solo (Reflection &amp; Space)</button>
                     </div>
                 </div>
 
-                <div>
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Posture & Physical / Video Demeanor</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">Physical presence, video posture, and body tension.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright">Rigid / Upright</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Relaxed / Leaning">Relaxed / Leaning</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="In-Motion / Fidgety">In-Motion / Fidgety</button>
+                <!-- CATEGORY 3: CHANNEL DEMEANOR (ADAPTS TO CAMERA ON/OFF) -->
+                <div id="cat-posture-block">
+                    <div class="flex items-center justify-between">
+                        <h3 id="cat-posture-title" class="text-sm font-medium text-slate-400 uppercase tracking-wide">Channel Demeanor &amp; Style</h3>
+                        <span id="cat-posture-mode-tag" class="text-xs text-indigo-400 font-medium">🎧 Camera-Off Mode</span>
+                    </div>
+                    <p id="cat-posture-sub" class="text-xs text-slate-500 mb-2 mt-1">Audio tone, pause length, and Slack messaging syntax.</p>
+                    <div class="flex flex-wrap gap-2" id="cat-posture-chips">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright" id="chip-posture-1">
+                            <span class="chip-label">Formal &amp; Structured (Monotone voice / Bullets &amp; precise Slack syntax)</span>
+                        </button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Relaxed / Leaning" id="chip-posture-2">
+                            <span class="chip-label">Gentle &amp; Measured (Soft voice / Emojis, pauses &amp; polite Slack syntax)</span>
+                        </button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="In-Motion / Fidgety" id="chip-posture-3">
+                            <span class="chip-label">Urgent &amp; High-Energy (Interrupting/loud voice / ALL-CAPS, rapid bursts)</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -784,11 +852,74 @@ employer, client, or third party. See LICENSE file for full legal terms.
         }
 
         // ================= ACTIVE PROFILER CHIPS & ANALYSIS =================
+        let observationMode = localStorage.getItem('profiler_obs_mode') || 'audio'; // default to camera-off for incident culture
+
+        function setObservationMode(mode) {
+            observationMode = mode;
+            localStorage.setItem('profiler_obs_mode', mode);
+
+            const btnAudio = document.getElementById('btn-mode-camera-off');
+            const btnVideo = document.getElementById('btn-mode-camera-on');
+            const title = document.getElementById('cat-posture-title');
+            const sub = document.getElementById('cat-posture-sub');
+            const modeTag = document.getElementById('cat-posture-mode-tag');
+            const chip1 = document.getElementById('chip-posture-1');
+            const chip2 = document.getElementById('chip-posture-2');
+            const chip3 = document.getElementById('chip-posture-3');
+
+            if (mode === 'audio') {
+                if (btnAudio) {
+                    btnAudio.classList.remove('text-slate-400', 'hover:text-slate-200');
+                    btnAudio.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+                }
+                if (btnVideo) {
+                    btnVideo.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                    btnVideo.classList.add('text-slate-400', 'hover:text-slate-200');
+                }
+
+                if (title) title.textContent = "Channel Demeanor & Style";
+                if (sub) sub.textContent = "Audio tone, pause length, and Slack messaging syntax.";
+                if (modeTag) modeTag.textContent = "🎧 Camera-Off Mode (Voice & Slack)";
+
+                if (chip1) chip1.querySelector('.chip-label').textContent = "Formal & Structured (Monotone voice / Bullets & precise Slack syntax)";
+                if (chip2) chip2.querySelector('.chip-label').textContent = "Gentle & Measured (Soft voice / Emojis, pauses & polite Slack syntax)";
+                if (chip3) chip3.querySelector('.chip-label').textContent = "Urgent & High-Energy (Interrupting/loud voice / ALL-CAPS, rapid bursts)";
+            } else {
+                if (btnVideo) {
+                    btnVideo.classList.remove('text-slate-400', 'hover:text-slate-200');
+                    btnVideo.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+                }
+                if (btnAudio) {
+                    btnAudio.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                    btnAudio.classList.add('text-slate-400', 'hover:text-slate-200');
+                }
+
+                if (title) title.textContent = "Posture & Physical / Video Demeanor";
+                if (sub) sub.textContent = "Physical presence, video posture, and body tension.";
+                if (modeTag) modeTag.textContent = "📹 Camera-On Mode (Video)";
+
+                if (chip1) chip1.querySelector('.chip-label').textContent = "Rigid / Upright (Upright posture, still, minimal motion)";
+                if (chip2) chip2.querySelector('.chip-label').textContent = "Relaxed / Leaning (Relaxed posture, leaning back, gentle presence)";
+                if (chip3) chip3.querySelector('.chip-label').textContent = "In-Motion / Fidgety (Pacing, shifting, high physical motion)";
+            }
+        }
+
+        function toggleAudioSlackCheatSheet() {
+            const sheet = document.getElementById('audio-slack-cheat-sheet');
+            const arrow = document.getElementById('cheat-sheet-arrow');
+            if (sheet) {
+                sheet.classList.toggle('hidden');
+                if (arrow) arrow.innerHTML = sheet.classList.contains('hidden') ? '&darr;' : '&uarr;';
+            }
+        }
+
         document.querySelectorAll('.chip').forEach(button => {
             button.addEventListener('click', (e) => {
-                const category = e.target.getAttribute('data-category');
-                const value = e.target.getAttribute('data-value');
-                const isActive = e.target.classList.contains('bg-indigo-600');
+                const btnEl = e.target.closest('.chip');
+                if (!btnEl) return;
+                const category = btnEl.getAttribute('data-category');
+                const value = btnEl.getAttribute('data-value');
+                const isActive = btnEl.classList.contains('bg-indigo-600');
 
                 document.querySelectorAll(`.chip[data-category="${category}"]`).forEach(btn => {
                     btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white');
@@ -799,8 +930,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     selections[category] = null;
                 } else {
                     selections[category] = value;
-                    e.target.classList.remove('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
-                    e.target.classList.add('bg-indigo-600', 'border-indigo-500', 'text-white');
+                    btnEl.classList.remove('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+                    btnEl.classList.add('bg-indigo-600', 'border-indigo-500', 'text-white');
                 }
             });
         });
@@ -1663,9 +1794,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
             md += `- **Incident Distress:** ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label} (${currentAnalysis.phase.disc.summary})\n\n`;
 
             md += `## 2. Raw Observational Data\n`;
-            md += `- **Speech Tempo:** ${selections.tempo || 'Not observed'}\n`;
+            md += `- **Observation Mode:** ${observationMode === 'audio' ? 'Camera-Off (Voice & Slack Bridge)' : 'Camera-On (Video Posture)'}\n`;
+            md += `- **Speech Tempo / Cadence:** ${selections.tempo || 'Not observed'}\n`;
             md += `- **Primary Focus:** ${selections.focus || 'Not observed'}\n`;
-            md += `- **Posture / Demeanor:** ${selections.posture || 'Not observed'}\n`;
+            md += `- **Channel Demeanor / Posture:** ${selections.posture || 'Not observed'}\n`;
             md += `- **Core Motivator:** ${selections.motivator || 'Not observed'}\n`;
             md += `- **Primary Stressor:** ${selections.stressor || 'Not observed'}\n`;
             md += `- **Conflict Stance:** ${selections.conflict || 'Not observed'}\n\n`;
@@ -1767,6 +1899,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
         document.addEventListener('DOMContentLoaded', () => {
             loadDossier();
             populateCodex();
+            setObservationMode(observationMode);
         });
     </script>
 </body>

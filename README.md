@@ -88,19 +88,25 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 1. **Fire up the app:** Double-click `the_behavioral_profiler.html` in any browser (Chrome, Edge, Firefox, Safari). No installation, Node.js, or server required.
 2. **Enter the Subject Identifier:** Type the name or role (e.g., *"VP Engineering"*, *"Escalated Customer Acme Corp"*, *"On-Call DBA"*).
-3. **Level 1: Tap Base Indicators (Observation):**
-   - *Speech Tempo:* How fast are they talking/typing?
+3. **Observation Mode Toggle (Camera Off vs. Camera On):**
+   - **Camera Off (Voice & Slack):** Default mode tailored for modern incident response where video is unavailable. Adapts indicators to tone of voice, pause durations, and Slack message syntax.
+   - **Camera On (Video):** Optimizes indicators for physical posture, gestures, and video presence.
+   - **Camera-Off Quick Decoder:** Click the in-app cheat sheet to reference how Thinkers, Persisters, Harmonizers, Rebels, Promoters, and Imaginers write in Slack and speak on voice bridges.
+4. **Level 1: Tap Base Indicators (Observation):**
+   - *Speech Tempo & Typing Cadence:* How fast are they talking/typing?
    - *Primary Focus:* Are they fixated on Tasks, People, Principles, Action, or Ideas?
-   - *Posture / Demeanor:* Are they upright/tense, relaxed, or fidgety?
-4. **Level 2: Tap Phase Indicators (Distress Probe):**
+   - *Channel Demeanor / Posture:* Formal & Structured, Gentle & Measured, or Urgent & High-Energy.
+5. **Level 2: Tap Phase Indicators (Distress Probe):**
    - *Motivator:* What are they starving for? (Status, Security, Space, Approval?)
    - *Stressor:* What triggered the blowout? (Time crunch, loss of control, friction?)
    - *Conflict Stance:* When cornered, do they blame, lecture, withdraw, or dominate?
-5. **Hit "Analyze Profile":**
-   - Instantly read the **Communication Channel**, **Current Driver**, and **Distress Tell**.
-   - Read the **Frontline Strategy** (immediate de-escalation tactics).
-   - Read the **Management Insight** (long-term positioning and team dynamics).
-6. **Export & Log:** Click **Save .MD** to download a structured incident debrief markdown report for handovers or 1-on-1 retrospectives.
+6. **Hit "Generate Tactical Incident Profile":**
+   - Instantly read the **DISC Leadership Alignment** (High D, I, S, C mapping).
+   - Read the **Incident Tactical Playbook ("Do's & Don'ts")** and copyable Slack status updates.
+   - Read the **Frontline Strategy** and **Management Insight**.
+7. **Save & Export:**
+   - Click **Save to Dossier** to persist the card into the multi-observer Dossier Library.
+   - Click **Save .MD** to download a structured incident debrief markdown report.
 
 ---
 
