@@ -44,14 +44,21 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <span class="text-xs text-indigo-300 font-medium tracking-wide">Incident & De-escalation Edition</span>
                     </div>
                 </div>
-                <nav class="flex space-x-1 sm:space-x-2">
-                    <button id="tab-profiler" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white shadow-sm" onclick="switchTab('profiler')">Active Profiler</button>
-                    <button id="tab-dossier" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')">
-                        <span>The Dossier</span>
-                        <span id="dossier-count-badge" class="ml-1.5 px-2 py-0.5 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
-                    </button>
-                    <button id="tab-codex" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
-                </nav>
+                <div class="flex items-center space-x-1 sm:space-x-3">
+                    <nav class="flex space-x-1 sm:space-x-2">
+                        <button id="tab-profiler" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium bg-indigo-600 text-white shadow-sm" onclick="switchTab('profiler')">Active Profiler</button>
+                        <button id="tab-dossier" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')">
+                            <span>The Dossier</span>
+                            <span id="dossier-count-badge" class="ml-1.5 px-1.5 py-0.2 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
+                        </button>
+                        <button id="tab-codex" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
+                        <button id="tab-manual" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('manual')">Field Manual</button>
+                    </nav>
+                    <a href="https://github.com/jdlikert-hash/the-behavioral-profiler" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center text-xs text-slate-400 hover:text-white bg-slate-700/50 hover:bg-slate-700 border border-slate-600/80 px-2.5 py-1.5 rounded-md transition-colors" title="View Source & License on GitHub">
+                        <svg class="w-3.5 h-3.5 mr-1 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        <span>GitHub & Docs</span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
@@ -254,6 +261,140 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="codex-grid">
                     <!-- Codex cards injected via JS -->
                 </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: FIELD MANUAL & DOCUMENTATION -->
+        <div id="view-manual" class="hidden space-y-6">
+            <div class="bg-slate-800 rounded-xl p-6 sm:p-8 shadow-lg border border-slate-700 space-y-8">
+                
+                <!-- Manual Header -->
+                <div class="border-b border-slate-700 pb-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-900/60 text-indigo-300 border border-indigo-700/50">Version 1.0</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-900/40 text-emerald-300 border border-emerald-700/40">100% Client-Side Privacy</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-900/40 text-purple-300 border border-purple-700/40">Author: Jack Likert</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Strategic Field Manual & Operations Guide</h2>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed max-w-3xl">
+                        A tactical psychological profiling, multi-observer intelligence, and crisis communication system designed for 
+                        Incident Management, Technical Support, and Engineering Leadership.
+                    </p>
+                </div>
+
+                <!-- Section 1: Executive Summary -->
+                <section class="space-y-3">
+                    <h3 class="text-lg font-bold text-indigo-400 flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-indigo-900/60 text-indigo-300 text-xs flex items-center justify-center mr-2 border border-indigo-700/50">1</span>
+                        Executive Summary: The Incident Communication Problem
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        When high-severity incidents (Sev-1 / P1 outages) strike, communication breakdown is almost always the true bottleneck. 
+                        Engineers retreat into technical weeds, executives demand instant binary answers, support agents absorb emotional heat from customers, 
+                        and incident commanders clash over priorities.
+                    </p>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        <strong>The Behavioral Profiler</strong> is a zero-dependency, field-ready tool designed to be kept open during critical operations. 
+                        In under 45 seconds, an incident commander or manager can observe baseline cues, pinpoint an actor’s psychological distress pattern, 
+                        and receive immediate, actionable tactical scripts (what to say vs. what to avoid on bridge calls and Slack) to de-escalate friction and restore operational alignment.
+                    </p>
+                </section>
+
+                <!-- Section 2: Two-Tier Architecture -->
+                <section class="space-y-3">
+                    <h3 class="text-lg font-bold text-indigo-400 flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-indigo-900/60 text-indigo-300 text-xs flex items-center justify-center mr-2 border border-indigo-700/50">2</span>
+                        The Psychological Engine: Base vs. Phase
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Built upon principles adapted from Dr. Taibi Kahler's <strong>Process Communication Model (PCM)</strong>—famously utilized by NASA for astronaut crew selection and crisis de-escalation:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-1.5">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-300">Level 1: Base (Communication Channel)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                The neurological baseline filter. Dictates how a person naturally perceives information: 
+                                through Logic (Thinker), Values (Persister), Emotions (Harmonizer), Reactions (Rebel), Direct Action (Promoter), or Reflection (Imaginer).
+                            </p>
+                            <span class="text-xs text-emerald-400 font-semibold block pt-1">&rarr; Tactical Rule: Speak to their Base to be understood.</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-1.5">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-rose-300">Level 2: Phase (Current Distress Driver)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                The temporary motivational state under acute pressure. Dictates their distress tells: micromanaging (Thinker), moralizing (Persister), 
+                                over-apologizing (Harmonizer), blaming (Rebel), steamrolling (Promoter), or shutting down (Imaginer).
+                            </p>
+                            <span class="text-xs text-rose-400 font-semibold block pt-1">&rarr; Tactical Rule: Address their Phase need to de-escalate conflict.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: DISC Synthesis -->
+                <section class="space-y-3">
+                    <h3 class="text-lg font-bold text-indigo-400 flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-indigo-900/60 text-indigo-300 text-xs flex items-center justify-center mr-2 border border-indigo-700/50">3</span>
+                        DISC Leadership Alignment & The "Incident High-D" Reality
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        DISC is the universal language of corporate leadership (Dominance, Influence, Steadiness, Conscientiousness). 
+                        Rather than forcing a bloated 20-question questionnaire during an outage, the Profiler automatically synthesizes DISC from the observed PCM channels:
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs">
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Thinker</strong> &rarr; High C (Analytical)</div>
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Persister</strong> &rarr; High D/C (Evaluator)</div>
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Harmonizer</strong> &rarr; High S (Steadiness)</div>
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Rebel</strong> &rarr; High I (Influence)</div>
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Promoter</strong> &rarr; High D (Dominance)</div>
+                        <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Imaginer</strong> &rarr; High C/S (Reflective)</div>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        <em>The Incident High-D Reality:</em> In crisis situations, almost all executives and clients adopt an aggressive, situational <strong>High-D demand</strong> 
+                        (<em>"What's broken? When is it fixed?"</em>). This tool tells you whether that person is a genuine Promoter or a panicked Thinker/Harmonizer needing specific reassurance.
+                    </p>
+                </section>
+
+                <!-- Section 4: Live-Fire Drills & Multi-Observer Intelligence -->
+                <section class="space-y-3">
+                    <h3 class="text-lg font-bold text-indigo-400 flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-indigo-900/60 text-indigo-300 text-xs flex items-center justify-center mr-2 border border-indigo-700/50">4</span>
+                        Team Live-Fire Exercises & Situational Divergence
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        A core strength of the Dossier Library is supporting <strong>team training simulations</strong>:
+                    </p>
+                    <ol class="list-decimal list-inside text-xs text-slate-300 space-y-1.5 pl-1">
+                        <li><strong>Multi-Observer Tracking:</strong> Multiple team members observe the same subject during a live drill and log cards independently.</li>
+                        <li><strong>Card Ingestion:</strong> The lead clicks <strong>Import Cards</strong> to ingest all team `.md` cards in batch.</li>
+                        <li><strong>Divergence Detection:</strong> The Dossier detects situational divergence (e.g. <em>"Operates as Thinker during calm 1-on-1s, but shifts to Promoter distress during outages"</em>).</li>
+                        <li><strong>Smart Deduplication:</strong> Use the <strong>Merge</strong> tool to consolidate misspellings (e.g. <em>"Sarha"</em> into <em>"Sarah"</em>) while preserving all observer logs.</li>
+                    </ol>
+                </section>
+
+                <!-- Section 5: Legal & Intellectual Property Notice -->
+                <section class="bg-slate-900/90 p-5 rounded-xl border border-indigo-500/40 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center">
+                            <svg class="w-4 h-4 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            Intellectual Property, Authorship & Workplace Notice
+                        </h3>
+                        <a href="https://github.com/jdlikert-hash/the-behavioral-profiler/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="text-xs text-indigo-400 hover:text-indigo-300 underline">
+                            View Full License &rarr;
+                        </a>
+                    </div>
+                    <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+                        <p><strong>Copyright &copy; 2026 Jack Likert. All Rights Reserved.</strong></p>
+                        <p>
+                            <strong>Declaration of Independent Authorship:</strong> This software, architecture, scoring engine, and documentation were conceived, authored, and reduced to practice solely and independently by <strong>Jack Likert</strong> on personal time using personal resources. It is <strong>NOT a work made for hire</strong> under 17 U.S.C. &sect; 101.
+                        </p>
+                        <p>
+                            <strong>Workplace Non-Assignment Disclaimer:</strong> Demonstrating, testing, hosting, or evaluating this tool within any workplace, employer network, or incident team <strong>does not convey, assign, license, or transfer any intellectual property rights, shop rights, or claims of ownership</strong> to any employer or third party.
+                        </p>
+                        <p class="text-slate-400 text-xs">
+                            Individual support personnel and incident commanders are granted a limited, personal, non-exclusive, revocable license to execute the Software for non-commercial incident triage and team training. Commercial redistribution or incorporation into proprietary enterprise platforms is strictly prohibited without written consent.
+                        </p>
+                    </div>
+                </section>
+
             </div>
         </div>
 
@@ -678,6 +819,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.getElementById('view-profiler').classList.add('hidden');
             document.getElementById('view-dossier').classList.add('hidden');
             document.getElementById('view-codex').classList.add('hidden');
+            document.getElementById('view-manual')?.classList.add('hidden');
             
             const targetView = document.getElementById(`view-${tabId}`);
             if (targetView) targetView.classList.remove('hidden');
