@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Behavioral Profiler — Incident & Tactical Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        .chip { transition: all 0.2s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-10 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between h-auto sm:h-16 py-3 sm:py-0">
+                <div class="flex items-center mb-3 sm:mb-0">
+                    <svg class="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight text-white">The Behavioral Profiler</h1>
+                        <span class="text-xs text-indigo-300 font-medium tracking-wide">Incident & De-escalation Edition</span>
+                    </div>
+                </div>
+                <nav class="flex space-x-1 sm:space-x-2">
+                    <button id="tab-profiler" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white shadow-sm" onclick="switchTab('profiler')">Active Profiler</button>
+                    <button id="tab-dossier" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')">
+                        <span>The Dossier</span>
+                        <span id="dossier-count-badge" class="ml-1.5 px-2 py-0.5 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
+                    </button>
+                    <button id="tab-codex" class="tab-btn px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- VIEW 1: ACTIVE PROFILER -->
+        <div id="view-profiler" class="block space-y-8">
+            
+            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
+                <div class="flex items-center justify-between mb-2">
+                    <label for="subject-name" class="block text-sm font-medium text-slate-400 uppercase tracking-wide">Subject Identifier / Incident Actor</label>
+                    <span id="subject-match-hint" class="hidden text-xs text-indigo-300 font-medium items-center bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-700/50">
+                        <svg class="w-3.5 h-3.5 mr-1 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        <span id="subject-match-text">Linked to existing profile</span>
+                    </span>
+                </div>
+                <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors">
+                <datalist id="subject-datalist"></datalist>
+            </div>
+
+            <!-- LEVEL 1 -->
+            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
+                    <h2 class="text-lg font-semibold text-indigo-400">Level 1: Base Observations (Communication Channel)</h2>
+                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Perceptual Filter</span>
+                </div>
+                
+                <div class="mb-5">
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Speech Tempo & Typing Cadence</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">Rate of speech, message frequency, and processing pace.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent">Fast / Urgent</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate">Measured / Deliberate</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Variable / Emotional">Variable / Emotional</button>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Primary Focus (Crucial Indicator)</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">Where do they instinctively anchor the conversation?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="People / Relationships">People / Relationships</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks">Things / Tasks (Data)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Ideas / Concepts">Ideas / Concepts (Values)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Action">Action (Bottom Line)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Spontaneous">Spontaneous (Reactions)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Concepts / Solo">Concepts / Solo (Reflection)</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Posture & Physical / Video Demeanor</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">Physical presence, video posture, and body tension.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright">Rigid / Upright</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Relaxed / Leaning">Relaxed / Leaning</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="In-Motion / Fidgety">In-Motion / Fidgety</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEVEL 2 -->
+            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
+                    <h2 class="text-lg font-semibold text-emerald-400">Level 2: Core Probes (Acute Distress & Phase Drivers)</h2>
+                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Distress Pattern</span>
+                </div>
+                
+                <div class="mb-5">
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Psychological Motivator</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">What underlying hunger is driving their urgency right now?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Wins">Status / Wins (Immediate Payoff)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Respect">Status / Respect (Recognition)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Data">Security / Data (Timeline Certainty)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Connection / Approval">Connection / Approval (Belonging)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Novelty / Fun">Novelty / Fun (Stimulation)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Space">Security / Space (Quiet Autonomy)</button>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Acute Stressor</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">What condition triggered or continues to drain their patience?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Lack of Time">Lack of Time / Shifting Schedules</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Loss of Control">Loss of Control / Inaction</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Social Friction">Social Friction / Harsh Tone</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Resource Scarcity">Resource Scarcity / Rigid Rules</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Conflict Stance (Crucial Indicator)</h3>
+                    <p class="text-xs text-slate-500 mb-2 mt-1">Default reaction when cornered or stressed on a bridge call / Slack.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Avoids / Deflects">Avoids / Deflects (Appeases)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Escalates">Dominates / Escalates (Forces Outcome)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Rigid">Dominates / Rigid (Preaches / Moralizes)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Logics / Over-explains">Logics / Over-explains (Nitpicks Data)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Withdraws">Withdraws (Shuts Down / Silent)</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Blames">Blames (Sarcastic / Points Fingers)</button>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="analyzeProfile()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-0.5 text-lg flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Generate Tactical Incident Profile
+            </button>
+
+            <!-- RESULTS CARD -->
+            <div id="results-card" class="hidden bg-slate-800 rounded-xl p-6 shadow-2xl border-2 border-indigo-500 transform transition-all duration-300 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-4 gap-3">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Incident Tactical Readout</span>
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-wider" id="res-title">Profile Name</h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="openSaveModal()" id="btn-save-dossier" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center shadow transition-colors">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                            Save to Dossier
+                        </button>
+                        <button onclick="exportToMarkdown()" id="btn-export" class="bg-slate-700 hover:bg-slate-600 text-indigo-300 px-3 py-1.5 rounded-md text-sm font-medium flex items-center hidden transition-colors border border-slate-600">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Save .MD
+                        </button>
+                        <button onclick="resetProfiler()" class="text-slate-400 hover:text-white text-sm underline px-2">Reset</button>
+                    </div>
+                </div>
+                
+                <div id="res-content" class="space-y-6">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- VIEW 2: THE DOSSIER LIBRARY -->
+        <div id="view-dossier" class="hidden space-y-6">
+            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-700 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white flex items-center">
+                            The Dossier Library
+                            <span id="dossier-total-subjects" class="ml-2 text-xs bg-indigo-900/60 text-indigo-300 border border-indigo-700/50 px-2 py-0.5 rounded-full font-mono">0 People</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Multi-observer tracking, situational divergence analysis, and team drill archive.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="file" id="file-import-input" multiple accept=".md,.json" class="hidden" onchange="handleFileImport(event)">
+                        <button onclick="document.getElementById('file-import-input').click()" class="bg-slate-700 hover:bg-slate-600 text-indigo-300 border border-slate-600 px-3 py-1.5 rounded-md text-xs font-medium flex items-center transition-colors shadow-sm">
+                            <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            Import Cards (.MD / .JSON)
+                        </button>
+                        <button onclick="exportLibraryJson()" class="bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600 px-3 py-1.5 rounded-md text-xs font-medium flex items-center transition-colors">
+                            <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Export Backup
+                        </button>
+                        <button onclick="loadSampleDrillData()" id="btn-sample-data" class="bg-indigo-900/40 hover:bg-indigo-900/60 text-indigo-300 border border-indigo-700/50 px-3 py-1.5 rounded-md text-xs font-medium flex items-center transition-colors">
+                            Load Sample Drill Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Controls -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative flex-grow">
+                        <input type="text" id="dossier-search" oninput="renderDossier()" placeholder="Search by name, alias, observer, archetype, or notes..." class="w-full bg-slate-900 border border-slate-600 rounded-md py-1.5 pl-8 pr-3 text-slate-200 text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <select id="dossier-context-filter" onchange="renderDossier()" class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-3 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="ALL">All Contexts</option>
+                        <option value="Sev-1 / P1 Incident">Incidents Only</option>
+                        <option value="Live-Fire Drill / Training">Live-Fire Drills Only</option>
+                        <option value="1-on-1 Coaching">1-on-1s Only</option>
+                        <option value="Customer Escalation">Customer Escalations</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Subject Cards Container -->
+            <div id="dossier-subjects-list" class="space-y-4">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+
+        <!-- VIEW 3: THE CODEX -->
+        <div id="view-codex" class="hidden space-y-6">
+            <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
+                <div class="border-b border-slate-700 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-white mb-1">The Profiler Codex & Tactical Playbooks</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        A dual-lens reference combining <strong>Process Communication Model (PCM)</strong> distress dynamics with <strong>DISC Leadership Alignment</strong>. 
+                        In live incidents, use these battlecards to select exact vocabulary and avoid trigger phrases.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="codex-grid">
+                    <!-- Codex cards injected via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SAVE OBSERVATION MODAL -->
+    <div id="modal-save" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 max-w-lg w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 class="text-lg font-bold text-white flex items-center">
+                    <svg class="w-5 h-5 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                    Save Observation to Dossier
+                </h3>
+                <button onclick="closeSaveModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Target Subject / Person</label>
+                    <input type="text" id="save-subject-input" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <p class="text-xs text-slate-500 mt-1">If this name matches an alias or existing subject, it links to their dossier.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Observer Name</label>
+                        <input type="text" id="save-observer-input" placeholder="e.g. Jordan (Lead) or Me" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Encounter Context</label>
+                        <select id="save-context-select" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="Sev-1 / P1 Incident">Sev-1 / P1 Incident</option>
+                            <option value="Live-Fire Drill / Training">Live-Fire Drill / Training</option>
+                            <option value="1-on-1 Coaching">1-on-1 Coaching</option>
+                            <option value="Customer Escalation">Customer Escalation</option>
+                            <option value="Incident Post-Mortem">Incident Post-Mortem</option>
+                            <option value="Day-to-Day Operations">Day-to-Day Operations</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Encounter Field Notes (Optional)</label>
+                    <textarea id="save-notes-input" rows="3" placeholder="e.g. Observed on incident bridge. Pushed for immediate ETA, became impatient when raw logs were presented without bottom-line impact." class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-3 border-t border-slate-700">
+                <button onclick="closeSaveModal()" class="px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white">Cancel</button>
+                <button onclick="confirmSaveObservation()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-semibold shadow">Save Observation</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MERGE SUBJECT MODAL -->
+    <div id="modal-merge" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-2xl border border-slate-700 max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 class="text-lg font-bold text-white">Merge Duplicate Subject</h3>
+                <button onclick="closeMergeModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
+            </div>
+            <div class="space-y-3">
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Merging <strong id="merge-source-name" class="text-amber-400"></strong> into another subject will transfer all observations and register its name as an alias (e.g. fixing typos like <em>"Sarha"</em> &rarr; <em>"Sarah"</em>).
+                </p>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Select Target Subject</label>
+                    <select id="merge-target-select" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 pt-3 border-t border-slate-700">
+                <button onclick="closeMergeModal()" class="px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white">Cancel</button>
+                <button onclick="confirmMergeSubjects()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-semibold shadow">Confirm Merge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-indigo-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2 text-sm">
+        <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800">
+        The Behavioral Profiler • 100% Client-Side Privacy • Multi-Observer Incident Intelligence
+    </footer>
+
+    <script>
+        const archetypes = {
+            thinker: {
+                name: "The Thinker",
+                baseComm: "Processes the world through logic and data. Needs structured, chronological, and verifiable communication.",
+                phaseDriver: "Currently seeking timeline certainty, data stability, and structural order.",
+                distress: "Will over-explain, nitpick irrelevant variables, weaponize facts, and micromanage while ignoring emotional context.",
+                frontline: "Acknowledge their data, provide clear timelines, and speak in logical sequences. Never give vague or emotional assurances.",
+                management: "Assign complex, structured diagnostic tasks. Keep updates agenda-driven. They stabilize chaotic bridges if given control of telemetry.",
+                disc: {
+                    badge: "High C",
+                    label: "High C (Conscientiousness)",
+                    style: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+                    summary: "Analytical, systematic, precision-driven, risk-averse"
+                },
+                incident: {
+                    doSay: [
+                        "Here is the verified data and timeline: Next status checkpoint is at [Time] with comparative error telemetry.",
+                        "What specific telemetry thresholds or log criteria do you need before approving the next mitigation phase?",
+                        "Let's document the sequence of events chronologically so nothing is assumed."
+                    ],
+                    dontSay: [
+                        "Don't worry about the raw logs right now, just trust that we have a good feeling about this patch.",
+                        "Stop overanalyzing the details and just let us try something quick.",
+                        "Calm down, it's not that big of a deal."
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (VERIFIED TELEMETRY)*\n• *Status:* Root cause mitigation in progress.\n• *Telemetry Snapshot:* Error rates decreased from 14.2% to 1.9% following pool restart.\n• *Next Checkpoint:* [Time] with latency & CPU delta.\n• *Artifacts:* Raw debug logs attached in thread.`
+                }
+            },
+            persister: {
+                name: "The Persister",
+                baseComm: "Processes the world through values, convictions, and principles. Needs respectful, opinion-oriented communication.",
+                phaseDriver: "Currently seeking respect, validation of their dedication, and adherence to team principles/standards.",
+                distress: "Will become hyper-critical, preach, moralize, and rigidly push their beliefs onto others while refusing to compromise.",
+                frontline: "Solicit their opinion, validate their dedication, and explicitly align requests with shared quality/integrity standards.",
+                management: "Put them in charge of compliance, security, or post-mortem reviews. They will aggressively defend standards if their loyalty is honored.",
+                disc: {
+                    badge: "High D / High C",
+                    label: "High D / C (Principled Evaluator)",
+                    style: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    summary: "Conviction-led, standards-focused, determined, ethical"
+                },
+                incident: {
+                    doSay: [
+                        "We share your commitment to system integrity and customer trust; here is how this step protects our SLAs.",
+                        "We value your technical judgment on this—what is your opinion on whether we fail over or hot-patch?",
+                        "Thank you for holding the line on security standards and catching this discrepancy."
+                    ],
+                    dontSay: [
+                        "The SLA policy and standards don't matter right now, we just need to hack together a workaround.",
+                        "You're being way too stubborn about protocol; just let it slide.",
+                        "Nobody cares about who was right or wrong."
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (STANDARDS & INTEGRITY)*\n• *Commitment:* Protecting data consistency and compliance SLAs.\n• *Mitigation:* Executing validated rollback to maintain system standards.\n• *Alignment:* Approach vetted against architecture guidelines.\n• *Next Checkpoint:* [Time].`
+                }
+            },
+            harmonizer: {
+                name: "The Harmonizer",
+                baseComm: "Processes the world through emotions and relationships. Needs warm, compassionate, and human-centric communication.",
+                phaseDriver: "Currently seeking to feel accepted, valued as an individual, and psychologically safe within the team.",
+                distress: "Will make mistakes to invite rescue, over-apologize, freeze up, or completely avoid necessary confrontation.",
+                frontline: "Validate their feelings first. Use inclusive 'we' language, approach gently, and prioritize human well-being over harsh directives.",
+                management: "Protect them from abrasive team members. They are the emotional glue of the group but burn out rapidly in high-friction environments.",
+                disc: {
+                    badge: "High S",
+                    label: "High S (Steadiness)",
+                    style: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                    summary: "Empathetic, supportive, patient, team-first stabilizer"
+                },
+                incident: {
+                    doSay: [
+                        "We are in this together as a team. Take a breath—we will resolve this step-by-step.",
+                        "I really appreciate how hard you've worked during this outage. How are you holding up right now?",
+                        "Let's step through this together on voice so you don't have to carry this alone."
+                    ],
+                    dontSay: [
+                        "Who broke this? Someone needs to take personal responsibility right now.",
+                        "Leave your stress out of this, just execute the commands faster.",
+                        "Why are you taking this so personally? Just do your job."
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (TEAM ALIGNMENT)*\n• *Status:* Team is working cohesively on service restoration.\n• *Support Notice:* Secondary on-call stepping in to relieve primary triage lead.\n• *Environment:* War room voice bridge active; team safety and pacing prioritized.\n• *Next Checkpoint:* [Time].`
+                }
+            },
+            rebel: {
+                name: "The Rebel",
+                baseComm: "Processes the world through spontaneous reactions and creativity. Needs playful, energetic, and upbeat communication.",
+                phaseDriver: "Currently seeking playful contact, stimulation, and freedom from rigid, stifling bureaucracy.",
+                distress: "Will complain, blame others, act sarcastic in incident channels, and actively resist standard runbooks.",
+                frontline: "Keep the interaction energetic. Offer discrete choices instead of directives. Frame troubleshooting as a fun puzzle.",
+                management: "Deploy them for creative troubleshooting and unexpected edge cases. Do not micromanage their keystrokes.",
+                disc: {
+                    badge: "High I",
+                    label: "High I (Influence / Disruptor)",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    summary: "Spontaneous, high-energy, creative troubleshooters, expressive"
+                },
+                incident: {
+                    doSay: [
+                        "Here's a puzzle: the primary route is jammed. What unconventional workaround or crazy idea can we test?",
+                        "Do you want to take point on the routing bypass or would you rather dive into the cache layer?",
+                        "Nice catch on that weird edge case—let's see if we can break the reproduction script."
+                    ],
+                    dontSay: [
+                        "You must strictly follow steps 1 through 24 in the handbook with zero deviations.",
+                        "Stop with the side remarks and jokes in the incident channel.",
+                        "Because I said so, that's why."
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (RAPID EXPERIMENTATION)*\n• *Status:* Testing dynamic traffic bypass around stalled pipeline.\n• *Active Test:* Canary traffic routed to isolated cluster.\n• *Observations:* Creative bypass showing immediate promise.\n• *Next Checkpoint:* [Time].`
+                }
+            },
+            promoter: {
+                name: "The Promoter",
+                baseComm: "Processes the world through direct action. Needs bottom-line, concise, action-oriented communication.",
+                phaseDriver: "Currently seeking immediate wins, high stakes, and tangible, visible progress.",
+                distress: "Will manipulate, escalate conflicts, bypass process, bark orders, and provoke others to force quick movement.",
+                frontline: "Be direct, skip the pleasantries, present the immediate bottom-line payoff, and challenge them to act decisively.",
+                management: "Deploy them to clear organizational roadblocks and close incidents. Keep them moving; stagnation turns into friction.",
+                disc: {
+                    badge: "High D",
+                    label: "High D (Dominance)",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    summary: "Bottom-line, direct, results-obsessed, fast-paced closer"
+                },
+                incident: {
+                    doSay: [
+                        "Bottom line: Gateway is saturated. If we flip the regional DNS switch now, 95% of users recover in 3 minutes.",
+                        "We need your call on this: do we pull the trigger on failover now, yes or no?",
+                        "Here's the win: we isolate the bad shard now, customers stop seeing errors immediately."
+                    ],
+                    dontSay: [
+                        "Let me give you a 20-minute backstory on how our database architecture evolved...",
+                        "We're really uncertain, we might need a few hours to think through every hypothetical.",
+                        "You need to wait patiently while we draft a formal proposal."
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (BOTTOM-LINE IMPACT)*\n• *Bottom Line:* 95% user impact eliminated via regional isolation.\n• *Immediate Action:* Triggering failover to restore remaining 5% of traffic.\n• *Win Condition:* Full green recovery projected in < 5 minutes.\n• *Next Checkpoint:* [Time].`
+                }
+            },
+            imaginer: {
+                name: "The Imaginer",
+                baseComm: "Processes the world through internal reflection. Needs clear, concise, direct, and non-demanding communication.",
+                phaseDriver: "Currently seeking solitude, uninterrupted thinking time, and physical/mental space to process.",
+                distress: "Will completely withdraw, shut down, go unresponsive on bridge calls, and passively freeze under pressure.",
+                frontline: "Give them physical and mental space. Give direct, clear statements rather than open-ended questions. Avoid rapid-fire shouting.",
+                management: "Assign deep, solitary investigative analysis (e.g., core dump reviews). Do not force rapid-fire verbal brainstorming.",
+                disc: {
+                    badge: "High C / High S",
+                    label: "High C / S (Reflective Stabilizer)",
+                    style: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+                    summary: "Deliberate, low-profile, calm conceptual processor"
+                },
+                incident: {
+                    doSay: [
+                        "Take 15 minutes of uninterrupted quiet time to analyze the memory dump. DM me directly when you have a read.",
+                        "Please run `trace_dump.sh` on host 04 and send the output log to our 1-on-1 thread.",
+                        "No need to stay on the loud Zoom audio bridge while you're debugging this."
+                    ],
+                    dontSay: [
+                        "Everyone unmute right now and shout out ideas rapid-fire!",
+                        "Why haven't you typed in Slack for 3 minutes? Are you paying attention?",
+                        "What do you think we should all feel about this entire situation?"
+                    ],
+                    slackTemplate: `*INCIDENT STATUS UPDATE (DEEP INVESTIGATION)*\n• *Current Focus:* Deep heap and thread profiling running in isolated container.\n• *Protocol:* Channel noise kept to a minimum to allow focused analysis.\n• *Expected Readout:* [Time] with core dump diagnostic.`
+                }
+            }
+        };
+
+        const scoringEngine = {
+            base: {
+                tempo: { "Fast / Urgent": ["promoter", "rebel"], "Measured / Deliberate": ["thinker", "persister", "imaginer"], "Variable / Emotional": ["harmonizer"] },
+                focus: { "People / Relationships": ["harmonizer"], "Things / Tasks": ["thinker"], "Ideas / Concepts": ["persister"], "Action": ["promoter"], "Spontaneous": ["rebel"], "Concepts / Solo": ["imaginer"] },
+                posture: { "Rigid / Upright": ["thinker", "persister"], "Relaxed / Leaning": ["harmonizer", "imaginer"], "In-Motion / Fidgety": ["promoter", "rebel"] }
+            },
+            phase: {
+                motivator: { "Status / Wins": ["promoter"], "Status / Respect": ["persister"], "Security / Data": ["thinker"], "Connection / Approval": ["harmonizer"], "Novelty / Fun": ["rebel"], "Security / Space": ["imaginer"] },
+                stressor: { "Lack of Time": ["thinker", "persister"], "Loss of Control": ["promoter"], "Social Friction": ["harmonizer", "imaginer"], "Resource Scarcity": ["rebel", "thinker"] },
+                conflict: { "Avoids / Deflects": ["harmonizer"], "Dominates / Escalates": ["promoter"], "Dominates / Rigid": ["persister"], "Logics / Over-explains": ["thinker"], "Withdraws": ["imaginer"], "Blames": ["rebel"] }
+            }
+        };
+
+        // Active state
+        let selections = { tempo: null, focus: null, posture: null, motivator: null, stressor: null, conflict: null };
+        let currentAnalysis = { baseKey: null, phaseKey: null, base: null, phase: null }; 
+        let currentSubjectName = "";
+
+        // ================= DOSSIER STORAGE & ARCHITECTURE =================
+        const DOSSIER_KEY = 'behavioral_profiler_dossier_v1';
+        let dossier = {
+            subjects: {},    // id -> { id, canonicalName, aliases: [], notes, createdAt }
+            observations: [] // array of { id, subjectId, rawSubjectInput, observerName, context, timestamp, selections, baseKey, phaseKey, notes }
+        };
+
+        function loadDossier() {
+            try {
+                const stored = localStorage.getItem(DOSSIER_KEY);
+                if (stored) {
+                    dossier = JSON.parse(stored);
+                    if (!dossier.subjects) dossier.subjects = {};
+                    if (!dossier.observations) dossier.observations = [];
+                }
+            } catch (e) {
+                console.error('Failed to load dossier from storage:', e);
+            }
+            updateDossierBadge();
+            populateSubjectDatalist();
+        }
+
+        function saveDossier() {
+            try {
+                localStorage.setItem(DOSSIER_KEY, JSON.stringify(dossier));
+            } catch (e) {
+                console.error('Failed to save dossier to storage:', e);
+            }
+            updateDossierBadge();
+            populateSubjectDatalist();
+        }
+
+        function updateDossierBadge() {
+            const count = dossier.observations.length;
+            const badge = document.getElementById('dossier-count-badge');
+            if (badge) badge.textContent = count;
+            const subCount = Object.keys(dossier.subjects).length;
+            const subBadge = document.getElementById('dossier-total-subjects');
+            if (subBadge) subBadge.textContent = `${subCount} ${subCount === 1 ? 'Person' : 'People'} (${count} Obs)`;
+        }
+
+        function populateSubjectDatalist() {
+            const datalist = document.getElementById('subject-datalist');
+            if (!datalist) return;
+            datalist.innerHTML = '';
+            
+            const addedNames = new Set();
+            Object.values(dossier.subjects).forEach(sub => {
+                if (!addedNames.has(sub.canonicalName)) {
+                    const opt = document.createElement('option');
+                    opt.value = sub.canonicalName;
+                    datalist.appendChild(opt);
+                    addedNames.add(sub.canonicalName);
+                }
+                if (sub.aliases && Array.isArray(sub.aliases)) {
+                    sub.aliases.forEach(alias => {
+                        if (!addedNames.has(alias)) {
+                            const opt = document.createElement('option');
+                            opt.value = alias;
+                            datalist.appendChild(opt);
+                            addedNames.add(alias);
+                        }
+                    });
+                }
+            });
+        }
+
+        function findSubjectByNameOrAlias(name) {
+            if (!name || !name.trim()) return null;
+            const clean = name.trim().toLowerCase();
+            
+            // 1. Check canonical names
+            for (const sub of Object.values(dossier.subjects)) {
+                if (sub.canonicalName.toLowerCase() === clean) return sub;
+            }
+            // 2. Check aliases
+            for (const sub of Object.values(dossier.subjects)) {
+                if (sub.aliases && sub.aliases.some(a => a.toLowerCase() === clean)) {
+                    return sub;
+                }
+            }
+            return null;
+        }
+
+        function handleSubjectInput(val) {
+            const hint = document.getElementById('subject-match-hint');
+            const hintText = document.getElementById('subject-match-text');
+            if (!val || !val.trim()) {
+                hint.classList.add('hidden');
+                hint.classList.remove('flex');
+                return;
+            }
+            const match = findSubjectByNameOrAlias(val);
+            if (match) {
+                const obsCount = dossier.observations.filter(o => o.subjectId === match.id).length;
+                hintText.textContent = `Linked to: ${match.canonicalName} (${obsCount} obs)`;
+                hint.classList.remove('hidden');
+                hint.classList.add('flex');
+            } else {
+                hint.classList.add('hidden');
+                hint.classList.remove('flex');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const text = document.getElementById('toast-message');
+            text.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // ================= ACTIVE PROFILER CHIPS & ANALYSIS =================
+        document.querySelectorAll('.chip').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const category = e.target.getAttribute('data-category');
+                const value = e.target.getAttribute('data-value');
+                const isActive = e.target.classList.contains('bg-indigo-600');
+
+                document.querySelectorAll(`.chip[data-category="${category}"]`).forEach(btn => {
+                    btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white');
+                    btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+                });
+
+                if (isActive) {
+                    selections[category] = null;
+                } else {
+                    selections[category] = value;
+                    e.target.classList.remove('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+                    e.target.classList.add('bg-indigo-600', 'border-indigo-500', 'text-white');
+                }
+            });
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            }
+
+            document.getElementById('view-profiler').classList.add('hidden');
+            document.getElementById('view-dossier').classList.add('hidden');
+            document.getElementById('view-codex').classList.add('hidden');
+            
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            if (tabId === 'dossier') {
+                renderDossier();
+            }
+        }
+
+        function calculateTopMatch(categoryScores, engineKey, primaryFactor) {
+            let scores = { thinker: 0, persister: 0, harmonizer: 0, rebel: 0, promoter: 0, imaginer: 0 };
+            
+            for (const [cat, value] of Object.entries(categoryScores)) {
+                if (value && scoringEngine[engineKey][cat][value]) {
+                    const matchedTypes = scoringEngine[engineKey][cat][value];
+                    matchedTypes.forEach(type => {
+                        scores[type] += (cat === primaryFactor) ? 2 : 1;
+                    });
+                }
+            }
+
+            let topType = null;
+            let maxScore = 0;
+            for (const [type, score] of Object.entries(scores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    topType = type;
+                }
+            }
+            return topType;
+        }
+
+        function copySlackTemplate(btnId, rawText) {
+            navigator.clipboard.writeText(rawText).then(() => {
+                const btn = document.getElementById(btnId);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<svg class="w-3.5 h-3.5 mr-1 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Copied!`;
+                btn.classList.add('text-emerald-300', 'border-emerald-500/50');
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.classList.remove('text-emerald-300', 'border-emerald-500/50');
+                }, 2000);
+            }).catch(err => {
+                console.error('Clipboard copy failed:', err);
+            });
+        }
+
+        function analyzeProfile() {
+            const resultsCard = document.getElementById('results-card');
+            const resTitle = document.getElementById('res-title');
+            const resContent = document.getElementById('res-content');
+            const btnExport = document.getElementById('btn-export');
+
+            currentSubjectName = document.getElementById('subject-name').value.trim() || "Unknown Subject";
+
+            if (!selections.focus || !selections.conflict) {
+                resTitle.textContent = "INCOMPLETE DATA";
+                resTitle.className = "text-xl font-bold text-amber-400 uppercase tracking-wider";
+                resContent.innerHTML = `
+                    <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-900/50">
+                        <p class="text-slate-300 text-sm leading-relaxed mb-1 font-medium">Please select at least:</p>
+                        <ul class="list-disc list-inside text-sm text-slate-400 space-y-1">
+                            <li><strong>Primary Focus</strong> in Level 1 (determines base communication channel)</li>
+                            <li><strong>Conflict Stance</strong> in Level 2 (determines active distress phase)</li>
+                        </ul>
+                    </div>`;
+                btnExport.classList.add('hidden');
+                resultsCard.classList.remove('hidden');
+                return;
+            }
+
+            const predictedBase = calculateTopMatch({ tempo: selections.tempo, focus: selections.focus, posture: selections.posture }, 'base', 'focus');
+            const predictedPhase = calculateTopMatch({ motivator: selections.motivator, stressor: selections.stressor, conflict: selections.conflict }, 'phase', 'conflict');
+
+            if (predictedBase && predictedPhase) {
+                currentAnalysis.baseKey = predictedBase;
+                currentAnalysis.phaseKey = predictedPhase;
+                currentAnalysis.base = archetypes[predictedBase];
+                currentAnalysis.phase = archetypes[predictedPhase];
+                
+                const isPure = predictedBase === predictedPhase;
+                const titleText = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
+
+                btnExport.classList.remove('hidden');
+                resTitle.textContent = titleText;
+                resTitle.className = "text-xl sm:text-2xl font-bold text-indigo-400 uppercase tracking-wider";
+                
+                const doSayList = currentAnalysis.phase.incident.doSay.map(s => 
+                    `<li class="flex items-start text-sm text-slate-200"><svg class="w-4 h-4 text-emerald-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>"${s}"</span></li>`
+                ).join('');
+
+                const dontSayList = currentAnalysis.phase.incident.dontSay.map(s => 
+                    `<li class="flex items-start text-sm text-slate-200"><svg class="w-4 h-4 text-rose-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg><span>"${s}"</span></li>`
+                ).join('');
+
+                resContent.innerHTML = `
+                    <!-- DUAL-LENS DISC ALIGNMENT BANNER -->
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">DISC Leadership & Incident Alignment</span>
+                            <span class="text-xs text-slate-500 font-mono">Dual-Lens Synthesis</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs text-slate-400 uppercase">Base Filter:</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold border ${currentAnalysis.base.disc.style}">
+                                    ${currentAnalysis.base.disc.badge} — ${currentAnalysis.base.disc.label}
+                                </span>
+                            </div>
+                            <span class="text-slate-500 font-bold">➔</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs text-slate-400 uppercase">Incident Distress:</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold border ${currentAnalysis.phase.disc.style}">
+                                    ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label}
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                            <em>Tactical Translation:</em> Baseline communication channel is <strong>${currentAnalysis.base.disc.label}</strong> (${currentAnalysis.base.disc.summary}). Under acute incident stress, distress behaviors shift toward <strong>${currentAnalysis.phase.disc.label}</strong> (${currentAnalysis.phase.disc.summary}).
+                        </p>
+                    </div>
+
+                    <!-- CORE READOUT -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                            <h4 class="text-xs text-indigo-300 uppercase font-bold tracking-wider mb-1">Communication Channel (Base)</h4>
+                            <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.base.baseComm}</p>
+                        </div>
+                        <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                            <h4 class="text-xs text-emerald-300 uppercase font-bold tracking-wider mb-1">Current Driver (Phase)</h4>
+                            <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.phaseDriver}</p>
+                        </div>
+                        <div class="bg-rose-900/20 p-4 rounded-lg border border-rose-900/50">
+                            <h4 class="text-xs text-rose-400 uppercase font-bold tracking-wider mb-1">Distress Tell (Phase)</h4>
+                            <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.distress}</p>
+                        </div>
+                    </div>
+
+                    <!-- INCIDENT TACTICAL PLAYBOOK (DO'S & DON'TS) -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Incident Tactical Scripts (Bridge & Slack Playbook)</h3>
+                            <span class="text-xs text-slate-400">Live De-escalation</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- SAY THIS -->
+                            <div class="bg-emerald-950/30 p-4 rounded-xl border border-emerald-800/50 space-y-3">
+                                <div class="flex items-center text-emerald-400 text-xs font-bold uppercase tracking-wide">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Green Light: Say This (De-escalation & Alignment)
+                                </div>
+                                <ul class="space-y-2.5">
+                                    ${doSayList}
+                                </ul>
+                            </div>
+
+                            <!-- NEVER SAY THIS -->
+                            <div class="bg-rose-950/30 p-4 rounded-xl border border-rose-800/50 space-y-3">
+                                <div class="flex items-center text-rose-400 text-xs font-bold uppercase tracking-wide">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    Red Line: Never Say This (Incident Triggers)
+                                </div>
+                                <ul class="space-y-2.5">
+                                    ${dontSayList}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLACK / BRIDGE COPYABLE TEMPLATE -->
+                    <div class="bg-slate-900/90 rounded-xl p-4 border border-indigo-500/40 space-y-3 shadow-inner">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-xs font-bold text-indigo-300 uppercase tracking-wide">Tailored Incident Slack / Status Update Template</span>
+                            </div>
+                            <button id="btn-copy-template" onclick="copySlackTemplate('btn-copy-template', currentAnalysis.phase.incident.slackTemplate)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-2.5 py-1 rounded text-xs font-medium flex items-center transition-colors">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                Copy Template
+                            </button>
+                        </div>
+                        <pre class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto border border-slate-800">${currentAnalysis.phase.incident.slackTemplate}</pre>
+                    </div>
+
+                    <!-- LONG-TERM STRATEGY -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-900/20 p-4 rounded-lg border border-emerald-900/50">
+                            <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">Frontline Strategy</h4>
+                            <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.frontline}</p>
+                        </div>
+                        <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-900/50">
+                            <h4 class="text-xs text-amber-400 uppercase font-bold tracking-wider mb-1">Management Insight</h4>
+                            <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.management}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsCard.classList.remove('hidden');
+            setTimeout(() => { resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+        }
+
+        function resetProfiler() {
+            for (let key in selections) selections[key] = null;
+            currentAnalysis = { baseKey: null, phaseKey: null, base: null, phase: null };
+            currentSubjectName = "";
+            document.getElementById('subject-name').value = '';
+            handleSubjectInput('');
+            document.querySelectorAll('.chip').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white');
+                btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+            });
+            document.getElementById('results-card').classList.add('hidden');
+            document.getElementById('btn-export').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================= SAVE OBSERVATION MODAL LOGIC =================
+        function openSaveModal() {
+            if (!currentAnalysis.baseKey || !currentAnalysis.phaseKey) {
+                alert('Please analyze a profile before saving.');
+                return;
+            }
+            const modal = document.getElementById('modal-save');
+            const subjectInput = document.getElementById('save-subject-input');
+            const observerInput = document.getElementById('save-observer-input');
+            const notesInput = document.getElementById('save-notes-input');
+
+            subjectInput.value = currentSubjectName || "Sarah (VP Eng)";
+            if (!observerInput.value) {
+                observerInput.value = localStorage.getItem('last_observer_name') || "Lead Observer";
+            }
+            notesInput.value = "";
+            modal.classList.remove('hidden');
+        }
+
+        function closeSaveModal() {
+            document.getElementById('modal-save').classList.add('hidden');
+        }
+
+        function confirmSaveObservation() {
+            const subjectRaw = document.getElementById('save-subject-input').value.trim();
+            const observerName = document.getElementById('save-observer-input').value.trim() || "Anonymous Observer";
+            const context = document.getElementById('save-context-select').value;
+            const notes = document.getElementById('save-notes-input').value.trim();
+
+            if (!subjectRaw) {
+                alert('Please enter a Subject Name.');
+                return;
+            }
+
+            localStorage.setItem('last_observer_name', observerName);
+
+            // Check if subject exists by name or alias
+            let subject = findSubjectByNameOrAlias(subjectRaw);
+            if (!subject) {
+                const subId = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+                subject = {
+                    id: subId,
+                    canonicalName: subjectRaw,
+                    aliases: [subjectRaw],
+                    notes: '',
+                    createdAt: new Date().toISOString()
+                };
+                dossier.subjects[subId] = subject;
+            } else {
+                // Register raw as alias if new
+                if (!subject.aliases.some(a => a.toLowerCase() === subjectRaw.toLowerCase())) {
+                    subject.aliases.push(subjectRaw);
+                }
+            }
+
+            const obsId = 'obs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+            const newObs = {
+                id: obsId,
+                subjectId: subject.id,
+                rawSubjectInput: subjectRaw,
+                observerName: observerName,
+                context: context,
+                timestamp: new Date().toISOString(),
+                selections: { ...selections },
+                baseKey: currentAnalysis.baseKey,
+                phaseKey: currentAnalysis.phaseKey,
+                notes: notes
+            };
+
+            dossier.observations.push(newObs);
+            saveDossier();
+            closeSaveModal();
+            showToast(`Observation for "${subject.canonicalName}" saved to Dossier!`);
+            handleSubjectInput(document.getElementById('subject-name').value);
+        }
+
+        // ================= DOSSIER LIBRARY VIEW & INTELLIGENCE =================
+        function renderDossier() {
+            const container = document.getElementById('dossier-subjects-list');
+            const search = (document.getElementById('dossier-search').value || '').toLowerCase().trim();
+            const contextFilter = document.getElementById('dossier-context-filter').value;
+
+            const subjects = Object.values(dossier.subjects);
+            if (subjects.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-slate-800 rounded-xl p-8 text-center border border-slate-700 space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-slate-700/60 text-indigo-400 mx-auto flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Your Dossier Library is Empty</h3>
+                        <p class="text-sm text-slate-400 max-w-md mx-auto">
+                            Profile someone on the Active Profiler tab and click <strong>Save to Dossier</strong>, or load our simulated team live-fire drill data to explore multi-observer intelligence.
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="loadSampleDrillData()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-lg text-xs transition-colors shadow">
+                                Load Sample Multi-Observer Drill Data
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            subjects.forEach(sub => {
+                let obsList = dossier.observations.filter(o => o.subjectId === sub.id);
+                if (contextFilter !== 'ALL') {
+                    obsList = obsList.filter(o => o.context === contextFilter);
+                }
+
+                // Filter search
+                if (search) {
+                    const matchesName = sub.canonicalName.toLowerCase().includes(search);
+                    const matchesAlias = sub.aliases && sub.aliases.some(a => a.toLowerCase().includes(search));
+                    const matchesObs = obsList.some(o => 
+                        o.observerName.toLowerCase().includes(search) || 
+                        (o.notes && o.notes.toLowerCase().includes(search)) ||
+                        archetypes[o.baseKey]?.name.toLowerCase().includes(search) ||
+                        archetypes[o.phaseKey]?.name.toLowerCase().includes(search)
+                    );
+                    if (!matchesName && !matchesAlias && !matchesObs) return;
+                }
+
+                if (contextFilter !== 'ALL' && obsList.length === 0) return;
+
+                // Analytics on Observations
+                const totalObs = obsList.length;
+                const baseCounts = {};
+                const phaseCounts = {};
+                const observersSet = new Set();
+                const contextsSet = new Set();
+
+                obsList.forEach(o => {
+                    baseCounts[o.baseKey] = (baseCounts[o.baseKey] || 0) + 1;
+                    phaseCounts[o.phaseKey] = (phaseCounts[o.phaseKey] || 0) + 1;
+                    observersSet.add(o.observerName);
+                    contextsSet.add(o.context);
+                });
+
+                // Calculate consensus & divergence
+                let topBase = null;
+                let maxBaseCount = 0;
+                for (const [k, count] of Object.entries(baseCounts)) {
+                    if (count > maxBaseCount) { maxBaseCount = count; topBase = k; }
+                }
+                const baseConsensusPct = totalObs > 0 ? Math.round((maxBaseCount / totalObs) * 100) : 0;
+
+                // Check for phase divergence across observations
+                const uniquePhases = Object.keys(phaseCounts);
+                const hasDivergence = uniquePhases.length > 1;
+
+                const aliasesDisplay = sub.aliases && sub.aliases.length > 1 
+                    ? `<span class="text-xs text-slate-400">Aliases: ${sub.aliases.filter(a => a !== sub.canonicalName).join(', ')}</span>`
+                    : '';
+
+                html += `
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 shadow-lg space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-slate-700/80 pb-4">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-xl font-bold text-white">${sub.canonicalName}</h3>
+                                <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-900/60 text-indigo-300 border border-indigo-700/50">
+                                    ${totalObs} ${totalObs === 1 ? 'Observation' : 'Observations'}
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2 mt-1">
+                                ${aliasesDisplay}
+                                <span class="text-xs text-slate-500">• ${observersSet.size} ${observersSet.size === 1 ? 'Observer' : 'Observers'} (${Array.from(observersSet).join(', ')})</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="profileSubjectInActive('${sub.canonicalName}')" class="bg-indigo-600/80 hover:bg-indigo-600 text-white text-xs px-2.5 py-1.5 rounded flex items-center transition-colors">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                New Profile
+                            </button>
+                            <button onclick="openMergeModal('${sub.id}')" class="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs px-2.5 py-1.5 rounded flex items-center transition-colors border border-slate-600" title="Merge this subject into another (alias consolidation)">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                Merge
+                            </button>
+                            <button onclick="deleteSubject('${sub.id}')" class="text-rose-400 hover:text-rose-300 text-xs p-1.5" title="Delete Subject">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CONSENSUS & DIVERGENCE INTELLIGENCE BANNER -->
+                    ${totalObs > 0 ? `
+                    <div class="bg-slate-900/90 rounded-xl p-3.5 border border-slate-700 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wide text-slate-400">Multi-Observer Synthesis & Situational Divergence</span>
+                            <span class="text-xs text-slate-500 font-mono">${totalObs} data point${totalObs > 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 text-xs">
+                            <span class="text-slate-300">Base Consensus:</span>
+                            <span class="px-2.5 py-0.5 rounded-full font-bold border ${archetypes[topBase].disc.style}">
+                                ${archetypes[topBase].name} (${baseConsensusPct}% agreement)
+                            </span>
+                        </div>
+                        ${hasDivergence ? `
+                        <div class="bg-amber-950/40 p-2.5 rounded-lg border border-amber-800/40 flex items-start space-x-2 text-xs text-amber-200">
+                            <svg class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div>
+                                <strong class="text-amber-300">Situational Distress Divergence Detected:</strong> Observers noted different Phase behaviors across environments:
+                                <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-300">
+                                    ${uniquePhases.map(pk => `<li><strong>${archetypes[pk].name} Phase</strong> (${phaseCounts[pk]} obs) &mdash; ${archetypes[pk].disc.label}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        ` : `
+                        <div class="text-xs text-emerald-400 flex items-center">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            High Observer Alignment: Phase distress consistently observed as <strong>${archetypes[uniquePhases[0]].name}</strong>.
+                        </div>
+                        `}
+                    </div>
+                    ` : ''}
+
+                    <!-- OBSERVATIONS TIMELINE -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
+                            <span>Recorded Observations Timeline</span>
+                            <button onclick="toggleObsTimeline('${sub.id}')" class="text-indigo-400 hover:text-indigo-300 font-semibold lowercase tracking-normal">
+                                toggle list (${totalObs})
+                            </button>
+                        </div>
+
+                        <div id="obs-timeline-${sub.id}" class="space-y-3 pt-1">
+                            ${obsList.map(obs => {
+                                const b = archetypes[obs.baseKey];
+                                const p = archetypes[obs.phaseKey];
+                                const dateFormatted = new Date(obs.timestamp).toLocaleDateString() + ' ' + new Date(obs.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                return `
+                                <div class="bg-slate-900/60 rounded-lg p-3.5 border border-slate-700/70 space-y-2 text-xs">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800 pb-2">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="font-bold text-white">${obs.observerName}</span>
+                                            <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800 text-xs">${obs.context}</span>
+                                            <span class="text-slate-500 font-mono">${dateFormatted}</span>
+                                        </div>
+                                        <button onclick="deleteObservation('${obs.id}')" class="text-slate-500 hover:text-rose-400 text-xs self-start sm:self-auto" title="Delete observation">Remove</button>
+                                    </div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <span class="text-slate-400">Observed Base:</span>
+                                        <span class="px-2 py-0.5 rounded-full font-semibold border ${b.disc.style}">${b.name} (${b.disc.badge})</span>
+                                        <span class="text-slate-600">&rarr;</span>
+                                        <span class="text-slate-400">Observed Phase:</span>
+                                        <span class="px-2 py-0.5 rounded-full font-semibold border ${p.disc.style}">${p.name} (${p.disc.badge})</span>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-400 bg-slate-950/40 p-2 rounded border border-slate-800/80">
+                                        <div>Tempo: <span class="text-slate-200">${obs.selections.tempo || 'N/A'}</span></div>
+                                        <div>Focus: <span class="text-slate-200">${obs.selections.focus || 'N/A'}</span></div>
+                                        <div>Posture: <span class="text-slate-200">${obs.selections.posture || 'N/A'}</span></div>
+                                        <div>Motivator: <span class="text-slate-200">${obs.selections.motivator || 'N/A'}</span></div>
+                                        <div>Stressor: <span class="text-slate-200">${obs.selections.stressor || 'N/A'}</span></div>
+                                        <div>Conflict: <span class="text-slate-200">${obs.selections.conflict || 'N/A'}</span></div>
+                                    </div>
+
+                                    ${obs.notes ? `
+                                    <div class="bg-slate-950/70 p-2.5 rounded border border-slate-800 text-slate-300 italic">
+                                        &ldquo;${obs.notes}&rdquo;
+                                    </div>
+                                    ` : ''}
+                                </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleObsTimeline(subId) {
+            const el = document.getElementById(`obs-timeline-${subId}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function profileSubjectInActive(canonicalName) {
+            switchTab('profiler');
+            const input = document.getElementById('subject-name');
+            input.value = canonicalName;
+            handleSubjectInput(canonicalName);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deleteSubject(subId) {
+            const sub = dossier.subjects[subId];
+            if (!sub) return;
+            if (confirm(`Are you sure you want to delete "${sub.canonicalName}" and all associated observations?`)) {
+                delete dossier.subjects[subId];
+                dossier.observations = dossier.observations.filter(o => o.subjectId !== subId);
+                saveDossier();
+                renderDossier();
+                showToast(`Deleted subject "${sub.canonicalName}".`);
+            }
+        }
+
+        function deleteObservation(obsId) {
+            if (confirm('Delete this single observation?')) {
+                dossier.observations = dossier.observations.filter(o => o.id !== obsId);
+                saveDossier();
+                renderDossier();
+                showToast('Observation removed.');
+            }
+        }
+
+        // ================= MERGE DEDUPLICATION ENGINE =================
+        let activeMergeSourceId = null;
+
+        function openMergeModal(sourceId) {
+            activeMergeSourceId = sourceId;
+            const source = dossier.subjects[sourceId];
+            if (!source) return;
+
+            document.getElementById('merge-source-name').textContent = source.canonicalName;
+            const select = document.getElementById('merge-target-select');
+            select.innerHTML = '';
+
+            Object.values(dossier.subjects).forEach(sub => {
+                if (sub.id !== sourceId) {
+                    const opt = document.createElement('option');
+                    opt.value = sub.id;
+                    opt.textContent = `${sub.canonicalName} (${dossier.observations.filter(o => o.subjectId === sub.id).length} obs)`;
+                    select.appendChild(opt);
+                }
+            });
+
+            if (select.options.length === 0) {
+                alert('No other subjects exist to merge into.');
+                return;
+            }
+
+            document.getElementById('modal-merge').classList.remove('hidden');
+        }
+
+        function closeMergeModal() {
+            document.getElementById('modal-merge').classList.add('hidden');
+            activeMergeSourceId = null;
+        }
+
+        function confirmMergeSubjects() {
+            const targetId = document.getElementById('merge-target-select').value;
+            if (!activeMergeSourceId || !targetId || activeMergeSourceId === targetId) return;
+
+            const source = dossier.subjects[activeMergeSourceId];
+            const target = dossier.subjects[targetId];
+
+            if (!source || !target) return;
+
+            // Transfer aliases
+            const combinedAliases = new Set(target.aliases || [target.canonicalName]);
+            combinedAliases.add(source.canonicalName);
+            if (source.aliases && Array.isArray(source.aliases)) {
+                source.aliases.forEach(a => combinedAliases.add(a));
+            }
+            target.aliases = Array.from(combinedAliases);
+
+            // Reassign all observations
+            dossier.observations.forEach(o => {
+                if (o.subjectId === source.id) {
+                    o.subjectId = target.id;
+                }
+            });
+
+            // Delete source subject
+            delete dossier.subjects[source.id];
+
+            saveDossier();
+            closeMergeModal();
+            renderDossier();
+            showToast(`Merged "${source.canonicalName}" into "${target.canonicalName}".`);
+        }
+
+        // ================= MULTI-FILE IMPORT & EXPORT =================
+        function exportLibraryJson() {
+            const blob = new Blob([JSON.stringify(dossier, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `behavioral_profiler_dossier_backup_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function handleFileImport(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            let importedCount = 0;
+            const promises = [];
+
+            Array.from(files).forEach(file => {
+                const p = new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const content = e.target.result;
+                        if (file.name.endsWith('.json')) {
+                            try {
+                                const parsed = JSON.parse(content);
+                                if (parsed.subjects && parsed.observations) {
+                                    Object.assign(dossier.subjects, parsed.subjects);
+                                    dossier.observations.push(...parsed.observations);
+                                    importedCount += parsed.observations.length;
+                                }
+                            } catch (err) {
+                                console.error('Error parsing JSON backup:', err);
+                            }
+                        } else if (file.name.endsWith('.md')) {
+                            const parsedObs = parseMarkdownProfile(content, file.name);
+                            if (parsedObs) {
+                                dossier.observations.push(parsedObs);
+                                importedCount++;
+                            }
+                        }
+                        resolve();
+                    };
+                    reader.readAsText(file);
+                });
+                promises.push(p);
+            });
+
+            Promise.all(promises).then(() => {
+                saveDossier();
+                renderDossier();
+                showToast(`Successfully imported ${importedCount} observation card${importedCount === 1 ? '' : 's'}!`);
+                event.target.value = '';
+            });
+        }
+
+        function parseMarkdownProfile(md, filename) {
+            try {
+                // Match Title
+                const titleMatch = md.match(/# (?:Incident )?Behavioral Profile:\s*(.+)/i);
+                const rawSubject = titleMatch ? titleMatch[1].trim() : filename.replace(/\.md$/i, '');
+
+                // Match Observational data
+                const tempoMatch = md.match(/- \*\*Speech Tempo:\*\*\s*(.+)/i);
+                const focusMatch = md.match(/- \*\*Primary Focus:\*\*\s*(.+)/i);
+                const postureMatch = md.match(/- \*\*Posture.*:\*\*\s*(.+)/i);
+                const motivatorMatch = md.match(/- \*\*Core Motivator:\*\*\s*(.+)/i);
+                const stressorMatch = md.match(/- \*\*Primary Stressor:\*\*\s*(.+)/i);
+                const conflictMatch = md.match(/- \*\*Conflict Stance:\*\*\s*(.+)/i);
+
+                const selectionsExtracted = {
+                    tempo: tempoMatch ? tempoMatch[1].trim() : null,
+                    focus: focusMatch ? focusMatch[1].trim() : null,
+                    posture: postureMatch ? postureMatch[1].trim() : null,
+                    motivator: motivatorMatch ? motivatorMatch[1].trim() : null,
+                    stressor: stressorMatch ? stressorMatch[1].trim() : null,
+                    conflict: conflictMatch ? conflictMatch[1].trim() : null
+                };
+
+                // Predict Base & Phase
+                const baseKey = calculateTopMatch({ tempo: selectionsExtracted.tempo, focus: selectionsExtracted.focus, posture: selectionsExtracted.posture }, 'base', 'focus') || 'thinker';
+                const phaseKey = calculateTopMatch({ motivator: selectionsExtracted.motivator, stressor: selectionsExtracted.stressor, conflict: selectionsExtracted.conflict }, 'phase', 'conflict') || 'promoter';
+
+                // Match Date
+                const dateMatch = md.match(/\*\*Date:\*\*\s*(.+)/i);
+                const dateStr = dateMatch ? new Date(dateMatch[1].trim()).toISOString() : new Date().toISOString();
+
+                // Match Notes
+                const notesMatch = md.match(/## (?:6|4)\. Encounter.*Notes\s*(?:<!--.*?-->|\*\([^*]+\)\*)?\s*([\s\S]*?)(?:$|\n##)/i);
+                const notes = notesMatch ? notesMatch[1].trim() : '';
+
+                // Link to or create subject
+                let subject = findSubjectByNameOrAlias(rawSubject);
+                if (!subject) {
+                    const subId = 'sub_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+                    subject = {
+                        id: subId,
+                        canonicalName: rawSubject,
+                        aliases: [rawSubject],
+                        notes: '',
+                        createdAt: dateStr
+                    };
+                    dossier.subjects[subId] = subject;
+                }
+
+                const obsId = 'obs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+                return {
+                    id: obsId,
+                    subjectId: subject.id,
+                    rawSubjectInput: rawSubject,
+                    observerName: `Card Observer (${filename})`,
+                    context: "Imported Exercise Card",
+                    timestamp: dateStr,
+                    selections: selectionsExtracted,
+                    baseKey: baseKey,
+                    phaseKey: phaseKey,
+                    notes: notes
+                };
+            } catch (err) {
+                console.error('Failed to parse markdown profile:', err);
+                return null;
+            }
+        }
+
+        // ================= SAMPLE MULTI-OBSERVER DRILL DATA =================
+        function loadSampleDrillData() {
+            const sarahId = 'sub_sample_sarah';
+            const daveId = 'sub_sample_dave';
+
+            dossier.subjects[sarahId] = {
+                id: sarahId,
+                canonicalName: "Sarah Chen",
+                aliases: ["Sarah Chen", "Sarah (VP Eng)", "Sarha", "Sarah"],
+                notes: "VP of Engineering. High-stakes decision maker.",
+                createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
+            };
+
+            dossier.subjects[daveId] = {
+                id: daveId,
+                canonicalName: "Dave Miller",
+                aliases: ["Dave Miller", "Incident Commander Dave", "Dave IC"],
+                notes: "Principal SRE and designated Incident Commander.",
+                createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
+            };
+
+            dossier.observations = [
+                {
+                    id: 'obs_sample_1',
+                    subjectId: sarahId,
+                    rawSubjectInput: "Sarah (VP Eng)",
+                    observerName: "Alex (Support Lead)",
+                    context: "Sev-1 / P1 Incident",
+                    timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
+                    selections: {
+                        tempo: "Fast / Urgent",
+                        focus: "Action",
+                        posture: "Rigid / Upright",
+                        motivator: "Status / Wins",
+                        stressor: "Loss of Control",
+                        conflict: "Dominates / Escalates"
+                    },
+                    baseKey: "promoter",
+                    phaseKey: "promoter",
+                    notes: "Demanded ETA within 60s of joining bridge. Pushed past technical backstories and challenged IC to make an immediate failover call."
+                },
+                {
+                    id: 'obs_sample_2',
+                    subjectId: sarahId,
+                    rawSubjectInput: "Sarah",
+                    observerName: "Jordan (Architecture Lead)",
+                    context: "1-on-1 Coaching",
+                    timestamp: new Date(Date.now() - 86400000 * 1).toISOString(),
+                    selections: {
+                        tempo: "Measured / Deliberate",
+                        focus: "Things / Tasks",
+                        posture: "Rigid / Upright",
+                        motivator: "Security / Data",
+                        stressor: "Lack of Time",
+                        conflict: "Logics / Over-explains"
+                    },
+                    baseKey: "thinker",
+                    phaseKey: "thinker",
+                    notes: "Very structured in 1-on-1. Walked through database connection pool graphs step-by-step. Valued rigorous data over quick promises."
+                },
+                {
+                    id: 'obs_sample_3',
+                    subjectId: sarahId,
+                    rawSubjectInput: "Sarha",
+                    observerName: "Taylor (Tier 2 SRE)",
+                    context: "Live-Fire Drill / Training",
+                    timestamp: new Date().toISOString(),
+                    selections: {
+                        tempo: "Fast / Urgent",
+                        focus: "Action",
+                        posture: "In-Motion / Fidgety",
+                        motivator: "Status / Wins",
+                        stressor: "Loss of Control",
+                        conflict: "Dominates / Escalates"
+                    },
+                    baseKey: "promoter",
+                    phaseKey: "promoter",
+                    notes: "During simulated P1 drill, stepped in to cut through debate and authorized canary restart. Clearly shifts into High D under operational pressure."
+                },
+                {
+                    id: 'obs_sample_4',
+                    subjectId: daveId,
+                    rawSubjectInput: "Dave IC",
+                    observerName: "Alex (Support Lead)",
+                    context: "Live-Fire Drill / Training",
+                    timestamp: new Date().toISOString(),
+                    selections: {
+                        tempo: "Measured / Deliberate",
+                        focus: "Things / Tasks",
+                        posture: "Rigid / Upright",
+                        motivator: "Security / Data",
+                        stressor: "Lack of Time",
+                        conflict: "Logics / Over-explains"
+                    },
+                    baseKey: "thinker",
+                    phaseKey: "thinker",
+                    notes: "Disciplined and methodical. Kept the bridge calm, demanded timestamped evidence before approving database rollback."
+                }
+            ];
+
+            saveDossier();
+            renderDossier();
+            showToast("Sample Live-Fire Drill Data Loaded!");
+        }
+
+        // ================= ENHANCED MARKDOWN EXPORT =================
+        function exportToMarkdown() {
+            if (!currentAnalysis.base || !currentAnalysis.phase) return;
+            const date = new Date().toISOString().split('T')[0];
+            const safeName = currentSubjectName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+            const fileName = `${safeName}_incident_profile_${date}.md`;
+            const isPure = currentAnalysis.base.name === currentAnalysis.phase.name;
+            const profileTitle = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
+
+            let md = `# Incident Behavioral Profile: ${currentSubjectName}\n`;
+            md += `**Date:** ${date}\n`;
+            md += `**Predicted Archetype:** ${profileTitle}\n\n`;
+            
+            md += `## 1. DISC Leadership Alignment\n`;
+            md += `- **Base Filter:** ${currentAnalysis.base.disc.badge} — ${currentAnalysis.base.disc.label} (${currentAnalysis.base.disc.summary})\n`;
+            md += `- **Incident Distress:** ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label} (${currentAnalysis.phase.disc.summary})\n\n`;
+
+            md += `## 2. Raw Observational Data\n`;
+            md += `- **Speech Tempo:** ${selections.tempo || 'Not observed'}\n`;
+            md += `- **Primary Focus:** ${selections.focus || 'Not observed'}\n`;
+            md += `- **Posture / Demeanor:** ${selections.posture || 'Not observed'}\n`;
+            md += `- **Core Motivator:** ${selections.motivator || 'Not observed'}\n`;
+            md += `- **Primary Stressor:** ${selections.stressor || 'Not observed'}\n`;
+            md += `- **Conflict Stance:** ${selections.conflict || 'Not observed'}\n\n`;
+
+            md += `## 3. Behavioral Readout\n`;
+            md += `### Communication Channel (Base)\n${currentAnalysis.base.baseComm}\n\n`;
+            md += `### Current Driver (Phase)\n${currentAnalysis.phase.phaseDriver}\n\n`;
+            md += `### Distress Tell (Phase)\n${currentAnalysis.phase.distress}\n\n`;
+            
+            md += `## 4. Incident Tactical Playbook ("Do's & Don'ts")\n`;
+            md += `### Green Light: Say This (De-escalation & Alignment)\n`;
+            currentAnalysis.phase.incident.doSay.forEach(s => { md += `- "${s}"\n`; });
+            md += `\n### Red Line: Never Say This (Incident Triggers)\n`;
+            currentAnalysis.phase.incident.dontSay.forEach(s => { md += `- "${s}"\n`; });
+
+            md += `\n### Recommended Incident Status Template\n\`\`\`markdown\n${currentAnalysis.phase.incident.slackTemplate}\n\`\`\`\n\n`;
+
+            md += `## 5. Strategic Engagement Tactics\n`;
+            md += `**Frontline Strategy:** ${currentAnalysis.phase.frontline}\n\n`;
+            md += `**Management Insight:** ${currentAnalysis.phase.management}\n\n`;
+            
+            md += `## 6. Encounter & Incident Notes\n*(Add incident notes, bridge observations, or follow-up action items here)*\n`;
+
+            const blob = new Blob([md], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // ================= CODEX GENERATION =================
+        function populateCodex() {
+            const codexGrid = document.getElementById('codex-grid');
+            let html = '';
+            
+            Object.entries(archetypes).forEach(([key, p]) => {
+                const doList = p.incident.doSay.map(s => `<li class="text-xs text-slate-300">• "${s}"</li>`).join('');
+                const dontList = p.incident.dontSay.map(s => `<li class="text-xs text-slate-300">• "${s}"</li>`).join('');
+
+                html += `
+                <div class="bg-slate-900/80 rounded-xl p-5 border border-slate-700 hover:border-slate-500 transition-colors space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-indigo-400">${p.name}</h3>
+                            <span class="text-xs text-slate-400">${p.disc.summary}</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border ${p.disc.style}">${p.disc.badge}</span>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <span class="text-xs text-indigo-300 uppercase font-bold tracking-wide">Base Channel</span>
+                            <p class="text-xs text-slate-300 mt-0.5">${p.baseComm}</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-emerald-300 uppercase font-bold tracking-wide">Phase Driver</span>
+                            <p class="text-xs text-slate-300 mt-0.5">${p.phaseDriver}</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-rose-400 uppercase font-bold tracking-wide">Distress Tell</span>
+                            <p class="text-xs text-slate-300 mt-0.5">${p.distress}</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block">Incident Battlecard</span>
+                        <div class="space-y-1.5">
+                            <span class="text-xs font-bold text-emerald-400 block">Say This:</span>
+                            <ul class="space-y-1 pl-1">
+                                ${doList}
+                            </ul>
+                            <span class="text-xs font-bold text-rose-400 block pt-1">Avoid:</span>
+                            <ul class="space-y-1 pl-1">
+                                ${dontList}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-800 space-y-2">
+                        <div>
+                            <span class="text-xs text-emerald-400 uppercase font-bold tracking-wide">Frontline Strategy</span>
+                            <p class="text-xs text-slate-300 mt-0.5">${p.frontline}</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-amber-400 uppercase font-bold tracking-wide">Management Insight</span>
+                            <p class="text-xs text-slate-300 mt-0.5">${p.management}</p>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            codexGrid.innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDossier();
+            populateCodex();
+        });
+    </script>
+</body>
+</html>
