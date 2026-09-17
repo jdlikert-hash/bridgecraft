@@ -85,7 +85,29 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ---
 
-## 5. How to Use the App (60-Second Quick Start)
+## 5. Four Operational Frames & Calming Aesthetic Themes
+
+BridgeCraft provides four specialized operational frames ("lenses"), each featuring a distinct, calming dark-mode aesthetic, tailored observational cues, and domain-specific action templates:
+
+| Operational Lens | Psychological Atmosphere | Calming Palette | Stakes & Core Use Case | Primary Artifact / Script |
+| :--- | :--- | :--- | :--- | :--- |
+| **🏢 IT Operations & Incident Command** (`it_ops`) | Focused, Tactical, Stabilizing | Deep Obsidian & Slate (`#0f172a`, `#1e293b`) with Electric Indigo & Cyan | Sev-1 / P1 outages, production downtime, SRE on-call rotations, Slack incident channels | Incident War Room Status Updates & Telemetry Isolation Scripts |
+| **💼 Customer Success & Enterprise CRM** (`crm_sales`) | Diplomatic, High-EQ, Reassuring | Midnight Navy (`#0a1128`, `#162447`) with Soft Coral & Warm Amber | Furious Sales VPs, contract renewal churn risks, SLA breach executive escalations | Executive Account Save Email & Partnership Alignment Memos |
+| **💳 Financial Hardship & Loan Workout** (`financial_hardship`) | Dignified, Respectful, Restoring Agency | Warm Espresso Charcoal (`#18181b`, `#27272a`) with Muted Sage & Soft Gold | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
+| **🩺 Crisis Counseling & Mental Health** (`counseling_crisis`) | Gentle, Grounding, Non-Stimulating | Deep Twilight Violet (`#150d24`, `#281945`) with Soft Lavender & Calm Teal | Acute emotional dysregulation, panic hotline intake, trauma-informed triage | Somatic Grounding Protocol & Structured Reality Testing Note |
+
+### URL Deep-Linking & Standalone Deployment:
+- **Instant Domain Switching:** Click any lens on the top Operational Lens strip to morph the entire application in real time.
+- **Deep-Linking Support:** Directly bookmark or link your domain using query parameters:
+  - `?lens=it` or `?lens=it_ops` (IT Operations)
+  - `?lens=crm` or `?lens=crm_sales` (Customer Success & CRM)
+  - `?lens=banking` or `?lens=financial_hardship` (Financial Hardship & Banking)
+  - `?lens=counseling` or `?lens=counseling_crisis` (Crisis Counseling & Mental Health)
+- **Standalone Domain App Export:** Click **Export Domain App** in the header to download a zero-dependency single HTML file pre-configured and locked to that specific domain for offline team distribution.
+
+---
+
+## 6. How to Use the App (60-Second Quick Start)
 
 1. **Fire up the app:** Double-click `bridgecraft.html` (or `the_behavioral_profiler.html`) in any browser (Chrome, Edge, Firefox, Safari). No installation, Node.js, or server required.
 2. **Enter the Stakeholder / Speaker Identifier:** Type the name or role (e.g., *"VP Engineering"*, *"Escalated Customer Acme Corp"*, *"On-Call DBA"*).
@@ -111,7 +133,7 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ---
 
-## 6. Application Architecture & Navigation
+## 7. Application Architecture & Navigation
 
 1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
 2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per person. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
@@ -120,7 +142,7 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ---
 
-## 7. Live-Fire Drills & Multi-Observer Intelligence
+## 8. Live-Fire Drills & Multi-Observer Intelligence
 
 A premier use case for **BridgeCraft** is team training exercises. When training frontline support engineers or managers in a live-fire incident simulation:
 
@@ -133,7 +155,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 
 ---
 
-## 8. Ethical Code & Field Guidelines
+## 9. Ethical Code & Field Guidelines
 
 > *"The purpose of BridgeCraft is not manipulation, labeling, or pigeonholing. The purpose is empathy in high-friction environments."*
 
@@ -143,7 +165,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 
 ---
 
-## 9. Intellectual Property, Independent Authorship & Workplace Notice
+## 10. Intellectual Property, Independent Authorship & Workplace Notice
 
 **Copyright (c) 2026 Jack Likert. All Rights Reserved.**
 
