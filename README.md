@@ -1,14 +1,15 @@
-# The Behavioral Profiler — Strategic Field Manual & Architecture
+# BridgeCraft — Strategic Field Manual & Architecture
 
-> **A tactical psychological profiling and communication de-escalation tool designed for Incident Management, Technical Support, and Engineering Leadership.**
+> **A tactical incident communication, de-escalation, and situational alignment console designed for Incident Management, Technical Support, and Engineering Leadership.**  
+> *(Formerly titled: The Behavioral Profiler)*
 
 ---
 
 ## 1. Executive Summary
 
-When high-severity incidents, outages, or critical customer escalations strike, communication breakdown is almost always the true bottleneck. Engineers retreat into deep weeds, executives demand immediate binary answers, support agents absorb emotional heat, and leaders clash over priorities.
+When high-severity incidents, outages, or critical customer escalations strike, communication breakdown is almost always the true bottleneck. Engineers retreat into deep technical weeds, executives demand immediate binary answers, support agents absorb emotional heat, and incident commanders clash over priorities.
 
-**The Behavioral Profiler** is a lightweight, zero-dependency, field-ready web application designed to be kept open in a browser tab. In under 60 seconds, a support engineer, incident commander, or manager can observe baseline cues, pinpoint an individual's psychological distress pattern, and receive immediate, actionable tactical scripts to de-escalate friction and drive aligned action.
+**BridgeCraft** is a lightweight, zero-dependency, field-ready web application designed to be kept open in a browser tab during operational triage. In under 45 seconds, an incident commander, support engineer, or manager can observe baseline cues, pinpoint an individual's psychological distress pattern, and receive immediate, actionable tactical scripts (what to say vs. what to avoid on voice bridges and Slack) to de-escalate friction and restore operational alignment.
 
 ---
 
@@ -86,8 +87,8 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ## 5. How to Use the App (60-Second Quick Start)
 
-1. **Fire up the app:** Double-click `the_behavioral_profiler.html` in any browser (Chrome, Edge, Firefox, Safari). No installation, Node.js, or server required.
-2. **Enter the Subject Identifier:** Type the name or role (e.g., *"VP Engineering"*, *"Escalated Customer Acme Corp"*, *"On-Call DBA"*).
+1. **Fire up the app:** Double-click `bridgecraft.html` (or `the_behavioral_profiler.html`) in any browser (Chrome, Edge, Firefox, Safari). No installation, Node.js, or server required.
+2. **Enter the Stakeholder / Speaker Identifier:** Type the name or role (e.g., *"VP Engineering"*, *"Escalated Customer Acme Corp"*, *"On-Call DBA"*).
 3. **Observation Mode Toggle (Camera Off vs. Camera On):**
    - **Camera Off (Voice & Slack):** Default mode tailored for modern incident response where video is unavailable. Adapts indicators to tone of voice, pause durations, and Slack message syntax.
    - **Camera On (Video):** Optimizes indicators for physical posture, gestures, and video presence.
@@ -100,78 +101,45 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
    - *Motivator:* What are they starving for? (Status, Security, Space, Approval?)
    - *Stressor:* What triggered the blowout? (Time crunch, loss of control, friction?)
    - *Conflict Stance:* When cornered, do they blame, lecture, withdraw, or dominate?
-6. **Hit "Generate Tactical Incident Profile":**
+6. **Hit "Calibrate Incident Playbook":**
    - Instantly read the **DISC Leadership Alignment** (High D, I, S, C mapping).
    - Read the **Incident Tactical Playbook ("Do's & Don'ts")** and copyable Slack status updates.
    - Read the **Frontline Strategy** and **Management Insight**.
 7. **Save & Export:**
-   - Click **Save to Dossier** to persist the card into the multi-observer Dossier Library.
-   - Click **Save .MD** to download a structured incident debrief markdown report.
+   - Click **Save to Archive** to persist the card into the multi-observer Field Archive.
+   - Click **Export Playbook (.MD)** to download a structured incident debrief markdown report.
 
 ---
 
-## 6. Strategic Roadmap & Expansion Plan
+## 6. Application Architecture & Navigation
 
-Here is the architectural plan for expanding the tool into an indispensable organizational asset:
-
-```mermaid
-graph TD
-    A[Phase 1: Current Foundation] -->|Solidify & Document| B[Phase 2: Incident De-escalation Layer]
-    B -->|Synthesize Frameworks| C[Phase 3: DISC & Communication Matrix]
-    C -->|Persistence & Workflows| D[Phase 4: Colleague Dossier & Incident Battlecards]
-
-    subgraph "Phase 1: Core Engine"
-    A1[PCM 6 Archetypes]
-    A2[Base / Phase Scoring]
-    A3[Markdown Export]
-    end
-
-    subgraph "Phase 2: Tactical Incident Mode"
-    B1["Do / Don't" Slack Templates]
-    B2[Crisis De-escalation Scripts]
-    B3[Trigger Word Warnings]
-    end
-
-    subgraph "Phase 3: Unified Framing"
-    C1[Automatic DISC Badge Output]
-    C2[2-Click Macro DISC Baseline Toggle]
-    C3[Expanded Multi-Lens Codex]
-    end
-
-    subgraph "Phase 4: Enterprise Value"
-    D1[Browser LocalStorage Stakeholder Roster]
-    D2[One-Click Incident Briefings]
-    D3[Post-Mortem Human Factor Notes]
-    end
-```
-
-### Application Navigation & Tabs Architecture:
-1. **Active Profiler (Rapid Triage):** The core fast-input engine for real-time profiling, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
-2. **The Dossier Library (Multi-Observer Archive):** Persistent client-side archive storing multiple timestamped observations per person. Tracks observer identity, environment context, situational divergence, and includes a 1-click merge engine for typo consolidation.
+1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
+2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per person. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
 3. **The Codex & Playbooks:** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards.
+4. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 
 ---
 
 ## 7. Live-Fire Drills & Multi-Observer Intelligence
 
-A premier use case for **The Behavioral Profiler** is team training exercises. When training frontline support engineers or managers in a live-fire incident simulation:
+A premier use case for **BridgeCraft** is team training exercises. When training frontline support engineers or managers in a live-fire incident simulation:
 
-1. **Simultaneous Observation:** Multiple team members independently observe a subject (e.g. an incident commander or executive actor) during the drill.
-2. **Card Ingestion:** Observers export their markdown cards (`.md`), and the team lead uses **Import Cards** to ingest all files in batch.
-3. **Situational Divergence Analysis:** The Dossier clusters the cards under the subject and highlights:
-   * **Base Consensus:** Percentage agreement on the subject's baseline channel.
-   * **Phase Divergence:** Divergences across environments (*"Promoter Phase during high-pressure outages vs. Thinker Phase during 1-on-1 reviews"*).
-4. **Typo & Alias Consolidation:** If different observers enter *"Sarah (VP)"*, *"Sarah"*, or make a typo like *"Sarha"*, the **Merge Duplicate Subject** utility merges them into a single profile while retaining all historical observer logs.
+1. **Simultaneous Observation:** Multiple team members independently observe a stakeholder (e.g. an incident commander or executive actor) during the drill.
+2. **Playbook Ingestion:** Observers export their markdown cards (`.md`), and the team lead uses **Import Playbooks** to ingest all files in batch.
+3. **Situational Adaptation Analysis:** The Field Archive clusters the cards under the stakeholder and highlights:
+   * **Base Consensus:** Percentage agreement on the stakeholder's baseline channel.
+   * **Situational Adaptation:** Variations across environments (*"Promoter Phase during high-pressure outages vs. Thinker Phase during 1-on-1 reviews"*).
+4. **Typo & Alias Consolidation:** If different observers enter *"Sarah (VP)"*, *"Sarah"*, or make a typo like *"Sarha"*, the **Merge Duplicate Record** utility merges them into a single profile while retaining all historical observer logs.
 
 ---
 
 ## 8. Ethical Code & Field Guidelines
 
-> *"The purpose of profiling is not manipulation, labeling, or pigeonholing. The purpose is empathy in high-friction environments."*
+> *"The purpose of BridgeCraft is not manipulation, labeling, or pigeonholing. The purpose is empathy in high-friction environments."*
 
 1. **The Platinum Rule:** The Golden Rule says *"Treat others how you want to be treated."* The Platinum Rule of incident management says *"Treat others how they need to be treated to stay calm and functional."*
-2. **Profiles are States, Not Life Sentences:** A person's phase shifts depending on sleep, pressure, life circumstances, and organizational safety. Always profile the *interaction*, not just the *person*.
-3. **Strict Client-Side Privacy:** This application runs 100% locally in the browser memory. No data, names, notes, or profile assessments are ever transmitted over a network.
+2. **Profiles are States, Not Life Sentences:** A person's phase shifts depending on sleep, pressure, life circumstances, and organizational safety. Always calibrate the *interaction*, not just the *person*.
+3. **Strict Client-Side Privacy:** This application runs 100% locally in browser memory. No data, names, notes, or assessments are ever transmitted over a network.
 
 ---
 
@@ -180,7 +148,7 @@ A premier use case for **The Behavioral Profiler** is team training exercises. W
 **Copyright (c) 2026 Jack Likert. All Rights Reserved.**
 
 ### Declaration of Independent Invention:
-This Software, documentation, heuristics, scoring engine, and architecture were conceived, authored, and reduced to practice solely and independently by **Jack Likert** on personal, non-work time, utilizing exclusively personal equipment, personal software licenses, and personal resources, without the use of any employer, client, or third-party facilities, equipment, supplies, confidential information, trade secrets, or funding.
+This Software (BridgeCraft, formerly known as The Behavioral Profiler), documentation, heuristics, scoring engine, and architecture were conceived, authored, and reduced to practice solely and independently by **Jack Likert** on personal, non-work time, utilizing exclusively personal equipment, personal software licenses, and personal resources, without the use of any employer, client, or third-party facilities, equipment, supplies, confidential information, trade secrets, or funding.
 
 ### Not a Work Made for Hire & Workplace Disclaimer:
 1. **Not a Work-for-Hire:** Under no circumstances shall this Software, or any portion thereof, be construed as a "work made for hire" under the United States Copyright Act (17 U.S.C. § 101) or any international equivalent.

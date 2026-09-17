@@ -1,6 +1,7 @@
 <!--
 ================================================================================
-The Behavioral Profiler — Incident & Tactical Edition
+BridgeCraft — Tactical Incident Communication & De-Escalation Console
+(Formerly titled: The Behavioral Profiler)
 Copyright (c) 2026 Jack Likert. All Rights Reserved.
 
 DECLARATION OF INDEPENDENT AUTHORSHIP:
@@ -17,7 +18,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Behavioral Profiler — Incident & Tactical Edition</title>
+    <title>BridgeCraft — Tactical Incident Communication & De-Escalation Console</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -40,15 +41,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <div class="flex items-center mb-3 sm:mb-0">
                     <svg class="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <div>
-                        <h1 class="text-xl font-bold tracking-tight text-white">The Behavioral Profiler</h1>
-                        <span class="text-xs text-indigo-300 font-medium tracking-wide">Incident & De-escalation Edition</span>
+                        <h1 class="text-xl font-bold tracking-tight text-white">BridgeCraft</h1>
+                        <span class="text-xs text-indigo-300 font-medium tracking-wide">Incident De-Escalation & Communication Console</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-1 sm:space-x-3">
                     <nav class="flex space-x-1 sm:space-x-2">
-                        <button id="tab-profiler" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium bg-indigo-600 text-white shadow-sm" onclick="switchTab('profiler')">Active Profiler</button>
+                        <button id="tab-profiler" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium bg-indigo-600 text-white shadow-sm" onclick="switchTab('profiler')">Active Console</button>
                         <button id="tab-dossier" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')">
-                            <span>The Dossier</span>
+                            <span>Field Archive</span>
                             <span id="dossier-count-badge" class="ml-1.5 px-1.5 py-0.2 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
                         </button>
                         <button id="tab-codex" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
@@ -70,10 +71,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
             
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
                 <div class="flex items-center justify-between mb-2">
-                    <label for="subject-name" class="block text-sm font-medium text-slate-400 uppercase tracking-wide">Subject Identifier / Incident Actor</label>
+                    <label for="subject-name" class="block text-sm font-medium text-slate-400 uppercase tracking-wide">Stakeholder / Speaker / Role</label>
                     <span id="subject-match-hint" class="hidden text-xs text-indigo-300 font-medium items-center bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-700/50">
                         <svg class="w-3.5 h-3.5 mr-1 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                        <span id="subject-match-text">Linked to existing profile</span>
+                        <span id="subject-match-text">Linked to archive history</span>
                     </span>
                 </div>
                 <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors">
@@ -236,24 +237,24 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             <button onclick="analyzeProfile()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-0.5 text-lg flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                Generate Tactical Incident Profile
+                Calibrate Incident Playbook
             </button>
 
             <!-- RESULTS CARD -->
             <div id="results-card" class="hidden bg-slate-800 rounded-xl p-6 shadow-2xl border-2 border-indigo-500 transform transition-all duration-300 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-4 gap-3">
                     <div>
-                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Incident Tactical Readout</span>
-                        <h2 class="text-2xl font-bold text-white uppercase tracking-wider" id="res-title">Profile Name</h2>
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Tactical Incident Playbook</span>
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-wider" id="res-title">Playbook Name</h2>
                     </div>
                     <div class="flex flex-wrap items-center gap-2">
                         <button onclick="openSaveModal()" id="btn-save-dossier" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center shadow transition-colors">
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                            Save to Dossier
+                            Save to Archive
                         </button>
                         <button onclick="exportToMarkdown()" id="btn-export" class="bg-slate-700 hover:bg-slate-600 text-indigo-300 px-3 py-1.5 rounded-md text-sm font-medium flex items-center hidden transition-colors border border-slate-600">
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Save .MD
+                            Export Playbook (.MD)
                         </button>
                         <button onclick="resetProfiler()" class="text-slate-400 hover:text-white text-sm underline px-2">Reset</button>
                     </div>
@@ -266,22 +267,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         </div>
 
-        <!-- VIEW 2: THE DOSSIER LIBRARY -->
+        <!-- VIEW 2: THE FIELD ARCHIVE -->
         <div id="view-dossier" class="hidden space-y-6">
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700 space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-700 pb-4">
                     <div>
                         <h2 class="text-2xl font-bold text-white flex items-center">
-                            The Dossier Library
+                            The Field Archive
                             <span id="dossier-total-subjects" class="ml-2 text-xs bg-indigo-900/60 text-indigo-300 border border-indigo-700/50 px-2 py-0.5 rounded-full font-mono">0 People</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Multi-observer tracking, situational divergence analysis, and team drill archive.</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Multi-observer intelligence, situational adaptation analysis, and team incident playbooks.</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2">
                         <input type="file" id="file-import-input" multiple accept=".md,.json" class="hidden" onchange="handleFileImport(event)">
                         <button onclick="document.getElementById('file-import-input').click()" class="bg-slate-700 hover:bg-slate-600 text-indigo-300 border border-slate-600 px-3 py-1.5 rounded-md text-xs font-medium flex items-center transition-colors shadow-sm">
                             <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                            Import Cards (.MD / .JSON)
+                            Import Playbooks (.MD / .JSON)
                         </button>
                         <button onclick="exportLibraryJson()" class="bg-slate-700 hover:bg-slate-600 text-slate-300 border border-slate-600 px-3 py-1.5 rounded-md text-xs font-medium flex items-center transition-colors">
                             <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -319,7 +320,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
         <div id="view-codex" class="hidden space-y-6">
             <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
                 <div class="border-b border-slate-700 pb-4 mb-6">
-                    <h2 class="text-2xl font-bold text-white mb-1">The Profiler Codex & Tactical Playbooks</h2>
+                    <h2 class="text-2xl font-bold text-white mb-1">The BridgeCraft Codex & Tactical Playbooks</h2>
                     <p class="text-slate-300 text-sm leading-relaxed">
                         A dual-lens reference combining <strong>Process Communication Model (PCM)</strong> distress dynamics with <strong>DISC Leadership Alignment</strong>. 
                         In live incidents, use these battlecards to select exact vocabulary and avoid trigger phrases.
@@ -345,7 +346,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Strategic Field Manual & Operations Guide</h2>
                     <p class="text-slate-300 text-sm mt-2 leading-relaxed max-w-3xl">
-                        A tactical psychological profiling, multi-observer intelligence, and crisis communication system designed for 
+                        A tactical crisis communication, de-escalation, and multi-observer alignment system designed for 
                         Incident Management, Technical Support, and Engineering Leadership.
                     </p>
                 </div>
@@ -362,7 +363,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         and incident commanders clash over priorities.
                     </p>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        <strong>The Behavioral Profiler</strong> is a zero-dependency, field-ready tool designed to be kept open during critical operations. 
+                        <strong>BridgeCraft</strong> (formerly titled <em>The Behavioral Profiler</em>) is a zero-dependency, field-ready console designed to be kept open during critical operations. 
                         In under 45 seconds, an incident commander or manager can observe baseline cues, pinpoint an actor’s psychological distress pattern, 
                         and receive immediate, actionable tactical scripts (what to say vs. what to avoid on bridge calls and Slack) to de-escalate friction and restore operational alignment.
                     </p>
@@ -474,22 +475,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
             <div class="flex justify-between items-center border-b border-slate-700 pb-3">
                 <h3 class="text-lg font-bold text-white flex items-center">
                     <svg class="w-5 h-5 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-                    Save Observation to Dossier
+                    Save Alignment to Field Archive
                 </h3>
                 <button onclick="closeSaveModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
             </div>
 
             <div class="space-y-3">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Target Subject / Person</label>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Stakeholder / Speaker Name</label>
                     <input type="text" id="save-subject-input" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <p class="text-xs text-slate-500 mt-1">If this name matches an alias or existing subject, it links to their dossier.</p>
+                    <p class="text-xs text-slate-500 mt-1">If this name matches an alias or existing record, it links to their history.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Observer Name</label>
-                        <input type="text" id="save-observer-input" placeholder="e.g. Jordan (Lead) or Me" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="text" id="save-observer-input" placeholder="e.g. Jordan (Lead) or On-Call SRE" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Encounter Context</label>
@@ -512,7 +513,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             <div class="flex justify-end space-x-3 pt-3 border-t border-slate-700">
                 <button onclick="closeSaveModal()" class="px-4 py-2 rounded-md text-sm text-slate-400 hover:text-white">Cancel</button>
-                <button onclick="confirmSaveObservation()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-semibold shadow">Save Observation</button>
+                <button onclick="confirmSaveObservation()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-semibold shadow">Save Alignment</button>
             </div>
         </div>
     </div>
@@ -521,15 +522,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
     <div id="modal-merge" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-800 rounded-2xl border border-slate-700 max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b border-slate-700 pb-3">
-                <h3 class="text-lg font-bold text-white">Merge Duplicate Subject</h3>
+                <h3 class="text-lg font-bold text-white">Merge Duplicate Stakeholder Record</h3>
                 <button onclick="closeMergeModal()" class="text-slate-400 hover:text-white text-xl leading-none">&times;</button>
             </div>
             <div class="space-y-3">
                 <p class="text-xs text-slate-300 leading-relaxed">
-                    Merging <strong id="merge-source-name" class="text-amber-400"></strong> into another subject will transfer all observations and register its name as an alias (e.g. fixing typos like <em>"Sarha"</em> &rarr; <em>"Sarah"</em>).
+                    Merging <strong id="merge-source-name" class="text-amber-400"></strong> into another record will transfer all observations and register its name as an alias (e.g. fixing typos like <em>"Sarha"</em> &rarr; <em>"Sarah"</em>).
                 </p>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Select Target Subject</label>
+                    <label class="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Select Target Record</label>
                     <select id="merge-target-select" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <!-- Populated dynamically -->
                     </select>
@@ -549,7 +550,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
     </div>
 
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800 space-y-1">
-        <div>The Behavioral Profiler &bull; Multi-Observer Incident Intelligence</div>
+        <div>BridgeCraft &bull; Tactical Incident Communication &amp; De-Escalation Console</div>
         <div>Copyright &copy; 2026 Jack Likert. All Rights Reserved. Independent Personal Work &bull; Not a Work-for-Hire.</div>
     </footer>
 
@@ -737,8 +738,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
         let currentAnalysis = { baseKey: null, phaseKey: null, base: null, phase: null }; 
         let currentSubjectName = "";
 
-        // ================= DOSSIER STORAGE & ARCHITECTURE =================
-        const DOSSIER_KEY = 'behavioral_profiler_dossier_v1';
+        // ================= FIELD ARCHIVE STORAGE & ARCHITECTURE =================
+        const ARCHIVE_KEY = 'bridgecraft_archive_v1';
+        const LEGACY_DOSSIER_KEY = 'behavioral_profiler_dossier_v1';
         let dossier = {
             subjects: {},    // id -> { id, canonicalName, aliases: [], notes, createdAt }
             observations: [] // array of { id, subjectId, rawSubjectInput, observerName, context, timestamp, selections, baseKey, phaseKey, notes }
@@ -746,14 +748,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         function loadDossier() {
             try {
-                const stored = localStorage.getItem(DOSSIER_KEY);
+                const stored = localStorage.getItem(ARCHIVE_KEY) || localStorage.getItem(LEGACY_DOSSIER_KEY);
                 if (stored) {
                     dossier = JSON.parse(stored);
                     if (!dossier.subjects) dossier.subjects = {};
                     if (!dossier.observations) dossier.observations = [];
                 }
             } catch (e) {
-                console.error('Failed to load dossier from storage:', e);
+                console.error('Failed to load archive from storage:', e);
             }
             updateDossierBadge();
             populateSubjectDatalist();
@@ -761,9 +763,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         function saveDossier() {
             try {
-                localStorage.setItem(DOSSIER_KEY, JSON.stringify(dossier));
+                const data = JSON.stringify(dossier);
+                localStorage.setItem(ARCHIVE_KEY, data);
+                localStorage.setItem(LEGACY_DOSSIER_KEY, data); // Backwards-compatible sync
             } catch (e) {
-                console.error('Failed to save dossier to storage:', e);
+                console.error('Failed to save archive to storage:', e);
             }
             updateDossierBadge();
             populateSubjectDatalist();
@@ -1341,13 +1345,13 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <div class="flex items-center space-x-2">
                             <button onclick="profileSubjectInActive('${sub.canonicalName}')" class="bg-indigo-600/80 hover:bg-indigo-600 text-white text-xs px-2.5 py-1.5 rounded flex items-center transition-colors">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                New Profile
+                                Calibrate Playbook
                             </button>
-                            <button onclick="openMergeModal('${sub.id}')" class="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs px-2.5 py-1.5 rounded flex items-center transition-colors border border-slate-600" title="Merge this subject into another (alias consolidation)">
+                            <button onclick="openMergeModal('${sub.id}')" class="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs px-2.5 py-1.5 rounded flex items-center transition-colors border border-slate-600" title="Merge this stakeholder into another (alias consolidation)">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
                                 Merge
                             </button>
-                            <button onclick="deleteSubject('${sub.id}')" class="text-rose-400 hover:text-rose-300 text-xs p-1.5" title="Delete Subject">
+                            <button onclick="deleteSubject('${sub.id}')" class="text-rose-400 hover:text-rose-300 text-xs p-1.5" title="Delete Record">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
@@ -1357,7 +1361,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     ${totalObs > 0 ? `
                     <div class="bg-slate-900/90 rounded-xl p-3.5 border border-slate-700 space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold uppercase tracking-wide text-slate-400">Multi-Observer Synthesis & Situational Divergence</span>
+                            <span class="text-xs font-bold uppercase tracking-wide text-slate-400">Multi-Observer Synthesis & Situational Adaptation</span>
                             <span class="text-xs text-slate-500 font-mono">${totalObs} data point${totalObs > 1 ? 's' : ''}</span>
                         </div>
                         <div class="flex flex-wrap items-center gap-2 text-xs">
@@ -1370,7 +1374,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <div class="bg-amber-950/40 p-2.5 rounded-lg border border-amber-800/40 flex items-start space-x-2 text-xs text-amber-200">
                             <svg class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                             <div>
-                                <strong class="text-amber-300">Situational Distress Divergence Detected:</strong> Observers noted different Phase behaviors across environments:
+                                <strong class="text-amber-300">Situational Adaptation Detected:</strong> Observers noted different Phase behaviors across environments:
                                 <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-300">
                                     ${uniquePhases.map(pk => `<li><strong>${archetypes[pk].name} Phase</strong> (${phaseCounts[pk]} obs) &mdash; ${archetypes[pk].disc.label}</li>`).join('')}
                                 </ul>
@@ -1551,7 +1555,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `behavioral_profiler_dossier_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `bridgecraft_archive_backup_${new Date().toISOString().split('T')[0]}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1605,8 +1609,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         function parseMarkdownProfile(md, filename) {
             try {
-                // Match Title
-                const titleMatch = md.match(/# (?:Incident )?Behavioral Profile:\s*(.+)/i);
+                // Match Title (supports BridgeCraft Tactical Playbook and legacy titles)
+                const titleMatch = md.match(/# (?:BridgeCraft Tactical )?(?:Incident )?(?:Behavioral Profile|Incident Playbook|Playbook):\s*(.+)/i);
                 const rawSubject = titleMatch ? titleMatch[1].trim() : filename.replace(/\.md$/i, '');
 
                 // Match Observational data
@@ -1773,7 +1777,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             saveDossier();
             renderDossier();
-            showToast("Sample Live-Fire Drill Data Loaded!");
+            showToast("Sample Live-Fire Drill Playbooks Loaded!");
         }
 
         // ================= ENHANCED MARKDOWN EXPORT =================
@@ -1781,11 +1785,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
             if (!currentAnalysis.base || !currentAnalysis.phase) return;
             const date = new Date().toISOString().split('T')[0];
             const safeName = currentSubjectName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-            const fileName = `${safeName}_incident_profile_${date}.md`;
+            const fileName = `${safeName}_bridgecraft_playbook_${date}.md`;
             const isPure = currentAnalysis.base.name === currentAnalysis.phase.name;
             const profileTitle = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
 
-            let md = `# Incident Behavioral Profile: ${currentSubjectName}\n`;
+            let md = `# BridgeCraft Tactical Incident Playbook: ${currentSubjectName}\n`;
             md += `**Date:** ${date}\n`;
             md += `**Predicted Archetype:** ${profileTitle}\n\n`;
             
