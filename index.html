@@ -31,7 +31,42 @@ employer, client, or third party. See LICENSE file for full legal terms.
         ::-webkit-scrollbar-track { background: var(--bg-card, #1e293b); }
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
-        .chip { transition: all 0.2s ease-in-out; }
+        .chip {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            user-select: none;
+            cursor: pointer;
+        }
+        .chip:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+        .chip.chip-selected {
+            transform: scale(1.02);
+            box-shadow: 0 0 14px var(--chip-active-bg, rgba(99, 102, 241, 0.45));
+        }
+        .chip.chip-selected::before {
+            content: "✓ ";
+            font-weight: 700;
+            margin-right: 3px;
+        }
+        *:focus-visible {
+            outline: 2px solid var(--accent-text, #a5b4fc);
+            outline-offset: 2px;
+        }
+        .tab-btn {
+            transition: all 0.15s ease-in-out;
+        }
+        #level2-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+        #level2-content.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
 
         /* THEME 1: IT OPERATIONS (Deep Slate / Electric Indigo & Cyan) */
         body.theme-it_ops {
@@ -123,53 +158,59 @@ employer, client, or third party. See LICENSE file for full legal terms.
 <body class="theme-it_ops text-slate-100 min-h-screen flex flex-col">
 
     <header class="theme-header border-b sticky top-0 z-10 shadow-md">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row items-center justify-between h-auto sm:h-16 py-3 sm:py-0">
                 <div class="flex items-center mb-3 sm:mb-0">
-                    <svg class="w-6 h-6 theme-accent-text mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <svg class="w-6 h-6 theme-accent-text mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <div>
                         <h1 class="text-xl font-bold tracking-tight text-white flex items-center">
                             BridgeCraft
                             <span id="header-domain-badge" class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full border border-indigo-500/40 bg-indigo-500/20 text-indigo-300">IT Ops</span>
                         </h1>
-                        <span id="app-tagline" class="text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation & Communication Console</span>
+                        <span id="app-tagline" class="text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation &amp; Communication Console</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-1 sm:space-x-3">
                     <nav class="flex space-x-1 sm:space-x-2">
-                        <button id="tab-profiler" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium theme-btn-accent shadow-sm" onclick="switchTab('profiler')">Active Console</button>
-                        <button id="tab-dossier" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')">
-                            <span>Field Archive</span>
-                            <span id="dossier-count-badge" class="ml-1.5 px-1.5 py-0.2 rounded-full text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
+                        <button id="tab-profiler" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium theme-btn-accent shadow-sm flex items-center" onclick="switchTab('profiler')" title="Active Console">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="hidden sm:inline">Active Console</span>
                         </button>
-                        <button id="tab-codex" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" onclick="switchTab('codex')">The Codex</button>
-                        <button id="tab-manual" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('manual')"><span>Field Manual &amp; How-To</span></button>
+                        <button id="tab-dossier" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('dossier')" title="Field Archive">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                            <span class="hidden sm:inline">Field Archive</span>
+                            <span id="dossier-count-badge" class="ml-1 sm:ml-1.5 px-1.5 py-0.2 rounded-full text-[10px] sm:text-xs bg-slate-700 text-slate-300 border border-slate-600">0</span>
+                        </button>
+                        <button id="tab-codex" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('codex')" title="The Codex">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            <span class="hidden sm:inline">The Codex</span>
+                        </button>
+                        <button id="tab-manual" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('manual')" title="Field Manual &amp; How-To">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                            <span class="hidden sm:inline">Field Manual</span>
+                        </button>
                     </nav>
-                    <a href="https://github.com/jdlikert-hash/bridgecraft" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center text-xs text-slate-400 hover:text-white bg-slate-700/50 hover:bg-slate-700 border border-slate-600/80 px-2.5 py-1.5 rounded-md transition-colors" title="View Source & License on GitHub">
-                        <svg class="w-3.5 h-3.5 mr-1 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        <span>GitHub & Docs</span>
-                    </a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- DOMAIN LENS SELECTOR STRIP -->
-    <div class="border-b border-slate-800/80 theme-subtle py-2 px-4 shadow-inner">
-        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+    <div class="border-b border-slate-800/80 theme-subtle py-1.5 px-4 shadow-inner">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <div class="flex items-center flex-wrap gap-1.5">
                 <span class="text-slate-400 font-semibold uppercase tracking-wider text-[11px] mr-1">Operational Lens:</span>
                 <div class="inline-flex rounded-lg p-0.5 bg-slate-900/90 border border-slate-700/80 shadow-sm" id="lens-selector-group">
-                    <button type="button" onclick="setDomainLens('it_ops')" id="btn-lens-it_ops" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center bg-indigo-600 text-white shadow-sm" title="IT Operations, Incident Command & War Rooms">
+                    <button type="button" onclick="setDomainLens('it_ops')" id="btn-lens-it_ops" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center bg-indigo-600 text-white shadow-sm" title="IT Operations, Incident Command &amp; War Rooms">
                         <span class="mr-1">🏢</span> IT Ops
                     </button>
-                    <button type="button" onclick="setDomainLens('crm_sales')" id="btn-lens-crm_sales" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Customer Success, Sales Executives & Churn De-Escalation">
-                        <span class="mr-1">💼</span> CRM & Sales
+                    <button type="button" onclick="setDomainLens('crm_sales')" id="btn-lens-crm_sales" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Customer Success, Sales Executives &amp; Churn De-Escalation">
+                        <span class="mr-1">💼</span> CRM &amp; Sales
                     </button>
-                    <button type="button" onclick="setDomainLens('financial_hardship')" id="btn-lens-financial_hardship" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Banking Hardship, Foreclosure Prevention & Loss Mitigation">
+                    <button type="button" onclick="setDomainLens('financial_hardship')" id="btn-lens-financial_hardship" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Banking Hardship, Foreclosure Prevention &amp; Loss Mitigation">
                         <span class="mr-1">💳</span> Banking Hardship
                     </button>
-                    <button type="button" onclick="setDomainLens('counseling_crisis')" id="btn-lens-counseling_crisis" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Mental Health Triage, Crisis Hotline & Somatic Grounding">
+                    <button type="button" onclick="setDomainLens('counseling_crisis')" id="btn-lens-counseling_crisis" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Mental Health Triage, Crisis Hotline &amp; Somatic Grounding">
                         <span class="mr-1">🩺</span> Crisis Counseling
                     </button>
                 </div>
@@ -182,20 +223,20 @@ employer, client, or third party. See LICENSE file for full legal terms.
         </div>
     </div>
 
-    <main class="flex-grow max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- VIEW 1: ACTIVE PROFILER -->
         <div id="view-profiler" class="block space-y-8">
             
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
                 <div class="flex items-center justify-between mb-2">
-                    <label for="subject-name" id="stakeholder-label" class="block text-sm font-medium text-slate-400 uppercase tracking-wide">Stakeholder / Speaker / Role</label>
+                    <label for="subject-name" id="stakeholder-label" class="block text-sm font-semibold text-slate-300">Stakeholder / Speaker / Role</label>
                     <span id="subject-match-hint" class="hidden text-xs theme-accent-text font-medium items-center bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-700/50">
                         <svg class="w-3.5 h-3.5 mr-1 theme-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
                         <span id="subject-match-text">Linked to archive history</span>
                     </span>
                 </div>
-                <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors">
+                <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors text-sm">
                 <datalist id="subject-datalist"></datalist>
                 <div class="flex items-center justify-between text-xs text-slate-400 mt-2 px-1">
                     <span>Select observation cues below to calibrate live de-escalation talk tracks.</span>
@@ -207,11 +248,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
             </div>
 
             <!-- LEVEL 1 -->
-            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-3 mb-4 gap-2">
-                    <div>
-                        <h2 id="level1-title" class="text-lg font-semibold theme-accent-text">Level 1: Base Observations (Communication Channel)</h2>
-                        <span id="level1-subtitle" class="text-xs text-slate-400 font-medium">Perceptual Filter &bull; How they absorb and process information</span>
+            <div class="bg-slate-800 rounded-xl p-5 sm:p-6 shadow-lg border border-slate-700">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700/80 pb-4 mb-5 gap-3">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-6 h-6 rounded-full theme-badge inline-flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                        <div>
+                            <h2 id="level1-title" class="text-base sm:text-lg font-semibold theme-accent-text">Level 1: Base Observations (Communication Channel)</h2>
+                            <span id="level1-subtitle" class="text-xs text-slate-400 font-medium">Perceptual Filter &bull; How they absorb and process information</span>
+                        </div>
                     </div>
                     <!-- CAMERA ON / OFF TOGGLE -->
                     <div class="flex items-center space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-700 self-start sm:self-auto text-xs font-medium">
@@ -227,7 +271,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 </div>
 
                 <!-- EXPANDABLE AUDIO & SLACK DECODER CHEATSHEET -->
-                <div class="mb-5 bg-slate-900/60 p-3 rounded-xl border border-slate-700/80">
+                <div class="mb-6 bg-slate-900/60 p-3 rounded-xl border border-slate-700/80">
                     <button type="button" onclick="toggleAudioSlackCheatSheet()" class="w-full flex items-center justify-between text-xs font-semibold theme-accent-text hover:opacity-80">
                         <span class="flex items-center">
                             <svg class="w-4 h-4 mr-1.5 theme-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -243,90 +287,104 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 </div>
                 
                 <div class="mb-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Speech Tempo &amp; Typing Cadence</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">Rate of speech, message frequency, and Slack reply processing pace.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent">Fast / Urgent (Rapid speech / quick multi-message bursts)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate">Measured / Deliberate (Calculated cadence / 1 composed update)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Variable / Emotional">Variable / Emotional (Pitch &amp; speed fluctuate with stress)</button>
+                    <h3 class="text-sm font-semibold text-slate-300">Speech Tempo &amp; Typing Cadence</h3>
+                    <p class="text-xs text-slate-400 mb-3 mt-1 italic">Rate of speech, message frequency, and processing pace.</p>
+                    <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Speech Tempo and Typing Cadence">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent" role="radio" aria-checked="false" title="Rapid speech / quick multi-message bursts">Fast / Urgent</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate" role="radio" aria-checked="false" title="Calculated cadence / 1 composed update">Measured / Deliberate</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Variable / Emotional" role="radio" aria-checked="false" title="Pitch &amp; speed fluctuate with stress">Variable / Emotional</button>
                     </div>
                 </div>
 
-                <div class="mb-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Primary Focus (Crucial Indicator)</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">Where do they instinctively anchor the conversation?</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="People / Relationships">People / Relationships</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks">Things / Tasks (Data &amp; Logic)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Ideas / Concepts">Ideas / Concepts (Values &amp; Standards)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Action">Action (Bottom Line)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Spontaneous">Spontaneous (Reactions &amp; Fun)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Concepts / Solo">Concepts / Solo (Reflection &amp; Space)</button>
+                <div class="border-t border-slate-700/50 pt-5 mt-5">
+                    <h3 class="text-sm font-semibold text-slate-300">Primary Focus</h3>
+                    <p class="text-xs text-slate-400 mb-3 mt-1 italic">Where do they instinctively anchor the conversation?</p>
+                    <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Primary Focus">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="People / Relationships" role="radio" aria-checked="false" title="People, relationships, feelings, and team morale">People / Relationships</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks" role="radio" aria-checked="false" title="Data, logic, structure, and operational facts">Things / Tasks</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Ideas / Concepts" role="radio" aria-checked="false" title="Values, standards, ethics, and principles">Ideas / Concepts</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Action" role="radio" aria-checked="false" title="Bottom line, direct results, and immediate action">Action</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Spontaneous" role="radio" aria-checked="false" title="Reactions, creative energy, humor, and fun">Spontaneous</button>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Concepts / Solo" role="radio" aria-checked="false" title="Reflection, independent space, and solitude">Concepts / Solo</button>
                     </div>
                 </div>
 
                 <!-- CATEGORY 3: CHANNEL DEMEANOR (ADAPTS TO CAMERA ON/OFF) -->
-                <div id="cat-posture-block">
+                <div id="cat-posture-block" class="border-t border-slate-700/50 pt-5 mt-5">
                     <div class="flex items-center justify-between">
-                        <h3 id="cat-posture-title" class="text-sm font-medium text-slate-400 uppercase tracking-wide">Channel Demeanor &amp; Style</h3>
+                        <h3 id="cat-posture-title" class="text-sm font-semibold text-slate-300">Channel Demeanor &amp; Style</h3>
                         <span id="cat-posture-mode-tag" class="text-xs text-indigo-400 font-medium">🎧 Camera-Off Mode</span>
                     </div>
-                    <p id="cat-posture-sub" class="text-xs text-slate-500 mb-2 mt-1">Audio tone, pause length, and Slack messaging syntax.</p>
-                    <div class="flex flex-wrap gap-2" id="cat-posture-chips">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright" id="chip-posture-1">
-                            <span class="chip-label">Formal &amp; Structured (Monotone voice / Bullets &amp; precise Slack syntax)</span>
+                    <p id="cat-posture-sub" class="text-xs text-slate-400 mb-3 mt-1 italic">Audio tone, pause length, and Slack messaging syntax.</p>
+                    <div class="flex flex-wrap gap-2.5" id="cat-posture-chips" role="radiogroup" aria-label="Channel Demeanor and Style">
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright" id="chip-posture-1" role="radio" aria-checked="false" title="Monotone voice / Bullets &amp; precise Slack syntax">
+                            <span class="chip-label">Formal &amp; Structured</span>
                         </button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Relaxed / Leaning" id="chip-posture-2">
-                            <span class="chip-label">Gentle &amp; Measured (Soft voice / Emojis, pauses &amp; polite Slack syntax)</span>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Relaxed / Leaning" id="chip-posture-2" role="radio" aria-checked="false" title="Soft voice / Emojis, pauses &amp; polite Slack syntax">
+                            <span class="chip-label">Gentle &amp; Measured</span>
                         </button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="posture" data-value="In-Motion / Fidgety" id="chip-posture-3">
-                            <span class="chip-label">Urgent &amp; High-Energy (Interrupting/loud voice / ALL-CAPS, rapid bursts)</span>
+                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="posture" data-value="In-Motion / Fidgety" id="chip-posture-3" role="radio" aria-checked="false" title="Interrupting/loud voice / ALL-CAPS, rapid bursts">
+                            <span class="chip-label">Urgent &amp; High-Energy</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- LEVEL 2 -->
-            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
-                <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
-                    <h2 class="text-lg font-semibold text-emerald-400">Level 2: Core Probes (Acute Distress & Phase Drivers)</h2>
-                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Distress Pattern</span>
-                </div>
-                
-                <div class="mb-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Psychological Motivator</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">What underlying hunger is driving their urgency right now?</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Wins">Status / Wins (Immediate Payoff)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Respect">Status / Respect (Recognition)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Data">Security / Data (Timeline Certainty)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Connection / Approval">Connection / Approval (Belonging)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Novelty / Fun">Novelty / Fun (Stimulation)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Space">Security / Space (Quiet Autonomy)</button>
+            <!-- LEVEL 2 (COLLAPSIBLE PROGRESSIVE DISCLOSURE) -->
+            <div id="level2-card" class="bg-slate-800 rounded-xl shadow-lg border border-slate-700 transition-all duration-300 overflow-hidden">
+                <div class="p-5 sm:p-6 flex items-center justify-between cursor-pointer select-none hover:bg-slate-750 transition-colors" onclick="toggleLevel2()" id="level2-header">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 inline-flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                        <div>
+                            <h2 class="text-base sm:text-lg font-semibold text-emerald-400 flex items-center">
+                                Level 2: Core Probes
+                                <span class="ml-2 text-xs font-normal text-slate-400 hidden sm:inline">(Optional &bull; Refines Accuracy)</span>
+                            </h2>
+                            <span class="text-xs text-slate-400">Distress Pattern &bull; Acute stressors &amp; conflict behavior under pressure</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2.5">
+                        <span id="level2-badge" class="text-xs px-2.5 py-0.5 rounded-full border border-slate-600 bg-slate-900/60 text-slate-400 font-medium">Optional</span>
+                        <span id="level2-chevron" class="text-slate-400 transform transition-transform duration-200 text-base leading-none">▸</span>
                     </div>
                 </div>
 
-                <div class="mb-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Acute Stressor</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">What condition triggered or continues to drain their patience?</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Lack of Time">Lack of Time / Shifting Schedules</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Loss of Control">Loss of Control / Inaction</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Social Friction">Social Friction / Harsh Tone</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Resource Scarcity">Resource Scarcity / Rigid Rules</button>
+                <div id="level2-content" class="px-5 sm:px-6 pb-6 pt-1 border-t border-slate-700/60">
+                    <div class="mb-5">
+                        <h3 class="text-sm font-semibold text-slate-300">Psychological Motivator</h3>
+                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">What underlying hunger is driving their urgency right now?</p>
+                        <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Psychological Motivator">
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Wins" role="radio" aria-checked="false" title="Immediate Payoff &amp; Concrete Wins">Status / Wins</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Respect" role="radio" aria-checked="false" title="Recognition &amp; Moral Principles">Status / Respect</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Data" role="radio" aria-checked="false" title="Timeline Certainty &amp; Detailed Facts">Security / Data</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Connection / Approval" role="radio" aria-checked="false" title="Belonging &amp; Interpersonal Acceptance">Connection / Approval</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Novelty / Fun" role="radio" aria-checked="false" title="Stimulation, Fresh Angles &amp; Spontaneity">Novelty / Fun</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Security / Space" role="radio" aria-checked="false" title="Quiet Autonomy &amp; Solitude">Security / Space</button>
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wide">Conflict Stance (Crucial Indicator)</h3>
-                    <p class="text-xs text-slate-500 mb-2 mt-1">Default reaction when cornered or stressed on a bridge call / Slack.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Avoids / Deflects">Avoids / Deflects (Appeases)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Escalates">Dominates / Escalates (Forces Outcome)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Rigid">Dominates / Rigid (Preaches / Moralizes)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Logics / Over-explains">Logics / Over-explains (Nitpicks Data)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Withdraws">Withdraws (Shuts Down / Silent)</button>
-                        <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Blames">Blames (Sarcastic / Points Fingers)</button>
+                    <div class="border-t border-slate-700/50 pt-5 mt-5">
+                        <h3 class="text-sm font-semibold text-slate-300">Acute Stressor</h3>
+                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">What condition triggered or continues to drain their patience?</p>
+                        <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Acute Stressor">
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Lack of Time" role="radio" aria-checked="false" title="Shifting Schedules &amp; Deadlines">Lack of Time</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Loss of Control" role="radio" aria-checked="false" title="Inaction &amp; Bureaucracy">Loss of Control</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Social Friction" role="radio" aria-checked="false" title="Harsh Tone &amp; Interpersonal Conflict">Social Friction</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Resource Scarcity" role="radio" aria-checked="false" title="Rigid Rules &amp; Material Constraints">Resource Scarcity</button>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-700/50 pt-5 mt-5">
+                        <h3 class="text-sm font-semibold text-slate-300">Conflict Stance</h3>
+                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">Default reaction when cornered or stressed on a bridge call / Slack.</p>
+                        <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Conflict Stance">
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Avoids / Deflects" role="radio" aria-checked="false" title="Appeases &amp; over-concedes to avoid clash">Avoids / Deflects</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Escalates" role="radio" aria-checked="false" title="Forces outcome aggressively &amp; attacks">Dominates / Escalates</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Rigid" role="radio" aria-checked="false" title="Preaches, moralizes &amp; digs in on protocol">Dominates / Rigid</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Logics / Over-explains" role="radio" aria-checked="false" title="Nitpicks data &amp; over-rationalizes">Logics / Over-explains</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Withdraws" role="radio" aria-checked="false" title="Shuts down, silent &amp; uncommunicative">Withdraws</button>
+                            <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Blames" role="radio" aria-checked="false" title="Sarcastic, complains &amp; points fingers">Blames</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -899,8 +957,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
         <span id="toast-message">Notification</span>
     </div>
 
-    <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800 space-y-1">
-        <div>BridgeCraft &bull; Tactical Incident Communication &amp; De-Escalation Console</div>
+    <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-800 space-y-2">
+        <div class="flex items-center justify-center space-x-4">
+            <span>BridgeCraft &bull; Tactical Incident Communication &amp; De-Escalation Console</span>
+            <span class="text-slate-600">&bull;</span>
+            <a href="https://github.com/jdlikert-hash/bridgecraft" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white flex items-center transition-colors">
+                <svg class="w-3.5 h-3.5 mr-1 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub &amp; Source</span>
+            </a>
+        </div>
         <div>Copyright &copy; 2026 Jack Likert. All Rights Reserved. Independent Personal Work &bull; Not a Work-for-Hire.</div>
     </footer>
 
@@ -940,16 +1005,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     audio: {
                         title: 'Channel Demeanor & Style',
                         sub: 'Audio tone, pause length, and Slack messaging syntax.',
-                        chip1: 'Formal & Structured (Monotone voice / Bullets & precise Slack syntax)',
-                        chip2: 'Gentle & Measured (Soft voice / Emojis, pauses & polite Slack syntax)',
-                        chip3: 'Urgent & High-Energy (Interrupting/loud voice / ALL-CAPS, rapid bursts)'
+                        chip1: 'Formal & Structured',
+                        chip1Title: 'Monotone voice / Bullets & precise Slack syntax',
+                        chip2: 'Gentle & Measured',
+                        chip2Title: 'Soft voice / Emojis, pauses & polite Slack syntax',
+                        chip3: 'Urgent & High-Energy',
+                        chip3Title: 'Interrupting/loud voice / ALL-CAPS, rapid bursts'
                     },
                     video: {
-                        title: 'Posture & Physical / Video Demeanor',
+                        title: 'Posture & Video Demeanor',
                         sub: 'Physical presence, video posture, and body tension.',
-                        chip1: 'Rigid / Upright (Upright posture, still, minimal motion)',
-                        chip2: 'Relaxed / Leaning (Relaxed posture, leaning back, gentle presence)',
-                        chip3: 'In-Motion / Fidgety (Pacing, shifting, high physical motion)'
+                        chip1: 'Rigid / Upright',
+                        chip1Title: 'Upright posture, still, minimal motion',
+                        chip2: 'Relaxed / Leaning',
+                        chip2Title: 'Relaxed posture, leaning back, gentle presence',
+                        chip3: 'In-Motion / Fidgety',
+                        chip3Title: 'Pacing, shifting, high physical motion'
                     }
                 },
                 cheatSheetTitle: 'Camera-Off Quick Decoder: Spotting Cues in Voice Bridges & Slack',
@@ -995,16 +1066,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     audio: {
                         title: 'Communication Demeanor & Ticket Syntax',
                         sub: 'Email formality, ticketing tone, and phone audio cadence.',
-                        chip1: 'Formal & Contractual (Concise, legalistic syntax / Demands SLA audit tables)',
-                        chip2: 'Warm & Relational (Friendly tone / Emojis, relationship-first phrasing)',
-                        chip3: 'Aggressive & Combative (Urgent calls / Threatening churn or executive escalation)'
+                        chip1: 'Formal & Contractual',
+                        chip1Title: 'Concise, legalistic syntax / Demands SLA audit tables',
+                        chip2: 'Warm & Relational',
+                        chip2Title: 'Friendly tone / Emojis, relationship-first phrasing',
+                        chip3: 'Aggressive & Combative',
+                        chip3Title: 'Urgent calls / Threatening churn or executive escalation'
                     },
                     video: {
                         title: 'Executive Meeting Demeanor',
                         sub: 'Camera posture, engagement cues, and meeting tension.',
-                        chip1: 'Executive Posture (Still, seated tall, direct gaze, formal workspace)',
-                        chip2: 'Open & Inviting (Leaning forward, warm nodding, welcoming gestures)',
-                        chip3: 'Pacing / Distracted (Checking phone, restless, looking off-camera)'
+                        chip1: 'Executive Posture',
+                        chip1Title: 'Still, seated tall, direct gaze, formal workspace',
+                        chip2: 'Open & Inviting',
+                        chip2Title: 'Leaning forward, warm nodding, welcoming gestures',
+                        chip3: 'Pacing / Distracted',
+                        chip3Title: 'Checking phone, restless, looking off-camera'
                     }
                 },
                 cheatSheetTitle: 'CRM & Sales Quick Decoder: Spotting Cues in Emails, Calls & Tickets',
@@ -1050,16 +1127,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     audio: {
                         title: 'Vocal Inflection & Response Cadence',
                         sub: 'Vocal stability, pause latency, and document follow-through.',
-                        chip1: 'Guarded & Methodical (Cautious tone / Itemized expense ledgers, suspicious)',
-                        chip2: 'Trembling & Overwhelmed (Shaky voice / Tearful explanations, apologetic)',
-                        chip3: 'Defiant & Combative (Raised voice / Accusatory, demanding regulatory escalation)'
+                        chip1: 'Guarded & Methodical',
+                        chip1Title: 'Cautious tone / Itemized expense ledgers, suspicious',
+                        chip2: 'Trembling & Overwhelmed',
+                        chip2Title: 'Shaky voice / Tearful explanations, apologetic',
+                        chip3: 'Defiant & Combative',
+                        chip3Title: 'Raised voice / Accusatory, demanding regulatory escalation'
                     },
                     video: {
                         title: 'Branch & Counter Demeanor',
                         sub: 'Physical posture, document handling, and bodily tension.',
-                        chip1: 'Stiff & Defensive (Folded arms, clutching folders tightly, guarded posture)',
-                        chip2: 'Hunched & Submissive (Looking down, tearful, wringing hands in distress)',
-                        chip3: 'Agitated & Leaning In (Pounding counter, waving notices, erratic pacing)'
+                        chip1: 'Stiff & Defensive',
+                        chip1Title: 'Folded arms, clutching folders tightly, guarded posture',
+                        chip2: 'Hunched & Submissive',
+                        chip2Title: 'Looking down, tearful, wringing hands in distress',
+                        chip3: 'Agitated & Leaning In',
+                        chip3Title: 'Pounding counter, waving notices, erratic pacing'
                     }
                 },
                 cheatSheetTitle: 'Financial Hardship Quick Decoder: Spotting Distress in Borrowers',
@@ -1105,16 +1188,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     audio: {
                         title: 'Vocal Inflection & Latency',
                         sub: 'Breath cadence, pitch modulation, and speech rate.',
-                        chip1: 'Flat & Intellectualized (Monotone breath / Analyzing logic to suppress affect)',
-                        chip2: 'Dysregulated & Tearful (Shaky breath / Overwhelmed, seeks reassurance)',
-                        chip3: 'Hyper-Aroused & Agitated (Rapid breathing / High pitch, pacing or interrupting)'
+                        chip1: 'Flat & Intellectualized',
+                        chip1Title: 'Monotone breath / Analyzing logic to suppress affect',
+                        chip2: 'Dysregulated & Tearful',
+                        chip2Title: 'Shaky breath / Overwhelmed, seeks reassurance',
+                        chip3: 'Hyper-Aroused & Agitated',
+                        chip3Title: 'Rapid breathing / High pitch, pacing or interrupting'
                     },
                     video: {
                         title: 'Somatic Posture & Body Language',
                         sub: 'Motor agitation, physical tension, and somatic holding.',
-                        chip1: 'Frozen & Rigid (Minimal blinking, holding posture, somatic lock)',
-                        chip2: 'Collapsing & Trembling (Slumping down, head in hands, visible tremors)',
-                        chip3: 'Restless & Motor-Agitated (Pacing room, rocking, flight-ready tension)'
+                        chip1: 'Frozen & Rigid',
+                        chip1Title: 'Minimal blinking, holding posture, somatic lock',
+                        chip2: 'Collapsing & Trembling',
+                        chip2Title: 'Slumping down, head in hands, visible tremors',
+                        chip3: 'Restless & Motor-Agitated',
+                        chip3Title: 'Pacing room, rocking, flight-ready tension'
                     }
                 },
                 cheatSheetTitle: 'Crisis Counseling Quick Decoder: Spotting Somatic Distress Channels',
@@ -2173,9 +2262,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 if (sub) sub.textContent = cues.sub;
                 if (modeTag) modeTag.textContent = cfg.obsModeLabels.audioTag;
 
-                if (chip1) chip1.querySelector('.chip-label').textContent = cues.chip1;
-                if (chip2) chip2.querySelector('.chip-label').textContent = cues.chip2;
-                if (chip3) chip3.querySelector('.chip-label').textContent = cues.chip3;
+                if (chip1) {
+                    chip1.querySelector('.chip-label').textContent = cues.chip1;
+                    chip1.title = cues.chip1Title || cues.chip1;
+                }
+                if (chip2) {
+                    chip2.querySelector('.chip-label').textContent = cues.chip2;
+                    chip2.title = cues.chip2Title || cues.chip2;
+                }
+                if (chip3) {
+                    chip3.querySelector('.chip-label').textContent = cues.chip3;
+                    chip3.title = cues.chip3Title || cues.chip3;
+                }
             } else {
                 if (btnVideo) {
                     btnVideo.className = `px-2.5 py-1 rounded-md transition-colors flex items-center ${activeColor} text-white shadow-sm`;
@@ -2188,9 +2286,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 if (sub) sub.textContent = cues.sub;
                 if (modeTag) modeTag.textContent = cfg.obsModeLabels.videoTag;
 
-                if (chip1) chip1.querySelector('.chip-label').textContent = cues.chip1;
-                if (chip2) chip2.querySelector('.chip-label').textContent = cues.chip2;
-                if (chip3) chip3.querySelector('.chip-label').textContent = cues.chip3;
+                if (chip1) {
+                    chip1.querySelector('.chip-label').textContent = cues.chip1;
+                    chip1.title = cues.chip1Title || cues.chip1;
+                }
+                if (chip2) {
+                    chip2.querySelector('.chip-label').textContent = cues.chip2;
+                    chip2.title = cues.chip2Title || cues.chip2;
+                }
+                if (chip3) {
+                    chip3.querySelector('.chip-label').textContent = cues.chip3;
+                    chip3.title = cues.chip3Title || cues.chip3;
+                }
             }
         }
 
@@ -2214,17 +2321,55 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 document.querySelectorAll(`.chip[data-category="${category}"]`).forEach(btn => {
                     btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'border-indigo-500', 'text-white');
                     btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+                    btn.setAttribute('aria-checked', 'false');
                 });
 
                 if (isSelected) {
                     selections[category] = null;
+                    btnEl.setAttribute('aria-checked', 'false');
                 } else {
                     selections[category] = value;
                     btnEl.classList.remove('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
                     btnEl.classList.add('chip-selected');
+                    btnEl.setAttribute('aria-checked', 'true');
                 }
+
+                checkLevel1Completion();
             });
         });
+
+        function toggleLevel2(forceExpand) {
+            const content = document.getElementById('level2-content');
+            const chevron = document.getElementById('level2-chevron');
+            const badge = document.getElementById('level2-badge');
+            if (!content) return;
+            const isExpanded = content.classList.contains('expanded');
+            const shouldExpand = forceExpand !== undefined ? forceExpand : !isExpanded;
+            if (shouldExpand) {
+                content.classList.add('expanded');
+                if (chevron) chevron.style.transform = 'rotate(90deg)';
+                if (badge) {
+                    badge.textContent = 'Active Probes';
+                    badge.className = 'text-xs px-2.5 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-medium';
+                }
+            } else {
+                content.classList.remove('expanded');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+                if (badge) {
+                    badge.textContent = 'Optional';
+                    badge.className = 'text-xs px-2.5 py-0.5 rounded-full border border-slate-600 bg-slate-900/60 text-slate-400 font-medium';
+                }
+            }
+        }
+
+        function checkLevel1Completion() {
+            if (selections.tempo && selections.focus && selections.posture) {
+                const content = document.getElementById('level2-content');
+                if (content && !content.classList.contains('expanded')) {
+                    toggleLevel2(true);
+                }
+            }
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2333,7 +2478,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold uppercase tracking-wider text-slate-400">DISC Leadership &amp; Operational Alignment</span>
-                        <span class="text-xs text-slate-500 font-mono">Dual-Lens Synthesis &bull; ${cfg.shortBadge}</span>
+                        <span class="text-xs text-slate-400 font-mono">Dual-Lens Synthesis &bull; ${cfg.shortBadge}</span>
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
                         <div class="flex items-center space-x-2">
@@ -2350,9 +2495,6 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             </span>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed pt-1">
-                        <em>Tactical Translation:</em> Baseline communication channel is <strong>${currentAnalysis.base.disc.label}</strong> (${currentAnalysis.base.disc.summary}). Under acute ${cfg.shortBadge} friction, distress behaviors shift toward <strong>${currentAnalysis.phase.disc.label}</strong> (${currentAnalysis.phase.disc.summary}).
-                    </p>
                 </div>
 
                 ${(() => {
@@ -2434,7 +2576,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     `;
                 })()}
 
-                <!-- CORE READOUT -->
+                <!-- CORE READOUT (3-COLUMN ANALYSIS) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
                         <h4 class="text-xs theme-accent-text uppercase font-bold tracking-wider mb-1">Communication Channel (Base)</h4>
@@ -2489,7 +2631,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
                 </div>
 
-                <!-- ACTION / STATUS TEMPLATE -->
+                <!-- ACTION / STATUS TEMPLATE (HIGH PRIORITY COPY-PASTE) -->
                 <div class="bg-slate-900/90 rounded-xl p-4 border theme-border-accent space-y-3 shadow-inner">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
@@ -2504,15 +2646,23 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <pre id="template-text-content" class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto border border-slate-800">${playbook.actionTemplate}</pre>
                 </div>
 
-                <!-- LONG-TERM STRATEGY -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-emerald-900/20 p-4 rounded-lg border border-emerald-900/50">
-                        <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">Frontline Strategy</h4>
-                        <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.frontline}</p>
+                <!-- TACTICAL SYNTHESIS & STRATEGY REFERENCE -->
+                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-750 space-y-3">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider theme-accent-text block mb-1">Tactical Synthesis &amp; Psychological Dynamic</span>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Baseline communication channel is <strong>${currentAnalysis.base.disc.label}</strong> (${currentAnalysis.base.disc.summary}). Under acute ${cfg.shortBadge} friction, distress behaviors shift toward <strong>${currentAnalysis.phase.disc.label}</strong> (${currentAnalysis.phase.disc.summary}).
+                        </p>
                     </div>
-                    <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-900/50">
-                        <h4 class="text-xs text-amber-400 uppercase font-bold tracking-wider mb-1">Management Insight</h4>
-                        <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.management}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-800/80">
+                        <div class="bg-emerald-900/20 p-3.5 rounded-lg border border-emerald-900/50">
+                            <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">Frontline Strategy</h4>
+                            <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">${currentAnalysis.phase.frontline}</p>
+                        </div>
+                        <div class="bg-amber-900/20 p-3.5 rounded-lg border border-amber-900/50">
+                            <h4 class="text-xs text-amber-400 uppercase font-bold tracking-wider mb-1">Management Insight</h4>
+                            <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">${currentAnalysis.phase.management}</p>
+                        </div>
                     </div>
                 </div>
             `;
@@ -2541,7 +2691,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.querySelectorAll('.chip').forEach(btn => {
                 btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'border-indigo-500', 'text-white');
                 btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
+                btn.setAttribute('aria-checked', 'false');
             });
+            toggleLevel2(false);
             document.getElementById('results-card').classList.add('hidden');
             document.getElementById('btn-export').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
