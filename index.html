@@ -233,10 +233,16 @@ employer, client, or third party. See LICENSE file for full legal terms.
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
                 <div class="flex items-center justify-between mb-2">
                     <label for="subject-name" id="stakeholder-label" class="block text-sm font-semibold text-slate-300">Stakeholder / Speaker / Role</label>
-                    <span id="subject-match-hint" class="hidden text-xs theme-accent-text font-medium items-center bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-700/50">
-                        <svg class="w-3.5 h-3.5 mr-1 theme-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                        <span id="subject-match-text">Linked to archive history</span>
-                    </span>
+                    <div class="flex items-center space-x-2">
+                        <span id="subject-match-hint" class="hidden text-xs theme-accent-text font-medium items-center bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-700/50">
+                            <svg class="w-3.5 h-3.5 mr-1 theme-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                            <span id="subject-match-text">Linked to archive history</span>
+                        </span>
+                        <button type="button" onclick="resetProfiler()" id="btn-profiler-reset-top" class="text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900/60 hover:bg-slate-700/80 px-2.5 py-1 rounded-md border border-slate-700 flex items-center transition-colors shadow-sm" title="Clear stakeholder and reset all cues">
+                            <svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span>Reset</span>
+                        </button>
+                    </div>
                 </div>
                 <input type="text" id="subject-name" list="subject-datalist" oninput="handleSubjectInput(this.value)" placeholder="e.g., Sarah (VP Eng), Incident Commander, Escalated Customer Acme" class="w-full bg-slate-900 border border-slate-600 rounded-md py-2 px-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors text-sm">
                 <datalist id="subject-datalist"></datalist>
@@ -391,10 +397,17 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 </div>
             </div>
 
-            <button onclick="analyzeProfile()" id="btn-calibrate" class="w-full theme-btn-accent font-bold py-4 rounded-xl shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-0.5 text-lg flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                <span id="calibrate-btn-text">Calibrate Incident Playbook</span>
-            </button>
+            <!-- PROFILER ACTION BAR -->
+            <div class="flex flex-col sm:flex-row items-stretch gap-3">
+                <button onclick="analyzeProfile()" id="btn-calibrate" class="flex-grow theme-btn-accent font-bold py-3.5 sm:py-4 px-6 rounded-xl shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-0.5 text-base sm:text-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span id="calibrate-btn-text">Calibrate Incident Playbook</span>
+                </button>
+                <button type="button" onclick="resetProfiler()" id="btn-calibrate-reset" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold py-3.5 sm:py-4 px-5 rounded-xl border border-slate-600 shadow-md transition duration-200 ease-in-out flex items-center justify-center text-sm sm:text-base flex-shrink-0 group" title="Clear all cues and reset profiler">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-slate-400 group-hover:text-slate-200 group-hover:rotate-[-45deg] transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <span>Reset Profiler</span>
+                </button>
+            </div>
 
             <!-- RESULTS CARD -->
             <div id="results-card" class="hidden bg-slate-800 rounded-xl p-6 shadow-2xl border-2 theme-border-accent transform transition-all duration-300 space-y-6">
@@ -412,7 +425,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Export Playbook (.MD)
                         </button>
-                        <button onclick="resetProfiler()" class="text-slate-400 hover:text-white text-sm underline px-2">Reset</button>
+                        <button onclick="resetProfiler()" id="btn-results-reset" class="bg-slate-700/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center transition-colors border border-slate-600 shadow-sm" title="Clear profile and start a new incident analysis">
+                            <svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span>Reset Profiler</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -2667,6 +2683,24 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                     </div>
                 </div>
+
+                <!-- RESULTS FOOTER ACTIONS -->
+                <div class="pt-5 border-t border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>Calibrated under BridgeCraft behavioral de-escalation protocols</span>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                        <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-md border border-slate-600 flex items-center transition-colors shadow-sm" title="Return to top of console">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            Back to Top
+                        </button>
+                        <button type="button" onclick="resetProfiler()" class="theme-btn-accent font-semibold px-3.5 py-1.5 rounded-md shadow flex items-center transition-colors text-white" title="Clear profile and start a new incident analysis">
+                            <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            Start New Profile / Reset
+                        </button>
+                    </div>
+                </div>
             `;
         }
 
@@ -2699,6 +2733,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.getElementById('results-card').classList.add('hidden');
             document.getElementById('btn-export').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast("Profiler reset to initial state.");
         }
 
         // ================= ENHANCED MARKDOWN EXPORT =================
