@@ -191,6 +191,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
                             <span class="hidden sm:inline">Field Manual</span>
                         </button>
+                        <button id="tab-coaching" class="tab-btn px-2.5 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white flex items-center" onclick="switchTab('coaching')" title="Coaching Console — Skill-Will Matrix & Task Tracker">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            <span class="hidden sm:inline">Coaching</span>
+                        </button>
                     </nav>
                 </div>
             </div>
@@ -830,6 +834,41 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
                 </section>
 
+            </div>
+        </div>
+
+        <!-- VIEW 5: COACHING CONSOLE — SKILL-WILL MATRIX & TASK TRACKER -->
+        <div id="view-coaching" class="hidden space-y-6">
+            <div class="bg-slate-800 rounded-xl p-5 sm:p-6 shadow-lg border border-slate-700 space-y-5">
+                <!-- Coaching Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center">
+                            <svg class="w-5 h-5 mr-2 theme-accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            Coaching Console
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Skill-Will Matrix & Task Tracker — Longitudinal 1-on-1 Coaching</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="coaching-stakeholder-select" class="text-xs text-slate-400 font-medium">Stakeholder:</label>
+                        <select id="coaching-stakeholder-select" onchange="selectCoachingStakeholder(this.value)" class="bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">— Select —</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Coaching Content (populated by JS) -->
+                <div id="coaching-content">
+                    <div class="text-center py-12 space-y-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-700/60 theme-accent-text mx-auto flex items-center justify-center">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Select a Stakeholder to Begin Coaching</h3>
+                        <p class="text-sm text-slate-400 max-w-lg mx-auto">
+                            Profile a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2051,7 +2090,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             const rowId = 'tt_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
             const div = document.createElement('div');
             div.id = rowId;
-            div.className = 'bg-slate-900/90 p-3.5 rounded-xl border border-slate-700 space-y-2 relative';
+            div.className = 'talk-track-row bg-slate-900/90 p-3.5 rounded-xl border border-slate-700 space-y-2 relative';
             div.innerHTML = `
                 <button type="button" onclick="document.getElementById('${rowId}').remove()" class="absolute top-2 right-2 text-slate-500 hover:text-rose-400 text-xs p-1" title="Remove Talk Track">
                     &times; Remove
@@ -2082,7 +2121,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             sub.hotButtons = hotButtonsText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
             const container = document.getElementById('intel-talk-tracks-container');
-            const trackRows = container.querySelectorAll('.bg-slate-900\/90');
+            const trackRows = container.querySelectorAll('.talk-track-row');
             const newTracks = [];
             trackRows.forEach(row => {
                 const trigger = row.querySelector('.tt-trigger-input')?.value.trim() || '';
@@ -2251,6 +2290,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     dossier = JSON.parse(stored);
                     if (!dossier.subjects) dossier.subjects = {};
                     if (!dossier.observations) dossier.observations = [];
+                    // Migrate: ensure every subject has a tasks object
+                    Object.values(dossier.subjects).forEach(sub => {
+                        if (!sub.tasks) sub.tasks = {};
+                    });
                 }
             } catch (e) {
                 console.error('Failed to load archive from storage:', e);
@@ -2507,6 +2550,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.getElementById('view-dossier').classList.add('hidden');
             document.getElementById('view-codex').classList.add('hidden');
             document.getElementById('view-manual')?.classList.add('hidden');
+            document.getElementById('view-coaching')?.classList.add('hidden');
             
             const targetView = document.getElementById(`view-${tabId}`);
             if (targetView) targetView.classList.remove('hidden');
@@ -2515,6 +2559,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 renderDossier();
             } else if (tabId === 'codex') {
                 populateCodex();
+            } else if (tabId === 'coaching') {
+                renderCoachingConsole();
             }
         }
 
@@ -3038,6 +3084,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
             saveDossier();
             closeSaveModal();
             showToast(`Observation for "${subject.canonicalName}" saved to Field Archive!`);
+            // Store last saved observation for cross-tab coaching link
+            window._lastSavedObservation = { subjectId: subject.id, observationId: obsId, subjectName: subject.canonicalName };
             handleSubjectInput(document.getElementById('subject-name').value);
         }
 
@@ -3152,8 +3200,16 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
 
                     <!-- STAKEHOLDER INTEL & HOT BUTTONS PREVIEW -->
-                    ${(sub.hotButtons && sub.hotButtons.length > 0) || (sub.personalTalkTracks && sub.personalTalkTracks.length > 0) ? `
+                    ${(sub.hotButtons && sub.hotButtons.length > 0) || (sub.personalTalkTracks && sub.personalTalkTracks.length > 0) || sub.notes ? `
                     <div class="bg-slate-900/90 rounded-xl p-3.5 border border-slate-700/80 space-y-2.5">
+                        ${sub.notes ? `
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Context &amp; Background:</span>
+                            <p class="text-xs text-slate-300 italic border-l-2 border-indigo-500 pl-2.5 py-0.5">
+                                "${escapeHtml(sub.notes)}"
+                            </p>
+                        </div>
+                        ` : ''}
                         ${sub.hotButtons && sub.hotButtons.length > 0 ? `
                         <div>
                             <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400 block mb-1">Known Hot Buttons &amp; Taboos:</span>
@@ -3169,6 +3225,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 ${sub.personalTalkTracks.map(tt => `
                                     <div class="text-xs text-slate-300 border-l-2 border-emerald-500 pl-2 py-0.5">
                                         <span class="text-amber-300 font-semibold">${escapeHtml(tt.trigger || 'General')}:</span> "${escapeHtml(tt.script || '')}"
+                                        ${tt.avoid ? `<span class="text-rose-400 block text-[11px] mt-0.5 font-sans">⚠️ Avoid: ${escapeHtml(tt.avoid)}</span>` : ''}
                                     </div>
                                 `).join('')}
                             </div>
@@ -3637,6 +3694,463 @@ employer, client, or third party. See LICENSE file for full legal terms.
             saveDossier();
             renderDossier();
             showToast("Sample Multi-Domain Drill Playbooks Loaded!");
+        }
+
+        // ================= COACHING CONSOLE — SKILL-WILL MATRIX & TASK TRACKER =================
+        let activeCoachingSubjectId = null;
+
+        const COACHING_STRATEGIES = {
+            guide:    { label: 'Guide', subtitle: 'High Will · Low Skill', color: 'text-cyan-300', bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', dotColor: '#22d3ee', strategy: (arch) => `Train & Mentor: Use ${arch.nlp ? arch.nlp.system : 'matched'} language. ${arch.nlp ? `Frame learning as: "${arch.nlp.delegationScript}"` : 'Pair with experienced peers.'}` },
+            delegate: { label: 'Delegate', subtitle: 'High Will · High Skill', color: 'text-emerald-300', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', dotColor: '#34d399', strategy: (arch) => `Empower & Challenge: Trust their expertise. ${arch.nlp ? `Use predicates like "${arch.nlp.predicates.slice(0,3).join('", "')}" to affirm autonomy.` : 'Give ownership and stretch goals.'}` },
+            direct:   { label: 'Direct', subtitle: 'Low Will · Low Skill', color: 'text-rose-300', bg: 'bg-rose-500/10', border: 'border-rose-500/30', dotColor: '#fb7185', strategy: (arch) => `Set Expectations & Monitor: Address the ${arch.phaseDriver.toLowerCase()} need first. Use clear, structured check-ins aligned with their ${arch.disc.badge} communication style.` },
+            excite:   { label: 'Excite', subtitle: 'Low Will · High Skill', color: 'text-amber-300', bg: 'bg-amber-500/10', border: 'border-amber-500/30', dotColor: '#fbbf24', strategy: (arch) => `Motivate & Remove Blockers: They know how — find out why engagement dropped. Tap into their core driver: ${arch.phaseDriver}. ${arch.nlp ? `Re-engage with: "${arch.nlp.predicates.slice(0,2).join('", "')}"` : ''}` }
+        };
+
+        function getQuadrant(skill, will) {
+            const s = skill === 'high' ? 1 : (skill === 'medium' ? 0.5 : 0);
+            const w = will === 'high' ? 1 : (will === 'medium' ? 0.5 : 0);
+            if (s <= 0.5 && w > 0.5) return 'guide';
+            if (s > 0.5 && w > 0.5) return 'delegate';
+            if (s <= 0.5 && w <= 0.5) return 'direct';
+            return 'excite';
+        }
+
+        function skillWillToCoord(skill, will) {
+            const sMap = { low: 0.15, medium: 0.5, high: 0.85 };
+            const wMap = { low: 0.85, medium: 0.5, high: 0.15 };
+            return { x: sMap[skill] || 0.5, y: wMap[will] || 0.5 };
+        }
+
+        function renderCoachingConsole() {
+            const select = document.getElementById('coaching-stakeholder-select');
+            if (!select) return;
+            const currentVal = select.value;
+            select.innerHTML = '<option value="">— Select —</option>';
+            Object.values(dossier.subjects).forEach(sub => {
+                const opt = document.createElement('option');
+                opt.value = sub.id;
+                opt.textContent = sub.canonicalName;
+                if (sub.id === currentVal) opt.selected = true;
+                select.appendChild(opt);
+            });
+            if (activeCoachingSubjectId && dossier.subjects[activeCoachingSubjectId]) {
+                select.value = activeCoachingSubjectId;
+                renderCoachingStakeholderView(activeCoachingSubjectId);
+            } else if (currentVal && dossier.subjects[currentVal]) {
+                activeCoachingSubjectId = currentVal;
+                renderCoachingStakeholderView(currentVal);
+            } else {
+                activeCoachingSubjectId = null;
+                document.getElementById('coaching-content').innerHTML = `
+                    <div class="text-center py-12 space-y-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-700/60 theme-accent-text mx-auto flex items-center justify-center">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Select a Stakeholder to Begin Coaching</h3>
+                        <p class="text-sm text-slate-400 max-w-lg mx-auto">
+                            Profile a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        function selectCoachingStakeholder(subId) {
+            activeCoachingSubjectId = subId || null;
+            renderCoachingConsole();
+        }
+
+        function renderCoachingStakeholderView(subId) {
+            const sub = dossier.subjects[subId];
+            if (!sub) return;
+            if (!sub.tasks) sub.tasks = {};
+
+            const subObs = dossier.observations.filter(o => o.subjectId === subId);
+            const tasks = Object.values(sub.tasks);
+
+            // Determine dominant archetype
+            const baseCounts = {};
+            subObs.forEach(o => { baseCounts[o.baseKey] = (baseCounts[o.baseKey] || 0) + 1; });
+            let topBaseKey = 'thinker';
+            let maxCount = 0;
+            for (const [k, c] of Object.entries(baseCounts)) { if (c > maxCount) { maxCount = c; topBaseKey = k; } }
+            const topArch = archetypes[topBaseKey];
+
+            // Build quadrant data from latest assessments
+            const quadrantTasks = [];
+            tasks.forEach(task => {
+                if (task.assessments && task.assessments.length > 0) {
+                    const latest = task.assessments[task.assessments.length - 1];
+                    const q = getQuadrant(latest.skill, latest.will);
+                    quadrantTasks.push({ task, latest, quadrant: q });
+                }
+            });
+
+            // Build unlinked observations list (observations not yet used in any assessment)
+            const usedObsIds = new Set();
+            tasks.forEach(t => (t.assessments || []).forEach(a => usedObsIds.add(a.observationId)));
+            const availableObs = subObs.filter(o => !usedObsIds.has(o.id));
+
+            let html = '';
+
+            // --- PCM Profile Summary Banner ---
+            html += `
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-2">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">${sub.canonicalName.charAt(0).toUpperCase()}</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">${sub.canonicalName}</h3>
+                            <div class="flex items-center space-x-2 text-xs text-slate-400">
+                                <span>${subObs.length} Observation${subObs.length !== 1 ? 's' : ''}</span>
+                                <span>•</span>
+                                <span>${tasks.length} Task${tasks.length !== 1 ? 's' : ''}</span>
+                                <span>•</span>
+                                <span>Dominant Profile: <strong class="theme-accent-text">${topArch.name}</strong> (${topArch.disc.badge})</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold border ${topArch.disc.style}">${topArch.disc.badge}</span>
+                        ${topArch.nlp ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${topArch.nlp.style}">${topArch.nlp.system}</span>` : ''}
+                    </div>
+                </div>
+            </div>
+            `;
+
+            // --- Two-column layout: Quadrant + Task List ---
+            html += `<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">`;
+
+            // --- Quadrant SVG Visualization ---
+            html += `
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-3">
+                <h4 class="text-sm font-bold text-white uppercase tracking-wide">Skill-Will Quadrant</h4>
+                ${renderQuadrantSVG(quadrantTasks, topArch)}
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                    ${Object.entries(COACHING_STRATEGIES).map(([key, qs]) => {
+                        const count = quadrantTasks.filter(qt => qt.quadrant === key).length;
+                        return `
+                        <div class="${qs.bg} ${qs.border} border rounded-lg p-2">
+                            <span class="font-bold ${qs.color}">${qs.label}</span>
+                            <span class="text-slate-400 ml-1">(${qs.subtitle})</span>
+                            <span class="text-slate-500 ml-1">— ${count} task${count !== 1 ? 's' : ''}</span>
+                        </div>`;
+                    }).join('')}
+                </div>
+            </div>
+            `;
+
+            // --- Task List Panel ---
+            html += `
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wide">Tasks (${tasks.length})</h4>
+                    <button onclick="openAddTaskForm('${subId}')" class="theme-btn-accent text-xs px-3 py-1.5 rounded-lg font-medium flex items-center shadow-sm">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        Add Task
+                    </button>
+                </div>
+
+                <div id="coaching-add-task-form" class="hidden bg-slate-950/60 rounded-lg p-3 border border-slate-700 space-y-2">
+                    <input type="text" id="coaching-new-task-name" placeholder="Task name (e.g., Incident Post-Mortems)" class="w-full bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded px-3 py-2 focus:ring-1 focus:ring-indigo-500">
+                    <input type="text" id="coaching-new-task-category" placeholder="Category (optional, e.g., Documentation)" class="w-full bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded px-3 py-2 focus:ring-1 focus:ring-indigo-500">
+                    <div class="flex justify-end space-x-2">
+                        <button onclick="closeAddTaskForm()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5">Cancel</button>
+                        <button onclick="confirmAddTask('${subId}')" class="theme-btn-accent text-xs px-3 py-1.5 rounded font-medium">Create Task</button>
+                    </div>
+                </div>
+
+                <div id="coaching-task-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+                    ${tasks.length === 0 ? `
+                    <p class="text-xs text-slate-500 text-center py-6">No tasks yet. Click <strong>Add Task</strong> to start tracking.</p>
+                    ` : tasks.map(task => {
+                        const latestA = task.assessments && task.assessments.length > 0 ? task.assessments[task.assessments.length - 1] : null;
+                        const q = latestA ? getQuadrant(latestA.skill, latestA.will) : null;
+                        const qs = q ? COACHING_STRATEGIES[q] : null;
+                        return `
+                        <div class="bg-slate-950/60 rounded-lg p-3 border border-slate-700/80 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm font-semibold text-white">${escapeHtml(task.name)}</span>
+                                    ${task.category ? `<span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-400 border border-slate-700">${escapeHtml(task.category)}</span>` : ''}
+                                    ${qs ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold ${qs.bg} ${qs.color} ${qs.border} border">${qs.label}</span>` : '<span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-500 border border-slate-700">Unrated</span>'}
+                                </div>
+                                <div class="flex items-center space-x-1.5">
+                                    <button onclick="toggleTaskAssessments('${subId}', '${task.id}')" class="text-xs theme-accent-text hover:underline">${task.assessments ? task.assessments.length : 0} rating${(task.assessments && task.assessments.length !== 1) ? 's' : ''}</button>
+                                    <button onclick="deleteCoachingTask('${subId}', '${task.id}')" class="text-slate-600 hover:text-rose-400 transition-colors" title="Delete task"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                </div>
+                            </div>
+                            ${latestA ? `
+                            <div class="flex items-center space-x-3 text-[11px] text-slate-400">
+                                <span>Skill: <strong class="text-white capitalize">${latestA.skill}</strong></span>
+                                <span>Will: <strong class="text-white capitalize">${latestA.will}</strong></span>
+                                <span class="text-slate-600">• ${new Date(latestA.date).toLocaleDateString()}</span>
+                            </div>
+                            ` : ''}
+                            <div id="task-assessments-${task.id}" class="hidden space-y-2 pt-2 border-t border-slate-800">
+                                ${(task.assessments || []).map(a => {
+                                    const linkedObs = dossier.observations.find(o => o.id === a.observationId);
+                                    const obsArch = linkedObs ? archetypes[linkedObs.baseKey] : null;
+                                    return `
+                                    <div class="bg-slate-900/60 rounded p-2 text-[11px] space-y-1 border border-slate-800">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="text-slate-500 font-mono">${new Date(a.date).toLocaleDateString()}</span>
+                                                <span>Skill: <strong class="text-white capitalize">${a.skill}</strong></span>
+                                                <span>Will: <strong class="text-white capitalize">${a.will}</strong></span>
+                                                ${obsArch ? `<span class="px-1.5 py-0.5 rounded-full text-[9px] font-semibold border ${obsArch.disc.style}">${obsArch.name}</span>` : ''}
+                                            </div>
+                                        </div>
+                                        ${a.notes ? `<p class="text-slate-400 italic">"${escapeHtml(a.notes)}"</p>` : ''}
+                                    </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            <button onclick="openRateTaskForm('${subId}', '${task.id}')" class="w-full text-center text-xs theme-accent-text hover:underline font-medium py-1">+ Rate Skill & Will (requires observation)</button>
+                            <div id="rate-task-form-${task.id}" class="hidden bg-slate-950/80 rounded-lg p-3 border border-indigo-500/30 space-y-3">
+                                <div class="flex items-center space-x-2 text-xs text-slate-400">
+                                    <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                                    <span class="font-medium">Link to Profiler Observation:</span>
+                                </div>
+                                <select id="rate-obs-select-${task.id}" class="w-full bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded px-2 py-1.5">
+                                    ${subObs.length === 0 ? '<option value="">No observations logged yet (General Assessment)</option>' : ''}
+                                    ${subObs.map((o, idx) => {
+                                        const ob = archetypes[o.baseKey];
+                                        const d = new Date(o.timestamp).toLocaleDateString();
+                                        return `<option value="${o.id}" ${idx === 0 ? 'selected' : ''}>${d} — ${ob ? ob.name : o.baseKey} (${o.context})</option>`;
+                                    }).join('')}
+                                </select>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="text-[11px] text-slate-400 font-medium block mb-1">Skill Level</label>
+                                        <div id="rate-skill-container-${task.id}" class="flex space-x-1" data-value="">
+                                            <button type="button" onclick="setTaskRatingSkill('${task.id}', 'low', this)" class="flex-1 text-[11px] py-1.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30 hover:bg-rose-500/25 transition-colors font-medium">Low</button>
+                                            <button type="button" onclick="setTaskRatingSkill('${task.id}', 'medium', this)" class="flex-1 text-[11px] py-1.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25 transition-colors font-medium">Med</button>
+                                            <button type="button" onclick="setTaskRatingSkill('${task.id}', 'high', this)" class="flex-1 text-[11px] py-1.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25 transition-colors font-medium">High</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="text-[11px] text-slate-400 font-medium block mb-1">Will Level</label>
+                                        <div id="rate-will-container-${task.id}" class="flex space-x-1" data-value="">
+                                            <button type="button" onclick="setTaskRatingWill('${task.id}', 'low', this)" class="flex-1 text-[11px] py-1.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30 hover:bg-rose-500/25 transition-colors font-medium">Low</button>
+                                            <button type="button" onclick="setTaskRatingWill('${task.id}', 'medium', this)" class="flex-1 text-[11px] py-1.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25 transition-colors font-medium">Med</button>
+                                            <button type="button" onclick="setTaskRatingWill('${task.id}', 'high', this)" class="flex-1 text-[11px] py-1.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25 transition-colors font-medium">High</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="rate-notes-${task.id}" placeholder="Assessment notes (optional)" class="w-full bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded px-2 py-1.5">
+                                <div class="flex justify-end space-x-2">
+                                    <button onclick="closeRateTaskForm('${task.id}')" class="text-xs text-slate-400 hover:text-white px-3 py-1">Cancel</button>
+                                    <button onclick="confirmRateTask('${subId}', '${task.id}')" class="theme-btn-accent text-xs px-3 py-1.5 rounded font-medium">Save Rating</button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+            `;
+
+            html += `</div>`; // close grid
+
+            // --- PCM Coaching Strategy Cards (one per occupied quadrant) ---
+            const occupiedQuadrants = [...new Set(quadrantTasks.map(qt => qt.quadrant))];
+            if (occupiedQuadrants.length > 0) {
+                html += `
+                <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-3">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wide">PCM-Informed Coaching Strategies for ${escapeHtml(sub.canonicalName)}</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        ${occupiedQuadrants.map(q => {
+                            const qs = COACHING_STRATEGIES[q];
+                            const tasksInQ = quadrantTasks.filter(qt => qt.quadrant === q);
+                            return `
+                            <div class="${qs.bg} ${qs.border} border rounded-lg p-3 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold ${qs.color} uppercase tracking-wide">${qs.label} — ${qs.subtitle}</span>
+                                    <span class="text-[10px] text-slate-500">${tasksInQ.length} task${tasksInQ.length !== 1 ? 's' : ''}</span>
+                                </div>
+                                <p class="text-xs text-slate-300">${qs.strategy(topArch)}</p>
+                                <div class="flex flex-wrap gap-1">
+                                    ${tasksInQ.map(qt => `<span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-900/80 text-slate-300 border border-slate-700">${escapeHtml(qt.task.name)}</span>`).join('')}
+                                </div>
+                            </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+                `;
+            }
+
+            document.getElementById('coaching-content').innerHTML = html;
+        }
+
+        function renderQuadrantSVG(quadrantTasks, topArch) {
+            const W = 320, H = 280;
+            const pad = 35;
+            const gW = W - pad * 2, gH = H - pad * 2;
+
+            let dots = '';
+            quadrantTasks.forEach((qt, i) => {
+                const coord = skillWillToCoord(qt.latest.skill, qt.latest.will);
+                const cx = pad + coord.x * gW;
+                const cy = pad + coord.y * gH;
+                const qs = COACHING_STRATEGIES[qt.quadrant];
+                dots += `<circle cx="${cx}" cy="${cy}" r="8" fill="${qs.dotColor}" fill-opacity="0.8" stroke="white" stroke-width="1.5"/>`;
+                dots += `<text x="${cx}" y="${cy + 3}" text-anchor="middle" font-size="8" fill="white" font-weight="bold">${i + 1}</text>`;
+            });
+
+            return `
+            <div class="flex justify-center">
+                <svg viewBox="0 0 ${W} ${H}" class="w-full max-w-[340px]" style="font-family: Inter, sans-serif;">
+                    <!-- Background quadrants -->
+                    <rect x="${pad}" y="${pad}" width="${gW/2}" height="${gH/2}" fill="rgba(34,211,238,0.06)" rx="4"/>
+                    <rect x="${pad + gW/2}" y="${pad}" width="${gW/2}" height="${gH/2}" fill="rgba(52,211,153,0.06)" rx="4"/>
+                    <rect x="${pad}" y="${pad + gH/2}" width="${gW/2}" height="${gH/2}" fill="rgba(251,113,133,0.06)" rx="4"/>
+                    <rect x="${pad + gW/2}" y="${pad + gH/2}" width="${gW/2}" height="${gH/2}" fill="rgba(251,191,36,0.06)" rx="4"/>
+
+                    <!-- Grid lines -->
+                    <line x1="${pad}" y1="${pad + gH/2}" x2="${pad + gW}" y2="${pad + gH/2}" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+                    <line x1="${pad + gW/2}" y1="${pad}" x2="${pad + gW/2}" y2="${pad + gH}" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+
+                    <!-- Axes -->
+                    <line x1="${pad}" y1="${pad + gH}" x2="${pad + gW}" y2="${pad + gH}" stroke="#94a3b8" stroke-width="1.5"/>
+                    <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${pad + gH}" stroke="#94a3b8" stroke-width="1.5"/>
+
+                    <!-- Axis labels -->
+                    <text x="${pad + gW/2}" y="${H - 4}" text-anchor="middle" font-size="10" fill="#94a3b8" font-weight="600">SKILL →</text>
+                    <text x="10" y="${pad + gH/2}" text-anchor="middle" font-size="10" fill="#94a3b8" font-weight="600" transform="rotate(-90, 10, ${pad + gH/2})">WILL →</text>
+
+                    <!-- Quadrant labels -->
+                    <text x="${pad + gW*0.25}" y="${pad + 16}" text-anchor="middle" font-size="9" fill="#22d3ee" font-weight="700">GUIDE</text>
+                    <text x="${pad + gW*0.75}" y="${pad + 16}" text-anchor="middle" font-size="9" fill="#34d399" font-weight="700">DELEGATE</text>
+                    <text x="${pad + gW*0.25}" y="${pad + gH - 8}" text-anchor="middle" font-size="9" fill="#fb7185" font-weight="700">DIRECT</text>
+                    <text x="${pad + gW*0.75}" y="${pad + gH - 8}" text-anchor="middle" font-size="9" fill="#fbbf24" font-weight="700">EXCITE</text>
+
+                    <!-- Low/High labels -->
+                    <text x="${pad}" y="${pad + gH + 14}" text-anchor="start" font-size="8" fill="#64748b">Low</text>
+                    <text x="${pad + gW}" y="${pad + gH + 14}" text-anchor="end" font-size="8" fill="#64748b">High</text>
+                    <text x="${pad - 4}" y="${pad + gH}" text-anchor="end" font-size="8" fill="#64748b">Low</text>
+                    <text x="${pad - 4}" y="${pad + 6}" text-anchor="end" font-size="8" fill="#64748b">High</text>
+
+                    <!-- Task dots -->
+                    ${dots}
+
+                    ${quadrantTasks.length === 0 ? `<text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="11" fill="#64748b">Rate tasks to plot them here</text>` : ''}
+                </svg>
+            </div>
+            ${quadrantTasks.length > 0 ? `
+            <div class="flex flex-wrap gap-2 text-[10px] text-slate-400 justify-center">
+                ${quadrantTasks.map((qt, i) => `<span>${i + 1}. ${escapeHtml(qt.task.name)}</span>`).join('<span class="text-slate-700">|</span>')}
+            </div>` : ''}
+            `;
+        }
+
+        function openAddTaskForm(subId) {
+            const form = document.getElementById('coaching-add-task-form');
+            if (form) form.classList.remove('hidden');
+        }
+
+        function closeAddTaskForm() {
+            const form = document.getElementById('coaching-add-task-form');
+            if (form) form.classList.add('hidden');
+            const nameInput = document.getElementById('coaching-new-task-name');
+            const catInput = document.getElementById('coaching-new-task-category');
+            if (nameInput) nameInput.value = '';
+            if (catInput) catInput.value = '';
+        }
+
+        function confirmAddTask(subId) {
+            const sub = dossier.subjects[subId];
+            if (!sub) return;
+            if (!sub.tasks) sub.tasks = {};
+            const name = (document.getElementById('coaching-new-task-name')?.value || '').trim();
+            const category = (document.getElementById('coaching-new-task-category')?.value || '').trim();
+            if (!name) { alert('Please enter a task name.'); return; }
+            const taskId = 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+            sub.tasks[taskId] = { id: taskId, name, category: category || '', createdAt: new Date().toISOString(), assessments: [] };
+            saveDossier();
+            closeAddTaskForm();
+            showToast(`Task "${name}" added for ${sub.canonicalName}.`);
+            renderCoachingStakeholderView(subId);
+        }
+
+        function deleteCoachingTask(subId, taskId) {
+            const sub = dossier.subjects[subId];
+            if (!sub || !sub.tasks || !sub.tasks[taskId]) return;
+            if (!confirm(`Delete task "${sub.tasks[taskId].name}" and all its assessments?`)) return;
+            delete sub.tasks[taskId];
+            saveDossier();
+            showToast('Task deleted.');
+            renderCoachingStakeholderView(subId);
+        }
+
+        function toggleTaskAssessments(subId, taskId) {
+            const el = document.getElementById(`task-assessments-${taskId}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function openRateTaskForm(subId, taskId) {
+            const form = document.getElementById(`rate-task-form-${taskId}`);
+            if (form) form.classList.toggle('hidden');
+        }
+
+        function closeRateTaskForm(taskId) {
+            const form = document.getElementById(`rate-task-form-${taskId}`);
+            if (form) form.classList.add('hidden');
+        }
+
+        function setTaskRatingSkill(taskId, value, btn) {
+            const container = document.getElementById('rate-skill-container-' + taskId);
+            if (!container) return;
+            container.dataset.value = value;
+            container.querySelectorAll('button').forEach(b => b.classList.remove('ring-2', 'ring-indigo-400'));
+            btn.classList.add('ring-2', 'ring-indigo-400');
+        }
+
+        function setTaskRatingWill(taskId, value, btn) {
+            const container = document.getElementById('rate-will-container-' + taskId);
+            if (!container) return;
+            container.dataset.value = value;
+            container.querySelectorAll('button').forEach(b => b.classList.remove('ring-2', 'ring-indigo-400'));
+            btn.classList.add('ring-2', 'ring-indigo-400');
+        }
+
+        function confirmRateTask(subId, taskId) {
+            const sub = dossier.subjects[subId];
+            if (!sub || !sub.tasks || !sub.tasks[taskId]) return;
+
+            const skillContainer = document.getElementById(`rate-skill-container-${taskId}`);
+            const willContainer = document.getElementById(`rate-will-container-${taskId}`);
+            const skill = skillContainer?.dataset?.value;
+            const will = willContainer?.dataset?.value;
+
+            if (!skill || !will) { alert('Please select both Skill and Will levels.'); return; }
+
+            const obsSelect = document.getElementById(`rate-obs-select-${taskId}`);
+            const obsId = obsSelect?.value || null;
+
+            const notes = (document.getElementById(`rate-notes-${taskId}`)?.value || '').trim();
+
+            if (!sub.tasks[taskId].assessments) sub.tasks[taskId].assessments = [];
+
+            const asmtId = 'asmt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+            sub.tasks[taskId].assessments.push({
+                id: asmtId,
+                date: new Date().toISOString(),
+                skill,
+                will,
+                observationId: obsId,
+                notes
+            });
+
+            saveDossier();
+            showToast(`Rated "${sub.tasks[taskId].name}": Skill ${skill}, Will ${will}.`);
+            renderCoachingStakeholderView(subId);
+        }
+
+        function navigateToCoachingFromSave(subId) {
+            activeCoachingSubjectId = subId;
+            switchTab('coaching');
         }
 
         // ================= CODEX GENERATION =================

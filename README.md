@@ -148,7 +148,8 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
 2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per stakeholder. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
 3. **The Codex (Tactical Battlecards):** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Custom battlecards directly power live Incident Playbooks calibrated on the Active Console. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
-4. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
+4. **1-on-1 Coaching (Skill-Will Matrix & Task Tracker):** Longitudinal coaching matrix enabling managers and incident leads to track individual work assignments, assess situational Skill and Will levels, plot tasks on the interactive Skill-Will Quadrant (Direct, Guide, Excite, Delegate), and receive tailored PCM/NLP communication strategies for each task.
+5. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 
 ---
 
