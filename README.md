@@ -82,6 +82,16 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
    - *Promoter* $\rightarrow$ **High D** (Driver / Competitive)
    - *Imaginer* $\rightarrow$ **High C / S** (Reflective / Deliberate)
 2. **The "Incident High-D Reality":** In operational emergencies, almost all executives and clients temporarily adopt an aggressive **High-D presentation** ("What is broken, when is it fixed, who is fixing it?"). Recognizing whether this is their *true base* or a *distress phase masking a panic-stricken Thinker or Harmonizer* allows frontline staff to tailor their response perfectly.
+3. **NLP Sensory Predicates & Task Delegation (Subconscious Rapport):** During task delegation, 1-on-1 coaching, or crisis leadership, matching a stakeholder's primary sensory representational system (VAKD) bypasses cognitive resistance and establishes rapid subconscious alignment:
+
+| PCM Archetype | NLP Sensory System | Core Cognitive Channel | Primary Predicates ("Mirror Words") | Task Delegation Script |
+| :--- | :--- | :--- | :--- | :--- |
+| **The Thinker** | **Auditory-Digital (Ad)** | Logic, Data & Structure | *makes sense, analyze, process, data, compute, logic, criteria* | *"Does this sequence make logical sense? Can you process the metrics and analyze the failure criteria?"* |
+| **The Persister** | **Auditory-Digital & Visual** | Values, Convictions & Standards | *in my view, perspective, respect, standards, integrity, verify* | *"In your view, what standard must we hold? We respect your perspective and trust your judgment on quality."* |
+| **The Harmonizer** | **Kinesthetic (K - Somatic)** | Emotions, Comfort & Relationships | *feels like, touch base, grasp, handle, heavy lift, comfortable, support* | *"How does this workload feel to you? Let's touch base so you feel completely supported and grounded."* |
+| **The Rebel** | **Auditory & Kinetic** | Reactions, Sound & Spontaneity | *sounds cool, kick around, toss out, fun, crazy idea, vibe, wild* | *"Sounds like a fun puzzle—wanna kick around some ideas, toss out the rulebook, and test something wild?"* |
+| **The Promoter** | **Kinesthetic (Action)** | Momentum, Direct Action & Wins | *bottom line, jump on it, hit the ground running, nail it down, win, move* | *"Bottom line: let's jump on this right now, nail it down before 3 PM, and secure the win."* |
+| **The Imaginer** | **Visual (Internal)** | Reflection, Mental Imagery & Space | *picture, imagine, envision, reflect, contemplate, space, horizon* | *"Take mental space to picture how this should look. When you've envisioned the full schema, ping me."* |
 
 ---
 
