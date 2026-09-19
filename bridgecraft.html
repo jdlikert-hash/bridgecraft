@@ -356,6 +356,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                     </div>
                     <div class="flex items-center space-x-2.5">
+                        <button type="button" onclick="event.stopPropagation(); toggleAllLevel2Probes();" id="btn-toggle-all-probes" class="text-xs px-2.5 py-1 rounded-full border border-indigo-500/40 bg-indigo-950/40 text-indigo-300 hover:bg-indigo-900/60 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Toggle conversational diagnostic questions for all Core Probes">
+                            <span>💬</span> <span>Diagnostic Probes</span>
+                        </button>
                         <span id="level2-badge" class="text-xs px-2.5 py-0.5 rounded-full border border-slate-600 bg-slate-900/60 text-slate-400 font-medium">Optional</span>
                         <span id="level2-chevron" class="text-slate-400 transform transition-transform duration-200 text-base leading-none">▸</span>
                     </div>
@@ -363,8 +366,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
                 <div id="level2-content" class="px-5 sm:px-6 pb-6 pt-1 border-t border-slate-700/60">
                     <div class="mb-5">
-                        <h3 class="text-sm font-semibold text-slate-300">Psychological Motivator</h3>
-                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">What underlying hunger is driving their urgency right now?</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-sm font-semibold text-slate-300">Psychological Motivator</h3>
+                            <button type="button" onclick="toggleCategoryProbes('motivator')" id="btn-probe-toggle-motivator" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
+                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-motivator">▾</span>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3 italic">What underlying hunger is driving their urgency right now?</p>
+                        <div id="probes-drawer-motivator" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Psychological Motivator">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Wins" role="radio" aria-checked="false" title="Immediate Payoff &amp; Concrete Wins">Status / Wins</button>
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Respect" role="radio" aria-checked="false" title="Recognition &amp; Moral Principles">Status / Respect</button>
@@ -376,8 +385,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
 
                     <div class="border-t border-slate-700/50 pt-5 mt-5">
-                        <h3 class="text-sm font-semibold text-slate-300">Acute Stressor</h3>
-                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">What condition triggered or continues to drain their patience?</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-sm font-semibold text-slate-300">Acute Stressor</h3>
+                            <button type="button" onclick="toggleCategoryProbes('stressor')" id="btn-probe-toggle-stressor" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
+                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-stressor">▾</span>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3 italic">What condition triggered or continues to drain their patience?</p>
+                        <div id="probes-drawer-stressor" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Acute Stressor">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Lack of Time" role="radio" aria-checked="false" title="Shifting Schedules &amp; Deadlines">Lack of Time</button>
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Loss of Control" role="radio" aria-checked="false" title="Inaction &amp; Bureaucracy">Loss of Control</button>
@@ -387,8 +402,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
 
                     <div class="border-t border-slate-700/50 pt-5 mt-5">
-                        <h3 class="text-sm font-semibold text-slate-300">Conflict Stance</h3>
-                        <p class="text-xs text-slate-400 mb-3 mt-1 italic">Default reaction when cornered or stressed on a bridge call / Slack.</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-sm font-semibold text-slate-300">Conflict Stance</h3>
+                            <button type="button" onclick="toggleCategoryProbes('conflict')" id="btn-probe-toggle-conflict" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
+                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-conflict">▾</span>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3 italic">Default reaction when cornered or stressed on a bridge call / Slack.</p>
+                        <div id="probes-drawer-conflict" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Conflict Stance">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Avoids / Deflects" role="radio" aria-checked="false" title="Appeases &amp; over-concedes to avoid clash">Avoids / Deflects</button>
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Dominates / Escalates" role="radio" aria-checked="false" title="Forces outcome aggressively &amp; attacks">Dominates / Escalates</button>
@@ -1844,6 +1865,108 @@ employer, client, or third party. See LICENSE file for full legal terms.
             }
         };
 
+        // ================= LEVEL 2 DIAGNOSTIC PROBES (CONVERSATIONAL HEURISTICS) =================
+        const DIAGNOSTIC_PROBES = {
+            motivator: {
+                categoryTitle: "Psychological Motivator",
+                generalProbe: "What is your fastest win here, and what outcome matters most right now to turn this situation around?",
+                items: {
+                    "Status / Wins": {
+                        question: "If we could hand you one concrete win in the next 30 minutes, what would move the needle fastest?",
+                        listenFor: "Immediate bottom-line outcomes, visible momentum, skipping bureaucracy.",
+                        archetype: "Promoter"
+                    },
+                    "Status / Respect": {
+                        question: "From a principles and standards standpoint, what is the non-negotiable line we cannot cross here?",
+                        listenFor: "Adherence to commitments, ethics, quality standards, recognition of integrity.",
+                        archetype: "Persister"
+                    },
+                    "Security / Data": {
+                        question: "What specific telemetry, timeline metrics, or logs do you need before you feel comfortable moving forward?",
+                        listenFor: "Chronological facts, percentages, exact error rates, structured methodology.",
+                        archetype: "Thinker"
+                    },
+                    "Connection / Approval": {
+                        question: "How is the team holding up through this, and who needs our support the most right now?",
+                        listenFor: "Concern for people, interpersonal harmony, team morale, feeling safe and appreciated.",
+                        archetype: "Harmonizer"
+                    },
+                    "Novelty / Fun": {
+                        question: "If we tossed out the standard playbook for a second, what's a creative or unconventional angle we could try?",
+                        listenFor: "Frustration with bureaucracy, desire for fresh angles, spontaneous brainstorm, fun.",
+                        archetype: "Rebel"
+                    },
+                    "Security / Space": {
+                        question: "Would you prefer some uninterrupted time offline to digest this before we regroup?",
+                        listenFor: "Low verbal stimulus, desire for solitude, quiet reflection without immediate pressure.",
+                        archetype: "Imaginer"
+                    }
+                }
+            },
+            stressor: {
+                categoryTitle: "Acute Stressor",
+                generalProbe: "What is creating the most acute friction or pressure for you on this right now?",
+                items: {
+                    "Lack of Time": {
+                        question: "Are we being rushed into a premature move without enough runway to verify the telemetry?",
+                        listenFor: "Anxiety over arbitrary deadlines, fear of sloppy execution, feeling rushed.",
+                        archetype: "Thinker / Persister"
+                    },
+                    "Loss of Control": {
+                        question: "Does it feel like decisions are being made around you without your direct authority or sign-off?",
+                        listenFor: "Anger at corporate bureaucracy, feeling managed, waiting on slow approvals.",
+                        archetype: "Promoter / Persister"
+                    },
+                    "Social Friction": {
+                        question: "Has the temperature or tone between teams gotten too combative for productive work?",
+                        listenFor: "Distress from shouting, finger-pointing, aggressive Slack messages, hostility.",
+                        archetype: "Harmonizer / Imaginer"
+                    },
+                    "Resource Scarcity": {
+                        question: "Are you hitting a brick wall with tooling, access permissions, or staffing constraints?",
+                        listenFor: "Complaints about lack of tools, missing permissions, understaffing, broken infrastructure.",
+                        archetype: "Rebel / Thinker"
+                    }
+                }
+            },
+            conflict: {
+                categoryTitle: "Conflict Stance",
+                generalProbe: "When this team hits acute pressure, what does the breakdown in communication usually look like?",
+                items: {
+                    "Avoids / Deflects": {
+                        question: "You seem hesitant to disagree—are you agreeing just to keep the peace, or do you truly agree with this plan?",
+                        listenFor: "Over-conceding, reluctant to push back, nervous laughter, avoiding confrontation.",
+                        archetype: "Harmonizer"
+                    },
+                    "Dominates / Escalates": {
+                        question: "Are you looking to take executive command of this right now, or can we align on the immediate operational play?",
+                        listenFor: "Barking orders, interrupting, threatening executive escalation ('taking this to the VP').",
+                        archetype: "Promoter"
+                    },
+                    "Dominates / Rigid": {
+                        question: "What specific policy or standard do you feel is being compromised here?",
+                        listenFor: "Preaching, moralizing, quoting policy, insisting on rigid protocol adherence.",
+                        archetype: "Persister"
+                    },
+                    "Logics / Over-explains": {
+                        question: "Are we getting lost in technical weeds when we need an immediate mitigation decision?",
+                        listenFor: "Lengthy pedantic monologues, nitpicking edge-case data while production is burning.",
+                        archetype: "Thinker"
+                    },
+                    "Withdraws": {
+                        question: "You've gone quiet on the bridge—what's your candid take on what was just proposed?",
+                        listenFor: "Camera off, mute on, monosyllabic replies ('fine', 'ok'), emotional detachment.",
+                        archetype: "Imaginer"
+                    },
+                    "Blames": {
+                        question: "Where do you think the system or process broke down before this landed on your plate?",
+                        listenFor: "Sarcastic remarks, eye-rolling, pointing fingers at other teams ('typical DevOps').",
+                        archetype: "Rebel"
+                    }
+                }
+            }
+        };
+
         const scoringEngine = {
             base: {
                 tempo: { "Fast / Urgent": ["promoter", "rebel"], "Measured / Deliberate": ["thinker", "persister", "imaginer"], "Variable / Emotional": ["harmonizer"] },
@@ -2499,8 +2622,168 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 }
 
                 checkLevel1Completion();
+                updateProbeCardsActiveState();
             });
         });
+
+        // ================= LEVEL 2 DIAGNOSTIC PROBE UX CONTROLS =================
+        function populateDiagnosticProbes() {
+            Object.entries(DIAGNOSTIC_PROBES).forEach(([catKey, catData]) => {
+                const drawer = document.getElementById(`probes-drawer-${catKey}`);
+                if (!drawer) return;
+
+                let html = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-indigo-950/40 rounded-lg p-2.5 border border-indigo-500/20 text-xs gap-2">
+                    <div class="flex items-start space-x-2">
+                        <span class="text-indigo-400 font-bold text-sm">🎯</span>
+                        <div>
+                            <span class="text-slate-400 uppercase tracking-wider font-bold text-[10px] block">Opening Conversational Probe:</span>
+                            <p class="text-slate-200 italic font-medium">"${escapeHtml(catData.generalProbe)}"</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] text-indigo-300 font-mono bg-indigo-900/50 px-2 py-0.5 rounded self-start sm:self-auto whitespace-nowrap">Click card to select chip</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+                `;
+
+                Object.entries(catData.items).forEach(([chipVal, item]) => {
+                    const isSel = selections[catKey] === chipVal;
+                    const safeChipVal = chipVal.replace(/'/g, "\\'");
+                    html += `
+                    <div onclick="selectChipFromProbe('${catKey}', '${safeChipVal}')" 
+                         data-category="${catKey}" 
+                         data-value="${escapeHtml(chipVal)}"
+                         class="probe-item-card ${isSel ? 'border-indigo-500 bg-indigo-950/50 ring-1 ring-indigo-400' : 'border-slate-700/80 bg-slate-900/90'} hover:bg-slate-800/90 border hover:border-indigo-500/50 rounded-lg p-2.5 cursor-pointer transition-all space-y-1.5 group shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-200 group-hover:text-white flex items-center space-x-1.5">
+                                <span class="probe-status-dot w-2 h-2 rounded-full ${isSel ? 'bg-indigo-400 ring-2 ring-indigo-400/30' : 'bg-slate-600 group-hover:bg-indigo-400'}"></span>
+                                <span>${escapeHtml(chipVal)}</span>
+                            </span>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 border border-slate-700 font-mono">${escapeHtml(item.archetype)}</span>
+                        </div>
+                        <p class="text-amber-300 font-medium italic text-[11px] leading-snug">"${escapeHtml(item.question)}"</p>
+                        <div class="text-[10px] text-slate-400 leading-tight">
+                            <span class="text-slate-500 font-semibold">Listen for:</span> ${escapeHtml(item.listenFor)}
+                        </div>
+                    </div>
+                    `;
+                });
+
+                html += `</div>`;
+                drawer.innerHTML = html;
+
+                // Also enrich chip tooltips
+                document.querySelectorAll(`.chip[data-category="${catKey}"]`).forEach(chip => {
+                    const val = chip.getAttribute('data-value');
+                    const item = catData.items[val];
+                    if (item) {
+                        chip.title = `💬 Probe: "${item.question}"\n(Listen for: ${item.listenFor})`;
+                    }
+                });
+            });
+        }
+
+        function updateProbeCardsActiveState() {
+            ['motivator', 'stressor', 'conflict'].forEach(cat => {
+                const activeVal = selections[cat];
+                document.querySelectorAll(`.probe-item-card[data-category="${cat}"]`).forEach(card => {
+                    const cardVal = card.getAttribute('data-value');
+                    const dot = card.querySelector('.probe-status-dot');
+                    if (activeVal && cardVal === activeVal) {
+                        card.classList.add('border-indigo-500', 'bg-indigo-950/50', 'ring-1', 'ring-indigo-400');
+                        card.classList.remove('border-slate-700/80', 'bg-slate-900/90');
+                        if (dot) dot.className = 'probe-status-dot w-2 h-2 rounded-full bg-indigo-400 ring-2 ring-indigo-400/30';
+                    } else {
+                        card.classList.remove('border-indigo-500', 'bg-indigo-950/50', 'ring-1', 'ring-indigo-400');
+                        card.classList.add('border-slate-700/80', 'bg-slate-900/90');
+                        if (dot) dot.className = 'probe-status-dot w-2 h-2 rounded-full bg-slate-600 group-hover:bg-indigo-400';
+                    }
+                });
+            });
+        }
+
+        function selectChipFromProbe(catKey, chipVal) {
+            const chip = document.querySelector(`.chip[data-category="${catKey}"][data-value="${chipVal}"]`);
+            if (chip) {
+                chip.click();
+            }
+        }
+
+        function toggleCategoryProbes(catKey) {
+            const drawer = document.getElementById(`probes-drawer-${catKey}`);
+            const btn = document.getElementById(`btn-probe-toggle-${catKey}`);
+            const chevron = document.getElementById(`probe-chevron-${catKey}`);
+            if (!drawer) return;
+            const isHidden = drawer.classList.contains('hidden');
+            if (isHidden) {
+                drawer.classList.remove('hidden');
+                if (btn) {
+                    btn.classList.add('bg-indigo-600/40', 'border-indigo-400/60', 'text-white');
+                    btn.classList.remove('bg-slate-900/60', 'text-indigo-300');
+                }
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+            } else {
+                drawer.classList.add('hidden');
+                if (btn) {
+                    btn.classList.remove('bg-indigo-600/40', 'border-indigo-400/60', 'text-white');
+                    btn.classList.add('bg-slate-900/60', 'text-indigo-300');
+                }
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+            updateAllProbesButtonState();
+        }
+
+        function toggleAllLevel2Probes() {
+            const content = document.getElementById('level2-content');
+            if (content && !content.classList.contains('expanded')) {
+                toggleLevel2(true);
+            }
+            const categories = ['motivator', 'stressor', 'conflict'];
+            const anyHidden = categories.some(cat => {
+                const d = document.getElementById(`probes-drawer-${cat}`);
+                return d && d.classList.contains('hidden');
+            });
+
+            categories.forEach(cat => {
+                const drawer = document.getElementById(`probes-drawer-${cat}`);
+                const btn = document.getElementById(`btn-probe-toggle-${cat}`);
+                const chevron = document.getElementById(`probe-chevron-${cat}`);
+                if (!drawer) return;
+                if (anyHidden) {
+                    drawer.classList.remove('hidden');
+                    if (btn) {
+                        btn.classList.add('bg-indigo-600/40', 'border-indigo-400/60', 'text-white');
+                        btn.classList.remove('bg-slate-900/60', 'text-indigo-300');
+                    }
+                    if (chevron) chevron.style.transform = 'rotate(180deg)';
+                } else {
+                    drawer.classList.add('hidden');
+                    if (btn) {
+                        btn.classList.remove('bg-indigo-600/40', 'border-indigo-400/60', 'text-white');
+                        btn.classList.add('bg-slate-900/60', 'text-indigo-300');
+                    }
+                    if (chevron) chevron.style.transform = 'rotate(0deg)';
+                }
+            });
+            updateAllProbesButtonState();
+        }
+
+        function updateAllProbesButtonState() {
+            const categories = ['motivator', 'stressor', 'conflict'];
+            const allOpen = categories.every(cat => {
+                const d = document.getElementById(`probes-drawer-${cat}`);
+                return d && !d.classList.contains('hidden');
+            });
+            const masterBtn = document.getElementById('btn-toggle-all-probes');
+            if (!masterBtn) return;
+            if (allOpen) {
+                masterBtn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-400');
+                masterBtn.classList.remove('bg-indigo-950/40', 'text-indigo-300');
+            } else {
+                masterBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-400');
+                masterBtn.classList.add('bg-indigo-950/40', 'text-indigo-300');
+            }
+        }
 
         function toggleLevel2(forceExpand) {
             const content = document.getElementById('level2-content');
@@ -2940,6 +3223,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 btn.setAttribute('aria-checked', 'false');
             });
             toggleLevel2(false);
+            updateProbeCardsActiveState();
             document.getElementById('results-card').classList.add('hidden');
             document.getElementById('btn-export').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4247,6 +4531,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             loadCustomPlaybooks();
             loadDossier();
             setDomainLens(currentLens);
+            populateDiagnosticProbes();
         });
 
         // Secret offline export hotkey for Jack: Ctrl+Shift+E
