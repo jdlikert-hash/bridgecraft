@@ -85,16 +85,16 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ---
 
-## 5. Four Operational Frames & Calming Aesthetic Themes
+## 5. Four Operational Frames & Tactical Domains
 
-BridgeCraft provides four specialized operational frames ("lenses"), each featuring a distinct, calming dark-mode aesthetic, tailored observational cues, and domain-specific action templates:
+BridgeCraft provides four specialized operational frames ("lenses"), each featuring tailored observational cues, specialized communication channels, and domain-specific action templates:
 
-| Operational Lens | Psychological Atmosphere | Calming Palette | Stakes & Core Use Case | Primary Artifact / Script |
-| :--- | :--- | :--- | :--- | :--- |
-| **🏢 IT Operations & Incident Command** (`it_ops`) | Focused, Tactical, Stabilizing | Deep Obsidian & Slate (`#0f172a`, `#1e293b`) with Electric Indigo & Cyan | Sev-1 / P1 outages, production downtime, SRE on-call rotations, Slack incident channels | Incident War Room Status Updates & Telemetry Isolation Scripts |
-| **💼 Customer Success & Enterprise CRM** (`crm_sales`) | Diplomatic, High-EQ, Reassuring | Midnight Navy (`#0a1128`, `#162447`) with Soft Coral & Warm Amber | Furious Sales VPs, contract renewal churn risks, SLA breach executive escalations | Executive Account Save Email & Partnership Alignment Memos |
-| **💳 Banking Hardship & Loss Mitigation** (`financial_hardship`) | Dignified, Respectful, Restoring Agency | Warm Espresso Charcoal (`#18181b`, `#27272a`) with Muted Sage & Soft Gold | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
-| **🩺 Crisis Counseling & Mental Health** (`counseling_crisis`) | Gentle, Grounding, Non-Stimulating | Deep Twilight Violet (`#150d24`, `#281945`) with Soft Lavender & Calm Teal | Acute emotional dysregulation, panic hotline intake, trauma-informed triage | Somatic Grounding Protocol & Structured Reality Testing Note |
+| Operational Lens | Primary Operating Channels | Operational Stakes & Core Use Case | Primary Artifact / Script |
+| :--- | :--- | :--- | :--- |
+| **🏢 IT Operations & Incident Command** (`it_ops`) | Voice incident bridges, Slack/Teams incident channels, on-call paging, status pages | Sev-1 / P1 outages, production downtime, SRE on-call rotations, cross-functional bridge coordination | Incident War Room Status Updates & Telemetry Isolation Scripts |
+| **💼 Customer Success & Enterprise CRM** (`crm_sales`) | Executive video calls (Zoom/Meet), high-priority email threads, QBRs, customer save meetings | Furious Sales VPs, contract renewal churn risks, SLA breach executive escalations | Executive Account Save Email & Partnership Alignment Memos |
+| **💳 Banking Hardship & Loss Mitigation** (`financial_hardship`) | Inbound phone queues, loss mitigation intake, borrower desk interviews, certified mail notices | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
+| **🩺 Crisis Counseling & Mental Health** (`counseling_crisis`) | Crisis hotlines, SMS/chat triage portals, walk-in intake, clinical debriefs | Acute emotional dysregulation, panic hotline intake, trauma-informed triage | Somatic Grounding Protocol & Structured Reality Testing Note |
 
 ### URL Deep-Linking & Standalone Deployment:
 - **Instant Domain Switching:** Click any lens on the top Operational Lens strip to morph the entire application in real time.
