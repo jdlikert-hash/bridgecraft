@@ -93,7 +93,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 | :--- | :--- | :--- | :--- | :--- |
 | **🏢 IT Operations & Incident Command** (`it_ops`) | Focused, Tactical, Stabilizing | Deep Obsidian & Slate (`#0f172a`, `#1e293b`) with Electric Indigo & Cyan | Sev-1 / P1 outages, production downtime, SRE on-call rotations, Slack incident channels | Incident War Room Status Updates & Telemetry Isolation Scripts |
 | **💼 Customer Success & Enterprise CRM** (`crm_sales`) | Diplomatic, High-EQ, Reassuring | Midnight Navy (`#0a1128`, `#162447`) with Soft Coral & Warm Amber | Furious Sales VPs, contract renewal churn risks, SLA breach executive escalations | Executive Account Save Email & Partnership Alignment Memos |
-| **💳 Financial Hardship & Loan Workout** (`financial_hardship`) | Dignified, Respectful, Restoring Agency | Warm Espresso Charcoal (`#18181b`, `#27272a`) with Muted Sage & Soft Gold | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
+| **💳 Banking Hardship & Loss Mitigation** (`financial_hardship`) | Dignified, Respectful, Restoring Agency | Warm Espresso Charcoal (`#18181b`, `#27272a`) with Muted Sage & Soft Gold | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
 | **🩺 Crisis Counseling & Mental Health** (`counseling_crisis`) | Gentle, Grounding, Non-Stimulating | Deep Twilight Violet (`#150d24`, `#281945`) with Soft Lavender & Calm Teal | Acute emotional dysregulation, panic hotline intake, trauma-informed triage | Somatic Grounding Protocol & Structured Reality Testing Note |
 
 ### URL Deep-Linking & Standalone Deployment:
@@ -101,7 +101,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 - **Deep-Linking Support:** Directly bookmark or link your domain using query parameters:
   - `?lens=it` or `?lens=it_ops` (IT Operations)
   - `?lens=crm` or `?lens=crm_sales` (Customer Success & CRM)
-  - `?lens=banking` or `?lens=financial_hardship` (Financial Hardship & Banking)
+  - `?lens=banking` or `?lens=financial_hardship` (Banking Hardship & Loss Mitigation)
   - `?lens=counseling` or `?lens=counseling_crisis` (Crisis Counseling & Mental Health)
 - **Standalone Domain App Export:** Click **Export Domain App** in the header to download a zero-dependency single HTML file pre-configured and locked to that specific domain for offline team distribution.
 
@@ -128,7 +128,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
    - Read the **Incident Tactical Playbook ("Do's & Don'ts")** and copyable Slack status updates.
    - Read the **Frontline Strategy** and **Management Insight**.
 7. **Save & Export:**
-   - Click **Save to Archive** to persist the card into the multi-observer Field Archive.
+   - Click **Save to Archive** to persist the observation into the multi-observer Field Archive.
    - Click **Export Playbook (.MD)** to download a structured incident debrief markdown report.
 
 ---
@@ -136,8 +136,8 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 ## 7. Application Architecture & Navigation
 
 1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
-2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per person. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
-3. **The Codex & Playbooks:** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
+2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per stakeholder. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
+3. **The Codex (Tactical Battlecards):** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Custom battlecards directly power live Incident Playbooks calibrated on the Active Console. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
 4. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 
 ---
