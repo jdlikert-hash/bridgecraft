@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BridgeCraft — Official Visual UI Tour & Interface Reference</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+    @media print {
+      @page { margin: 12mm; size: A4 portrait; }
+      body { background: #ffffff !important; color: #0f172a !important; padding: 0 !important; }
+      .print-dark { color: #0f172a !important; }
+      .print-muted { color: #334155 !important; }
+      .print-heading-1 { color: #0369a1 !important; }
+      .print-heading-2 { color: #047857 !important; }
+      .print-heading-3 { color: #6d28d9 !important; }
+      .print-heading-4 { color: #b45309 !important; }
+      .print-heading-5 { color: #4338ca !important; }
+      .print-heading-6 { color: #be123c !important; }
+      .section-card { break-inside: avoid; page-break-inside: avoid; page-break-after: always; padding-top: 10px; }
+      .section-card:last-of-type { page-break-after: auto; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-6 md:p-12">
+  <div class="max-w-5xl mx-auto space-y-12">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 pb-8">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">Official Interface Reference</span>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">BridgeCraft — Visual UI Tour & Architecture Reference</h1>
+          <p class="text-slate-400 mt-2 text-sm md:text-base">Comprehensive visual layout and pixel-perfect screenshots of the tactical de-escalation console.</p>
+        </div>
+        <button onclick="window.print()" class="no-print px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-semibold shadow transition-colors flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          Export as PDF (Ctrl+P)
+        </button>
+      </div>
+      <div class="mt-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs md:text-sm">
+        <strong>NotebookLM Note:</strong> Upload this document as a PDF to Google NotebookLM to anchor its multimodal video and audio generation engines on real screenshots rather than synthetic approximations.
+      </div>
+    </header>
+
+    <!-- Screen 1 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-cyan-400 print-heading-1">1. Active Console — Level 2 Diagnostic Probes & Questions</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/01_active_console_diagnostic_probes.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        The core triage engine featuring Level 1 baseline indicators (Speech Tempo, Focus, Posture) and Level 2 distress probes (Psychological Motivator, Acute Stressor, Conflict Stance). Each probe includes an expandable <em>Diagnostic Questions</em> helper drawer offering subtle, conversational probes responders can ask live on bridge calls.
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/01_active_console_diagnostic_probes.png" alt="Active Console with Diagnostic Probes" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">Motivator Drawer:</strong> "What is your fastest win here?", "What standard must we hold?"</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Stressor Drawer:</strong> "What is breaking our momentum?", "Where is the biggest unknown?"</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Conflict Stance:</strong> "Whose call is this?", "What's the exact procedure we violated?"</li>
+      </ul>
+    </section>
+
+    <!-- Screen 2 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-emerald-400 print-heading-2">2. Calibrated Tactical Incident Playbook</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/02_calibrated_incident_playbook.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        Rendered in under 50ms upon clicking <em>Calibrate Incident Playbook</em>. Features the automatic DISC synthesis badge, psychological diagnosis, tailored "Say This / Never Say This" tactical scripts, and 1-click copyable Slack/Voice status updates.
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/02_calibrated_incident_playbook.png" alt="Calibrated Incident Playbook" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">DISC Leadership Alignment:</strong> High-D / High-C direct synthesis badge.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">De-Escalation Scripts:</strong> Proven green-light phrases vs fatal red-light triggers.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Action Bar:</strong> <em>Save to Archive</em>, <em>Export Playbook (.MD)</em>, and <em>Edit Battlecard</em>.</li>
+      </ul>
+    </section>
+
+    <!-- Screen 3 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-violet-400 print-heading-3">3. Adaptive Cognitive Framing — Speaking Their Mental Dialect</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/03_adaptive_cognitive_framing.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        Section 4 on the Active Console. Translates behavioral cues into sensory and cognitive processing styles (Visual, Auditory, Kinesthetic, Digital Logic, Evaluative, Velocity). Provides real-time linguistic markers and verbal alignment scripts.
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/03_adaptive_cognitive_framing.png" alt="Adaptive Cognitive Framing" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">Linguistic Markers:</strong> Detects whether they process in visual imagery, auditory resonance, or action verbs.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Ethical Standard:</strong> Emphasizes operational resonance over interpersonal manipulation.</li>
+      </ul>
+    </section>
+
+    <!-- Screen 4 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-amber-400 print-heading-4">4. The Field Archive — Stakeholder Dossiers & Rehearsal Sandbox</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/04_field_archive_stakeholder_dossier.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        Persistent multi-observer library tracking individual stakeholders across outage calls and 1-on-1s. Displays consensus channel, situational adaptations, known hot buttons, and the 1-click <strong>[🎭 Rehearsal Sandbox (.MD)]</strong> export button for external AI roleplay.
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/04_field_archive_stakeholder_dossier.png" alt="Field Archive Stakeholder Dossier" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">Consensus Engine:</strong> 100% Base Consensus across multiple observations.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Rehearsal Sandbox:</strong> Generates air-gapped markdown file for external LLM ingestion.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Merge & Aliases:</strong> 1-click consolidation for misspellings and role aliases.</li>
+      </ul>
+    </section>
+
+    <!-- Screen 5 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-indigo-400 print-heading-5">5. 1-on-1 Coaching — Interactive Skill-Will Matrix & Task Tracker</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/05_coaching_skill_will_matrix.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        Longitudinal coaching workspace for engineering managers and incident commanders. Allows teams to log discrete work items, evaluate situational Skill and Will levels, and view them dynamically mapped on an interactive SVG 2x2 matrix (Guide, Delegate, Direct, Excite).
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/05_coaching_skill_will_matrix.png" alt="1-on-1 Coaching Console" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">SVG 2x2 Matrix:</strong> Plots tasks as interactive numeric badges in real time.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Task Tracker:</strong> Manages task status, category tags, and historical notes.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Offline Local Storage:</strong> Zero cloud footprint; persists completely in browser.</li>
+      </ul>
+    </section>
+
+    <!-- Screen 6 -->
+    <section class="space-y-4 section-card">
+      <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+        <h2 class="text-xl font-bold text-rose-400 print-heading-6">6. Tailored Coaching Strategies — Synthesizing Matrix with PCM</h2>
+        <span class="text-xs font-mono text-slate-400 print-muted">File: screenshots/06_coaching_marcus_quadrant_strategy.png</span>
+      </div>
+      <p class="text-slate-300 print-dark text-sm leading-relaxed">
+        The bridge between task delegation and psychological calibration. Automatically synthesizes the quadrant leadership stance (Direct, Guide, Excite, Delegate) with the stakeholder's dominant cognitive dialect, generating custom management scripts.
+      </p>
+      <div class="rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl bg-slate-900">
+        <img src="screenshots/06_coaching_marcus_quadrant_strategy.png" alt="Marcus Vance Tailored Coaching Strategy" class="w-full h-auto object-cover">
+      </div>
+      <ul class="text-xs text-slate-400 print-muted grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+        <li>&bull; <strong class="text-slate-200 print-dark">Synthesis Engine:</strong> Combines "Guide (High Will/Low Skill)" with "Thinker" logic.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Operational Script:</strong> Provides exact coaching talk tracks tailored to his mental dialect.</li>
+        <li>&bull; <strong class="text-slate-200 print-dark">Direct Rehearsal Export:</strong> Includes <em>Rehearsal Sandbox (.MD)</em> button right in the header.</li>
+      </ul>
+    </section>
+
+    <footer class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+      BridgeCraft &copy; 2026 Jack Likert. Built with Tailwind CSS & Vanilla JavaScript. Zero Cloud Footprint.
+    </footer>
+
+  </div>
+</body>
+</html>

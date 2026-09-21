@@ -17,7 +17,7 @@ This document is engineered to serve as both an exhaustive operational field man
 - **Chapter 5: Adaptive Cognitive Framing — Speaking Their Exact Mental Dialect**
 - **Chapter 6: Stakeholder Intelligence & Field Dialect Snippets (Hot Buttons & Quotes)**
 - **Chapter 7: 1-on-1 Coaching Console & The Skill-Will Quadrant Matrix**
-- **Chapter 8: Tactical De-Escalation Rehearsal Sandbox — AI Flight Simulator**
+- **Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Air-Gapped AI Handoff & Roleplay**
 - **Chapter 9: The Field Archive — Multi-Observer Intelligence & Situational Adaptation**
 - **Chapter 10: The Codex — Customizing Tactical Battlecards & Domain Playbooks**
 - **Chapter 11: Four Operational Frames — IT Ops, CRM Sales, Financial Hardship, and Crisis**
@@ -88,6 +88,12 @@ BridgeCraft is engineered under a strict **Zero-Cloud Privacy Architecture**:
 - **Zero Network Transmission:** No names, stakeholder notes, talk tracks, or task ratings ever leave your machine. No telemetry servers, external APIs, or analytics trackers are used.
 - **Local Storage Persistence:** All dossiers, observations, custom playbooks, and coaching tasks are stored exclusively in your browser's private `localStorage`.
 - **Zero Dependencies:** The entire application runs out of a single file (`bridgecraft.html` or `index.html`) using modern Tailwind CSS and vanilla JavaScript. It runs completely offline—even during total network blackouts.
+
+### 2.2 Complete Disconnection from AI (The Air-Gap Principle)
+> [!IMPORTANT]
+> **CRITICAL: BRIDGECRAFT HAS NO BUILT-IN AI CHATBOT OR API CONNECTION**  
+> BridgeCraft contains **no embedded Large Language Model (LLM), no integrated AI chat window, and makes zero API calls to OpenAI, Google, Anthropic, or any cloud provider**.  
+> The application is strictly an **offline behavioral profiler and data compiler**. To protect confidentiality and keep the tool 100% free and secure, BridgeCraft intentionally uses an **air-gapped workflow**: it compiles a structured rehearsal dossier (`.md`), downloads it to your computer, and you manually decide whether and where to upload that document (such as into your own private Google NotebookLM or Copilot account). BridgeCraft itself never communicates with an AI.
 
 ### 2.2 Navigation Overview
 The top header provides instant access to all core operational modes:
@@ -292,23 +298,46 @@ HIGH WILL ───+────────────────────
 
 ---
 
-## 🎭 Chapter 8: Tactical De-Escalation Rehearsal Sandbox — AI Flight Simulator
+## 🎭 Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Air-Gapped AI Handoff & Roleplay
 
 ### 8.1 The Problem It Solves
 You are about to enter a high-stakes bridge call with a furious executive who blames your team for an outage. How do you practice your de-escalation scripts without burning real relationship capital?
 
-BridgeCraft includes a built-in **Tactical De-Escalation Rehearsal Sandbox exporter**. With 1 click, you generate a comprehensive rehearsal dossier formatted specifically for **Google NotebookLM, Microsoft Copilot, ChatGPT, or Claude**.
+BridgeCraft includes a built-in **Tactical De-Escalation Rehearsal Sandbox exporter**. With 1 click, you generate a comprehensive rehearsal dossier formatted specifically for external roleplay in **Google NotebookLM, Microsoft Copilot, ChatGPT, or Claude**.
 
-### 8.2 How to Export and Run a Simulation Drill
-1. In the **Field Archive** or the **1-on-1 Coaching** header, click **`[🎭 Rehearsal Sandbox (.MD)]`**.
-2. A customized markdown file (`[name]_rehearsal_sandbox_[date].md`) is downloaded immediately.
-3. Open **Google NotebookLM** (or your preferred LLM), create a new notebook, and upload the `.md` file as a source.
-4. Copy and paste the embedded **AI Simulator Roleplay Directive** into the chat box:
-   > *"You are roleplaying as Marcus Vance in an operational communication rehearsal drill. Follow all persona rules in the attached document. Begin the drill by challenging me on the current outage status."*
-5. Run a live de-escalation drill! The AI will adopt their exact cognitive framing dialect, challenge you with their known hot buttons, demand resolution based on their core motivator, and de-escalate only when you use their verified Green Light scripts.
-
-### 8.3 The Anti-"Cloning" Ethical Standard
+### 8.2 Architectural Reality: The Air-Gapped Handoff (No Built-in Chatbot)
 > [!IMPORTANT]
+> **CRITICAL ARCHITECTURAL DISTINCTION: BRIDGECRAFT HAS NO IN-APP AI CHAT**  
+> **BridgeCraft is NOT an AI chatbot and does NOT have a built-in interactive chat window.**  
+> There is no API connection to OpenAI, Google Gemini, or Anthropic within BridgeCraft itself. The application never sends your data across the internet.
+> 
+> Instead, BridgeCraft operates as an **air-gapped data compiler**. The rehearsal workflow is a deliberate, **manual 3-step handoff**:
+> 1. **Step 1 (Inside BridgeCraft):** You compile and download a structured `.md` file to your local computer.
+> 2. **Step 2 (Manual File Handoff):** You open a separate browser tab, navigate to your external AI tool of choice (e.g. Google NotebookLM, Microsoft Copilot, ChatGPT, or Claude), and manually upload the `.md` file.
+> 3. **Step 3 (Prompt Execution in External Tool):** You copy the ready-made System Prompt from the file and paste it into that external AI tool to begin your live rehearsal.
+
+```
++------------------------------------+         [ MANUAL HUMAN STEP ]         +-------------------------------------+
+|        INSIDE BRIDGECRAFT          |   ─────────────────────────────────>  |       EXTERNAL AI ENVIRONMENT       |
+| (100% Offline / No AI Integration) |   User manually moves .md file into   | (NotebookLM, Copilot, Claude, etc.) |
+|                                    |   their own private external AI tool  |                                     |
+|  1. Calibrate Profile & Tasks      |                                       |  3. Upload .md as a source          |
+|  2. Click "Rehearsal Sandbox (.MD)"|                                       |  4. Paste embedded System Prompt    |
+|  ==> Downloads file to laptop disk |                                       |  5. Conduct live voice/text roleplay|
++------------------------------------+                                       +-------------------------------------+
+```
+
+### 8.3 Step-by-Step Instructions for the Manual Simulation Drill
+1. **Export the File:** In the **Field Archive** or the **1-on-1 Coaching** header, click **`[🎭 Rehearsal Sandbox (.MD)]`**.
+2. **Locate Download:** A customized markdown file (`[name]_rehearsal_sandbox_[date].md`) is downloaded directly to your local computer's Downloads folder.
+3. **Open Your External AI Tool:** In a new browser window, open your preferred LLM (e.g., [Google NotebookLM](https://notebooklm.google.com/), Microsoft Copilot, or Claude).
+4. **Upload the Source:** In NotebookLM, create a new notebook and click **Add Source &rarr; Upload File**, selecting the downloaded `.md` file from your computer.
+5. **Paste the Directive:** Open the `.md` file in any text editor, copy the fenced **AI Simulator Roleplay Directive** block, and paste it into the chat window:
+   > *"You are roleplaying as Marcus Vance in an operational communication rehearsal drill. Follow all persona rules in the attached document. Begin the drill by challenging me on the current outage status."*
+6. **Execute Live Drill:** The external AI will adopt their exact cognitive framing dialect, challenge you with their known hot buttons, demand resolution based on their core motivator, and de-escalate only when you use their verified Green Light scripts.
+
+### 8.4 The Anti-"Cloning" Ethical Standard
+> [!NOTE]
 > **Operational Flight Simulator vs. "Peer Cloning"**  
 > We must never describe this capability as "cloning our peers" or "surveillance." BridgeCraft is an **operational flight simulator**. Every exported rehearsal sandbox begins with an explicit ethical training notice:
 > 
