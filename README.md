@@ -1,7 +1,7 @@
 # BridgeCraft v2.0 — Strategic Field Manual & Architecture
 
 > **A tactical incident communication, de-escalation, and situational alignment console designed for frontline operators, client advocates, and people leaders across high-pressure environments.**  
-> *(Formerly titled: The Behavioral Profiler · See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
+> *(See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
 
 > 📖 **Comprehensive User Manual & Video Tutorial Guide:**  
 > For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** video and audio tutorial generation, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
@@ -11,9 +11,9 @@
 
 ## 1. Executive Summary
 
-When high-severity incidents, outages, or critical customer escalations strike, communication breakdown is almost always the true bottleneck. Engineers retreat into deep technical weeds, executives demand immediate binary answers, support agents absorb emotional heat, and incident commanders clash over priorities.
+High-pressure operations inevitably strain team coordination. When urgency is elevated, different stakeholders process information through distinct lenses—some require verified data and timelines, others demand rapid bottom-line summaries, and others focus on team consensus or risk avoidance. Misalignment across these communication styles creates unnecessary friction and operational delay.
 
-**BridgeCraft** is a lightweight, zero-dependency, field-ready web application designed to be kept open in a browser tab during operational triage. In under 45 seconds, an incident commander, support engineer, or manager can observe baseline cues, pinpoint an individual's psychological distress pattern, and receive immediate, actionable tactical scripts (what to say vs. what to avoid on voice bridges and Slack) to de-escalate friction and restore operational alignment.
+**BridgeCraft** serves as an interactive behavioral assessor designed to run alongside active workflows. By observing a few initial cues, operators can determine how a colleague, client, or leader processes urgency under stress and access tailored talk tracks (what to say and what to avoid) to keep discussions productive and aligned.
 
 ---
 
