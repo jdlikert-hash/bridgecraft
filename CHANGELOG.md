@@ -65,6 +65,7 @@ BridgeCraft 2.0 represents a comprehensive architectural leap from a single-purp
 - **Rebranded Platform:** Renamed from *The Behavioral Profiler* to **BridgeCraft: Tactical Incident Communication & De-Escalation Console**.
 - **Branding Assets:** Added custom dual-tower suspension bridge emblem and matching SVG favicon.
 - **Streamlined Navigation:** Removed redundant and static "Active Domain" badge from the lens strip.
+- **Terminology Shift (Assessor & Assessment):** Transitioned user-facing vocabulary from "profiler" and "profile" to "assessor" and "assessment" across UI controls, button labels, toasts, markdown exports, and documentation to emphasize objective, situational incident alignment over surveillance or labeling.
 - **Documentation Overhaul:** Engineered [BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md) and [README.md](README.md) for automated video and podcast generation.
 
 ---

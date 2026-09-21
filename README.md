@@ -19,7 +19,7 @@ When high-severity incidents, outages, or critical customer escalations strike, 
 
 ## 2. Core Psychological Engine: The Two-Tier Model
 
-The Profiler is built upon principles adapted from Dr. Taibi Kahler's **Process Communication Model (PCM)**—the framework famously utilized by NASA for astronaut crew selection and crisis de-escalation.
+The Assessor is built upon principles adapted from Dr. Taibi Kahler's **Process Communication Model (PCM)**—the framework famously utilized by NASA for astronaut crew selection and crisis de-escalation.
 
 Traditional personality frameworks (like MBTI or Big Five) are descriptive and static—they tell you who someone is on a relaxed Sunday morning. PCM is **dynamic and behavioral**—it models how an individual's communication channel shifts under acute stress.
 
@@ -173,7 +173,7 @@ BridgeCraft includes a zero-latency, private customization layer allowing teams 
 High-stakes communication is always personal. BridgeCraft allows users to attach bespoke intelligence to individual stakeholders in The Field Archive:
 * **Known Hot Buttons & Taboos:** Record sensitive triggers (e.g., *"Hates technical jargon"*, *"Stressed about Thursday board meeting"*, *"Needs direct VP commitments"*).
 * **Bespoke Personal Talk Tracks:** Record scenario-specific scripts with a Trigger, Custom Script ("Say This"), and Avoid notes.
-* **Active Console Auto-Surfacing:** Whenever a recognized stakeholder is profiled on the Active Console, an expandable **Stakeholder Intelligence Banner** auto-surfaces above the tactical playbook, presenting their hot buttons and tailored scripts in real time.
+* **Active Console Auto-Surfacing:** Whenever a recognized stakeholder is assessed on the Active Console, an expandable **Stakeholder Intelligence Banner** auto-surfaces above the tactical playbook, presenting their hot buttons and tailored scripts in real time.
 
 ### C. Commercial CRM & Sales Realignment
 The **CRM & Sales** operational lens provides authentic commercial and relationship talk tracks:
@@ -198,7 +198,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 3. **Situational Adaptation Analysis:** The Field Archive clusters the cards under the stakeholder and highlights:
    * **Base Consensus:** Percentage agreement on the stakeholder's baseline channel.
    * **Situational Adaptation:** Variations across environments (*"Promoter Phase during high-pressure outages vs. Thinker Phase during 1-on-1 reviews"*).
-4. **Typo & Alias Consolidation:** If different observers enter *"Sarah (VP)"*, *"Sarah"*, or make a typo like *"Sarha"*, the **Merge Duplicate Record** utility merges them into a single profile while retaining all historical observer logs.
+4. **Typo & Alias Consolidation:** If different observers enter *"Sarah (VP)"*, *"Sarah"*, or make a typo like *"Sarha"*, the **Merge Duplicate Record** utility merges them into a single assessment record while retaining all historical observer logs.
 
 ---
 
@@ -207,7 +207,7 @@ A premier use case for **BridgeCraft** is team training exercises. When training
 > *"The purpose of BridgeCraft is not manipulation, labeling, or pigeonholing. The purpose is empathy in high-friction environments."*
 
 1. **The Platinum Rule:** The Golden Rule says *"Treat others how you want to be treated."* The Platinum Rule of incident management says *"Treat others how they need to be treated to stay calm and functional."*
-2. **Profiles are States, Not Life Sentences:** A person's phase shifts depending on sleep, pressure, life circumstances, and organizational safety. Always calibrate the *interaction*, not just the *person*.
+2. **Assessments are States, Not Life Sentences:** A person's phase shifts depending on sleep, pressure, life circumstances, and organizational safety. Always assess the *interaction*, not just the *person*.
 3. **Strict Client-Side Privacy:** This application runs 100% locally in browser memory. No data, names, notes, or assessments are ever transmitted over a network.
 
 ---

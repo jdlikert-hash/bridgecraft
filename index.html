@@ -240,7 +240,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
     <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- VIEW 1: ACTIVE PROFILER -->
+        <!-- VIEW 1: ACTIVE ASSESSOR -->
         <div id="view-profiler" class="block space-y-8">
             
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700">
@@ -431,15 +431,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 </div>
             </div>
 
-            <!-- PROFILER ACTION BAR -->
+            <!-- ASSESSOR ACTION BAR -->
             <div class="flex flex-col sm:flex-row items-stretch gap-3">
                 <button onclick="analyzeProfile()" id="btn-calibrate" class="flex-grow theme-btn-accent font-bold py-3.5 sm:py-4 px-6 rounded-xl shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-0.5 text-base sm:text-lg flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     <span id="calibrate-btn-text">Calibrate Incident Playbook</span>
                 </button>
-                <button type="button" onclick="resetProfiler()" id="btn-calibrate-reset" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold py-3.5 sm:py-4 px-5 rounded-xl border border-slate-600 shadow-md transition duration-200 ease-in-out flex items-center justify-center text-sm sm:text-base flex-shrink-0 group" title="Clear all cues and reset profiler">
+                <button type="button" onclick="resetProfiler()" id="btn-calibrate-reset" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold py-3.5 sm:py-4 px-5 rounded-xl border border-slate-600 shadow-md transition duration-200 ease-in-out flex items-center justify-center text-sm sm:text-base flex-shrink-0 group" title="Clear all cues and reset assessor">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-slate-400 group-hover:text-slate-200 group-hover:rotate-[-45deg] transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <span>Reset Profiler</span>
+                    <span>Reset Assessor</span>
                 </button>
             </div>
 
@@ -459,9 +459,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Export Playbook (.MD)
                         </button>
-                        <button onclick="resetProfiler()" id="btn-results-reset" class="bg-slate-700/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center transition-colors border border-slate-600 shadow-sm" title="Clear profile and start a new incident analysis">
+                        <button onclick="resetProfiler()" id="btn-results-reset" class="bg-slate-700/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center transition-colors border border-slate-600 shadow-sm" title="Clear assessment and start a new incident analysis">
                             <svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            <span>Reset Profiler</span>
+                            <span>Reset Assessor</span>
                         </button>
                     </div>
                 </div>
@@ -631,7 +631,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <strong class="text-slate-100 text-sm">Stakeholder Intelligence</strong>
                             </div>
                             <p class="text-slate-300 leading-relaxed">
-                                In <strong>Field Archive</strong>, click <strong>Edit Intel</strong> on any person to record known <strong>Hot Buttons &amp; Taboos</strong> and <strong>Bespoke Talk Tracks</strong>. Next time you profile them, their personal intel auto-surfaces above the tactical playbook!
+                                In <strong>Field Archive</strong>, click <strong>Edit Intel</strong> on any person to record known <strong>Hot Buttons &amp; Taboos</strong> and <strong>Bespoke Talk Tracks</strong>. Next time you assess them, their personal intel auto-surfaces above the tactical playbook!
                             </p>
                             <span class="text-[11px] text-rose-400 font-semibold block pt-0.5">Tip: You can also click "+ Add Stakeholder Intel" directly from Active Console.</span>
                         </div>
@@ -722,7 +722,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
                         DISC is the universal language of corporate leadership (Dominance, Influence, Steadiness, Conscientiousness). 
-                        Rather than forcing a bloated 20-question questionnaire during an outage, the Profiler automatically synthesizes DISC from the observed PCM channels:
+                        Rather than forcing a bloated 20-question questionnaire during an outage, the Assessor automatically synthesizes DISC from the observed PCM channels:
                     </p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs">
                         <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"><strong>Thinker</strong> &rarr; High C (Analytical)</div>
@@ -895,7 +895,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <h3 class="text-lg font-bold text-white">Select a Stakeholder to Begin Coaching</h3>
                         <p class="text-sm text-slate-400 max-w-lg mx-auto">
-                            Profile a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
+                            Assess a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
                         </p>
                     </div>
                 </div>
@@ -2542,7 +2542,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             }, 3000);
         }
 
-        // ================= ACTIVE PROFILER CHIPS & OBSERVATION =================
+        // ================= ACTIVE ASSESSOR CHIPS & OBSERVATION =================
         function setObservationMode(mode) {
             observationMode = mode;
             localStorage.setItem('profiler_obs_mode', mode);
@@ -3023,7 +3023,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                         <span>Stakeholder Intelligence:</span>
                                         <span class="theme-accent-text">${escapeHtml(matchedSub.canonicalName)}</span>
                                     </h4>
-                                    <span class="text-[11px] text-slate-400">${escapeHtml(matchedSub.notes || 'Field Archive Profile')}</span>
+                                    <span class="text-[11px] text-slate-400">${escapeHtml(matchedSub.notes || 'Field Archive Assessment')}</span>
                                 </div>
                             </div>
                             <button onclick="openEditIntelModal('${matchedSub.id}')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-2.5 py-1 rounded flex items-center space-x-1 transition-colors self-start sm:self-auto shadow-sm">
@@ -3184,9 +3184,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
                             Back to Top
                         </button>
-                        <button type="button" onclick="resetProfiler()" class="theme-btn-accent font-semibold px-3.5 py-1.5 rounded-md shadow flex items-center transition-colors text-white" title="Clear profile and start a new incident analysis">
+                        <button type="button" onclick="resetProfiler()" class="theme-btn-accent font-semibold px-3.5 py-1.5 rounded-md shadow flex items-center transition-colors text-white" title="Clear assessment and start a new incident analysis">
                             <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            Start New Profile / Reset
+                            Start New Assessment / Reset
                         </button>
                     </div>
                 </div>
@@ -3251,7 +3251,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.getElementById('results-card').classList.add('hidden');
             document.getElementById('btn-export').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            showToast("Profiler reset to initial state.");
+            showToast("Assessor reset to initial state.");
         }
 
         // ================= ENHANCED MARKDOWN EXPORT =================
@@ -3413,7 +3413,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <h3 class="text-lg font-bold text-white">Your Field Archive is Empty</h3>
                         <p class="text-sm text-slate-400 max-w-md mx-auto">
-                            Profile someone on the Active Console and click <strong>Save to Archive</strong>, or load our simulated cross-domain drill data to explore multi-observer intelligence.
+                            Assess someone on the Active Console and click <strong>Save to Archive</strong>, or load our simulated cross-domain drill data to explore multi-observer intelligence.
                         </p>
                         <div class="pt-2">
                             <button onclick="loadSampleDrillData()" class="theme-btn-accent font-medium px-4 py-2 rounded-lg text-xs transition-colors shadow">
@@ -3495,7 +3495,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             </button>
                             <button onclick="profileSubjectInActive('${sub.canonicalName}')" class="theme-btn-accent text-xs px-2.5 py-1.5 rounded flex items-center transition-colors shadow-sm" title="Open this stakeholder on the Active Console to log an observation">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                Profile on Console
+                                Assess on Console
                             </button>
                             <button onclick="exportRehearsalSandbox('${sub.id}')" class="bg-amber-600/80 hover:bg-amber-500 text-white text-xs px-2.5 py-1.5 rounded flex items-center transition-colors shadow-sm" title="Export Tactical De-Escalation Rehearsal Sandbox (.MD) for roleplay simulation in NotebookLM, Copilot, or Claude">
                                 <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -3768,7 +3768,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             let md = `# Tactical De-Escalation Rehearsal Sandbox: ${sub.canonicalName}\n`;
             md += `**Operational Role / Context:** ${sub.notes || 'Cross-Functional Stakeholder'}\n`;
-            md += `**Observed Archetype Profile:** ${baseArch.name} Base / ${phaseArch.name} Phase (${baseArch.disc.badge} &rarr; ${phaseArch.disc.badge})\n`;
+            md += `**Observed Archetype Assessment:** ${baseArch.name} Base / ${phaseArch.name} Phase (${baseArch.disc.badge} &rarr; ${phaseArch.disc.badge})\n`;
             md += `**Date Compiled:** ${date}\n`;
             md += `**Data Points:** ${obsList.length} field observation(s), ${taskList.length} tracked operational task(s)\n\n`;
 
@@ -3871,7 +3871,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     const oPhase = archetypes[o.phaseKey]?.name || 'Unknown';
                     md += `### Observation ${idx + 1}: ${o.context || 'Field Encounter'} (${obsDate})\n`;
                     md += `- **Observer:** ${o.observerName || 'Lead Observer'} | **Domain Lens:** ${o.lensId || 'it_ops'}\n`;
-                    md += `- **Observed Profile:** ${oBase} Base / ${oPhase} Phase\n`;
+                    md += `- **Observed Assessment:** ${oBase} Base / ${oPhase} Phase\n`;
                     if (o.selections) {
                         md += `- **L1/L2 Behavioral Readout:** Tempo: ${o.selections.tempo || 'N/A'}, Focus: ${o.selections.focus || 'N/A'}, Motivator: ${o.selections.motivator || 'N/A'}, Stressor: ${o.selections.stressor || 'N/A'}, Conflict: ${o.selections.conflict || 'N/A'}\n`;
                     }
@@ -4226,7 +4226,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <h3 class="text-lg font-bold text-white">Select a Stakeholder to Begin Coaching</h3>
                         <p class="text-sm text-slate-400 max-w-lg mx-auto">
-                            Profile a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
+                            Assess a stakeholder on the <strong>Active Console</strong> and save an observation to the <strong>Field Archive</strong> first. Then select them here to track tasks, rate Skill & Will, and receive PCM-tailored coaching strategies.
                         </p>
                     </div>
                 `;
@@ -4269,7 +4269,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             let html = '';
 
-            // --- PCM Profile Summary Banner ---
+            // --- PCM Assessment Summary Banner ---
             html += `
             <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-700 space-y-2">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -4282,7 +4282,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <span>•</span>
                                 <span>${tasks.length} Task${tasks.length !== 1 ? 's' : ''}</span>
                                 <span>•</span>
-                                <span>Dominant Profile: <strong class="theme-accent-text">${topArch.name}</strong> (${topArch.disc.badge})</span>
+                                <span>Dominant Assessment: <strong class="theme-accent-text">${topArch.name}</strong> (${topArch.disc.badge})</span>
                             </div>
                         </div>
                     </div>
@@ -4396,7 +4396,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <div id="rate-task-form-${task.id}" class="hidden bg-slate-950/80 rounded-lg p-3 border border-indigo-500/30 space-y-3">
                                 <div class="flex items-center space-x-2 text-xs text-slate-400">
                                     <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                                    <span class="font-medium">Link to Profiler Observation:</span>
+                                    <span class="font-medium">Link to Assessor Observation:</span>
                                 </div>
                                 <select id="rate-obs-select-${task.id}" class="w-full bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded px-2 py-1.5">
                                     ${subObs.length === 0 ? '<option value="">No observations logged yet (General Assessment)</option>' : ''}

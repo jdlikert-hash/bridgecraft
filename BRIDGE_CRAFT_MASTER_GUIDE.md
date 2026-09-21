@@ -93,7 +93,7 @@ BridgeCraft is engineered under a strict **Zero-Cloud Privacy Architecture**:
 > [!IMPORTANT]
 > **CRITICAL: BRIDGECRAFT HAS NO BUILT-IN AI CHATBOT OR API CONNECTION**  
 > BridgeCraft contains **no embedded Large Language Model (LLM), no integrated AI chat window, and makes zero API calls to OpenAI, Google, Anthropic, or any cloud provider**.  
-> The application is strictly an **offline behavioral profiler and data compiler**. To protect confidentiality and keep the tool 100% free and secure, BridgeCraft intentionally uses an **air-gapped workflow**: it compiles a structured rehearsal dossier (`.md`), downloads it to your computer, and you manually decide whether and where to upload that document (such as into your own private Google NotebookLM or Copilot account). BridgeCraft itself never communicates with an AI.
+> The application is strictly an **offline behavioral assessor and data compiler**. To protect confidentiality and keep the tool 100% free and secure, BridgeCraft intentionally uses an **air-gapped workflow**: it compiles a structured rehearsal dossier (`.md`), downloads it to your computer, and you manually decide whether and where to upload that document (such as into your own private Google NotebookLM or Copilot account). BridgeCraft itself never communicates with an AI.
 
 ### 2.2 Navigation Overview
 The top header provides instant access to all core operational modes:
@@ -254,7 +254,7 @@ In the **Field Archive** tab, click **Edit Intel** on any stakeholder card to op
 ### 6.2 Where Intelligence Surfaces
 - **Active Console Banner:** The moment you type their name in the Active Console, an amber Stakeholder Intelligence Banner auto-surfaces above your playbook, displaying their hot buttons and custom talk tracks in real time.
 - **Field Archive Preview:** Renders red warning chips for Hot Buttons, amber italicized badges for Signature Quotes, and emerald script blocks for bespoke talk tracks.
-- **1-on-1 Coaching Console:** Displays dialect quotes directly beneath their profile summary banner.
+- **1-on-1 Coaching Console:** Displays dialect quotes directly beneath their assessment summary banner.
 
 ---
 
@@ -321,7 +321,7 @@ BridgeCraft includes a built-in **Tactical De-Escalation Rehearsal Sandbox expor
 |        INSIDE BRIDGECRAFT          |   ─────────────────────────────────>  |       EXTERNAL AI ENVIRONMENT       |
 | (100% Offline / No AI Integration) |   User manually moves .md file into   | (NotebookLM, Copilot, Claude, etc.) |
 |                                    |   their own private external AI tool  |                                     |
-|  1. Calibrate Profile & Tasks      |                                       |  3. Upload .md as a source          |
+|  1. Calibrate Assessment & Tasks   |                                       |  3. Upload .md as a source          |
 |  2. Click "Rehearsal Sandbox (.MD)"|                                       |  4. Paste embedded System Prompt    |
 |  ==> Downloads file to laptop disk |                                       |  5. Conduct live voice/text roleplay|
 +------------------------------------+                                       +-------------------------------------+
@@ -429,8 +429,8 @@ Directly bookmark or link your operational domain using URL query parameters:
 - In high-stress crisis management, the Golden Rule fails because a panicked Thinker needs data, while a stressed Harmonizer needs empathy. Giving data to the Harmonizer or empathy to the Thinker inflames the crisis.
 - **The Platinum Rule:** *"Treat others how they need to be treated to stay calm, functional, and aligned."*
 
-### 12.2 Profiles are States, Not Life Sentences
-Never use BridgeCraft to label or pigeonhole colleagues (*"Oh, Dave is just a Rebel"*). A person's Phase shifts based on sleep, psychological safety, acute stressors, and organizational pressure. **Always profile the interaction, not the human.**
+### 12.2 Assessments are States, Not Life Sentences
+Never use BridgeCraft to label or pigeonhole colleagues (*"Oh, Dave is just a Rebel"*). A person's Phase shifts based on sleep, psychological safety, acute stressors, and organizational pressure. **Always assess the interaction, not the human.**
 
 ### 12.3 Master FAQ & Troubleshooting
 
@@ -444,7 +444,7 @@ Never use BridgeCraft to label or pigeonhole colleagues (*"Oh, Dave is just a Re
 **A:** Frame it explicitly as **Tactical Empathy & Flight Simulation Training**. Explain that just as pilots use flight simulators to practice engine failures, incident responders use BridgeCraft to practice de-escalating tense conversations before joining real customer calls. Emphasize that all data is 100% private, client-side, and stored only on their local machine.
 
 **Q: Can I run this completely offline during an internet outage?**  
-**A:** Yes. BridgeCraft has zero external network calls, zero npm dependencies, and requires no backend server. You can double-click `bridgecraft.html` on a laptop with Wi-Fi turned off in airplane mode, and 100% of features—profiling, coaching, archive, battlecards, and exports—will function flawlessly.
+**A:** Yes. BridgeCraft has zero external network calls, zero npm dependencies, and requires no backend server. You can double-click `bridgecraft.html` on a laptop with Wi-Fi turned off in airplane mode, and 100% of features—assessing, coaching, archive, battlecards, and exports—will function flawlessly.
 
 ---
 
