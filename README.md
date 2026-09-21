@@ -1,10 +1,11 @@
-# BridgeCraft — Strategic Field Manual & Architecture
+# BridgeCraft v2.0 — Strategic Field Manual & Architecture
 
 > **A tactical incident communication, de-escalation, and situational alignment console designed for Incident Management, Technical Support, and Engineering Leadership.**  
-> *(Formerly titled: The Behavioral Profiler)*
+> *(Formerly titled: The Behavioral Profiler · See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
 
 > 📖 **Comprehensive User Manual & Video Tutorial Guide:**  
-> For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** video and audio tutorial generation, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.
+> For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** video and audio tutorial generation, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
+> 🖼️ **Visual UI Tour & Ground-Truth Reference:** See **[BridgeCraft_Visual_UI_Tour.pdf](docs/BridgeCraft_Visual_UI_Tour.pdf)**.
 
 ---
 

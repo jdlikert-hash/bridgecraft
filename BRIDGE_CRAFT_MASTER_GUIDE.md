@@ -2,7 +2,7 @@
 
 > **A Comprehensive, Chapter-by-Chapter Guide to Tactical Incident Communication, Applied Behavioral Science, Adaptive Cognitive Framing, and De-Escalation Rehearsals.**  
 > *Engineered for Incident Commanders, Engineering Leads, Customer Support Managers, and Cross-Functional Negotiators.*  
-> *Author: Jack Likert | Version: 2026 Production Edition*
+> *Author: Jack Likert | Version: 2.0.0 (Production Release)*
 
 ---
 
