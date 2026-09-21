@@ -3,8 +3,8 @@
 > **A tactical incident communication, de-escalation, and situational alignment console designed for frontline operators, client advocates, and people leaders across high-pressure environments.**  
 > *(See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
 
-> 📖 **Comprehensive User Manual & Video Tutorial Guide:**  
-> For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** video and audio tutorial generation, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
+> 📖 **Definitive Master Guide & Slide Deck Curriculum:**  
+> For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** slide deck creation, executive briefing synthesis, and feature walkthrough decks, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
 > 🖼️ **Visual UI Tour & Ground-Truth Reference:** See **[BridgeCraft_Visual_UI_Tour.pdf](docs/BridgeCraft_Visual_UI_Tour.pdf)**.
 
 ---
@@ -144,7 +144,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 7. **Save & Export:**
    - Click **Save to Archive** to persist the observation into the multi-observer Field Archive.
    - Click **Export Playbook (.MD)** to download a structured incident debrief markdown report.
-   - Click **Rehearsal Sandbox (.MD)** in Field Archive or 1-on-1 Coaching to compile an air-gapped rehearsal dossier for manual upload into external AI tools (NotebookLM, Copilot, ChatGPT).
+   - Click **Rehearsal Sandbox (.MD)** in Field Archive or 1-on-1 Coaching to compile a 100% client-side rehearsal dossier for manual upload into external AI tools (NotebookLM, Copilot, ChatGPT).
 
 ---
 
@@ -154,7 +154,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per stakeholder. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
 3. **The Codex (Tactical Battlecards):** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Custom battlecards directly power live Incident Playbooks calibrated on the Active Console. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
 4. **1-on-1 Coaching (Skill-Will Matrix & Task Tracker):** Longitudinal coaching matrix enabling managers and incident leads to track individual work assignments, assess situational Skill and Will levels, plot tasks on the interactive Skill-Will Quadrant (Direct, Guide, Excite, Delegate), and receive tailored communication strategies for each task.
-5. **Tactical Rehearsal Sandbox (Air-Gapped AI Handoff):** Compiles multi-observation dossiers, cognitive framing markers, and active coaching tasks into a single markdown file formatted for external roleplay. **BridgeCraft contains NO built-in AI chatbot or cloud APIs**—the user manually imports the file into their external LLM of choice for live training.
+5. **Tactical Rehearsal Sandbox (Client-Side AI Handoff):** Compiles multi-observation dossiers, cognitive framing markers, and active coaching tasks into a single markdown file formatted for external roleplay. **BridgeCraft contains NO built-in AI chatbot or cloud APIs**—the user manually imports the file into their external LLM of choice for live training.
 6. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 
 ---

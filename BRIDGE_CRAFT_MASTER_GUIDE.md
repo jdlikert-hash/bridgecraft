@@ -1,14 +1,14 @@
-# BridgeCraft: The Definitive Master Field Manual & Video Tutorial Curriculum
+# BridgeCraft: Definitive Master Guide & Slide Deck Curriculum
 
 > **A Comprehensive, Chapter-by-Chapter Guide to Tactical Incident Communication, Applied Behavioral Science, Adaptive Cognitive Framing, and De-Escalation Rehearsals.**  
 > *Engineered for Incident Commanders, Engineering Leads, Customer Support Managers, and Cross-Functional Negotiators.*  
-> *Author: Jack Likert | Version: 2.0.0 (Production Release)*
+> *Version: 2.0.0 (Production Release) | Architecture: 100% Client-Side Execution*
 
 ---
 
-## 📋 Course Syllabus & Video Chapter Index
+## 📋 Course Syllabus & Presentation Index
 
-This document is engineered to serve as both an exhaustive operational field manual and a **ready-to-ingest source for Google NotebookLM, Microsoft Copilot, or Claude** to produce an instructional video tutorial series, audio podcast walkthrough, or chapter-by-chapter training curriculum.
+This document is engineered to serve as both an exhaustive operational master guide and a **ready-to-ingest source for Google NotebookLM, Microsoft Copilot, or Claude** to produce an executive briefing deck, feature walkthrough slide presentation, audio briefing, or chapter-by-chapter training curriculum.
 
 - **Chapter 1: The Core Mental Model — Why High-Stakes Communication Fails**
 - **Chapter 2: Architecture & Setup — Zero-Cloud Privacy & Navigation**
@@ -17,7 +17,7 @@ This document is engineered to serve as both an exhaustive operational field man
 - **Chapter 5: Adaptive Cognitive Framing — Speaking Their Exact Mental Dialect**
 - **Chapter 6: Stakeholder Intelligence & Field Dialect Snippets (Hot Buttons & Quotes)**
 - **Chapter 7: 1-on-1 Coaching Console & The Skill-Will Quadrant Matrix**
-- **Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Air-Gapped AI Handoff & Roleplay**
+- **Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Client-Side AI Handoff & Roleplay**
 - **Chapter 9: The Field Archive — Multi-Observer Intelligence & Situational Adaptation**
 - **Chapter 10: The Codex — Customizing Tactical Battlecards & Domain Playbooks**
 - **Chapter 11: Four Operational Frames — IT Ops, CRM Sales, Financial Hardship, and Crisis**
@@ -25,10 +25,10 @@ This document is engineered to serve as both an exhaustive operational field man
 
 ---
 
-## 🎬 Chapter 1: The Core Mental Model — Why High-Stakes Communication Fails
+## 🧭 Chapter 1: The Core Mental Model — Why High-Stakes Communication Fails
 
 ### 1.1 The Operational Bottleneck
-When a critical Sev-1 outage strikes, a customer threatens an immediate contract cancellation, or an escalation hits executive leadership, technical and operational tools are rarely the true failure point. The actual bottleneck is **communication breakdown**:
+During critical Sev-1 outages, urgent customer contract escalations, or high-stakes leadership alignment reviews, technical and operational systems are rarely the primary bottleneck. The true failure point is **communication breakdown**:
 - Engineers retreat into dense technical telemetry that non-technical leaders cannot parse.
 - Panicked executives demand instantaneous binary deadlines (*"Is it fixed yet? Yes or no?"*).
 - Support leads absorb emotional volatility from furious clients without an effective de-escalation protocol.
@@ -89,21 +89,21 @@ BridgeCraft is engineered under a strict **Zero-Cloud Privacy Architecture**:
 - **Local Storage Persistence:** All dossiers, observations, custom playbooks, and coaching tasks are stored exclusively in your browser's private `localStorage`.
 - **Zero Dependencies:** The entire application runs out of a single file (`bridgecraft.html` or `index.html`) using modern Tailwind CSS and vanilla JavaScript. It runs completely offline—even during total network blackouts.
 
-### 2.2 Complete Disconnection from AI (The Air-Gap Principle)
+### 2.2 Complete Disconnection from AI (100% Client-Side Execution Principle)
 > [!IMPORTANT]
 > **CRITICAL: BRIDGECRAFT HAS NO BUILT-IN AI CHATBOT OR API CONNECTION**  
 > BridgeCraft contains **no embedded Large Language Model (LLM), no integrated AI chat window, and makes zero API calls to OpenAI, Google, Anthropic, or any cloud provider**.  
-> The application is strictly an **offline behavioral assessor and data compiler**. To protect confidentiality and keep the tool 100% free and secure, BridgeCraft intentionally uses an **air-gapped workflow**: it compiles a structured rehearsal dossier (`.md`), downloads it to your computer, and you manually decide whether and where to upload that document (such as into your own private Google NotebookLM or Copilot account). BridgeCraft itself never communicates with an AI.
+> The application is strictly an **offline behavioral assessor and data compiler**. To protect confidentiality and keep the tool 100% free and secure, BridgeCraft intentionally uses a **100% client-side workflow**: it compiles a structured rehearsal dossier (`.md`), downloads it to your computer, and you manually decide whether and where to upload that document (such as into your own private Google NotebookLM or Copilot account). BridgeCraft itself never communicates with an AI.
 
-### 2.2 Navigation Overview
+### 2.3 Navigation Overview
 The top header provides instant access to all core operational modes:
 1. **Operational Lens Selector (Top Left):** Toggle between IT Ops, CRM Sales, Financial Hardship, and Crisis Counseling.
-2. **Active Console:** The real-time triage workspace used during live calls.
+2. **Active Console:** The real-time triage workspace used during live calls with Level 1 baseline chips and Level 2 diagnostic probes.
 3. **Field Archive:** The longitudinal dossier repository storing multiple observations, hot buttons, signature quotes, and merge utilities.
 4. **The Codex:** Tactical reference battlecards with live inline customization tools.
-5. **1-on-1 Coaching:** Longitudinal Skill & Will 2x2 matrix task tracker.
-6. **Field Guide / Help (`?`):** In-app documentation modal.
-7. **Secret Bundler (`Ctrl+Shift+E`):** Downloads an offline single-file bundled distribution.
+5. **Field Manual:** The comprehensive in-app operational reference and behavioral framework built directly into the console.
+6. **Coaching Console:** Longitudinal Skill & Will 2x2 matrix task tracker and personalized leadership strategy generator.
+7. **Diagnostic Probes & Quick Tools:** Collapsible live probes (`[💬 Diagnostic Probes]`), global reset tools, and offline single-file bundling (`Ctrl+Shift+E`).
 
 ---
 
@@ -298,20 +298,20 @@ HIGH WILL ───+────────────────────
 
 ---
 
-## 🎭 Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Air-Gapped AI Handoff & Roleplay
+## 🎭 Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Client-Side AI Handoff & Roleplay
 
 ### 8.1 The Problem It Solves
 You are about to enter a high-stakes bridge call with a furious executive who blames your team for an outage. How do you practice your de-escalation scripts without burning real relationship capital?
 
 BridgeCraft includes a built-in **Tactical De-Escalation Rehearsal Sandbox exporter**. With 1 click, you generate a comprehensive rehearsal dossier formatted specifically for external roleplay in **Google NotebookLM, Microsoft Copilot, ChatGPT, or Claude**.
 
-### 8.2 Architectural Reality: The Air-Gapped Handoff (No Built-in Chatbot)
+### 8.2 Architectural Reality: The Client-Side Handoff (No Built-in Chatbot)
 > [!IMPORTANT]
 > **CRITICAL ARCHITECTURAL DISTINCTION: BRIDGECRAFT HAS NO IN-APP AI CHAT**  
 > **BridgeCraft is NOT an AI chatbot and does NOT have a built-in interactive chat window.**  
 > There is no API connection to OpenAI, Google Gemini, or Anthropic within BridgeCraft itself. The application never sends your data across the internet.
 > 
-> Instead, BridgeCraft operates as an **air-gapped data compiler**. The rehearsal workflow is a deliberate, **manual 3-step handoff**:
+> Instead, BridgeCraft operates as a **100% client-side data compiler**. The rehearsal workflow is a deliberate, **manual 3-step handoff**:
 > 1. **Step 1 (Inside BridgeCraft):** You compile and download a structured `.md` file to your local computer.
 > 2. **Step 2 (Manual File Handoff):** You open a separate browser tab, navigate to your external AI tool of choice (e.g. Google NotebookLM, Microsoft Copilot, ChatGPT, or Claude), and manually upload the `.md` file.
 > 3. **Step 3 (Prompt Execution in External Tool):** You copy the ready-made System Prompt from the file and paste it into that external AI tool to begin your live rehearsal.
@@ -448,4 +448,4 @@ Never use BridgeCraft to label or pigeonhole colleagues (*"Oh, Dave is just a Re
 
 ---
 
-*End of Master Guide. Ingest this document directly into Google NotebookLM to generate video scripts, audio podcast episodes, and training modules.*
+*End of Master Guide. Ingest this document directly into Google NotebookLM alongside the Visual UI Tour PDF to generate slide decks, executive briefings, and tactical training presentations.*
