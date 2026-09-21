@@ -37,6 +37,13 @@ employer, client, or third party. See LICENSE file for full legal terms.
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
             transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--bg-page);
+            background-image: 
+                radial-gradient(1000px circle at 8% 20%, var(--ambient-glow, rgba(99, 102, 241, 0.24)), transparent 65%),
+                radial-gradient(1000px circle at 92% 30%, var(--ambient-secondary, rgba(6, 182, 212, 0.16)), transparent 65%),
+                radial-gradient(1200px circle at 50% 10%, var(--ambient-glow, rgba(99, 102, 241, 0.20)), transparent 70%);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-card, #1e293b); }
@@ -50,7 +57,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
         }
         .chip:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            border-color: var(--accent-hover, #818cf8) !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px var(--accent-badge-bg, rgba(99, 102, 241, 0.25));
+            color: #ffffff !important;
         }
         .chip.chip-selected {
             transform: scale(1.02);
@@ -95,6 +104,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
             --header-tagline: #818cf8;
             --chip-active-bg: #6366f1;
             --chip-active-border: #818cf8;
+            --ambient-glow: rgba(99, 102, 241, 0.24);
+            --ambient-secondary: rgba(6, 182, 212, 0.16);
         }
 
         /* THEME 2: CRM & SALES (Midnight Navy / Soft Coral & Warm Amber) */
@@ -113,6 +124,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
             --header-tagline: #fb7185;
             --chip-active-bg: #f43f5e;
             --chip-active-border: #fb7185;
+            --ambient-glow: rgba(244, 63, 94, 0.24);
+            --ambient-secondary: rgba(251, 146, 60, 0.16);
         }
 
         /* THEME 3: FINANCIAL HARDSHIP (Warm Charcoal / Muted Sage & Warm Gold) */
@@ -131,6 +144,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
             --header-tagline: #34d399;
             --chip-active-bg: #10b981;
             --chip-active-border: #34d399;
+            --ambient-glow: rgba(16, 185, 129, 0.24);
+            --ambient-secondary: rgba(245, 158, 11, 0.16);
         }
 
         /* THEME 4: CRISIS COUNSELING (Twilight Violet / Soft Lavender & Calm Teal) */
@@ -149,6 +164,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
             --header-tagline: #c084fc;
             --chip-active-bg: #a855f7;
             --chip-active-border: #c084fc;
+            --ambient-glow: rgba(168, 85, 247, 0.24);
+            --ambient-secondary: rgba(45, 212, 191, 0.16);
         }
 
         /* Dynamic theme class bindings */
@@ -179,7 +196,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <span class="ml-2 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700/80 font-semibold" title="Version 2.0 (The Adaptive Operational Console)">v2.0</span>
                             <span id="header-domain-badge" class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full border border-indigo-500/40 bg-indigo-500/20 text-indigo-300">IT Ops</span>
                         </h1>
-                        <span id="app-tagline" class="text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation &amp; Communication Console</span>
+                        <span id="app-tagline" class="hidden sm:inline-block text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation &amp; Communication Console</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-1 sm:space-x-2">
@@ -219,7 +236,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
     <div class="border-b border-slate-800/80 theme-subtle py-1.5 px-4 shadow-inner">
         <div class="max-w-5xl mx-auto flex items-center justify-between gap-2 text-xs">
             <div class="flex items-center flex-wrap gap-1.5">
-                <span class="text-slate-400 font-semibold uppercase tracking-wider text-[11px] mr-1">Operational Lens:</span>
+                <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-slate-800/90 border border-slate-700/60 mr-1 flex items-center gap-1 shadow-sm">
+                    <span class="text-slate-400">🎯</span> Operational Lens:
+                </span>
                 <div class="inline-flex rounded-lg p-0.5 bg-slate-900/90 border border-slate-700/80 shadow-sm" id="lens-selector-group">
                     <button type="button" onclick="setDomainLens('it_ops')" id="btn-lens-it_ops" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center bg-indigo-600 text-white shadow-sm" title="IT Operations, Incident Command &amp; War Rooms">
                         <span class="mr-1">🏢</span> IT Ops
@@ -234,6 +253,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <span class="mr-1">🩺</span> Crisis Counseling
                     </button>
                 </div>
+            </div>
+            <!-- PRIVACY TRUST AFFIRMATION -->
+            <div class="hidden sm:inline-flex items-center text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-emerald-950/40 text-emerald-300/90 border border-emerald-800/40 shadow-sm" title="Zero telemetry, no external APIs, all data stored strictly in local browser memory">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+                <span>100% Local &bull; Zero Cloud &bull; Air-Gapped</span>
             </div>
         </div>
     </div>
@@ -309,7 +333,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 
                 <div class="mb-5">
                     <h3 class="text-sm font-semibold text-slate-300">Speech Tempo &amp; Typing Cadence</h3>
-                    <p class="text-xs text-slate-400 mb-3 mt-1 italic">Rate of speech, message frequency, and processing pace.</p>
+                    <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">Rate of speech, message frequency, and processing pace.</p>
                     <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Speech Tempo and Typing Cadence">
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Fast / Urgent" role="radio" aria-checked="false" title="Rapid speech / quick multi-message bursts">Fast / Urgent</button>
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="tempo" data-value="Measured / Deliberate" role="radio" aria-checked="false" title="Calculated cadence / 1 composed update">Measured / Deliberate</button>
@@ -319,7 +343,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
                 <div class="border-t border-slate-700/50 pt-5 mt-5">
                     <h3 class="text-sm font-semibold text-slate-300">Primary Focus</h3>
-                    <p class="text-xs text-slate-400 mb-3 mt-1 italic">Where do they instinctively anchor the conversation?</p>
+                    <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">Where do they instinctively anchor the conversation?</p>
                     <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Primary Focus">
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="People / Relationships" role="radio" aria-checked="false" title="People, relationships, feelings, and team morale">People / Relationships</button>
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="focus" data-value="Things / Tasks" role="radio" aria-checked="false" title="Data, logic, structure, and operational facts">Things / Tasks</button>
@@ -336,7 +360,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <h3 id="cat-posture-title" class="text-sm font-semibold text-slate-300">Channel Demeanor &amp; Style</h3>
                         <span id="cat-posture-mode-tag" class="text-xs text-indigo-400 font-medium">🎧 Camera-Off Mode</span>
                     </div>
-                    <p id="cat-posture-sub" class="text-xs text-slate-400 mb-3 mt-1 italic">Audio tone, pause length, and Slack messaging syntax.</p>
+                    <p id="cat-posture-sub" class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">Audio tone, pause length, and Slack messaging syntax.</p>
                     <div class="flex flex-wrap gap-2.5" id="cat-posture-chips" role="radiogroup" aria-label="Channel Demeanor and Style">
                         <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="posture" data-value="Rigid / Upright" id="chip-posture-1" role="radio" aria-checked="false" title="Monotone voice / Bullets &amp; precise Slack syntax">
                             <span class="chip-label">Formal &amp; Structured</span>
@@ -381,7 +405,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-motivator">▾</span>
                             </button>
                         </div>
-                        <p class="text-xs text-slate-400 mb-3 italic">What underlying hunger is driving their urgency right now?</p>
+                        <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">What underlying hunger is driving their urgency right now?</p>
                         <div id="probes-drawer-motivator" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Psychological Motivator">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="motivator" data-value="Status / Wins" role="radio" aria-checked="false" title="Immediate Payoff &amp; Concrete Wins">Status / Wins</button>
@@ -400,7 +424,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-stressor">▾</span>
                             </button>
                         </div>
-                        <p class="text-xs text-slate-400 mb-3 italic">What condition triggered or continues to drain their patience?</p>
+                        <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">What condition triggered or continues to drain their patience?</p>
                         <div id="probes-drawer-stressor" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Acute Stressor">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="stressor" data-value="Lack of Time" role="radio" aria-checked="false" title="Shifting Schedules &amp; Deadlines">Lack of Time</button>
@@ -417,7 +441,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-conflict">▾</span>
                             </button>
                         </div>
-                        <p class="text-xs text-slate-400 mb-3 italic">Default reaction when cornered or stressed on a bridge call / Slack.</p>
+                        <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">Default reaction when cornered or stressed on a bridge call / Slack.</p>
                         <div id="probes-drawer-conflict" class="hidden mb-4 bg-slate-950/80 rounded-xl p-3.5 border border-indigo-500/30 space-y-3 shadow-inner"></div>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Conflict Stance">
                             <button class="chip px-4 py-2 rounded-full border border-slate-600 bg-slate-700/50 text-sm font-medium hover:bg-slate-600 text-slate-200" data-category="conflict" data-value="Avoids / Deflects" role="radio" aria-checked="false" title="Appeases &amp; over-concedes to avoid clash">Avoids / Deflects</button>
@@ -445,21 +469,21 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             <!-- RESULTS CARD -->
             <div id="results-card" class="hidden bg-slate-800 rounded-xl p-6 shadow-2xl border-2 theme-border-accent transform transition-all duration-300 space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700 pb-4 gap-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-700/80 pb-5 gap-4 bg-slate-900/40 -mx-6 -mt-6 p-6 rounded-t-xl">
                     <div>
                         <span id="res-category-label" class="text-xs font-bold theme-accent-text uppercase tracking-widest block mb-1">Tactical Incident Playbook</span>
-                        <h2 class="text-2xl font-bold text-white uppercase tracking-wider" id="res-title">Playbook Name</h2>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-wider" id="res-title">Playbook Name</h2>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2">
-                        <button onclick="openSaveModal()" id="btn-save-dossier" class="theme-btn-accent px-3 py-1.5 rounded-md text-sm font-medium flex items-center shadow transition-colors">
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button onclick="openSaveModal()" id="btn-save-dossier" class="theme-btn-accent px-4 py-2 rounded-lg text-sm font-semibold flex items-center shadow-md hover:brightness-110 hover:shadow-indigo-500/20 transition-all transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                             Save to Archive
                         </button>
-                        <button onclick="exportToMarkdown()" id="btn-export" class="bg-slate-700 hover:bg-slate-600 text-indigo-300 px-3 py-1.5 rounded-md text-sm font-medium flex items-center hidden transition-colors border border-slate-600">
-                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <button onclick="exportToMarkdown()" id="btn-export" class="bg-slate-700/90 hover:bg-slate-600 text-slate-200 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center hidden transition-all border border-slate-600 shadow-sm">
+                            <svg class="w-4 h-4 mr-1.5 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Export Playbook (.MD)
                         </button>
-                        <button onclick="resetProfiler()" id="btn-results-reset" class="bg-slate-700/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center transition-colors border border-slate-600 shadow-sm" title="Clear assessment and start a new incident analysis">
+                        <button onclick="resetProfiler()" id="btn-results-reset" class="bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center transition-all border border-slate-700 shadow-sm" title="Clear assessment and start a new incident analysis">
                             <svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                             <span>Reset Assessor</span>
                         </button>
@@ -1111,9 +1135,14 @@ employer, client, or third party. See LICENSE file for full legal terms.
     </div>
 
     <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-800 space-y-2">
-        <div class="flex items-center justify-center space-x-4">
+        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4">
             <span>BridgeCraft v2.0 &bull; Tactical Incident Communication &amp; De-Escalation Console</span>
-            <span class="text-slate-600">&bull;</span>
+            <span class="text-slate-600 hidden sm:inline">&bull;</span>
+            <span class="inline-flex items-center text-emerald-400 font-medium">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span>
+                100% Client-Side &bull; Zero Cloud &bull; Air-Gapped Ready
+            </span>
+            <span class="text-slate-600 hidden sm:inline">&bull;</span>
             <a href="https://github.com/jdlikert-hash/bridgecraft" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white flex items-center transition-colors">
                 <svg class="w-3.5 h-3.5 mr-1 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                 <span>GitHub &amp; Source</span>
@@ -2937,7 +2966,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             btnExport.classList.remove('hidden');
             if (resCatLabel) resCatLabel.textContent = cfg.resultCardHeader;
             resTitle.textContent = titleText;
-            resTitle.className = "text-xl sm:text-2xl font-bold theme-accent-text uppercase tracking-wider";
+            resTitle.className = "text-2xl sm:text-3xl font-extrabold theme-accent-text uppercase tracking-wider drop-shadow-sm";
 
             const doSayList = playbook.doSay.map(s => 
                 `<li class="flex items-start text-sm text-slate-200"><svg class="w-4 h-4 text-emerald-400 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>"${s}"</span></li>`
@@ -2956,15 +2985,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
                         <div class="flex items-center space-x-2">
-                            <span class="text-xs text-slate-400 uppercase">Base Filter:</span>
+                            <span class="text-xs text-slate-400 uppercase font-semibold">Base Filter:</span>
                             <span class="px-3 py-1 rounded-full text-xs font-bold border ${currentAnalysis.base.disc.style}">
                                 ${currentAnalysis.base.disc.badge} — ${currentAnalysis.base.disc.label}
                             </span>
                         </div>
                         <span class="text-slate-500 font-bold">➔</span>
                         <div class="flex items-center space-x-2">
-                            <span class="text-xs text-slate-400 uppercase">Operational Distress:</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${currentAnalysis.phase.disc.style}">
+                            <span class="text-xs text-slate-400 uppercase font-semibold">Operational Distress:</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold border ${isPure ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : currentAnalysis.phase.disc.style}">
                                 ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label}
                             </span>
                         </div>
@@ -3052,16 +3081,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
                 <!-- CORE READOUT (3-COLUMN ANALYSIS) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/80 shadow-sm space-y-1">
                         <h4 class="text-xs theme-accent-text uppercase font-bold tracking-wider mb-1">Communication Channel (Base)</h4>
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.base.baseComm}</p>
                     </div>
-                    <div class="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                        <h4 class="text-xs text-emerald-300 uppercase font-bold tracking-wider mb-1">Current Driver (Phase)</h4>
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/80 shadow-sm space-y-1">
+                        <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">Current Driver (Phase)</h4>
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.phaseDriver}</p>
                     </div>
-                    <div class="bg-rose-900/20 p-4 rounded-lg border border-rose-900/50">
-                        <h4 class="text-xs text-rose-400 uppercase font-bold tracking-wider mb-1">Distress Tell (Phase)</h4>
+                    <div class="bg-gradient-to-br from-rose-950/40 to-slate-900/90 p-4 rounded-xl border border-rose-500/40 shadow-sm space-y-1">
+                        <h4 class="text-xs text-rose-400 uppercase font-bold tracking-wider mb-1 flex items-center gap-1.5">
+                            <span>⚠️</span> <span>Distress Tell (Phase)</span>
+                        </h4>
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.distress}</p>
                     </div>
                 </div>
