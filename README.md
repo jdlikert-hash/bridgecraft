@@ -1,6 +1,6 @@
 # BridgeCraft v2.0 — Strategic Field Manual & Architecture
 
-> **A tactical incident communication, de-escalation, and situational alignment console designed for Incident Management, Technical Support, and Engineering Leadership.**  
+> **A tactical incident communication, de-escalation, and situational alignment console designed for frontline operators, client advocates, and people leaders across high-pressure environments.**  
 > *(Formerly titled: The Behavioral Profiler · See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
 
 > 📖 **Comprehensive User Manual & Video Tutorial Guide:**  
