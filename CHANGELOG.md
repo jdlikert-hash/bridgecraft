@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - 2026-09-22 — *Christopher Voss Tactical Empathy Integration*
+
+Introduced proven tactical empathy and counter-manipulation frameworks from former FBI hostage negotiator Christopher Voss (*Never Split the Difference*) to enhance de-escalation, disarm defensive posturing, and protect operators during volatile interactions.
+
+### Added
+- **Tactical Labels in Level 2 Diagnostic Probes:**
+  - Appended calibrated, non-interrogative "Tactical Label" alternatives (e.g. *"It seems like..."*, *"It sounds like..."*) to all 16 Level 2 diagnostic probe cards.
+  - Lowers cognitive resistance and prompts a biological *"That's right"* agreement that de-escalates amygdala arousal without demanding answers.
+  - Enhanced native chip tooltips to display both the interrogative question and its Tactical Label alternative.
+- **Adult-State Boundary Statements in The Codex (Red Lines):**
+  - Expanded Red Line ("Never Say This") triggers for volatile, high-conflict archetypes (Promoter and Rebel) across all 4 operational lenses.
+  - Integrated standardized Adult-state boundary scripts to halt manipulation, pressure tactics, and protocol bypassing while keeping discussions professional and aligned.
+  - Distinct UI badge and styling for Boundary Statements in live playbooks and The Codex.
+- **Pre-Emptive Accusation Audits in High-Stakes Action Templates:**
+  - Embedded optional `[Accusation Audit (Optional Intro)]` opening sentences at the top of factory action templates for CRM Sales and Financial Hardship lenses.
+  - Disarms stakeholder emotional ammunition and defuses worst-case fears upfront before presenting tactical recovery plans.
+- **Contextual Fatigue & Burnout Checks in Skill-Will Matrix:**
+  - Added clarifying verbiage prompting managers to evaluate for recent incident load, on-call paging volume, and physiological exhaustion in the Excite quadrant (Low Will / High Skill) before applying behavioral interventions.
+
+---
+
 ## [2.0.0] - 2026-09-21 — *The Adaptive Operational Console*
 
 BridgeCraft 2.0 represents a comprehensive architectural leap from a single-purpose incident triage calculator to an end-to-end tactical communication, de-escalation, and longitudinal team coaching platform.
@@ -44,7 +65,7 @@ BridgeCraft 2.0 represents a comprehensive architectural leap from a single-purp
   - Dynamically generated coaching strategy cards synthesizing quadrant leadership stances with the stakeholder's dominant PCM cognitive dialect.
 - **Tactical De-Escalation Rehearsal Sandbox:**
   - 1-click export of structured training dossiers (`.md`) formatted specifically for external AI roleplay (**Google NotebookLM, Microsoft Copilot, ChatGPT, Claude**).
-  - Explicit **Air-Gap Architecture**: BridgeCraft operates 100% locally with zero cloud APIs; users manually import dossiers into their external LLM of choice for simulation drills.
+  - Explicit **100% Client-Side Execution**: BridgeCraft operates 100% locally with zero cloud APIs; users manually import dossiers into their external LLM of choice for simulation drills.
   - Embedded **Anti-"Cloning" Ethical Standard** ensuring all dossiers serve strictly as operational flight simulators for tactical empathy.
 - **Multi-Observer Intelligence & Alias Merge Engine:**
   - Aggregates observations across multiple observers and operational contexts (Outages, 1-on-1s, All-Hands).

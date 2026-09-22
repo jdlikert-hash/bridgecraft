@@ -97,6 +97,11 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 | **The Promoter** | **Direct** | Action & Velocity | *bottom line, jump on it, hit the ground running, nail it down, win, move* | *"Bottom line: let's jump on this right now, nail it down before 3 PM, and secure the win."* |
 | **The Imaginer** | **Reflective** | Internal Mental Imagery | *picture, imagine, envision, reflect, contemplate, space, horizon* | *"Take mental space to picture how this should look. When you've envisioned the full schema, ping me."* |
 
+4. **Applied Tactical Empathy (Christopher Voss Doctrine):** High-stakes operational triage incorporates principles from master hostage negotiator Christopher Voss (*Never Split the Difference*):
+   - **Tactical Labels in Level 2 Diagnostic Probes:** Direct questions often trigger defensive rationalization. Non-interrogative labels (*"It seems like..."*, *"It sounds like..."*) identify the emotional dynamic without demanding an answer, eliciting a biological *"That's right"* agreement that de-escalates amygdala arousal.
+   - **Boundary Statements in Red Lines:** Accommodating high-conflict, volatile archetypes (Promoter and Rebel) is often misinterpreted as weakness, inviting manipulation. Standardized Adult-state boundary scripts halt boundary-pushing while keeping the conversation professional and aligned.
+   - **Accusation Audits in High-Stakes Templates:** Pre-emptively voicing the stakeholder's worst-case fears and grievances at the top of CRM Sales and Financial Hardship action templates defuses emotional ammunition before they can fire it.
+
 ---
 
 ## 5. Four Operational Frames & Tactical Domains
@@ -150,10 +155,10 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 
 ## 7. Application Architecture & Navigation
 
-1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases.
+1. **Active Console (Rapid Triage):** The core fast-input engine for real-time calibration, DISC alignment, and copy-paste incident scripts. Includes dynamic autocomplete matching known names and aliases, plus collapsible **Level 2 Diagnostic Probes** featuring both direct interrogative cues and Voss **Tactical Label alternatives** to lower defenses live on calls.
 2. **The Field Archive (Multi-Observer Library):** Persistent client-side archive storing multiple timestamped observations per stakeholder. Tracks observer identity, environment context, situational adaptation, and includes a 1-click merge engine for typo consolidation.
-3. **The Codex (Tactical Battlecards):** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Custom battlecards directly power live Incident Playbooks calibrated on the Active Console. Users can click **Edit Battlecard** to customize the exact talk tracks and action templates for any archetype in any domain, with complete local persistence.
-4. **1-on-1 Coaching (Skill-Will Matrix & Task Tracker):** Longitudinal coaching matrix enabling managers and incident leads to track individual work assignments, assess situational Skill and Will levels, plot tasks on the interactive Skill-Will Quadrant (Direct, Guide, Excite, Delegate), and receive tailored communication strategies for each task.
+3. **The Codex (Tactical Battlecards):** Comprehensive reference manual combining PCM archetypes, DISC quadrants, and frontline de-escalation battlecards. Custom battlecards directly power live Incident Playbooks calibrated on the Active Console. Includes adult-state **Boundary Statements** within Red Line triggers for volatile archetypes (Promoter and Rebel) to counter manipulation. Users can click **Edit Battlecard** to customize the exact talk tracks, boundary scripts, and action templates for any archetype in any domain, with complete local persistence.
+4. **1-on-1 Coaching (Skill-Will Matrix & Task Tracker):** Longitudinal coaching matrix enabling managers and incident leads to track individual work assignments, assess situational Skill and Will levels, plot tasks on the interactive Skill-Will Quadrant (Direct, Guide, Excite, Delegate), and receive tailored communication strategies for each task—including contextual **Fatigue & Burnout Checks** in the Excite quadrant before applying behavioral interventions.
 5. **Tactical Rehearsal Sandbox (Client-Side AI Handoff):** Compiles multi-observation dossiers, cognitive framing markers, and active coaching tasks into a single markdown file formatted for external roleplay. **BridgeCraft contains NO built-in AI chatbot or cloud APIs**—the user manually imports the file into their external LLM of choice for live training.
 6. **Field Manual:** Complete in-app operational documentation, live-fire drill guidelines, and legal protections.
 

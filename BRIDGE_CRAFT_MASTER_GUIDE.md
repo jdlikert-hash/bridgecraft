@@ -187,29 +187,73 @@ Every probe drawer contains:
 4. **Two-Way Synchronization:** Selecting a chip below immediately highlights the corresponding probe card above.
 5. **Native Hover Tooltips:** Hovering over any radio chip displays the exact live question in the browser's native tooltip.
 
-### 4.3 Probe Questions Reference Cheat Sheet
+### 4.2 Tactical Labels vs. Interrogative Questions (The Voss Doctrine)
+Direct interrogative questions (*"What data do you need?"*, *"Why are you resisting this process?"*) can inadvertently trigger defensive, analytical posturing in dysregulated stakeholders. In hostage negotiation and high-stakes mediation (Christopher Voss, *Never Split the Difference*), **Tactical Labels** identify the underlying emotional dynamic without demanding an answer:
+- Instead of asking a question that demands cognitive work, the operator offers a neutral hypothesis: *"It seems like..."*, *"It sounds like..."*, *"It feels like..."*
+- This prompts an instinctive biological *"That's right!"* response, which lowers amygdala arousal, relieves cognitive load, and encourages the stakeholder to elaborate voluntarily.
+- Every Level 2 probe card in BridgeCraft provides both the direct interrogative probe and its calibrated Tactical Label alternative.
 
-#### Psychological Motivators (Opening Probe: *"If this call goes perfectly, what does the ideal headline look like for you?"*)
-- **Status / Wins:** *"What is your fastest win here?"* &rarr; Listen for: Fixation on time-to-resolution, executive visibility, taking credit.
-- **Certainty / Logic:** *"What data or metrics would give you 100% confidence to move forward?"* &rarr; Listen for: Requests for root-cause telemetry, exact timestamps, methodology.
-- **Autonomy / Control:** *"What part of this process do you want full ownership to direct?"* &rarr; Listen for: Resistance to micromanagement, desire to dictate choices.
-- **Connection / Tribe:** *"Who on the team is most impacted, and how do we ensure they feel supported?"* &rarr; Listen for: Concern for team morale, emotional fatigue.
-- **Fairness / Respect:** *"How can we structure this so leadership recognizes your team's contribution?"* &rarr; Listen for: Principled indignation, references to professional ethics.
-- **Safety / Security:** *"What space or breathing room do you need right now to assess this without pressure?"* &rarr; Listen for: Need to isolate from cross-talk and noise.
+### 4.3 Probe Questions & Tactical Labels Reference Cheat Sheet
 
-#### Acute Stressors (Opening Probe: *"What is the single biggest friction point making this hard to stabilize right now?"*)
-- **Loss of Control:** *"What feels most out of your hands right now that you wish you could steer directly?"*
-- **Perceived Incompetence:** *"What background context do you feel isn't being acknowledged by leadership?"*
-- **Chaos / Unpredictability:** *"What is the single most unpredictable factor right now?"*
-- **Isolation / Rejection:** *"Do you feel like you are carrying this entire blast radius alone?"*
-- **Rigidity / Over-structure:** *"Where is standard protocol getting in the way of what actually needs to happen?"*
-- **Sensory / Social Overload:** *"Do you need 5 minutes off audio to review the dashboard in silence?"*
+#### Psychological Motivators (Opening Probe: *"What is your fastest win here, and what outcome matters most right now to turn this situation around?"*)
+- **Status / Wins (Promoter):**  
+  - *Interrogative:* *"If we could hand you one concrete win in the next 30 minutes, what would move the needle fastest?"*  
+  - *Tactical Label:* *"It seems like securing an immediate, high-visibility win right now is what matters most."*  
+  - *Listen for:* Immediate bottom-line outcomes, visible momentum, skipping bureaucracy.
+- **Status / Respect (Persister):**  
+  - *Interrogative:* *"From a principles and standards standpoint, what is the non-negotiable line we cannot cross here?"*  
+  - *Tactical Label:* *"It sounds like protecting our standards and commitments here is non-negotiable for you."*  
+  - *Listen for:* Adherence to commitments, ethics, quality standards, recognition of integrity.
+- **Security / Data (Thinker):**  
+  - *Interrogative:* *"What specific telemetry, timeline metrics, or logs do you need before you feel comfortable moving forward?"*  
+  - *Tactical Label:* *"It seems like you need verified telemetry and chronological clarity before signing off."*  
+  - *Listen for:* Chronological facts, percentages, exact error rates, structured methodology.
+- **Connection / Approval (Harmonizer):**  
+  - *Interrogative:* *"How is the team holding up through this, and who needs our support the most right now?"*  
+  - *Tactical Label:* *"It feels like ensuring the team is supported and protected is your top priority right now."*  
+  - *Listen for:* Concern for people, interpersonal harmony, team morale, feeling safe and appreciated.
+- **Novelty / Fun (Rebel):**  
+  - *Interrogative:* *"If we tossed out the standard playbook for a second, what's a creative or unconventional angle we could try?"*  
+  - *Tactical Label:* *"It sounds like standard operating procedure feels rigid and you'd rather try a fresh angle."*  
+  - *Listen for:* Frustration with bureaucracy, desire for fresh angles, spontaneous brainstorm, fun.
+- **Security / Space (Imaginer):**  
+  - *Interrogative:* *"Would you prefer some uninterrupted time offline to digest this before we regroup?"*  
+  - *Tactical Label:* *"It feels like you just need some quiet space to process this without live pressure."*  
+  - *Listen for:* Low verbal stimulus, desire for solitude, quiet reflection without immediate pressure.
 
-#### Conflict Stances (Opening Probe: *"When this incident began escalating, what was your initial reaction?"*)
-- **Blamer / Dominator:** *"From your vantage point, where did the breakdown actually happen?"* &rarr; Attack, finger-pointing, aggressive cross-examination.
-- **Accommodator / Appeaser:** *"What is the team expecting you to deliver, and where are you feeling the crunch?"* &rarr; Over-apologizing, taking personal blame, deferring.
-- **Distractor / Deflector:** *"There's a lot of noise right now—what's the one thread that cuts through all this?"* &rarr; Sarcasm, changing subjects, dismissing urgency.
-- **Withdrawer / Detached:** *"When you step back and look at the telemetry, what is your neutral take?"* &rarr; Radio silence, flat monotone, monosyllabic replies.
+#### Acute Stressors (Opening Probe: *"What is creating the most acute friction or pressure for you on this right now?"*)
+- **Lack of Time (Thinker / Persister):**  
+  - *Interrogative:* *"Are we being rushed into a premature move without enough runway to verify the telemetry?"*  
+  - *Tactical Label:* *"It seems like being forced to act without sufficient verification is creating a lot of friction."*
+- **Loss of Control (Promoter / Persister):**  
+  - *Interrogative:* *"Does it feel like decisions are being made around you without your direct authority or sign-off?"*  
+  - *Tactical Label:* *"It sounds like decisions are being made above your head and you feel sidelined."*
+- **Social Friction (Harmonizer / Imaginer):**  
+  - *Interrogative:* *"Has the temperature or tone between teams gotten too combative for productive work?"*  
+  - *Tactical Label:* *"It feels like the interpersonal friction on this bridge is getting in the way of real progress."*
+- **Resource Scarcity (Rebel / Thinker):**  
+  - *Interrogative:* *"Where is standard protocol or resource tooling getting in the way of what actually needs to happen?"*  
+  - *Tactical Label:* *"It seems like standard protocol is actually slowing us down right now."*
+
+#### Conflict Stances (Opening Probe: *"When this team hits acute pressure, what does the breakdown in communication usually look like?"*)
+- **Avoids / Deflects (Harmonizer):**  
+  - *Interrogative:* *"You seem hesitant to disagree—are you agreeing just to keep the peace, or do you truly agree with this plan?"*  
+  - *Tactical Label:* *"It seems like there's hesitation to voice concerns because you want to keep the team aligned."*
+- **Dominates / Escalates (Promoter):**  
+  - *Interrogative:* *"Are you looking to take executive command of this right now, or can we align on the immediate operational play?"*  
+  - *Tactical Label:* *"It sounds like you feel the current pace isn't moving fast enough and you need direct command."*
+- **Dominates / Rigid (Persister):**  
+  - *Interrogative:* *"What specific policy or standard do you feel is being compromised here?"*  
+  - *Tactical Label:* *"It seems like a fundamental standard or procedure is being compromised and you can't let that slide."*
+- **Logics / Over-explains (Thinker):**  
+  - *Interrogative:* *"Are we getting lost in technical weeds when we need an immediate mitigation decision?"*  
+  - *Tactical Label:* *"It seems like there's critical data on the table that isn't being properly factored into this decision."*
+- **Withdraws (Imaginer):**  
+  - *Interrogative:* *"You've gone quiet on the bridge—what's your candid take on what was just proposed?"*  
+  - *Tactical Label:* *"It feels like you're holding back your candid perspective while the group debates."*
+- **Blames (Rebel):**  
+  - *Interrogative:* *"Where do you think the system or process broke down before this landed on your plate?"*  
+  - *Tactical Label:* *"It sounds like you feel stuck absorbing the fallout from someone else's broken process."*
 
 ---
 
@@ -281,7 +325,9 @@ HIGH WILL ───+────────────────────
 1. **Guide (High Will · Low Skill - Cyan):** Highly motivated but lacks technical domain knowledge. Needs hands-on mentoring and step-by-step guidance.
 2. **Delegate (High Will · High Skill - Emerald):** Master of the domain with high motivation. Needs full autonomy, ownership, and zero micromanagement.
 3. **Direct (Low Will · Low Skill - Rose):** Low competency and low engagement. High operational risk during incidents. Requires firm, structured supervision and explicit milestones.
-4. **Excite (Low Will · High Skill - Amber):** Highly skilled veteran whose engagement or morale has dropped (often due to burnout or organizational friction). Needs unblocking, recognition, and rekindled motivation.
+4. **Excite (Low Will · High Skill - Amber):** Highly skilled veteran whose engagement or morale has dropped.
+   - **Fatigue & Burnout Check:** In high-stress operational environments, a drop in motivation is frequently physiological exhaustion or on-call fatigue rather than a psychological Phase shift or motivational failure. Before applying behavioral interventions or motivational coaching, evaluate recent incident load, nocturnal paging volume, or extended triage shifts.
+   - **Intervention:** Re-energize through autonomy, alignment with their core psychological motivator, clearing bureaucratic roadblocks, and providing mandatory recovery space if fatigued.
 
 ### 7.2 How to Track Tasks in BridgeCraft
 1. Navigate to the **1-on-1 Coaching** tab.
@@ -387,6 +433,18 @@ Every organization has its own internal jargon, escalation protocols, and Slack 
 - Click **Reset Domain Defaults** in The Codex header to reset all 6 archetypes in that domain simultaneously.
 - Customizations export automatically with your full JSON backup.
 
+### 10.3 Establishing Boundary Statements in Red Lines (The Voss Counter-Manipulation Protocol)
+Traditional de-escalation training often instructs operators to stay soft, accommodating, and agreeable. However, when dealing with volatile or high-conflict archetypes (specifically **The Promoter** and **The Rebel**, whose stress behaviors can resemble Cluster B manipulative or boundary-testing traits), unconditional accommodation is frequently misinterpreted as weakness, inviting further manipulation, steamrolling, and pressure to bypass standard operating procedures.
+
+To counteract this dynamic without escalating into hostility, BridgeCraft embeds standardized **Boundary Statements** directly inside the Red Line ("Never Say This") triggers for the Promoter and Rebel archetypes across all operational domains:
+- **The Adult Ego State:** The statement grounds the operator in Eric Berne's Adult ego state (calm, objective, factual) while halting manipulation.
+- **Structure of a Boundary Statement:** Acknowledges the immediate outcome or valid choice, but sets an unyielding operational boundary:
+  - *Promoter (IT Ops):* `"I can get you the bottom-line numbers by 3 PM, but I cannot authorize a bypass of the security protocol to do it."`
+  - *Promoter (CRM Sales):* `"I can commit our principal architect to review your telemetry today, but I cannot authorize SLA breach penalty credits before root-cause analysis is concluded."`
+  - *Rebel (IT Ops):* `"I'm open to testing alternative routing scripts, but I will not take down the staging canary without signed approval."`
+  - *Rebel (CRM Sales):* `"I hear your frustration with the standard renewal timeline, but I will not execute an unapproved contract override."`
+- **Visual Highlighting in the UI:** In both the Active Console and The Codex, Boundary Statements are automatically detected and styled with a distinct rose/amber badge and monospace font, ensuring the operator immediately distinguishes between what *not* to say versus the exact verbal boundary to hold on the bridge.
+
 ---
 
 ## 🌐 Chapter 11: Four Operational Frames — IT Ops, CRM Sales, Financial Hardship, and Crisis
@@ -419,6 +477,29 @@ Directly bookmark or link your operational domain using URL query parameters:
 - `bridgecraft.html?lens=crm_sales` (or `?lens=crm`)
 - `bridgecraft.html?lens=financial_hardship` (or `?lens=banking`)
 - `bridgecraft.html?lens=counseling_crisis` (or `?lens=counseling`)
+
+### 11.6 Accusation Audits in High-Friction Operational Lenses (The Voss Doctrine)
+In high-stakes negotiation (*Never Split the Difference*, Christopher Voss), an **Accusation Audit** is the practice of pre-emptively articulating the other party's worst-case fears, suspicions, and negative thoughts about you before they have the chance to express them.
+
+By voicing their unspoken accusations upfront, the operator accomplishes three psychological breakthroughs:
+1. **Defuses Emotional Ammunition:** Naming the negative emotions neutralizes amygdala reactivity and eliminates their primary leverage before negotiations even begin.
+2. **Accelerates Rapport:** The stakeholder realizes they do not need to fight to prove they were wronged, triggering an immediate *"That's right"* realization.
+3. **Clears the Runway for Action Plans:** Once the perceived negligence or grievance is openly acknowledged, the stakeholder can actually process the tactical steps of the recovery plan.
+
+#### Implementation in BridgeCraft Templates:
+BridgeCraft embeds an optional `[Accusation Audit (Optional Intro)]` opening sentence directly at the top of domain action templates, specifically within the **Customer Success & Enterprise CRM** (`crm_sales`) and **Banking Hardship & Loss Mitigation** (`financial_hardship`) lenses:
+- **CRM Sales (Promoter / Executive Escalation):**  
+  `[Accusation Audit (Optional Intro)]: "You are likely thinking we completely dropped the ball on this SLA, and that our engineering team hasn't prioritized your renewal."`
+- **CRM Sales (Harmonizer / High-EQ Escalation):**  
+  `[Accusation Audit (Optional Intro)]: "You're probably feeling that we let your team take all the heat for this disruption and that we haven't treated your partnership with the care it deserves."`
+- **CRM Sales (Thinker / Analytical Save):**  
+  `[Accusation Audit (Optional Intro)]: "You're probably thinking our engineering team is just throwing generic platitudes at this without understanding your actual deliverable milestones."`
+- **Banking Hardship (Thinker / Loss Mitigation):**  
+  `[Accusation Audit (Optional Intro)]: "You are likely thinking that the bank only cares about automated notices, and that nobody has actually reviewed the specific ledger numbers in your file."`
+- **Banking Hardship (Harmonizer / Borrower Stabilization):**  
+  `[Accusation Audit (Optional Intro)]: "You're probably feeling overwhelmed, exhausted by automated phone trees, and worried that we're going to judge your family's situation."`
+
+*Operator Note:* Each audit is clearly demarcated inside the template so it can easily be retained when engaging hostile or hyper-skeptical stakeholders, or cleanly deleted for routine operational correspondence.
 
 ---
 
