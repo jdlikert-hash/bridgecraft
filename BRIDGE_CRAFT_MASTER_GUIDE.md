@@ -187,6 +187,7 @@ Every probe drawer contains:
 3. **1-Click Selection:** Clicking any probe card automatically selects the corresponding radio chip button below, updates the active ring highlight, and triggers real-time analysis.
 4. **Two-Way Synchronization:** Selecting a chip below immediately highlights the corresponding probe card above.
 5. **Native Hover Tooltips:** Hovering over any radio chip displays the passive *Listen for* cues first, followed by the tactical label and question.
+6. **Acute Stressor Companion Briefing Panel:** In the 4-choice Acute Stressor drawer, the remaining 2-slot grid space is utilized for a high-yield frontline protocol panel detailing 4 crucial heuristics for managing in-your-face reactive distress (Regulate biology before logic, avoid interrogative questions, offer concrete binary choices, and hold adult-state grounding).
 
 ### 4.3 Tactical Labels vs. Interrogative Questions (The Voss Doctrine)
 Direct interrogative questions (*"What data do you need?"*, *"Why are you resisting this process?"*) can inadvertently trigger defensive, analytical posturing in dysregulated stakeholders. In hostage negotiation and high-stakes mediation (Christopher Voss, *Never Split the Difference*), **Tactical Labels** identify the underlying emotional dynamic without demanding an answer:

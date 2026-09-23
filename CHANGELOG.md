@@ -19,6 +19,9 @@ Restructured Level 2 Diagnostic Probes to align with core Process Communication 
   - Added flexbox vertical alignment (`flex flex-col justify-between`) to ensure uniform card heights across grid rows.
 - **Native Chip Tooltip Lead:**
   - Updated radio chip hover tooltips to lead with `👂 Listen for: ...` before displaying the calibrated Tactical Label and Probing Question.
+- **Acute Stressor Companion Briefing Panel:**
+  - Added an interactive "Frontline Protocol: Disarming In-Your-Face Reactive Distress" companion briefing panel spanning the remaining 2 grid slots in the Acute Stressor drawer.
+  - Eliminates trapped negative space in the 4-choice drawer while equipping operators with 4 immediate, high-yield rules for managing acute physiological flooding and reactive hostility live on calls.
 - **Category Probe Microcopy:**
   - Standardized category toggle button labels from "Verbal Probes" to "Diagnostic Probes" and updated tooltips to highlight passive acoustic listening.
 - **Master Guide Documentation:**
