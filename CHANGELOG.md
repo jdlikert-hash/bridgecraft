@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.1] - 2026-09-23 — *Passive Listening Radar & Level 2 Probe Hierarchy Inversion*
+
+Restructured Level 2 Diagnostic Probes to align with core Process Communication Model (PCM) observational methodology. Elevated passive acoustic recognition cues to the primary focal position at the top of cards, reducing live incident cognitive load and eliminating conversational friction.
+
+### Changed
+- **Passive Listening Radar as Primary Focal Anchor:**
+  - Inverted the internal anatomy of all 16 Level 2 diagnostic probe cards across Psychological Motivator, Acute Stressor, and Conflict Stance drawers.
+  - Positioned **"👂 Listen For (Passive Radar)"** in a high-contrast container immediately beneath the card header, allowing operators to diagnose behavioral drivers purely by listening without interrupting or interrogating.
+  - Subordinated active conversational prompts (**Tactical Labels** and **Probing Questions**) to a clean secondary block beneath the listening cues.
+  - Added flexbox vertical alignment (`flex flex-col justify-between`) to ensure uniform card heights across grid rows.
+- **Native Chip Tooltip Lead:**
+  - Updated radio chip hover tooltips to lead with `👂 Listen for: ...` before displaying the calibrated Tactical Label and Probing Question.
+- **Category Probe Microcopy:**
+  - Standardized category toggle button labels from "Verbal Probes" to "Diagnostic Probes" and updated tooltips to highlight passive acoustic listening.
+- **Master Guide Documentation:**
+  - Updated Chapter 4 of the Master Guide to document the passive-first triage hierarchy and completed the cheat sheet with full *Listen for* cues across all 16 diagnostic items.
+
+---
+
 ## [2.1.0] - 2026-09-22 — *Christopher Voss Tactical Empathy Integration*
 
 Introduced proven tactical empathy and counter-manipulation frameworks from former FBI hostage negotiator Christopher Voss (*Never Split the Difference*) to enhance de-escalation, disarm defensive posturing, and protect operators during volatile interactions.

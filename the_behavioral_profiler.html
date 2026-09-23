@@ -389,7 +389,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                     </div>
                     <div class="flex items-center space-x-2.5">
-                        <button type="button" onclick="event.stopPropagation(); toggleAllLevel2Probes();" id="btn-toggle-all-probes" class="text-xs px-2.5 py-1 rounded-full border border-indigo-500/40 bg-indigo-950/40 text-indigo-300 hover:bg-indigo-900/60 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Toggle conversational diagnostic questions for all Core Probes">
+                        <button type="button" onclick="event.stopPropagation(); toggleAllLevel2Probes();" id="btn-toggle-all-probes" class="text-xs px-2.5 py-1 rounded-full border border-indigo-500/40 bg-indigo-950/40 text-indigo-300 hover:bg-indigo-900/60 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Toggle passive listening cues and conversational probes for all Core Probes">
                             <span>💬</span> <span>Diagnostic Probes</span>
                         </button>
                         <span id="level2-badge" class="text-xs px-2.5 py-0.5 rounded-full border border-slate-600 bg-slate-900/60 text-slate-400 font-medium">Optional</span>
@@ -401,8 +401,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div class="mb-5">
                         <div class="flex items-center justify-between mb-1">
                             <h3 class="text-sm font-semibold text-slate-300">Psychological Motivator</h3>
-                            <button type="button" onclick="toggleCategoryProbes('motivator')" id="btn-probe-toggle-motivator" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
-                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-motivator">▾</span>
+                            <button type="button" onclick="toggleCategoryProbes('motivator')" id="btn-probe-toggle-motivator" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live passive listening cues and diagnostic probes">
+                                <span>💬</span> <span>Diagnostic Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-motivator">▾</span>
                             </button>
                         </div>
                         <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">What underlying hunger is driving their urgency right now?</p>
@@ -420,8 +420,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div class="border-t border-slate-700/50 pt-5 mt-5">
                         <div class="flex items-center justify-between mb-1">
                             <h3 class="text-sm font-semibold text-slate-300">Acute Stressor</h3>
-                            <button type="button" onclick="toggleCategoryProbes('stressor')" id="btn-probe-toggle-stressor" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
-                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-stressor">▾</span>
+                            <button type="button" onclick="toggleCategoryProbes('stressor')" id="btn-probe-toggle-stressor" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live passive listening cues and diagnostic probes">
+                                <span>💬</span> <span>Diagnostic Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-stressor">▾</span>
                             </button>
                         </div>
                         <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">What condition triggered or continues to drain their patience?</p>
@@ -437,8 +437,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div class="border-t border-slate-700/50 pt-5 mt-5">
                         <div class="flex items-center justify-between mb-1">
                             <h3 class="text-sm font-semibold text-slate-300">Conflict Stance</h3>
-                            <button type="button" onclick="toggleCategoryProbes('conflict')" id="btn-probe-toggle-conflict" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live conversational diagnostic questions">
-                                <span>💬</span> <span>Verbal Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-conflict">▾</span>
+                            <button type="button" onclick="toggleCategoryProbes('conflict')" id="btn-probe-toggle-conflict" class="text-xs px-2.5 py-1 rounded-md border border-indigo-500/30 bg-slate-900/60 text-indigo-300 hover:bg-indigo-950/70 hover:text-indigo-200 font-medium flex items-center space-x-1.5 transition-colors shadow-sm" title="Show live passive listening cues and diagnostic probes">
+                                <span>💬</span> <span>Diagnostic Probes</span> <span class="text-[10px] text-indigo-400 transition-transform duration-200" id="probe-chevron-conflict">▾</span>
                             </button>
                         </div>
                         <p class="text-xs text-slate-400 mb-3 mt-0.5 font-normal leading-relaxed">Default reaction when cornered or stressed on a bridge call / Slack.</p>
@@ -2729,23 +2729,35 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div onclick="selectChipFromProbe('${catKey}', '${safeChipVal}')" 
                          data-category="${catKey}" 
                          data-value="${escapeHtml(chipVal)}"
-                         class="probe-item-card ${isSel ? 'border-indigo-500 bg-indigo-950/50 ring-1 ring-indigo-400' : 'border-slate-700/80 bg-slate-900/90'} hover:bg-slate-800/90 border hover:border-indigo-500/50 rounded-lg p-2.5 cursor-pointer transition-all space-y-1.5 group shadow-sm">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-slate-200 group-hover:text-white flex items-center space-x-1.5">
-                                <span class="probe-status-dot w-2 h-2 rounded-full ${isSel ? 'bg-indigo-400 ring-2 ring-indigo-400/30' : 'bg-slate-600 group-hover:bg-indigo-400'}"></span>
-                                <span>${escapeHtml(chipVal)}</span>
-                            </span>
-                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 border border-slate-700 font-mono">${escapeHtml(item.archetype)}</span>
+                         class="probe-item-card ${isSel ? 'border-indigo-500 bg-indigo-950/50 ring-1 ring-indigo-400' : 'border-slate-700/80 bg-slate-900/90'} hover:bg-slate-800/90 border hover:border-indigo-500/50 rounded-lg p-2.5 cursor-pointer transition-all space-y-2 group shadow-sm flex flex-col justify-between">
+                        <div class="space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-200 group-hover:text-white flex items-center space-x-1.5">
+                                    <span class="probe-status-dot w-2 h-2 rounded-full ${isSel ? 'bg-indigo-400 ring-2 ring-indigo-400/30' : 'bg-slate-600 group-hover:bg-indigo-400'}"></span>
+                                    <span>${escapeHtml(chipVal)}</span>
+                                </span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 border border-slate-700 font-mono">${escapeHtml(item.archetype)}</span>
+                            </div>
+
+                            <!-- Primary Passive Radar: Listen For -->
+                            <div class="bg-indigo-950/40 border border-indigo-500/30 rounded p-2 text-xs leading-snug shadow-inner">
+                                <span class="text-indigo-300 font-bold uppercase tracking-wider text-[9px] block mb-0.5">👂 Listen For:</span>
+                                <p class="text-slate-100 font-medium text-[11px] leading-snug">${escapeHtml(item.listenFor)}</p>
+                            </div>
                         </div>
-                        <p class="text-amber-300 font-medium italic text-[11px] leading-snug">"${escapeHtml(item.question)}"</p>
-                        ${item.labelAlternative ? `
-                        <div class="text-[10.5px] leading-tight text-emerald-300/95 bg-emerald-950/30 px-2 py-1 rounded border border-emerald-500/20">
-                            <span class="text-emerald-400 font-bold uppercase tracking-wider text-[9px] block">Tactical Label:</span>
-                            <span class="italic font-sans">"${escapeHtml(item.labelAlternative)}"</span>
-                        </div>
-                        ` : ''}
-                        <div class="text-[10px] text-slate-400 leading-tight">
-                            <span class="text-slate-500 font-semibold">Listen for:</span> ${escapeHtml(item.listenFor)}
+
+                        <!-- Active Conversational Prompts (Subordinate) -->
+                        <div class="space-y-1.5 pt-0.5">
+                            ${item.labelAlternative ? `
+                            <div class="text-[10.5px] leading-tight text-emerald-300/95 bg-emerald-950/30 px-2 py-1 rounded border border-emerald-500/20">
+                                <span class="text-emerald-400 font-bold uppercase tracking-wider text-[9px] block">🏷️ Tactical Label:</span>
+                                <span class="italic font-sans">"${escapeHtml(item.labelAlternative)}"</span>
+                            </div>
+                            ` : ''}
+                            <div class="text-[10.5px] leading-tight text-amber-200/90 bg-amber-950/20 px-2 py-1 rounded border border-amber-500/20">
+                                <span class="text-amber-400 font-bold uppercase tracking-wider text-[9px] block">💬 Probing Question:</span>
+                                <span class="italic font-sans">"${escapeHtml(item.question)}"</span>
+                            </div>
                         </div>
                     </div>
                     `;
@@ -2759,7 +2771,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     const val = chip.getAttribute('data-value');
                     const item = catData.items[val];
                     if (item) {
-                        chip.title = `💬 Question: "${item.question}"${item.labelAlternative ? `\n🏷️ Label: "${item.labelAlternative}"` : ''}\n(Listen for: ${item.listenFor})`;
+                        chip.title = `👂 Listen for: ${item.listenFor}${item.labelAlternative ? `\n🏷️ Label: "${item.labelAlternative}"` : ''}\n💬 Question: "${item.question}"`;
                     }
                 });
             });

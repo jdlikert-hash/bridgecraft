@@ -174,86 +174,97 @@ BridgeCraft solves this through **Diagnostic Probes**: built-in, collapsible con
 
 ### 4.1 Master Toggle & Category Drawers
 - In the Level 2 section header, click **`[💬 Diagnostic Probes]`** to expand or collapse all probe drawers at once.
-- Or click **`[💬 Verbal Probes]`** beside any individual category (*Psychological Motivator*, *Acute Stressor*, *Conflict Stance*) to inspect just that category.
+- Or click **`[💬 Diagnostic Probes]`** beside any individual category (*Psychological Motivator*, *Acute Stressor*, *Conflict Stance*) to inspect just that category.
 
 ### 4.2 Interactive Probe Cards & 1-Click Chip Selection
 Every probe drawer contains:
 1. **The Opening Probe:** A gentle, conversational question to ask early in an incident call to open the diagnostic window.
-2. **Category Probe Cards:** Six interactive cards for each option containing:
-   - The specific live question to ask.
-   - The behavioral listening cues to listen for in their reply.
-   - Psychological archetype tag (Thinker, Persister, Harmonizer, Rebel, Promoter, Imaginer).
+2. **Category Probe Cards:** Six interactive cards for each option structured with a passive-first triage hierarchy:
+   - **Primary Passive Radar (Listen For):** Prominently placed at the top of the card. These behavioral and acoustic cues allow operators to identify the counterpart's active driver passively as they speak, carrying zero social cost and zero conversational friction.
+   - **Tactical Label (Calibrated Nudge):** A low-friction Christopher Voss observation statement (*"It seems like..."*) that confirms hypotheses without demanding defensive answers.
+   - **Probing Question (Active Fallback):** A direct interrogative question to use if the counterpart is silent or ambiguous.
+   - **Psychological archetype tag:** (Thinker, Persister, Harmonizer, Rebel, Promoter, Imaginer).
 3. **1-Click Selection:** Clicking any probe card automatically selects the corresponding radio chip button below, updates the active ring highlight, and triggers real-time analysis.
 4. **Two-Way Synchronization:** Selecting a chip below immediately highlights the corresponding probe card above.
-5. **Native Hover Tooltips:** Hovering over any radio chip displays the exact live question in the browser's native tooltip.
+5. **Native Hover Tooltips:** Hovering over any radio chip displays the passive *Listen for* cues first, followed by the tactical label and question.
 
-### 4.2 Tactical Labels vs. Interrogative Questions (The Voss Doctrine)
+### 4.3 Tactical Labels vs. Interrogative Questions (The Voss Doctrine)
 Direct interrogative questions (*"What data do you need?"*, *"Why are you resisting this process?"*) can inadvertently trigger defensive, analytical posturing in dysregulated stakeholders. In hostage negotiation and high-stakes mediation (Christopher Voss, *Never Split the Difference*), **Tactical Labels** identify the underlying emotional dynamic without demanding an answer:
 - Instead of asking a question that demands cognitive work, the operator offers a neutral hypothesis: *"It seems like..."*, *"It sounds like..."*, *"It feels like..."*
 - This prompts an instinctive biological *"That's right!"* response, which lowers amygdala arousal, relieves cognitive load, and encourages the stakeholder to elaborate voluntarily.
-- Every Level 2 probe card in BridgeCraft provides both the direct interrogative probe and its calibrated Tactical Label alternative.
+- Every Level 2 probe card in BridgeCraft provides passive listening cues at the top, followed by both the calibrated Tactical Label and the direct interrogative probe.
 
-### 4.3 Probe Questions & Tactical Labels Reference Cheat Sheet
+### 4.4 Diagnostic Probes & Tactical Labels Reference Cheat Sheet
 
 #### Psychological Motivators (Opening Probe: *"What is your fastest win here, and what outcome matters most right now to turn this situation around?"*)
 - **Status / Wins (Promoter):**  
-  - *Interrogative:* *"If we could hand you one concrete win in the next 30 minutes, what would move the needle fastest?"*  
-  - *Tactical Label:* *"It seems like securing an immediate, high-visibility win right now is what matters most."*  
   - *Listen for:* Immediate bottom-line outcomes, visible momentum, skipping bureaucracy.
+  - *Tactical Label:* *"It seems like securing an immediate, high-visibility win right now is what matters most."*  
+  - *Interrogative:* *"If we could hand you one concrete win in the next 30 minutes, what would move the needle fastest?"*  
 - **Status / Respect (Persister):**  
-  - *Interrogative:* *"From a principles and standards standpoint, what is the non-negotiable line we cannot cross here?"*  
-  - *Tactical Label:* *"It sounds like protecting our standards and commitments here is non-negotiable for you."*  
   - *Listen for:* Adherence to commitments, ethics, quality standards, recognition of integrity.
+  - *Tactical Label:* *"It sounds like protecting our standards and commitments here is non-negotiable for you."*  
+  - *Interrogative:* *"From a principles and standards standpoint, what is the non-negotiable line we cannot cross here?"*  
 - **Security / Data (Thinker):**  
-  - *Interrogative:* *"What specific telemetry, timeline metrics, or logs do you need before you feel comfortable moving forward?"*  
-  - *Tactical Label:* *"It seems like you need verified telemetry and chronological clarity before signing off."*  
   - *Listen for:* Chronological facts, percentages, exact error rates, structured methodology.
+  - *Tactical Label:* *"It seems like you need verified telemetry and chronological clarity before signing off."*  
+  - *Interrogative:* *"What specific telemetry, timeline metrics, or logs do you need before you feel comfortable moving forward?"*  
 - **Connection / Approval (Harmonizer):**  
-  - *Interrogative:* *"How is the team holding up through this, and who needs our support the most right now?"*  
-  - *Tactical Label:* *"It feels like ensuring the team is supported and protected is your top priority right now."*  
   - *Listen for:* Concern for people, interpersonal harmony, team morale, feeling safe and appreciated.
+  - *Tactical Label:* *"It feels like ensuring the team is supported and protected is your top priority right now."*  
+  - *Interrogative:* *"How is the team holding up through this, and who needs our support the most right now?"*  
 - **Novelty / Fun (Rebel):**  
-  - *Interrogative:* *"If we tossed out the standard playbook for a second, what's a creative or unconventional angle we could try?"*  
-  - *Tactical Label:* *"It sounds like standard operating procedure feels rigid and you'd rather try a fresh angle."*  
   - *Listen for:* Frustration with bureaucracy, desire for fresh angles, spontaneous brainstorm, fun.
+  - *Tactical Label:* *"It sounds like standard operating procedure feels rigid and you'd rather try a fresh angle."*  
+  - *Interrogative:* *"If we tossed out the standard playbook for a second, what's a creative or unconventional angle we could try?"*  
 - **Security / Space (Imaginer):**  
-  - *Interrogative:* *"Would you prefer some uninterrupted time offline to digest this before we regroup?"*  
-  - *Tactical Label:* *"It feels like you just need some quiet space to process this without live pressure."*  
   - *Listen for:* Low verbal stimulus, desire for solitude, quiet reflection without immediate pressure.
+  - *Tactical Label:* *"It feels like you just need some quiet space to process this without live pressure."*  
+  - *Interrogative:* *"Would you prefer some uninterrupted time offline to digest this before we regroup?"*  
 
 #### Acute Stressors (Opening Probe: *"What is creating the most acute friction or pressure for you on this right now?"*)
 - **Lack of Time (Thinker / Persister):**  
-  - *Interrogative:* *"Are we being rushed into a premature move without enough runway to verify the telemetry?"*  
+  - *Listen for:* Anxiety over arbitrary deadlines, fear of sloppy execution, feeling rushed.
   - *Tactical Label:* *"It seems like being forced to act without sufficient verification is creating a lot of friction."*
+  - *Interrogative:* *"Are we being rushed into a premature move without enough runway to verify the telemetry?"*  
 - **Loss of Control (Promoter / Persister):**  
-  - *Interrogative:* *"Does it feel like decisions are being made around you without your direct authority or sign-off?"*  
+  - *Listen for:* Anger at corporate bureaucracy, feeling managed, waiting on slow approvals.
   - *Tactical Label:* *"It sounds like decisions are being made above your head and you feel sidelined."*
+  - *Interrogative:* *"Does it feel like decisions are being made around you without your direct authority or sign-off?"*  
 - **Social Friction (Harmonizer / Imaginer):**  
-  - *Interrogative:* *"Has the temperature or tone between teams gotten too combative for productive work?"*  
+  - *Listen for:* Distress from shouting, finger-pointing, aggressive Slack messages, hostility.
   - *Tactical Label:* *"It feels like the interpersonal friction on this bridge is getting in the way of real progress."*
+  - *Interrogative:* *"Has the temperature or tone between teams gotten too combative for productive work?"*  
 - **Resource Scarcity (Rebel / Thinker):**  
-  - *Interrogative:* *"Where is standard protocol or resource tooling getting in the way of what actually needs to happen?"*  
+  - *Listen for:* Complaints about rigid protocol, missing permissions, understaffing, broken infrastructure.
   - *Tactical Label:* *"It seems like standard protocol is actually slowing us down right now."*
+  - *Interrogative:* *"Where is standard protocol or resource tooling getting in the way of what actually needs to happen?"*  
 
 #### Conflict Stances (Opening Probe: *"When this team hits acute pressure, what does the breakdown in communication usually look like?"*)
 - **Avoids / Deflects (Harmonizer):**  
-  - *Interrogative:* *"You seem hesitant to disagree—are you agreeing just to keep the peace, or do you truly agree with this plan?"*  
+  - *Listen for:* Over-conceding, reluctant to push back, nervous laughter, avoiding confrontation.
   - *Tactical Label:* *"It seems like there's hesitation to voice concerns because you want to keep the team aligned."*
+  - *Interrogative:* *"You seem hesitant to disagree—are you agreeing just to keep the peace, or do you truly agree with this plan?"*  
 - **Dominates / Escalates (Promoter):**  
-  - *Interrogative:* *"Are you looking to take executive command of this right now, or can we align on the immediate operational play?"*  
+  - *Listen for:* Barking orders, interrupting, threatening executive escalation ('taking this to the VP').
   - *Tactical Label:* *"It sounds like you feel the current pace isn't moving fast enough and you need direct command."*
+  - *Interrogative:* *"Are you looking to take executive command of this right now, or can we align on the immediate operational play?"*  
 - **Dominates / Rigid (Persister):**  
-  - *Interrogative:* *"What specific policy or standard do you feel is being compromised here?"*  
+  - *Listen for:* Preaching, moralizing, quoting policy, insisting on rigid protocol adherence.
   - *Tactical Label:* *"It seems like a fundamental standard or procedure is being compromised and you can't let that slide."*
+  - *Interrogative:* *"What specific policy or standard do you feel is being compromised here?"*  
 - **Logics / Over-explains (Thinker):**  
-  - *Interrogative:* *"Are we getting lost in technical weeds when we need an immediate mitigation decision?"*  
+  - *Listen for:* Lengthy pedantic monologues, nitpicking edge-case data while production is burning.
   - *Tactical Label:* *"It seems like there's critical data on the table that isn't being properly factored into this decision."*
+  - *Interrogative:* *"Are we getting lost in technical weeds when we need an immediate mitigation decision?"*  
 - **Withdraws (Imaginer):**  
-  - *Interrogative:* *"You've gone quiet on the bridge—what's your candid take on what was just proposed?"*  
+  - *Listen for:* Camera off, mute on, monosyllabic replies ('fine', 'ok'), emotional detachment.
   - *Tactical Label:* *"It feels like you're holding back your candid perspective while the group debates."*
+  - *Interrogative:* *"You've gone quiet on the bridge—what's your candid take on what was just proposed?"*  
 - **Blames (Rebel):**  
-  - *Interrogative:* *"Where do you think the system or process broke down before this landed on your plate?"*  
+  - *Listen for:* Sarcastic remarks, eye-rolling, pointing fingers at other teams ('typical DevOps').
   - *Tactical Label:* *"It sounds like you feel stuck absorbing the fallout from someone else's broken process."*
+  - *Interrogative:* *"Where do you think the system or process broke down before this landed on your plate?"*
 
 ---
 
