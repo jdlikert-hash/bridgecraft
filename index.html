@@ -2047,7 +2047,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             },
             phase: {
                 motivator: { "Status / Wins": ["promoter"], "Status / Respect": ["persister"], "Security / Data": ["thinker"], "Connection / Approval": ["harmonizer"], "Novelty / Fun": ["rebel"], "Security / Space": ["imaginer"] },
-                stressor: { "Lack of Time": ["thinker", "persister"], "Loss of Control": ["promoter"], "Social Friction": ["harmonizer", "imaginer"], "Resource Scarcity": ["rebel", "thinker"] },
+                stressor: { "Lack of Time": ["thinker", "persister"], "Loss of Control": ["promoter", "persister"], "Social Friction": ["harmonizer", "imaginer"], "Resource Scarcity": ["rebel", "thinker"] },
                 conflict: { "Avoids / Deflects": ["harmonizer"], "Dominates / Escalates": ["promoter"], "Dominates / Rigid": ["persister"], "Logics / Over-explains": ["thinker"], "Withdraws": ["imaginer"], "Blames": ["rebel"] }
             }
         };
@@ -2991,25 +2991,42 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         function calculateTopMatch(categoryScores, engineKey, primaryFactor) {
             let scores = { thinker: 0, persister: 0, harmonizer: 0, rebel: 0, promoter: 0, imaginer: 0 };
+            let primaryMatchedTypes = [];
             
             for (const [cat, value] of Object.entries(categoryScores)) {
-                if (value && scoringEngine[engineKey][cat][value]) {
+                if (value && scoringEngine[engineKey] && scoringEngine[engineKey][cat] && scoringEngine[engineKey][cat][value]) {
                     const matchedTypes = scoringEngine[engineKey][cat][value];
+                    if (cat === primaryFactor) {
+                        primaryMatchedTypes = matchedTypes;
+                    }
                     matchedTypes.forEach(type => {
                         scores[type] += (cat === primaryFactor) ? 2 : 1;
                     });
                 }
             }
 
-            let topType = null;
             let maxScore = 0;
-            for (const [type, score] of Object.entries(scores)) {
+            for (const score of Object.values(scores)) {
                 if (score > maxScore) {
                     maxScore = score;
-                    topType = type;
                 }
             }
-            return topType || "thinker";
+
+            if (maxScore === 0) return null;
+
+            const topCandidates = Object.keys(scores).filter(type => scores[type] === maxScore);
+
+            if (topCandidates.length === 1) {
+                return topCandidates[0];
+            }
+
+            // Principled tie-breaker: Prioritize candidate matching the primary factor (Focus in Base, Conflict in Phase)
+            const primaryMatch = topCandidates.find(type => primaryMatchedTypes.includes(type));
+            if (primaryMatch) {
+                return primaryMatch;
+            }
+
+            return topCandidates[0];
         }
 
         function analyzeProfile() {
@@ -3024,8 +3041,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 return;
             }
 
-            const predictedBase = calculateTopMatch(baseScores, 'base', 'focus');
-            const predictedPhase = calculateTopMatch(phaseScores, 'phase', 'conflict');
+            let predictedBase;
+            let predictedPhase;
+
+            if (baseCount > 0 && phaseCount === 0) {
+                predictedBase = calculateTopMatch(baseScores, 'base', 'focus') || 'thinker';
+                predictedPhase = predictedBase;
+            } else if (baseCount === 0 && phaseCount > 0) {
+                predictedPhase = calculateTopMatch(phaseScores, 'phase', 'conflict') || 'thinker';
+                predictedBase = predictedPhase;
+            } else {
+                predictedBase = calculateTopMatch(baseScores, 'base', 'focus') || 'thinker';
+                predictedPhase = calculateTopMatch(phaseScores, 'phase', 'conflict') || predictedBase;
+            }
 
             currentSubjectName = document.getElementById('subject-name').value.trim() || "Observed Stakeholder";
             currentAnalysis.baseKey = predictedBase;
@@ -3045,7 +3073,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
             const playbook = getEffectivePlaybook(currentAnalysis.phaseKey, currentLens);
             const isPure = currentAnalysis.baseKey === currentAnalysis.phaseKey;
-            const titleText = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
+            const titleText = isPure ? `Pure ${currentAnalysis.base.name.replace(/^The\s+/, '')}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
 
             const resTitle = document.getElementById('res-title');
             const resContent = document.getElementById('res-content');
@@ -3387,7 +3415,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             const safeName = currentSubjectName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
             const fileName = `${safeName}_bridgecraft_${currentLens}_${date}.md`;
             const isPure = currentAnalysis.base.name === currentAnalysis.phase.name;
-            const profileTitle = isPure ? `Pure ${currentAnalysis.base.name}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
+            const profileTitle = isPure ? `Pure ${currentAnalysis.base.name.replace(/^The\s+/, '')}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
 
             let md = `# BridgeCraft Tactical Playbook: ${currentSubjectName}\n`;
             md += `**Operational Lens:** ${cfg.name} (${cfg.shortBadge})\n`;

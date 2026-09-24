@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.2] - 2026-09-24 — *Scoring System Engine Accuracy & Default Fallback Calibration*
+
+Comprehensive mathematical audit and precision calibration of the BridgeCraft two-tier scoring engine prior to senior leadership demonstration. Fixed phase default fallback, corrected archetype inclusion on acute stressors, aligned tie-breaker prioritization, and polished pure archetype title formatting without introducing any user complexity.
+
+### Fixed
+- **Phase Default Fallback when Level 2 is Unselected (`analyzeProfile`):**
+  - Resolved critical issue where single-tier Base selections (e.g. Harmonizer, Rebel, Promoter) with Level 2 left unselected defaulted the phase to Thinker (`calculateTopMatch` 0-score fallback), incorrectly producing e.g. "Harmonizer Base / Thinker Phase" and displaying a Thinker data-heavy playbook.
+  - Aligned behavior with Process Communication Model (PCM) principles: when Level 2 is unobserved (`phaseCount === 0`), Phase now defaults to match Base (`predictedPhase = predictedBase`), generating a pure profile (e.g. "Pure Harmonizer") with that archetype's de-escalation playbook.
+  - Symmetrically, when only Phase distress cues are observed under acute crisis (`baseCount === 0 && phaseCount > 0`), Base defaults to match Phase (`predictedBase = predictedPhase`).
+- **Archetype Parity in Scoring Engine (`scoringEngine.phase.stressor`):**
+  - Updated `"Loss of Control"` in `scoringEngine.phase.stressor` from `["promoter"]` to `["promoter", "persister"]`, achieving 100% parity with the probe card badge ("Promoter / Persister") and Chapter 4 of the Master Guide.
+- **Principled Primary Factor Tie-Breaker (`calculateTopMatch`):**
+  - Replaced arbitrary dictionary-order tie-breaking (`Object.entries` order) with a principled primary factor tie-breaker.
+  - When candidate archetypes tie on total score, candidates matching the explicit primary attribute (`focus` in Base, `conflict` in Phase) are prioritized over candidates that only matched secondary attributes.
+- **Pure Profile Display Polish (`renderAnalysisCard`, `exportToMarkdown`):**
+  - Cleaned up archetype card header and markdown export title formatting when Base and Phase match, displaying e.g. "Pure Harmonizer" rather than "Pure The Harmonizer".
+
+---
+
 ## [2.1.1] - 2026-09-23 — *Passive Listening Radar & Level 2 Probe Hierarchy Inversion*
 
 Restructured Level 2 Diagnostic Probes to align with core Process Communication Model (PCM) observational methodology. Elevated passive acoustic recognition cues to the primary focal position at the top of cards, reducing live incident cognitive load and eliminating conversational friction.
