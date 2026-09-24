@@ -1,11 +1,11 @@
-# BridgeCraft v2.0 — Strategic Field Manual & Architecture
+# BridgeCraft v2.1.2 — Strategic Field Manual & Architecture
 
 > **A tactical incident communication, de-escalation, and situational alignment console designed for frontline operators, client advocates, and people leaders across high-pressure environments.**  
-> *(See [CHANGELOG.md](CHANGELOG.md) for full v2.0 release history)*
+> *(See [CHANGELOG.md](CHANGELOG.md) for full release history up to v2.1.2)*
 
-> 📖 **Definitive Master Guide & Slide Deck Curriculum:**  
-> For the complete chapter-by-chapter walkthrough engineered for **Google NotebookLM** slide deck creation, executive briefing synthesis, and feature walkthrough decks, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
-> 🖼️ **Visual UI Tour & Ground-Truth Reference:** See **[BridgeCraft_Visual_UI_Tour.pdf](docs/BridgeCraft_Visual_UI_Tour.pdf)**.
+> 🎙️ **Definitive Master Guide for Google NotebookLM (Audio Overview / Podcast & Slide Decks):**  
+> For the complete chapter-by-chapter curriculum engineered for **Google NotebookLM** podcast generation, executive briefing synthesis, and feature walkthrough decks, see **[BRIDGE_CRAFT_MASTER_GUIDE.md](BRIDGE_CRAFT_MASTER_GUIDE.md)**.  
+> 🖼️ **Visual UI Tour & Ground-Truth PDF Reference:** See **[BridgeCraft_Visual_UI_Tour.pdf](docs/BridgeCraft_Visual_UI_Tour.pdf)** (or view the HTML version at [`docs/BRIDGECRAFT_VISUAL_TOUR.html`](docs/BRIDGECRAFT_VISUAL_TOUR.html)).
 
 ---
 

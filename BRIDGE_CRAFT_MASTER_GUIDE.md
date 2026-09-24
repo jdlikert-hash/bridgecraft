@@ -2,13 +2,13 @@
 
 > **A Comprehensive, Chapter-by-Chapter Guide to Tactical Incident Communication, Applied Behavioral Science, Adaptive Cognitive Framing, and De-Escalation Rehearsals.**  
 > *Engineered for Incident Commanders, Engineering Leads, Customer Support Managers, and Cross-Functional Negotiators.*  
-> *Version: 2.0.0 (Production Release) | Architecture: 100% Client-Side Execution*
+> *Version: 2.1.2 (Production Release) | Architecture: 100% Client-Side Execution*
 
 ---
 
 ## 📋 Course Syllabus & Presentation Index
 
-This document is engineered to serve as both an exhaustive operational master guide and a **ready-to-ingest source for Google NotebookLM, Microsoft Copilot, or Claude** to produce an executive briefing deck, feature walkthrough slide presentation, audio briefing, or chapter-by-chapter training curriculum.
+This document is engineered to serve as both an exhaustive operational master guide and a **ready-to-ingest source for Google NotebookLM, Microsoft Copilot, or Claude** to produce an Audio Overview podcast, executive briefing deck, feature walkthrough slide presentation, or chapter-by-chapter training curriculum.
 
 - **Chapter 1: The Core Mental Model — Why High-Stakes Communication Fails**
 - **Chapter 2: Architecture & Setup — Zero-Cloud Privacy & Navigation**
