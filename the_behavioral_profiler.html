@@ -18,7 +18,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BridgeCraft — Tactical Incident Communication & De-Escalation Console</title>
+    <title>BridgeCraft — Real-Time De-Escalation & Behavioral Co-Pilot</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f46e5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23b)'/%3E%3Crect x='7' y='6' width='2.5' height='15' rx='0.6' fill='%23fff'/%3E%3Crect x='22.5' y='6' width='2.5' height='15' rx='0.6' fill='%23fff'/%3E%3Cpath d='M2 17.5 Q7 11 8.2 8' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3Cpath d='M8.2 8 Q16 18.5 23.8 8' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round'/%3E%3Cpath d='M23.8 8 Q25 11 30 17.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3Cline x1='12' y1='13.8' x2='12' y2='19' stroke='%23fff' stroke-width='1' stroke-opacity='0.9'/%3E%3Cline x1='16' y1='16.8' x2='16' y2='19' stroke='%23fff' stroke-width='1' stroke-opacity='0.9'/%3E%3Cline x1='20' y1='13.8' x2='20' y2='19' stroke='%23fff' stroke-width='1' stroke-opacity='0.9'/%3E%3Crect x='2' y='19' width='28' height='2.4' rx='0.8' fill='%23fff'/%3E%3Cpath d='M5 24.5 h6 M14 24.5 h7 M24 24.5 h3 M8 27 h5 M17 27 h7' stroke='%23a5f3fc' stroke-width='1' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E">
     <link rel="alternate icon" href="favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -187,13 +187,13 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
     <header class="theme-header border-b sticky top-0 z-10 shadow-md">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center justify-between h-auto lg:h-16 py-3 lg:py-0 gap-3">
+            <div class="flex flex-col lg:flex-row items-center justify-between min-h-16 py-2.5 lg:py-0 gap-2.5 lg:gap-4">
                 <div class="flex items-center mb-1 lg:mb-0">
                     <svg class="w-6 h-6 theme-accent-text mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 15h20M6 6v12M18 6v12M5 10h2M17 10h2M2 13c3-3 4-7 4-7s6 9 12 0c0 0 1 4 4 7M12 12.5v2.5"></path></svg>
                     <div>
                         <h1 class="text-xl font-bold tracking-tight text-white flex items-center">
                             BridgeCraft
-                            <span class="ml-2 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700/80 font-semibold" title="Version 2.0 (The Adaptive Operational Console)">v2.0</span>
+                            <span class="ml-2 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700/80 font-semibold" title="BridgeCraft v2.2 — Actionable Behavioral Co-Pilot">v2.2</span>
                             <span id="header-domain-badge" class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full border border-indigo-500/40 bg-indigo-500/20 text-indigo-300">IT Ops</span>
                         </h1>
                         <span id="app-tagline" class="hidden sm:inline-block text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation &amp; Communication Console</span>
@@ -233,7 +233,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
     </header>
 
     <!-- DOMAIN LENS SELECTOR STRIP -->
-    <div class="border-b border-slate-800/80 theme-subtle py-1.5 px-4 shadow-inner">
+    <div class="border-b border-slate-800/80 theme-subtle py-1.5 px-4 shadow-inner relative z-20">
         <div class="max-w-5xl mx-auto flex items-center justify-between gap-2 text-xs">
             <div class="flex items-center flex-wrap gap-1.5">
                 <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-slate-800/90 border border-slate-700/60 mr-1 flex items-center gap-1 shadow-sm">
@@ -287,8 +287,21 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <span>Select observation cues below to calibrate live de-escalation talk tracks.</span>
                     <a href="javascript:void(0)" onclick="switchTab('manual')" class="theme-accent-text hover:underline flex items-center font-medium">
                         <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span>Quick-Start Field Guide &rarr;</span>
+                        <span>Strategic Field Manual &rarr;</span>
                     </a>
+                </div>
+
+                <!-- LIVE CO-PILOT INDICATOR BANNER (ACTIONABLE & PLAIN ENGLISH) -->
+                <div class="mt-3.5 pt-3 border-t border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div class="flex items-center flex-wrap gap-2">
+                        <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-500/40 font-mono text-[10px] font-bold flex items-center gap-1 shadow-sm">
+                            <span>⚡</span> Behavioral Co-Pilot Active
+                        </span>
+                        <span class="text-slate-300 text-xs">
+                            Translating: <strong>Communication Channel</strong> &bull; <strong>Core Stress Trigger</strong> &bull; <strong>Conflict Traps</strong> &bull; <strong>Brain Bandwidth</strong>
+                        </span>
+                    </div>
+                    <span class="text-[11px] text-slate-400 font-mono hidden sm:inline">&bull; Zero Jargon &bull; Auto-Derived</span>
                 </div>
             </div>
 
@@ -733,6 +746,70 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 over-apologizing (Harmonizer), blaming (Rebel), steamrolling (Promoter), or shutting down (Imaginer).
                             </p>
                             <span class="text-xs text-rose-400 font-semibold block pt-1">&rarr; Tactical Rule: Address their Phase need to de-escalate conflict.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION 2.5: THE FRONTLINE BEHAVIORAL STACK (ACTIONABLE & ZERO JARGON) -->
+                <section class="bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-900 p-5 sm:p-6 rounded-2xl border border-indigo-500/30 space-y-4 shadow-xl">
+                    <div class="border-b border-indigo-900/60 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-sm">⚡</span>
+                            <div>
+                                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">The Frontline Behavioral Stack: De-Escalation Without the Jargon</h3>
+                                <p class="text-xs text-slate-400">You don't need a psychology degree to calm a bridge call. Here is how the 4 layers work in plain English:</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-200 border border-indigo-500/30 self-start sm:self-auto font-semibold">Practical Field Rules</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
+                        <!-- Layer 1 -->
+                        <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-5 h-5 rounded-md bg-blue-500/20 text-blue-300 flex items-center justify-center font-bold text-xs">1</span>
+                                <strong class="text-sm text-slate-100">The Core Trigger (What Stole Their Patience)</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                When a stakeholder blows up, it is almost never about the software or the ticket. Their brain felt a sudden threat to one of four essentials: <strong>Certainty</strong> (shifting timelines), <strong>Control</strong> (feeling dictated to), <strong>Respect</strong> (feeling their competence was dismissed), or <strong>Safety</strong> (fear of blame).
+                            </p>
+                            <span class="text-emerald-400 font-semibold block">&rarr; The Action: Give them the specific antidote. If they need certainty, give a firm checkpoint timestamp. If they feel pushed around, give them two binary choices.</span>
+                        </div>
+
+                        <!-- Layer 2 -->
+                        <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-5 h-5 rounded-md bg-rose-500/20 text-rose-300 flex items-center justify-center font-bold text-xs">2</span>
+                                <strong class="text-sm text-slate-100">The Conflict Trap (Don't Take the Bait)</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Under stress, people unconsciously drag you into unproductive conflict roles: <strong>The Attacker</strong> (shouting and demanding compliance), <strong>The Helpless Victim</strong> (over-apologizing and shutting down), or <strong>The Nitpicker</strong> (flooding the room with trivia to avoid responsibility).
+                            </p>
+                            <span class="text-rose-300 font-semibold block">&rarr; The Action: Never take the bait. If they attack, don't apologize or argue policy (that fuels their anger). Use the <strong>Circuit Breaker</strong> script to ground both parties back into solving the problem.</span>
+                        </div>
+
+                        <!-- Layer 3 -->
+                        <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-5 h-5 rounded-md bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold text-xs">3</span>
+                                <strong class="text-sm text-slate-100">Negotiation Stance (How to Counter Their Move)</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                When somebody takes a hard line on an escalation call, they are either <strong>Bulldozing</strong> (demanding power), <strong>Holding a Principled Stand</strong> (protecting quality standards), or <strong>Appeasing</strong> (over-promising just to end the call).
+                            </p>
+                            <span class="text-purple-300 font-semibold block">&rarr; The Action: Bulldozers need firm boundaries and clear options. Principled leaders need their mission acknowledged first. Appeasers need gentle probing to surface hidden risks before they explode later.</span>
+                        </div>
+
+                        <!-- Layer 4 -->
+                        <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-5 h-5 rounded-md bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-xs">4</span>
+                                <strong class="text-sm text-slate-100">Brain Bandwidth (Biology Before Logic)</strong>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Acute panic drops human reasoning bandwidth by <strong>80%</strong>. When a stakeholder is flooded with adrenaline, their prefrontal cortex cannot process bullet points, architecture diagrams, or SLAs.
+                            </p>
+                            <span class="text-amber-300 font-semibold block">&rarr; The Action: Never dump data on an angry person. Drop your vocal cadence, slow your breathing, and label their reality first. Once they take a physical breath, their reasoning bandwidth returns.</span>
                         </div>
                     </div>
                 </section>
@@ -1931,37 +2008,43 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         question: "If we could hand you one concrete win in the next 30 minutes, what would move the needle fastest?",
                         labelAlternative: "It seems like securing an immediate, high-visibility win right now is what matters most.",
                         listenFor: "Immediate bottom-line outcomes, visible momentum, skipping bureaucracy.",
-                        archetype: "Promoter"
+                        archetype: "Promoter",
+                        actionTag: "⚡ Trigger: Sluggish Pace / Needs Fast Win"
                     },
                     "Status / Respect": {
                         question: "From a principles and standards standpoint, what is the non-negotiable line we cannot cross here?",
                         labelAlternative: "It sounds like protecting our standards and commitments here is non-negotiable for you.",
                         listenFor: "Adherence to commitments, ethics, quality standards, recognition of integrity.",
-                        archetype: "Persister"
+                        archetype: "Persister",
+                        actionTag: "⚡ Trigger: Broken Standards / Respect"
                     },
                     "Security / Data": {
                         question: "What specific telemetry, timeline metrics, or logs do you need before you feel comfortable moving forward?",
                         labelAlternative: "It seems like you need verified telemetry and chronological clarity before signing off.",
                         listenFor: "Chronological facts, percentages, exact error rates, structured methodology.",
-                        archetype: "Thinker"
+                        archetype: "Thinker",
+                        actionTag: "⚡ Trigger: Timeline & Data Ambiguity"
                     },
                     "Connection / Approval": {
                         question: "How is the team holding up through this, and who needs our support the most right now?",
                         labelAlternative: "It feels like ensuring the team is supported and protected is your top priority right now.",
                         listenFor: "Concern for people, interpersonal harmony, team morale, feeling safe and appreciated.",
-                        archetype: "Harmonizer"
+                        archetype: "Harmonizer",
+                        actionTag: "⚡ Trigger: Hostility & Social Tension"
                     },
                     "Novelty / Fun": {
                         question: "If we tossed out the standard playbook for a second, what's a creative or unconventional angle we could try?",
                         labelAlternative: "It sounds like standard operating procedure feels rigid and you'd rather try a fresh angle.",
                         listenFor: "Frustration with bureaucracy, desire for fresh angles, spontaneous brainstorm, fun.",
-                        archetype: "Rebel"
+                        archetype: "Rebel",
+                        actionTag: "⚡ Trigger: Rigid Red Tape / Boredom"
                     },
                     "Security / Space": {
                         question: "Would you prefer some uninterrupted time offline to digest this before we regroup?",
                         labelAlternative: "It feels like you just need some quiet space to process this without live pressure.",
                         listenFor: "Low verbal stimulus, desire for solitude, quiet reflection without immediate pressure.",
-                        archetype: "Imaginer"
+                        archetype: "Imaginer",
+                        actionTag: "⚡ Trigger: Sensory & Social Overload"
                     }
                 }
             },
@@ -2003,37 +2086,43 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         question: "You seem hesitant to disagree—are you agreeing just to keep the peace, or do you truly agree with this plan?",
                         labelAlternative: "It seems like there's hesitation to voice concerns because you want to keep the team aligned.",
                         listenFor: "Over-conceding, reluctant to push back, nervous laughter, avoiding confrontation.",
-                        archetype: "Harmonizer"
+                        archetype: "Harmonizer",
+                        actionTag: "🛡️ Conflict Trap: Freezing / Over-Conceding"
                     },
                     "Dominates / Escalates": {
                         question: "Are you looking to take executive command of this right now, or can we align on the immediate operational play?",
                         labelAlternative: "It sounds like you feel the current pace isn't moving fast enough and you need direct command.",
                         listenFor: "Barking orders, interrupting, threatening executive escalation ('taking this to the VP').",
-                        archetype: "Promoter"
+                        archetype: "Promoter",
+                        actionTag: "🛡️ Conflict Trap: Bulldozing / Attacking"
                     },
                     "Dominates / Rigid": {
                         question: "What specific policy or standard do you feel is being compromised here?",
                         labelAlternative: "It seems like a fundamental standard or procedure is being compromised and you can't let that slide.",
                         listenFor: "Preaching, moralizing, quoting policy, insisting on rigid protocol adherence.",
-                        archetype: "Persister"
+                        archetype: "Persister",
+                        actionTag: "🛡️ Conflict Trap: Moralizing / Rigid Policy"
                     },
                     "Logics / Over-explains": {
                         question: "Are we getting lost in technical weeds when we need an immediate mitigation decision?",
                         labelAlternative: "It seems like there's critical data on the table that isn't being properly factored into this decision.",
                         listenFor: "Lengthy pedantic monologues, nitpicking edge-case data while production is burning.",
-                        archetype: "Thinker"
+                        archetype: "Thinker",
+                        actionTag: "🛡️ Conflict Trap: Nitpicking / Data Flood"
                     },
                     "Withdraws": {
                         question: "You've gone quiet on the bridge—what's your candid take on what was just proposed?",
                         labelAlternative: "It feels like you're holding back your candid perspective while the group debates.",
                         listenFor: "Camera off, mute on, monosyllabic replies ('fine', 'ok'), emotional detachment.",
-                        archetype: "Imaginer"
+                        archetype: "Imaginer",
+                        actionTag: "🛡️ Conflict Trap: Going Dark / Shutdown"
                     },
                     "Blames": {
                         question: "Where do you think the system or process broke down before this landed on your plate?",
                         labelAlternative: "It sounds like you feel stuck absorbing the fallout from someone else's broken process.",
                         listenFor: "Sarcastic remarks, eye-rolling, pointing fingers at other teams ('typical DevOps').",
-                        archetype: "Rebel"
+                        archetype: "Rebel",
+                        actionTag: "🛡️ Conflict Trap: Finger Pointing / Blame"
                     }
                 }
             }
@@ -2736,7 +2825,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                     <span class="probe-status-dot w-2 h-2 rounded-full ${isSel ? 'bg-indigo-400 ring-2 ring-indigo-400/30' : 'bg-slate-600 group-hover:bg-indigo-400'}"></span>
                                     <span>${escapeHtml(chipVal)}</span>
                                 </span>
-                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 border border-slate-700 font-mono">${escapeHtml(item.archetype)}</span>
+                                <div class="flex items-center space-x-1.5">
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 border border-slate-700 font-mono">${escapeHtml(item.archetype)}</span>
+                                    ${item.actionTag ? `<span class="text-[9px] px-1.5 py-0.5 rounded bg-indigo-950/80 text-indigo-200 border border-indigo-500/30 font-sans font-medium">${escapeHtml(item.actionTag)}</span>` : ''}
+                                </div>
                             </div>
 
                             <!-- Primary Passive Radar: Listen For -->
@@ -3068,11 +3160,233 @@ employer, client, or third party. See LICENSE file for full legal terms.
             setTimeout(() => { resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
+        
+        // ================= ACTIONABLE FRONTLINE BEHAVIORAL ENGINE =================
+        const ACTIONABLE_BEHAVIORAL_ENGINE = {
+            triggers: {
+                thinker: {
+                    name: "Timeline & Data Ambiguity",
+                    badge: "Ambiguity & Shifting Timelines",
+                    style: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+                    tell: "Panicking over shifting deadlines, ambiguous status, or unverified claims.",
+                    action: "Give a firm next-checkpoint time (e.g. 'Next status update at 2:15 PM with delta metrics') and itemized objective criteria."
+                },
+                persister: {
+                    name: "Broken Standards & Respect",
+                    badge: "Challenged Standards & Values",
+                    style: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    tell: "Feeling that quality standards are slipping, commitments are broken, or expertise is ignored.",
+                    action: "Publicly validate their high standards and ask for their judgment before proposing alternatives."
+                },
+                harmonizer: {
+                    name: "Interpersonal Tension & Hostility",
+                    badge: "Hostility & Fear of Blame",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    tell: "Flooded by harsh tones, conflict, fear of being blamed, or feeling unsupported.",
+                    action: "Use inclusive 'we' language, acknowledge personal pressure, and ensure unconditional psychological safety."
+                },
+                rebel: {
+                    name: "Rigid Red Tape & Micromanagement",
+                    badge: "Bureaucracy & Micromanagement",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "Feeling boxed in by bureaucracy, micromanaged, or forced to follow rigid process.",
+                    action: "Offer two discrete operational choices; reframe the roadblock as an unconventional challenge to solve."
+                },
+                promoter: {
+                    name: "Sluggish Inaction & Lost Momentum",
+                    badge: "Inaction & Lost Momentum",
+                    style: "bg-red-500/20 text-red-300 border-red-500/40",
+                    tell: "Frustrated by endless deliberation, bureaucracy, and loss of competitive velocity.",
+                    action: "Cut straight to the bottom-line payoff; empower them with clear ownership to score an immediate visible win."
+                },
+                imaginer: {
+                    name: "Sensory & Meeting Overload",
+                    badge: "Sensory & Meeting Overload",
+                    style: "bg-teal-500/20 text-teal-300 border-teal-500/40",
+                    tell: "Flooded by rapid-fire cross-talk, bridge noise, and forced on-the-spot group pressure.",
+                    action: "Shield them from meeting noise; send a 1-on-1 direct message and grant quiet space to process."
+                }
+            },
+            conflictTraps: {
+                attacker: {
+                    roleName: "The Attacker / Blamer",
+                    badge: "Attacking & Demanding Compliance",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "Issues aggressive demands, moralizes, weaponizes protocol, or threatens executive escalation.",
+                    baitTrap: "Do NOT over-apologize or argue company policy (apologizing invites them to attack harder).",
+                    pivotStance: "Grounded Problem-Solver",
+                    breakerScript: "I hear the urgency and I share your frustration on this timeline. Let's redirect that intensity straight into isolating the blocker right now."
+                },
+                deflector: {
+                    roleName: "The Helpless Deflector",
+                    badge: "Freezing & Over-Conceding",
+                    style: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+                    tell: "Over-apologizes, acts helpless, withdraws into silence, or defers all decisions.",
+                    baitTrap: "Do NOT take over their work (rescuing them reinforces helplessness and burns you out).",
+                    pivotStance: "Empowering Coach",
+                    breakerScript: "You understand this area better than anyone. What is the very first operational step you need from us to unlock your progress?"
+                },
+                intellectualizer: {
+                    roleName: "The Data Weaponizer",
+                    badge: "Nitpicking & Data Flooding",
+                    style: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+                    tell: "Floods the room with granular telemetry, definitions, and trivia to avoid emotional discomfort.",
+                    baitTrap: "Do NOT get sucked into debating edge cases or definitions.",
+                    pivotStance: "Decision Anchor",
+                    breakerScript: "The telemetry you surfaced is comprehensive. What is the single highest-priority decision this data points us to right now?"
+                },
+                blamer: {
+                    roleName: "The System Blamer",
+                    badge: "Finger-Pointing & Sarcasm",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    tell: "Attacks management, company policy, or third parties to avoid taking personal ownership.",
+                    baitTrap: "Do NOT defend the company rulebook or lecture them on protocol.",
+                    pivotStance: "Ownership Challenge",
+                    breakerScript: "Let's set aside who broke it for 10 minutes. If you had total operational authority right now, how would you solve it?"
+                },
+                grounded: {
+                    roleName: "Collaborative Adult",
+                    badge: "Clear & Non-Reactive",
+                    style: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                    tell: "Clear, task-focused, non-defensive communication.",
+                    baitTrap: "Maintain calm pacing; avoid escalating micro-tells.",
+                    pivotStance: "Direct Partner",
+                    breakerScript: "Let's confirm our alignment on the immediate operational sequence."
+                }
+            },
+            negotiationStance: {
+                competing_aggressive: {
+                    badge: "Bulldozing / Power Move",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    action: "Forcing outcome by authority; hold firm boundaries and offer two concrete binary options."
+                },
+                competing_principled: {
+                    badge: "Principled Stand",
+                    style: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    action: "Standing firm on protocol; align on shared mission before negotiating mechanics."
+                },
+                accommodating: {
+                    badge: "People-Pleasing / Over-Conceding",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    action: "Over-conceding to avoid tension; gently probe for hidden objections or unvoiced risks."
+                },
+                avoiding: {
+                    badge: "Disconnecting / Going Dark",
+                    style: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+                    action: "Shutting down; transition to a low-pressure asynchronous 1-on-1 channel."
+                },
+                collaborating_analytical: {
+                    badge: "Analytical Problem Solving",
+                    style: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+                    action: "Seeking objective logic; establish clear numerical criteria and decision gates."
+                },
+                competing_disruptive: {
+                    badge: "Defiant / Pushing Back",
+                    style: "bg-red-500/20 text-red-300 border-red-500/40",
+                    action: "Rebelling against authority; redirect energy into competing against the technical obstacle."
+                },
+                collaborating_standard: {
+                    badge: "Open Collaboration",
+                    style: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                    action: "Joint exploration of win-win solutions."
+                }
+            },
+            bandwidth: {
+                overloaded: {
+                    state: "Overloaded (Fight or Flight)",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "High adrenaline: Tunnel vision & ~80% bandwidth drop. Drop your vocal pace BEFORE debating data."
+                },
+                shutdown: {
+                    state: "Shut Down (Freeze / Overwhelm)",
+                    style: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+                    tell: "Overwhelmed by meeting noise. Remove cross-talk; provide quiet 1-on-1 containment."
+                },
+                open: {
+                    state: "Open (Full Bandwidth)",
+                    style: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                    tell: "Channels open: Fully receptive to complex problem solving, nuance, and trade-offs."
+                }
+            },
+            habitTell: {
+                thinker: { name: "Perfectionist", cue: "Qualifiers ('obviously', 'precisely'), granular edits, fear of error." },
+                persister: { name: "Moral High Ground", cue: "Unyielding stoicism, quoting principles, deep endurance." },
+                harmonizer: { name: "Over-Accommodating", cue: "Apologizing profusely, head tilting, softening statements ('I could be wrong...')." },
+                rebel: { name: "Pushing Back", cue: "Creative resistance, sighing, testing boundaries and rules." },
+                promoter: { name: "Impatient Driver", cue: "Skipping greetings, interrupting, demanding immediate velocity." },
+                imaginer: { name: "Withdrawing Inward", cue: "Flat affect, camera off, monosyllables, internal processing." }
+            }
+        };
+
+        function getActionableBehavioralProfile(baseKey, phaseKey, currentSelections) {
+            const trigger = ACTIONABLE_BEHAVIORAL_ENGINE.triggers[phaseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.triggers[baseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.triggers.thinker;
+            const habit = ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[baseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.habitTell.thinker;
+
+            let trapKey = 'grounded';
+            let stanceKey = 'collaborating_standard';
+            let bandwidthKey = 'open';
+
+            const conflict = currentSelections.conflict;
+
+            if (conflict === 'Dominates / Escalates') {
+                trapKey = 'attacker';
+                stanceKey = 'competing_aggressive';
+                bandwidthKey = 'overloaded';
+            } else if (conflict === 'Dominates / Rigid') {
+                trapKey = 'attacker';
+                stanceKey = 'competing_principled';
+                bandwidthKey = 'overloaded';
+            } else if (conflict === 'Avoids / Deflects') {
+                trapKey = 'deflector';
+                stanceKey = 'accommodating';
+                bandwidthKey = 'shutdown';
+            } else if (conflict === 'Withdraws') {
+                trapKey = 'deflector';
+                stanceKey = 'avoiding';
+                bandwidthKey = 'shutdown';
+            } else if (conflict === 'Logics / Over-explains') {
+                trapKey = 'intellectualizer';
+                stanceKey = 'collaborating_analytical';
+                bandwidthKey = 'overloaded';
+            } else if (conflict === 'Blames') {
+                trapKey = 'blamer';
+                stanceKey = 'competing_disruptive';
+                bandwidthKey = 'overloaded';
+            } else {
+                if (phaseKey === 'promoter' || phaseKey === 'persister') {
+                    trapKey = 'attacker';
+                    stanceKey = 'competing_aggressive';
+                    bandwidthKey = 'overloaded';
+                } else if (phaseKey === 'harmonizer' || phaseKey === 'imaginer') {
+                    trapKey = 'deflector';
+                    stanceKey = 'avoiding';
+                    bandwidthKey = 'shutdown';
+                } else if (phaseKey === 'rebel') {
+                    trapKey = 'blamer';
+                    stanceKey = 'competing_disruptive';
+                    bandwidthKey = 'overloaded';
+                } else {
+                    trapKey = 'grounded';
+                    stanceKey = 'collaborating_standard';
+                    bandwidthKey = 'open';
+                }
+            }
+
+            return {
+                trigger,
+                trap: ACTIONABLE_BEHAVIORAL_ENGINE.conflictTraps[trapKey],
+                stance: ACTIONABLE_BEHAVIORAL_ENGINE.negotiationStance[stanceKey],
+                bandwidth: ACTIONABLE_BEHAVIORAL_ENGINE.bandwidth[bandwidthKey],
+                habit
+            };
+        }
+
         function renderAnalysisCard() {
             if (!currentAnalysis.base || !currentAnalysis.phase) return;
             const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
             const playbook = getEffectivePlaybook(currentAnalysis.phaseKey, currentLens);
             const isPure = currentAnalysis.baseKey === currentAnalysis.phaseKey;
+            const actionProfile = getActionableBehavioralProfile(currentAnalysis.baseKey, currentAnalysis.phaseKey, selections);
             const titleText = isPure ? `Pure ${currentAnalysis.base.name.replace(/^The\s+/, '')}` : `${currentAnalysis.base.name} Base / ${currentAnalysis.phase.name} Phase`;
 
             const resTitle = document.getElementById('res-title');
@@ -3117,6 +3431,61 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <span class="px-3 py-1 rounded-full text-xs font-bold border ${isPure ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : currentAnalysis.phase.disc.style}">
                                 ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label}
                             </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIONABLE BEHAVIORAL RADAR (ZERO JARGON) -->
+                <div class="bg-gradient-to-br from-slate-900/95 via-slate-900/80 to-indigo-950/40 p-4 rounded-xl border border-slate-700/80 space-y-3 shadow-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800 pb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+                                <span>⚡</span> Frontline Behavioral Radar
+                            </span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-950/70 text-indigo-300 border border-indigo-500/30 font-semibold">What Drives Them &bull; What Traps You</span>
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-mono">Real-Time De-Escalation Guidance</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                        <!-- CORE TRIGGER -->
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">⚡ Core Trigger</span>
+                            <div class="flex items-center">
+                                <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.trigger.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.trigger.badge)}: ${escapeHtml(actionProfile.trigger.tell)}">
+                                    ${actionProfile.trigger.badge}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-snug pt-0.5">${escapeHtml(actionProfile.trigger.tell)}</p>
+                        </div>
+                        <!-- CONFLICT TRAP -->
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">🛡️ Conflict Trap</span>
+                            <div class="flex items-center">
+                                <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.trap.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.trap.badge)} (${escapeHtml(actionProfile.trap.roleName)}): ${escapeHtml(actionProfile.trap.tell)}">
+                                    ${actionProfile.trap.badge}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-snug pt-0.5">${escapeHtml(actionProfile.trap.tell)}</p>
+                        </div>
+                        <!-- NEGOTIATION STANCE -->
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">⚔️ Negotiation Stance</span>
+                            <div class="flex items-center">
+                                <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.stance.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.stance.badge)}: ${escapeHtml(actionProfile.stance.action)}">
+                                    ${actionProfile.stance.badge}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-snug pt-0.5">${escapeHtml(actionProfile.stance.action)}</p>
+                        </div>
+                        <!-- BRAIN BANDWIDTH -->
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">🧠 Brain Bandwidth</span>
+                            <div class="flex items-center">
+                                <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.bandwidth.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.bandwidth.state)}: ${escapeHtml(actionProfile.bandwidth.tell)}">
+                                    ${actionProfile.bandwidth.state}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-snug pt-0.5">${escapeHtml(actionProfile.bandwidth.tell)}</p>
                         </div>
                     </div>
                 </div>
@@ -3255,6 +3624,49 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             </ul>
                         </div>
                     </div>
+
+                    <!-- DE-ESCALATION CIRCUIT BREAKER & CORE TRIGGER ANTIDOTE -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                        <!-- CIRCUIT BREAKER -->
+                        <div class="bg-gradient-to-br from-indigo-950/50 via-slate-900/90 to-purple-950/40 p-4 rounded-xl border border-indigo-500/40 space-y-2.5 shadow-md">
+                            <div class="flex items-center justify-between border-b border-indigo-900/50 pb-1.5">
+                                <div class="flex items-center space-x-1.5">
+                                    <span class="text-sm">🛡️</span>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">De-Escalation Circuit Breaker</span>
+                                </div>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-200 border border-indigo-500/30">Pivot Stance: ${actionProfile.trap.pivotStance}</span>
+                            </div>
+                            <div class="text-[11px] text-amber-300/90 bg-amber-950/30 p-2 rounded border border-amber-500/20 leading-snug">
+                                <strong>⚠️ Trap to Avoid:</strong> ${escapeHtml(actionProfile.trap.baitTrap)}
+                            </div>
+                            <div class="space-y-1 pt-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block">Say This to Reset the Conversation:</span>
+                                <p class="text-xs text-slate-100 italic font-medium bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 leading-relaxed">
+                                    "${escapeHtml(actionProfile.trap.breakerScript)}"
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- CORE TRIGGER ANTIDOTE -->
+                        <div class="bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-blue-950/40 p-4 rounded-xl border border-blue-500/40 space-y-2.5 shadow-md">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between border-b border-blue-900/50 pb-1.5">
+                                    <div class="flex items-center space-x-1.5">
+                                        <span class="text-sm">⚡</span>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-blue-300">De-Escalation Antidote</span>
+                                    </div>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/60 text-blue-200 border border-blue-500/30">${actionProfile.trigger.name}</span>
+                                </div>
+                                <div class="text-[11px] text-slate-200 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 space-y-1 leading-relaxed">
+                                    <strong class="text-blue-400 font-semibold block">The Move That Calms Them:</strong>
+                                    <span>${escapeHtml(actionProfile.trigger.action)}</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 pt-1 flex items-start space-x-1.5">
+                                    <span><strong>Stress Habit to Spot:</strong> <code class="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">${actionProfile.habit.name}</code> &mdash; ${escapeHtml(actionProfile.habit.cue)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- ACTION / STATUS TEMPLATE (HIGH PRIORITY COPY-PASTE) -->
@@ -3310,17 +3722,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </p>
                         <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
                             <span class="text-[11px] uppercase tracking-wide text-slate-400 font-semibold mr-1">Cognitive Markers:</span>
-                            ${currentAnalysis.base.nlp.predicates.map(word => `<button type="button" onclick="copyPredicateWord('${word}', this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-indigo-200 hover:text-white border border-slate-700 hover:border-indigo-500/50 text-xs font-mono transition-colors" title="Click to copy cognitive marker">${escapeHtml(word)}</button>`).join('')}
+                            ${currentAnalysis.base.nlp.predicates.map(word => `<span class="px-2 py-0.5 rounded bg-slate-800 text-indigo-200 border border-slate-700 text-xs font-mono">${escapeHtml(word)}</span>`).join('')}
                         </div>
-                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 flex flex-col sm:flex-row sm:items-start justify-between gap-2">
-                            <div class="space-y-0.5">
-                                <span class="text-[11px] uppercase tracking-wide text-emerald-400 font-bold block">Cognitive Alignment Frame (Dialect Match):</span>
-                                <p class="text-xs text-slate-200 italic font-medium">"${currentAnalysis.base.nlp.delegationScript}"</p>
-                            </div>
-                            <button type="button" onclick="copyDelegationScript(this, '${escapeHtml(currentAnalysis.base.nlp.delegationScript.replace(/'/g, "\\'"))}')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-600 px-2.5 py-1 rounded text-xs font-medium flex items-center transition-colors flex-shrink-0 self-start sm:self-center" title="Copy alignment script">
-                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                Copy Script
-                            </button>
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1">
+                            <span class="text-[11px] uppercase tracking-wide text-emerald-400 font-bold block">Cognitive Alignment Frame (Dialect Match):</span>
+                            <p class="text-xs text-slate-200 italic font-medium leading-relaxed">"${currentAnalysis.base.nlp.delegationScript}"</p>
                         </div>
                     </div>` : ''}
                 </div>
@@ -3359,33 +3765,6 @@ employer, client, or third party. See LICENSE file for full legal terms.
             });
         }
 
-        function copyDelegationScript(btn, text) {
-            if (!text) return;
-            navigator.clipboard.writeText(text).then(() => {
-                if (btn) {
-                    const orig = btn.innerHTML;
-                    btn.innerHTML = `<svg class="w-3 h-3 mr-1 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Copied!`;
-                    setTimeout(() => { btn.innerHTML = orig; }, 2000);
-                }
-                showToast("Delegation frame copied to clipboard!");
-            });
-        }
-
-        function copyPredicateWord(word, btn) {
-            if (!word) return;
-            navigator.clipboard.writeText(word).then(() => {
-                if (btn) {
-                    const orig = btn.textContent;
-                    btn.textContent = "✓ Copied";
-                    btn.classList.add('border-emerald-400', 'text-emerald-300');
-                    setTimeout(() => {
-                        btn.textContent = orig;
-                        btn.classList.remove('border-emerald-400', 'text-emerald-300');
-                    }, 1500);
-                }
-                showToast(`Copied cognitive marker "${word}" to clipboard!`);
-            });
-        }
 
         function resetProfiler() {
             for (let key in selections) selections[key] = null;
@@ -3426,7 +3805,15 @@ employer, client, or third party. See LICENSE file for full legal terms.
             md += `- **Base Filter:** ${currentAnalysis.base.disc.badge} — ${currentAnalysis.base.disc.label} (${currentAnalysis.base.disc.summary})\n`;
             md += `- **Operational Distress:** ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label} (${currentAnalysis.phase.disc.summary})\n\n`;
 
-            md += `## 2. Raw Observational Data\n`;
+            const actionExport = getActionableBehavioralProfile(currentAnalysis.baseKey, currentAnalysis.phaseKey, selections);
+            md += `## 2. Frontline Behavioral De-Escalation Radar\n`;
+            md += `- **Core Stress Trigger:** ${actionExport.trigger.name}\n  - *What's Happening:* ${actionExport.trigger.tell}\n  - *Immediate Action:* ${actionExport.trigger.action}\n`;
+            md += `- **Conflict Trap:** ${actionExport.trap.roleName}\n  - *Trap to Avoid:* ${actionExport.trap.baitTrap}\n  - *Reset Script:* "${actionExport.trap.breakerScript}"\n`;
+            md += `- **Negotiation Stance:** ${actionExport.stance.badge}\n  - *Countermove:* ${actionExport.stance.action}\n`;
+            md += `- **Brain Bandwidth:** ${actionExport.bandwidth.state}\n  - *Guidance:* ${actionExport.bandwidth.tell}\n`;
+            md += `- **Stress Habit Tell:** ${actionExport.habit.name} (${actionExport.habit.cue})\n\n`;
+
+            md += `## 3. Raw Observational Data\n`;
             md += `- **Observation Mode:** ${observationMode === 'audio' ? cfg.obsModeLabels.audio : cfg.obsModeLabels.video}\n`;
             md += `- **Speech / Cadence:** ${selections.tempo || 'Not observed'}\n`;
             md += `- **Primary Focus:** ${selections.focus || 'Not observed'}\n`;
@@ -3435,12 +3822,12 @@ employer, client, or third party. See LICENSE file for full legal terms.
             md += `- **Primary Stressor:** ${selections.stressor || 'Not observed'}\n`;
             md += `- **Conflict Stance:** ${selections.conflict || 'Not observed'}\n\n`;
 
-            md += `## 3. Behavioral Readout\n`;
+            md += `## 4. Behavioral Readout\n`;
             md += `### Communication Channel (Base)\n${currentAnalysis.base.baseComm}\n\n`;
             md += `### Current Driver (Phase)\n${currentAnalysis.phase.phaseDriver}\n\n`;
             md += `### Distress Tell (Phase)\n${currentAnalysis.phase.distress}\n\n`;
             
-            md += `## 4. ${cfg.shortBadge} Tactical Playbook ("Do's & Don'ts")\n`;
+            md += `## 5. ${cfg.shortBadge} Tactical Playbook ("Do's & Don'ts")\n`;
             md += `### Green Light: Say This (De-escalation & Alignment)\n`;
             playbook.doSay.forEach(s => { md += `- "${s}"\n`; });
             md += `\n### Red Line: Never Say This (Triggers)\n`;
@@ -3448,7 +3835,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             md += `\n### ${playbook.templateTitle}\n\`\`\`markdown\n${playbook.actionTemplate}\n\`\`\`\n\n`;
 
-            md += `## 5. Strategic Engagement Tactics\n`;
+            md += `## 6. Strategic Engagement Tactics\n`;
             md += `**Frontline Strategy:** ${currentAnalysis.phase.frontline}\n\n`;
             md += `**Management Insight:** ${currentAnalysis.phase.management}\n\n`;
             if (currentAnalysis.base.nlp) {
@@ -3458,7 +3845,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 md += `- **Cognitive Alignment Frame:** "${currentAnalysis.base.nlp.delegationScript}"\n\n`;
             }
             
-            md += `## 6. Encounter & De-Escalation Notes\n*(Add notes, observations, or follow-up action items here)*\n`;
+            md += `## 7. Encounter & De-Escalation Notes\n*(Add notes, observations, or follow-up action items here)*\n`;
 
             const blob = new Blob([md], { type: 'text/markdown' });
             const url = URL.createObjectURL(blob);
@@ -4880,6 +5267,25 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <strong class="text-emerald-400 font-semibold">Alignment Frame:</strong> "${p.nlp.delegationScript}"
                         </p>
                     </div>` : ''}
+
+                    <!-- FRONTLINE ACTIONABLE PROFILE -->
+                    <div class="pt-2 border-t border-slate-800 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wide text-indigo-300 block flex items-center gap-1.5">
+                            <span>⚡</span> Frontline De-Escalation Profile
+                        </span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <div class="bg-slate-950/70 p-2.5 rounded border border-slate-800 space-y-1">
+                                <span class="text-[10px] font-bold uppercase text-slate-400 block">Core Stress Trigger:</span>
+                                <span class="font-semibold text-slate-200">${ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key].name : ''}</span>
+                                <p class="text-[11px] text-slate-400 leading-snug"><strong class="text-blue-400 font-semibold">Antidote:</strong> ${ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key].action : ''}</p>
+                            </div>
+                            <div class="bg-slate-950/70 p-2.5 rounded border border-slate-800 space-y-1">
+                                <span class="text-[10px] font-bold uppercase text-slate-400 block">Stress Habit &amp; Tell:</span>
+                                <span class="font-semibold text-indigo-300">${ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key].name : ''}</span>
+                                <p class="text-[11px] text-slate-400 leading-snug">${ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key].cue : ''}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 `;
             });

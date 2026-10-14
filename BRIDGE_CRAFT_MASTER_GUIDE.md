@@ -155,10 +155,17 @@ Determine what psychological battery needs replenishment. (See Chapter 4 for the
 Click **Calibrate Incident Playbook** to generate the real-time operational readout:
 1. **Predicted Archetype Header:** Confirms their Base channel and current Distress Phase.
 2. **DISC Leadership Alignment:** Explains their situational High D, I, S, or C presentation.
-3. **Green Light ("Say This"):** Exact phrases calibrated to disarm their distress.
-4. **Red Line ("Never Say This"):** High-risk phrases guaranteed to escalate friction.
-5. **Domain Action Template:** A complete, copyable operational update (e.g., War Room Slack Update, Executive Escalation Email). Click **Copy Template** to copy to clipboard.
-6. **Adaptive Cognitive Framing:** Mental dialect markers and task alignment scripts (see Chapter 5).
+3. **Frontline Behavioral Radar (Zero Jargon):**
+   - **Core Stress Trigger:** Exactly what condition stole their patience (Timeline ambiguity, Broken standards, Hostility, Red tape, Inaction and lost momentum, or Sensory overload).
+   - **Conflict Trap:** What role they are trying to drag you into (The Attacker, The Helpless Deflector, The Data Weaponizer, or The System Blamer).
+   - **Negotiation Stance:** Their immediate operational posture (Bulldozing, Principled Stand, Appeasing, Going Dark, or Analytical).
+   - **Brain Bandwidth:** Whether their prefrontal cortex is overloaded in fight-or-flight (dropping bandwidth by 80%) or open to collaborative reasoning.
+4. **De-Escalation Circuit Breaker:** A calibrated reset script to neutralize aggressive attacks, blame, or passive withdrawal and pivot back to Adult-to-Adult problem solving.
+5. **Core Trigger Antidote:** The exact operational move that soothes their neurological threat (e.g., firm checkpoint timestamps, binary choices, public validation).
+6. **Green Light ("Say This"):** Exact phrases calibrated to disarm their distress.
+7. **Red Line ("Never Say This"):** High-risk phrases guaranteed to escalate friction.
+8. **Domain Action Template:** A complete, copyable operational update (e.g., War Room Slack Update, Executive Escalation Email). Click **Copy Template** to copy to clipboard.
+9. **Adaptive Cognitive Framing:** Mental dialect markers and task alignment scripts (see Chapter 5).
 
 ### Step 6: Save or Export
 - Click **Save to Field Archive** to store this observation under the stakeholder's permanent dossier.
@@ -267,6 +274,28 @@ Direct interrogative questions (*"What data do you need?"*, *"Why are you resist
   - *Tactical Label:* *"It sounds like you feel stuck absorbing the fallout from someone else's broken process."*
   - *Interrogative:* *"Where do you think the system or process broke down before this landed on your plate?"*
 
+### 4.5 The Frontline Behavioral Stack: Real-Time De-Escalation (Zero Jargon)
+
+BridgeCraft synthesizes advanced psychological models (social neuroscience, conflict dynamics, negotiation postures, and autonomic regulation) **without miring operators in clinical acronyms or academic definitions**. 
+
+Frontline engineers, incident commanders, and client advocates need plain-English clarity on four operational dimensions:
+
+1. **The Core Trigger (What Stole Their Patience):**
+   - When a stakeholder panics or attacks, their brain perceived a sudden threat to **Certainty** (shifting timelines), **Control** (feeling micromanaged), **Respect** (standards or competence challenged), or **Safety** (fear of blame).
+   - **The Countermove:** Provide the specific antidote. If they need certainty, give a firm checkpoint timestamp (*"Next status update at 2:15 PM with delta metrics"*). If they feel pushed around, provide two binary choices.
+
+2. **The Conflict Trap (Don't Take the Bait):**
+   - Under acute stress, people unconsciously drag you into unproductive conflict roles: **The Attacker** (issuing aggressive demands and forcing compliance), **The Helpless Deflector** (freezing and over-apologizing), **The Data Weaponizer** (flooding the room with granular trivia), or **The System Blamer** (pointing fingers at management/process).
+   - **The Countermove:** Never take the bait. If they attack, do not apologize or argue policy (apologizing invites them to attack harder). Deploy the **De-Escalation Circuit Breaker** line to reset the interaction into Adult-to-Adult problem solving.
+
+3. **Negotiation Stance (How to Counter Their Posture):**
+   - Identifies whether the stakeholder is **Bulldozing** (forcing outcomes by power), **Holding a Principled Stand** (protecting quality standards), **Appeasing** (over-conceding to avoid tension), **Going Dark** (shutting down/disconnecting), or **Analytical** (seeking objective logic).
+   - **The Countermove:** Bulldozers need firm boundaries and options. Principled leaders need their mission acknowledged first. Appeasers need gentle probing to surface unvoiced risks.
+
+4. **Brain Bandwidth (Biology Before Logic):**
+   - Acute panic triggers fight-or-flight, collapsing working memory and reasoning bandwidth by **~80%**.
+   - **The Countermove:** Never dump complex telemetry or architectural diagrams on an angry person. Drop your vocal cadence, slow your breathing, and label their reality first. Once they physically exhale, their reasoning bandwidth returns.
+
 ---
 
 ## 🧠 Chapter 5: Adaptive Cognitive Framing — Speaking Their Exact Mental Dialect
@@ -288,8 +317,8 @@ BridgeCraft firmly rejects pseudo-scientific jargon in favor of **applied cognit
 | **Reflective** (*Imaginer*) | Reflective (Internal Visual) | `picture`, `imagine`, `envision`, `reflect`, `contemplate`, `space`, `horizon` | *"Take mental space to picture how this should look. When you've envisioned the full schema, ping me."* |
 
 ### 5.3 Using the Feature in BridgeCraft
-1. **Interactive Click-to-Copy:** In the Results Card under **Adaptive Cognitive Framing & Mental Dialect**, click any individual cognitive marker button to immediately copy it to your clipboard with a confirmation toast.
-2. **1-Click Alignment Frame Copy:** Click **Copy Script** on the alignment frame to immediately copy the entire customized sentence into Slack or your call notes.
+1. **Zero-Clutter Cognitive Markers:** In the Results Card under **Adaptive Cognitive Framing & Mental Dialect**, view the stakeholder's primary sensory predicates displayed as clean, uncluttered chips.
+2. **Cognitive Alignment Frame:** Easily read or highlight the customized alignment sentence to speak their exact mental dialect during delegation or de-escalation.
 
 ---
 

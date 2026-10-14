@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.2.0] - 2026-10-14 - *Frontline Behavioral Radar & Interface Decluttering*
+
+Introduced real-time zero-jargon Frontline Behavioral Radar, De-Escalation Circuit Breaker, and Core Trigger Antidotes. Polished behavioral microcopy across all operational lenses and removed redundant script copy buttons to preserve a clean, uncluttered interface during active incident management.
+
+### Added
+- **Frontline Behavioral Radar:** Real-time 4-pillar de-escalation stack (Core Trigger, Conflict Trap, Negotiation Stance, Brain Bandwidth) with comprehensive full-phrase tooltips and adaptive text wrapping.
+- **De-Escalation Circuit Breaker & Antidotes:** Calibrated verbal reset lines to neutralize aggression, defensiveness, and withdrawal live on calls without taking the bait.
+
+### Changed
+- **Interface Decluttering:** Removed redundant "Copy Script" buttons across Circuit Breaker and Adaptive Cognitive Framing cards; styled cognitive markers as clean, static chips.
+- **Copy Calibration:** Streamlined badge copy (e.g. "Inaction & Lost Momentum", "Attacking & Demanding Compliance") and softened abrasive phrasing in behavioral readouts.
+- **Markdown Export:** Corrected sequential section numbering (Sections 1-7) in incident debrief markdown export.
+
+---
 ## [2.1.2] - 2026-09-24 — *Scoring System Engine Accuracy & Default Fallback Calibration*
 
 Comprehensive mathematical audit and precision calibration of the BridgeCraft two-tier scoring engine prior to senior leadership demonstration. Fixed phase default fallback, corrected archetype inclusion on acute stressors, aligned tie-breaker prioritization, and polished pure archetype title formatting without introducing any user complexity.

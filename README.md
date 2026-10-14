@@ -104,6 +104,21 @@ Instead, utilize a **Synthesized Dual-Lens approach**:
 
 ---
 
+## 4.5 The Frontline Behavioral Stack: Real-Time De-Escalation (Zero Jargon)
+
+BridgeCraft synthesizes advanced psychological models (social neuroscience, conflict dynamics, negotiation postures, and autonomic regulation) **without bogging operators down in clinical acronyms or academic definitions**. 
+
+Frontline engineers, incident commanders, and client advocates don't need a psychology degree—they need clear, plain-English answers to four critical operational questions:
+
+| Behavioral Dimension | The Plain-English Operational Reality | The Frontline Action (What You Do) |
+| :--- | :--- | :--- |
+| **1. The Core Trigger** | **What stole their patience?** When people panic or lash out, their brain felt a sudden threat to **Certainty** (shifting timelines), **Control** (feeling dictated to), **Respect** (competence questioned), or **Safety** (fear of blame). | **Give the specific antidote:** If they need certainty, give a firm checkpoint timestamp (*"Next update at 2:15 PM with delta metrics"*). If they feel pushed around, offer two binary options. |
+| **2. The Conflict Trap** | **How are they baiting you?** Under acute stress, people unconsciously drag you into traps: **The Attacker** (shouting and demanding compliance), **The Helpless Deflector** (freezing and deflecting all decisions), or **The Data Weaponizer** (flooding the room with trivia to avoid responsibility). | **Deploy the Circuit Breaker:** Never take the bait. If they attack, don't apologize or argue policy. Use the scripted **Circuit Breaker** line to reset the conversation into Adult-to-Adult problem-solving. |
+| **3. Negotiation Stance** | **What posture are they taking?** Are they **Bulldozing** (forcing resolution by power), **Holding a Principled Stand** (protecting standards), or **Appeasing** (over-promising just to end the call)? | **Counter their move:** Bulldozers need firm boundaries and options. Principled leaders need their mission acknowledged first. Appeasers need gentle probing for hidden operational risks. |
+| **4. Brain Bandwidth** | **Can their brain even hear logic right now?** Acute panic triggers fight-or-flight, dropping working memory and reasoning bandwidth by **~80%**. | **Regulate biology before logic:** Never dump complex telemetry or policy on an angry stakeholder. Drop your vocal cadence, slow your breathing, and label their reality first. Once they physically exhale, their reasoning bandwidth returns. |
+
+---
+
 ## 5. Four Operational Frames & Tactical Domains
 
 BridgeCraft provides four specialized operational frames ("lenses"), each featuring tailored observational cues, specialized communication channels, and domain-specific action templates:
