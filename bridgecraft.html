@@ -6552,19 +6552,69 @@ function defSub(text) {
     return String(text).replace(/\[Request\]/g, c.req).replace(/\[peer\]/g, c.peer);
 }
 
+const DEF_DEFERENTIAL_LIVE = {
+    nigysob: "Thank you for the detailed review. You're right that field is missing from this version. I'll add it by [time]. So I deliver to your standard next time, could you send me the criteria you'll review against?",
+    yesbut: "I value your direction on this and want to help narrow it. What would a successful outcome need to satisfy: cost, timeline, risk? I will prepare two options scored against that by [time] for your decision.",
+    guilt_shame: "I appreciate your candor, and I want to make sure I do right by the organization. Here is where our team stands on our committed milestones. If [Request] is the strategic priority, please guide me on which of those we should pause.",
+    blemish: "Good catch on that formatting detail; I'll have that corrected immediately. Aside from that item, does the core substance of the proposal have your approval?",
+    corner: "Both speed and thoroughness are essential to get this right. Delaying preserves quality; holding the date requires narrowing scope to [core]. As our leader, which trade-off would you like us to execute?",
+    see_what_you_made_me_do: "I provided the telemetry numbers on Thursday to keep you informed. The decision to override the deploy gate was yours to make. Let's look at the metrics together to see how to recover.",
+    harried: "I see how much effort you are putting into this, and I respect your dedication. To ensure we maintain high delivery quality and avoid defects, our team's capacity is committed to [A] and [B].",
+    wooden_leg: "I understand that team is facing staffing constraints right now. However, our team cannot absorb their backlog without putting [Commitment A] at risk. May we align with leadership on resource allocation?",
+    rescuer_switch: "I truly appreciate your support and guidance. To make sure I do right by it and keep everything transparent, I'll document what we agreed and loop in [peer] so everyone is aligned.",
+    fear_relief: "Thank you; I want to ensure I provide a thoroughly vetted answer rather than a rushed one. I will review the capacity and send you the trade-offs in writing by [time].",
+    urgency: "I appreciate the urgency behind this. To help me prioritize accurately, what is the key driver for this date? I can begin [small step] today and follow up with a full capacity plan by [time].",
+    dif: "Thank you for working with me to narrow the scope. Looking at [smaller ask] on its own merits, here is the capacity it requires and what it would displace.",
+    fif: "I appreciate how important this initiative has become. Because it has grown from [original] to [current], I'd like to re-baseline with you: the cumulative total is now [N], and we need a trade-off sign-off to proceed.",
+    darvo: "I want to ensure we stay focused on the core operational issue: [concern in one sentence]. I have full respect for leadership; my goal is simply to get a clear business decision on this risk.",
+    divide: "Thank you for your confidence in me. To make sure we manage overall organizational capacity accurately, I'd like to loop in [peer] and send a joint proposal with our combined options.",
+    stonewall: "To ensure we remain on schedule without interrupting you, I will proceed with [default plan] unless you advise otherwise by [time]. Does that work for you?",
+    veiled_threat: "I want to ensure I understand: is my response to [Request] connected to my standing or role? I want to keep our focus entirely on the work. Here is what my team can commit to.",
+    loaded_q: "Thank you for raising this. This initiative is new to our team as of today. Our approved commitments through [date] are [commitments]. Here is what we can do with [Request] and the trade-offs it would require.",
+    goalposts: "I want to make sure we hit your exact standard. Let's document the acceptance criteria in writing today so there is clear alignment, and any future adjustments can be tracked with their capacity impact.",
+    verbal_only: "To make sure I carry out your intent with precision, I will send a brief recap of what you shared. Unless you redirect me, I will proceed on that basis.",
+    hot_potato: "I am honored by your confidence in my leadership on this. Before our team assumes formal ownership, we will conduct a one-week baseline assessment to establish realistic milestones and resourcing.",
+    kiss_up_kick_down: "I understand the executive pressure on this deadline. Based on our team's verified capacity, we can deliver by [date] only if we descope [Feature B]. Let's present those options to leadership together.",
+    bait_and_switch: "Our committed delivery date of [Date] was explicitly structured around the [2 contractors]. Because those resources have been reallocated, the adjusted delivery date is [Revised Date].",
+    starve_the_beast: "Our team is prepared to execute [Sprint]. We are currently awaiting [Approval X], submitted on [Date]. Each business day of delay will shift the target launch date by one day.",
+    gaslighting: "Let's refer back to our written summary from [Date], where we confirmed [Milestone]. That has been the agreed baseline our engineering team has been executing against.",
+    mushroom: "To ensure this deliverable meets leadership's strategic expectations, I would appreciate direct access to the feedback from the executive review so we can align our architecture.",
+    ambush: "I take this feedback very seriously and want to give it the thorough, data-driven attention it deserves. Please send me the specific items in writing and I will reconvene with you tomorrow at [time]."
+};
+
 function defLive(g) {
-    const base = defSub(g.live);
-    return defState.tone === 'deferential' ? 'Thank you for trusting me with this. ' + base : base;
+    if (defState.tone === 'deferential') {
+        const defLine = (typeof DEF_DEFERENTIAL_LIVE !== 'undefined' && DEF_DEFERENTIAL_LIVE[g.id]) || g.live_def;
+        if (defLine) return defSub(defLine);
+        return defSub(g.live);
+    }
+    return defSub(g.live);
 }
 
 // ---------- memo builder (domain-neutral, vocabulary swapped by field) ----------
 function defMemo(kind) {
     const c = defCtx();
     const v = DEF_DOMAINS[defState.domain] || DEF_DOMAINS.general;
-    const open = defState.tone === 'deferential'
-        ? 'Thank you for your time and guidance today. I am writing to respectfully confirm my understanding so that I can act on it correctly.'
-        : 'Following up on our conversation to make sure I act on it correctly.';
-    const close = defState.tone === 'deferential' ? 'With respect and thanks,' : 'Thanks,';
+    const isDef = defState.tone === 'deferential';
+    const opens = {
+        tradeoff: isDef
+            ? 'Thank you for your strategic guidance today. To ensure our team executes against your priorities without jeopardizing existing commitments, I am submitting this trade-off analysis for your alignment.'
+            : 'Following up on our discussion to align team capacity with your priorities.',
+        confirm: isDef
+            ? 'Thank you for discussing ' + c.req + ' with me today. To ensure I carry out your exact directions, I am writing to respectfully confirm my understanding.'
+            : 'Confirming our conversation regarding ' + c.req + ' so there is a shared baseline.',
+        criteria: isDef
+            ? 'Thank you for your direction on ' + c.req + '. So that our team delivers to your exact standard, I would appreciate your confirmation on the following acceptance criteria.'
+            : 'Following up to establish clear acceptance criteria for ' + c.req + ' before we begin.',
+        default: isDef
+            ? 'Thank you for reviewing our delivery schedule. To maintain operational continuity on our approved roadmap, here is the current plan of record.'
+            : 'Summary of the plan of record for ' + c.req + ' based on current resource allocations.',
+        joint: isDef
+            ? 'Thank you for discussing ' + c.req + ' with us. ' + c.peer + ' and I coordinated closely to ensure we support this initiative while maintaining cross-functional delivery capacity.'
+            : c.peer + ' and I coordinated to review cross-functional capacity for ' + c.req + '.'
+    };
+    const open = opens[kind] || (isDef ? 'Thank you for your time and guidance today.' : 'Following up on our conversation.');
+    const close = isDef ? 'With respect and thanks,' : 'Thanks,';
     if (kind === 'tradeoff') {
         return 'Subject: Priority alignment and trade-off for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
             '\n\n1. CURRENT BASELINE\n   Before today, ' + v.res + ' was committed to ' + v.commit + ' per ' + v.base + '.' +
@@ -6614,11 +6664,11 @@ function defMemo(kind) {
 function defRenderLive(panel) {
     const d = defState.tone === 'deferential';
     const lines = {
-        pause: d ? 'Thank you. May I take a moment to note this accurately?' : "Let me make sure I have this right.",
-        ack: d ? 'I understand how important [Request] is to you.' : "I hear that [Request] is a priority.",
-        pin: d ? 'With your permission, I will send a short note by [time] so you can confirm the best option.' : "I'll send you the options and trade-offs by [time] so you can decide.",
-        exit1: "I want to give you a real answer, not a quick one. I'll come back to you by [time].",
-        exit2: "Let me check shared capacity with [peer] and confirm in writing."
+        pause: d ? 'May I take a moment to note this down so I capture your intent accurately?' : "Let me make sure I have this right.",
+        ack: d ? 'I understand that [Request] is a top priority for you.' : "I hear that [Request] is a priority.",
+        pin: d ? 'With your permission, I will prepare a short trade-off memo by [time] for your final decision.' : "I'll send you the options and trade-offs by [time] so you can decide.",
+        exit1: d ? "I want to provide you with a vetted, accurate answer rather than an off-the-cuff one. I will follow up with you by [time]." : "I want to give you a real answer, not a quick one. I'll come back to you by [time].",
+        exit2: d ? "Let me review our shared capacity commitments with [peer] and confirm our delivery options in writing." : "Let me check shared capacity with [peer] and confirm in writing."
     };
     const step = (n, title, color, body, key) =>
         '<div class="bg-slate-950/70 p-4 rounded-xl border ' + color + ' space-y-2">' +
