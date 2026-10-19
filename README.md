@@ -165,11 +165,11 @@ The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **
      - *What they Say:* Vague directives, past grievance lists, unwritten promises, "take one for the team".
      - *How they Deliver:* Manufactured urgency, sudden volume/temper displays, private 1-on-1 pressure.
      - *How it is Structured:* Verbal-only mandates, bypassing PMO/lead, dividing peers, shifting criteria.
-   - Calculates diagnostic confidence against the 15-game taxonomy.
+   - Calculates diagnostic confidence against the 27-game taxonomy.
    - **The Innocent Alternative Check:** Highlights explicit operational checks (*"Could this be innocent?"*) to differentiate legitimate organizational fire drills from manipulative games, preventing hyper-vigilant misattribution.
    - **Domain-Neutral Confirmation Memos:** Auto-generates structured written plans of record across 5 specialized vocabularies: Engineering (PRs, sprints, tech debt), IT Operations (tickets, SLAs, incidents), Finance (budgets, forecasts, audits), Sales (pipeline, accounts, deals), and General Business.
 
-3. **📚 Games Library (15 Documented Patterns):**
+3. **📚 Games Library (27 Documented Patterns across TA, Karpman, Influence, and Scope):**
    - **Transactional Analysis (Eric Berne):** *NIGYSOB ("Now I've Got You, Son of a Bitch")*, *Why Don't You / Yes But*, *Guilt / Debt Induction*.
    - **Karpman Drama Triangle (Stephen Karpman):** *Persecutor-to-Rescuer Switch*, *Divide and Conquer*.
    - **Influence & Compliance Tactics (Robert Cialdini & Social Psychology):** *Fear-then-Relief*, *Forced Urgency*, *Door-in-the-Face*, *Foot-in-the-Door*, *DARVO*, *Stonewalling*, *Veiled Threat*.
@@ -177,7 +177,7 @@ The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **
    - **Custom Game JSON Builder:** Allows teams to add custom organizational games that persist locally and participate in live cue decoding.
 
 4. **🎯 Training Drills: Scenarios & Interactive Flashcards:**
-   - **Scenario Practice ("Name the Game"):** 16 realistic, multi-role workplace scenarios (including genuine, innocent requests as negative controls). Operators evaluate dialogue, identify matching games, and receive instant feedback.
+   - **Scenario Practice ("Name the Game"):** 22 realistic, multi-role workplace scenarios (including genuine, innocent requests as negative controls). Operators evaluate dialogue, identify matching games, and receive instant feedback.
    - **Interactive Flashcards (Active-Recall Drills):**
      - Card prompt displays the game name.
      - The operator mentally rehearses: *What cues indicate this game? What payoff is the stakeholder seeking? How do I test innocence? What is my spoken counter?*

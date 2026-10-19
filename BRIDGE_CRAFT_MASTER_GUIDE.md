@@ -519,9 +519,9 @@ BridgeCraft is not limited to engineering outages. Clicking any lens in the top 
 - **The 5-Tab Workbench Architecture:**
   1. **⚡ Live Card:** 30-second grounding protocol (Pause &rarr; Acknowledge &rarr; Pin It) with Standard vs. High-Deference tone toggle and clean exit lines.
   2. **🔍 Multi-Cue Decoder:** Diagnoses 25 observable cues across What They Say, How They Deliver, and How It Is Structured. Includes diagnostic confidence scoring, domain-neutral confirmation memos (Engineering, IT Ops, Finance, Sales, General), and the critical **Innocent Alternative Reality Check** to prevent false-positive paranoia.
-  3. **📚 Games Library:** 15 cataloged games with complete breakdowns of payoff, psychological hook, innocent alternative test, and counter-moves. Features a local JSON builder for adding custom organization-specific tactics.
+  3. **📚 Games Library:** 27 cataloged games with complete breakdowns of payoff, psychological hook, innocent alternative test, and counter-moves. Features a local JSON builder for adding custom organization-specific tactics.
   4. **🎯 Training Module (Scenarios & Flashcards):**
-     - **Scenario Practice:** 16 multi-step workplace dilemmas (including positive/innocent requests) to train calibrated recognition under pressure.
+     - **Scenario Practice:** 22 multi-step workplace dilemmas (including positive/innocent requests) to train calibrated recognition under pressure.
      - **Interactive Flashcards:** Active-recall drill loop (Prompt &rarr; Mental Rehearsal of Cues, Payoff & Counter &rarr; Reveal &rarr; Next Card).
   5. **🛡️ Escalation & Private Incident Record:** 10-point severity matrix separating interpersonal game tactics from actionable HR/legal threats, paired with an evidentiary incident log template (quotes, physical behaviors, witnesses; strictly zero emotional adjectives).
 

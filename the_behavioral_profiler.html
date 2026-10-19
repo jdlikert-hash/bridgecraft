@@ -756,7 +756,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <strong class="text-slate-100 text-sm">Upward Defense, Games Decoder &amp; Flashcard Drills</strong>
                             </div>
                             <p class="text-slate-300 leading-relaxed">
-                                When facing transactional power dynamics, staged urgency, or coercive senior requests, select <strong>Upward Defense</strong> (<code>?lens=power_defense</code>). Deploy the 30-second <strong>Live Card</strong> (Pause &rarr; Acknowledge &rarr; Pin It with High-Deference mode), diagnose tactics with the 25-cue <strong>Decoder</strong> and innocent alternative checks, explore the 15-game catalog, practice with 16 realistic <strong>Scenarios</strong>, run active-recall <strong>Flashcard Drills</strong>, and document violations with the objective <strong>Escalation</strong> matrix.
+                                When facing transactional power dynamics, staged urgency, or coercive senior requests, select <strong>Upward Defense</strong> (<code>?lens=power_defense</code>). Deploy the 30-second <strong>Live Card</strong> (Pause &rarr; Acknowledge &rarr; Pin It with High-Deference mode), diagnose tactics with the 25-cue <strong>Decoder</strong> and innocent alternative checks, explore the 15-game catalog, practice with 22 realistic <strong>Scenarios</strong>, run active-recall <strong>Flashcard Drills</strong>, and document violations with the objective <strong>Escalation</strong> matrix.
                             </p>
                             <span class="text-[11px] text-amber-300 font-semibold block pt-0.5">Tip: Run 5 flashcards weekly or right before high-pressure executive 1-on-1s.</span>
                         </div>
@@ -1071,7 +1071,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 space-y-2">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold text-sm text-purple-300">📚 3. Games Library &amp; Custom Builder</span>
-                                <span class="text-[10px] font-mono text-slate-400">15 Patterns</span>
+                                <span class="text-[10px] font-mono text-slate-400">27 Patterns</span>
                             </div>
                             <p class="text-slate-300 leading-relaxed">
                                 A comprehensive catalog categorized across four established theoretical families:
@@ -1103,7 +1103,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                         <li>Card prompt displays the game name.</li>
                                         <li>Pause and mentally rehearse: <em>What cues give this away? What is their payoff? How do I test innocence? What is my spoken counter?</em></li>
                                         <li>Click <strong>Reveal</strong> to review the diagnostic cues, designed payoff, innocent test, and exact live counter-line.</li>
-                                        <li>Click <strong>Next card</strong> to cycle through all 15 game archetypes.</li>
+                                        <li>Click <strong>Next card</strong> to cycle through all 27 game archetypes.</li>
                                     </ol>
                                 </li>
                             </ul>
@@ -5877,19 +5877,31 @@ const DEF_CUE_GROUPS = [
         ['v_pit', "Asks you to keep something from peers or your manager ('between us')"],
         ['v_help', "Presents as your protector or ally, then asks for a favor"],
         ['v_public', "Criticizes you in front of others"],
-        ['v_yesbut', "Rejects every option you offer without saying what would work"]
+        ['v_yesbut', "Rejects every option you offer without saying what would work"],
+        ['v_blemish', "Fixates on a trivial formatting flaw, typo, or minor cosmetic detail"],
+        ['v_corner', "Frames a Catch-22 dilemma where every available option is criticized"],
+        ['v_mademedo', "Blames you for their decision or blunder ('I only did that because you...')"],
+        ['v_gaslight', "Flatly denies prior explicit agreements or directives ('I never said that')"],
+        ['v_martyr', "Displays frantic, vocal martyrdom while refusing delegation or prioritization"],
+        ['v_wooden', "Uses a chronic obstacle, timezone, or past reorg as a permanent excuse"],
     ]},
     { id: 'deliver', title: 'How they DELIVER it', cues: [
         ['n_spike', "Sudden spike in intensity (volume, sharp gestures, hard tone)"],
         ['n_relief', "Intensity followed by abrupt warmth or an easy exit if you agree"],
         ['n_silence', "Prolonged silence, cold stare, or withholding replies"],
         ['n_paternal', "Paternalistic 'concerned' tone while applying pressure"],
-        ['n_private', "Raised privately: no witnesses, no agenda, no ticket"]
+        ['n_private', "Raised privately: no witnesses, no agenda, no ticket"],
+        ['n_ambush', "Meeting framed as casual or routine suddenly turns into a formal interrogation"],
+        ['n_bicycle', "Agrees instantly to superiors then passes extreme unbuffered demands downward"],
     ]},
     { id: 'structure', title: 'How the request is STRUCTURED', cues: [
         ['s_noauth', "No ticket, charter, budget, or approver behind the request"],
         ['s_capacity', "Ignores the capacity or commitments you have already stated"],
-        ['s_repeat', "The same pattern has shown up across several meetings"]
+        ['s_repeat', "The same pattern has shown up across several meetings"],
+        ['s_hotpotato', "Attempts to transfer ownership of an at-risk project right before a deadline"],
+        ['s_baitswitch', "Promises resources or sponsorship, then revokes them once scope is committed"],
+        ['s_starve', "Withholds necessary approvals, access, or staffing needed to meet the mandate"],
+        ['s_mushroom', "Deliberately withholds strategic context, client notes, or stakeholder inputs"],
     ]}
 ];
 
@@ -6116,6 +6128,163 @@ const DEF_GAMES = [
         memo: 'factlog',
         escalate: true,
         avoid: "Do not plead, bargain, or promise extra work in response to an implied consequence."
+    },
+    {
+        id: 'blemish', name: "Blemish (The Nitpicker)", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'Blemish' — searching for a trivial flaw to maintain superiority.",
+        cues: [["v_blemish",3],["v_gotcha",2],["v_goalpost",1]],
+        summary: "They find a minor cosmetic imperfection (a typo, an unaligned table, a phrasing nuance) in an otherwise solid deliverable and use it to reject the entire proposal or withhold approval.",
+        payoff: "Withholds sign-off, preserves intellectual or moral superiority, and avoids committing to the substantive proposal.",
+        hook: "Over-focusing on the cosmetic flaw, apologizing, and exhaustively rewriting the entire document from scratch.",
+        innocent: "Is the deliverable customer-facing, regulatory, or legally binding where typos create liability? If so, treat it as a routine copy-edit catch, fix it, and move on.",
+        counter: "Separate cosmetic corrections from substantive approval: acknowledge the typo, offer to correct it immediately, and request a decision on the core business proposal.",
+        live: "Good catch on that typo; I'll fix that line now. Aside from that formatting detail, does the core proposal have your approval to proceed?",
+        memo: 'confirm',
+        avoid: "Do not throw out the entire deliverable or re-litigate the core design over a cosmetic flaw."
+    },
+    {
+        id: 'corner', name: "Corner (The Catch-22 / Double Bind)", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'Corner'; Gregory Bateson (1956) Double Bind Theory.",
+        cues: [["v_corner",3],["v_blame",2],["v_disappoint",1]],
+        summary: "They frame a dilemma where every available option is declared wrong ('If you ship now it's rushed; if you test thoroughly you're missing deadlines').",
+        payoff: "Guarantees you are perpetually in the wrong, justifying executive micromanagement, blame shifting, or withholding compensation.",
+        hook: "Agonizing over trying to find an impossible 'perfect' compromise that avoids criticism.",
+        innocent: "Are the business constraints genuinely in tension (e.g., hard regulatory filing vs. deep security audit)? That is a legitimate trade-off, not a psychological trap.",
+        counter: "Surface the conflicting requirements as an explicit executive business decision rather than a personal failure of execution.",
+        live: "Both speed and thorough testing are vital here. Moving the date preserves quality; holding the date narrows scope to [core]. Which trade-off do you authorize?",
+        memo: 'tradeoff',
+        avoid: "Do not accept blame for structural trade-offs that require executive authorization."
+    },
+    {
+        id: 'see_what_you_made_me_do', name: "See What You Made Me Do", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'See What You Made Me Do'.",
+        cues: [["v_mademedo",3],["v_blame",2]],
+        summary: "When a senior decision, deploy, or strategy stumbles, they claim they only made that mistake because of your question, telemetry update, or warning.",
+        payoff: "Evades executive accountability by transferring ownership of leadership errors onto subordinates.",
+        hook: "Feeling guilty for speaking up, presenting accurate data, or asking clarifying questions.",
+        innocent: "Did you provide verifiably incorrect data or miss an SLA you explicitly owned? If so, own the specific data gap plainly.",
+        counter: "Re-establish the objective boundaries of decision authority: state plainly what data you provided and where decision authorization resided.",
+        live: "I provided the telemetry numbers on Thursday as requested. The decision to override the deploy gate was yours. Let's look at the metrics to see how to recover.",
+        memo: 'factlog',
+        avoid: "Do not apologize for providing accurate status telemetry or asking necessary operational questions."
+    },
+    {
+        id: 'harried', name: "Harried (The Overburdened Martyr)", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'Harried' — taking on impossible burdens to establish moral immunity.",
+        cues: [["v_martyr",3],["s_capacity",2]],
+        summary: "A leader takes on frantic, chaotic overwork, refuses to delegate or prioritize, and weaponizes their exhaustion to demand unthinking, around-the-clock compliance from everyone else.",
+        payoff: "Unassailable moral high ground ('Look how hard I am working!') and immunity from accountability or process critique.",
+        hook: "Feeling guilty for having healthy boundaries, or attempting to match their chaotic 80-hour panic pace.",
+        innocent: "Is the team dealing with an active Sev-1 production outage or regulatory disaster? In a crisis all hands rally; once resolved, normal bounds must return.",
+        counter: "Acknowledge their hard work, decline the panic contagion, and anchor to sustainable, high-quality team delivery capacity.",
+        live: "I see how hard you're pushing on this. To protect our delivery quality and avoid errors, our team's capacity is committed to [A] and [B].",
+        memo: 'tradeoff',
+        avoid: "Do not get swept into matching their frantic pace or adopting unstructured crisis mode as the default."
+    },
+    {
+        id: 'wooden_leg', name: "Wooden Leg ('What Do You Expect?')", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'Wooden Leg' — pleading disability or limitation to avoid performance.",
+        cues: [["v_wooden",3],["v_vague",2]],
+        summary: "They use a chronic organizational constraint (past reorg, timezone difference, vendor limitation) as a permanent excuse to avoid delivering their part while expecting you to quietly absorb the slack.",
+        payoff: "Lowers expectations to zero while transferring operational responsibility onto your team without giving you the resources.",
+        hook: "Stepping in to 'rescue' the peer or manager by doing their job for them to prevent project failure.",
+        innocent: "Is there a temporary, genuine blocker outside their control? If so, collaboratively problem-solve the blocker with leadership.",
+        counter: "Validate the constraint with empathy, but decline to silently absorb their deliverables without formal resource and priority re-allocation.",
+        live: "I understand that team is short-staffed right now. However, our team cannot absorb their backlog without deprioritizing [Commitment A]. Let's align with leadership on resources.",
+        memo: 'joint',
+        avoid: "Do not quietly backfill other teams' deliverables without formal visibility and resource adjustments."
+    },
+    {
+        id: 'hot_potato', name: "Hot Potato (Pass the Grenade)", family: 'scope',
+        source: "Chris Argyris (1990) Overcoming Organizational Defenses; corporate scapegoating dynamics.",
+        cues: [["s_hotpotato",3],["s_noauth",2],["v_urgent",1]],
+        summary: "An at-risk or failing project is suddenly reassigned to your team under the guise of an 'exciting leadership opportunity' right before a critical deliverable or SLA collapses.",
+        payoff: "Transfers political blame and accountability for an impending failure onto a new owner.",
+        hook: "Flattery ('You're the only lead who can turn this around') or eager ambition to demonstrate leadership capability.",
+        innocent: "Is this a genuine strategic realignment backed by revised timelines, dedicated rescue budget, and full executive sponsorship? If so, evaluate it.",
+        counter: "Condition acceptance on a formal baseline audit, a complete reset of delivery milestones, and explicit written sign-off on existing technical debt.",
+        live: "I'm willing to evaluate taking this over. Before we accept ownership, we will conduct a one-week baseline audit to establish realistic milestones and resourcing.",
+        memo: 'tradeoff',
+        avoid: "Do not inherit project accountability without an explicit baseline audit and schedule reset."
+    },
+    {
+        id: 'kiss_up_kick_down', name: "Kiss Up, Kick Down (Bicycle Manager)", family: 'influence',
+        source: "Manfred Kets de Vries (2001) The Leadership Mystique; downward displacement of executive anxiety.",
+        cues: [["n_bicycle",3],["n_spike",2],["s_capacity",2]],
+        summary: "A manager agrees instantly and obsequiously to impossible executive mandates without checking capacity, then uses intense pressure and fear downward to force the team to absorb the burnout.",
+        payoff: "Maintains pristine standing with executive leadership at the direct expense of frontline team health and turnover.",
+        hook: "Wanting to protect the team from executive wrath by absorbing unbuffered pressure.",
+        innocent: "Did senior executives deliver a non-negotiable legal or regulatory mandate? If so, collaborate on aggressive scope shedding rather than endless overtime.",
+        counter: "Protect the team with transparent capacity telemetry: document the mathematical gap between executive promises and engineering reality in writing.",
+        live: "I know leadership wants this quickly. Here is our mathematical capacity: we can deliver by [date] only if we drop [Feature B]. Let's show them those options.",
+        memo: 'tradeoff',
+        avoid: "Do not absorb unbuffered pressure or promise impossible overtime without showing the trade-offs."
+    },
+    {
+        id: 'bait_and_switch', name: "Bait and Switch (Resource Clawback)", family: 'scope',
+        source: "Classic compliance & contract manipulation; Robert Cialdini (1984) Influence.",
+        cues: [["s_baitswitch",3],["s_noauth",2],["v_goalpost",1]],
+        summary: "Promises extra headcount, dedicated contractor hours, or executive cover to secure your project commitment, but quietly revokes the resources once the commitment is publicly locked in.",
+        payoff: "Extracts expanded commitments under false pretenses without paying the operational cost of necessary resources.",
+        hook: "Committing based on future promises rather than present, funded reality.",
+        innocent: "Did an unexpected company-wide budget freeze or emergency force a resource reallocation? If so, scope must automatically contract in direct proportion.",
+        counter: "Formally tie the delivery commitments to the promised resources: when resources disappear, delivery scope or dates automatically shift in lockstep.",
+        live: "Our committed date of [Date] was explicitly contingent on the [2 contractors]. Since those resources are paused, the new delivery date is [Revised Date].",
+        memo: 'default',
+        avoid: "Do not attempt to maintain original delivery dates when the resources tied to them are removed."
+    },
+    {
+        id: 'starve_the_beast', name: "Starve the Beast (Engineered Failure)", family: 'scope',
+        source: "Corporate governance & bureaucratic sabotage theory.",
+        cues: [["s_starve",3],["s_noauth",2],["v_blame",1]],
+        summary: "Assigns a high-visibility mandate but systematically delays or withholds critical approvals, architectural access, or staffing, setting the initiative up to fail so they can fault your execution.",
+        payoff: "Provides an excuse to cancel the program or replace the lead without taking the political blame for killing it.",
+        hook: "Attempting to 'work miracles' and pushing forward without the required foundational dependencies.",
+        innocent: "Are the approval delays caused by routine corporate bureaucratic lag? Test by proposing a pre-cleared automated approval workflow.",
+        counter: "Log every dependency blocker with date-stamps and formal stop-work thresholds so the delay is publicly owned by the blocking party.",
+        live: "We are ready to proceed with [Sprint]. We are currently blocked on [Approval X], which was submitted on [Date]. Each day of delay shifts the launch date by one day.",
+        memo: 'confirm',
+        avoid: "Do not quietly absorb external approval delays as team execution slips."
+    },
+    {
+        id: 'gaslighting', name: "Reality Distortion / Revisionist History", family: 'influence',
+        source: "Interpersonal manipulation literature; Robin Stern (2007) The Gaslight Effect.",
+        cues: [["v_gaslight",3],["v_blame",2],["v_nowrite",1]],
+        summary: "They flatly deny earlier explicit agreements, milestones, or directives ('I never agreed to that', 'We never said that'), attempting to rewrite history and destabilize your confidence in your records.",
+        payoff: "Escapes accountability for previous decisions and forces renegotiation from a position of manufactured guilt.",
+        hook: "Second-guessing your own memory, doubting your notes, or failing to establish written plans of record.",
+        innocent: "Did they genuinely forget or misunderstand? Honest memory lapses happen frequently. A neutral recap email immediately clears up honest confusion.",
+        counter: "Ground every discussion in the contemporaneous written record without emotional confrontation.",
+        live: "Let's refer back to our written recap from [Date], where we agreed to [Milestone]. That's the baseline we've been executing against.",
+        memo: 'confirm',
+        avoid: "Do not engage in verbal 'he-said-she-said' arguments; rely strictly on dated written records."
+    },
+    {
+        id: 'mushroom', name: "Mushroom Management (Information Hoarding)", family: 'influence',
+        source: "Corporate management dynamics ('Keep them in the dark and feed them manure').",
+        cues: [["s_mushroom",3],["v_vague",2],["n_private",1]],
+        summary: "They deliberately withhold strategic context, customer communications, or senior leadership feedback to keep you in the dark, dependent, and vulnerable to sudden criticism.",
+        payoff: "Maintains a monopoly on the political narrative and ensures the delivery team cannot challenge leadership assumptions.",
+        hook: "Operating in a vacuum and trusting that 'leadership will handle the context.'",
+        innocent: "Is the information legally or regulatory restricted (e.g., material non-public information, confidential HR matters)?",
+        counter: "Request the specific upstream inputs required for execution in writing, establishing that delivery accuracy depends on transparency.",
+        live: "To ensure this deliverable meets the client's actual requirement, I need to see the direct feedback from the QBR. Please share the notes or invite me to the next session.",
+        memo: 'criteria',
+        avoid: "Do not build complex deliverables based on second-hand verbal summaries."
+    },
+    {
+        id: 'ambush', name: "The Ambush (Kangaroo Court)", family: 'influence',
+        source: "Negotiation & conflict literature; John Gottman's 'Harsh Startup' and tactical blindsiding.",
+        cues: [["n_ambush",3],["n_spike",2],["v_public",1],["n_private",1]],
+        summary: "A meeting scheduled as an informal 'casual catch-up' or routine 1-on-1 abruptly converts into a surprise performance interrogation, audit, or hostile critique.",
+        payoff: "Shocks you into defensive panic, extracting apologies, concessions, or unvetted commitments before your reasoning brain can engage.",
+        hook: "Scrambling to defend yourself on the spot without data, documentation, or preparation.",
+        innocent: "Did urgent, critical production telemetry break an hour before the meeting? Emergency triage is not an ambush.",
+        counter: "Call an immediate operational timeout. Decline to adjudicate unannounced claims on the fly. Request the specific items in writing and reconvene after gathering facts.",
+        live: "This is a serious topic that deserves an accurate, thorough review with the relevant data. Please send me the specific items in writing and I will reconvene with you tomorrow at [time].",
+        memo: 'factlog',
+        escalate: true,
+        avoid: "Do not attempt to litigate complex unannounced accusations on the spot without preparation."
     }
 ];
 
@@ -6183,7 +6352,43 @@ const DEF_SCENARIOS = [
     { id: 's16', title: 'By end of day', answer: 'urgency',
       text: "'I need a yes by end of day. It's just important.' No driver, no consequence, no ticket, and it collides with your stated commitments.",
       cues: ['v_urgent', 'v_deadline', 's_noauth', 's_capacity'],
-      why: "A hard date with no reason or approver is the signature of manufactured time pressure." }
+      why: "A hard date with no reason or approver is the signature of manufactured time pressure." },
+    {
+        id: 's17', title: "The typo catch", answer: 'blemish',
+        text: "You present a 30-page security architecture review that took three weeks to complete. A director stops on slide 4: 'There is a comma splice here and this axis label isn't bolded. If you can't even get basic formatting right, how can I trust your team to secure our database? Rejected.'",
+        cues: ["v_blemish","v_gotcha"],
+        why: "Fixating on a cosmetic flaw to reject an entire major deliverable is the hallmark of Blemish. Isolate the typo from the architecture approval."
+    },
+    {
+        id: 's18', title: "The urgent handoff", answer: 'hot_potato',
+        text: "A peer manager approaches you on Thursday: 'Leadership wants you to take over the Analytics pipeline—they know you're a great fixer! It just needs a little push across the finish line next Tuesday.' You check the logs and see the pipeline has been failing tests for two months and has zero documentation.",
+        cues: ["s_hotpotato","s_noauth","v_urgent"],
+        why: "Passing off a failing project right before a deadline is Hot Potato. Never accept ownership without a baseline audit and reset of milestones."
+    },
+    {
+        id: 's19', title: "The Friday catch-up", answer: 'ambush',
+        text: "Your skip-level puts a 20-minute 'Quick catch-up / weekend check-in' on your calendar for 4:30 PM Friday. When you join, two HR business partners and an internal auditor are on the call, and the executive opens with: 'We need to discuss systemic failures in your team's code review process.'",
+        cues: ["n_ambush","n_spike","n_private"],
+        why: "Framing a meeting as casual then springing a surprise formal interrogation is an Ambush. Call a timeout, request the items in writing, and do not litigate on the fly."
+    },
+    {
+        id: 's20', title: "The missing contractors", answer: 'bait_and_switch',
+        text: "To hit an accelerated Q3 date, you requested two senior contractor engineers. The VP signed off on the budget and you publicly committed to the date. Two weeks into the sprint, the VP informs you the contractor budget was reallocated to another initiative, but insists: 'Your team already committed to September 15th, so you have to find a way.'",
+        cues: ["s_baitswitch","v_goalpost","s_capacity"],
+        why: "Revoking the resources that enabled the commitment is Bait and Switch. Delivery scope or dates must automatically contract in lockstep with lost resources."
+    },
+    {
+        id: 's21', title: "I never approved that", answer: 'gaslighting',
+        text: "At the milestone review, you present the scope agreed upon in the signed project charter from last month. The senior sponsor scoffs: 'I never agreed to exclude legacy database support. I would never have approved that. Why are you trying to cut corners?'",
+        cues: ["v_gaslight","v_blame"],
+        why: "Flatly denying prior explicit written agreements is revisionist history / gaslighting. Point calmly to the contemporaneous written plan of record."
+    },
+    {
+        id: 's22', title: "The impossible choice", answer: 'corner',
+        text: "Your VP says: 'If we ship this release on Friday with minor bugs, you're being sloppy and cutting corners. But if you delay it to fix the bugs, you're missing our quarterly revenue commitment and failing the business. Which kind of poor leader are you?'",
+        cues: ["v_corner","v_blame","v_disappoint"],
+        why: "Framing a dilemma where every choice is declared an execution failure is the Corner game. Reframe it as an executive business trade-off between speed and polish."
+    }
 ];
 
 const DEF_ESCALATION_ITEMS = [
