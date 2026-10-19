@@ -168,6 +168,26 @@ employer, client, or third party. See LICENSE file for full legal terms.
             --ambient-secondary: rgba(45, 212, 191, 0.16);
         }
 
+        /* THEME 5: UPWARD DEFENSE & POWER DYNAMICS (Obsidian Slate / Tactical Gold & Amber Shield) */
+        body.theme-power_defense {
+            --bg-page: #13110e;
+            --bg-header: #1f1b16;
+            --bg-card: #241f18;
+            --bg-subtle: #0d0b09;
+            --border-card: #4a3f2f;
+            --accent-primary: #d97706;
+            --accent-hover: #b45309;
+            --accent-text: #fcd34d;
+            --accent-badge-bg: rgba(245, 158, 11, 0.2);
+            --accent-badge-text: #fde68a;
+            --accent-badge-border: rgba(245, 158, 11, 0.5);
+            --header-tagline: #fbbf24;
+            --chip-active-bg: #d97706;
+            --chip-active-border: #fbbf24;
+            --ambient-glow: rgba(245, 158, 11, 0.22);
+            --ambient-secondary: rgba(225, 29, 72, 0.14);
+        }
+
         /* Dynamic theme class bindings */
         body { background-color: var(--bg-page); color: #f1f5f9; }
         .theme-header { background-color: var(--bg-header) !important; border-color: var(--border-card) !important; }
@@ -193,7 +213,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div>
                         <h1 class="text-xl font-bold tracking-tight text-white flex items-center">
                             BridgeCraft
-                            <span class="ml-2 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700/80 font-semibold" title="BridgeCraft v2.2 — Actionable Behavioral Co-Pilot">v2.2</span>
+                            <span class="ml-2 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700/80 font-semibold" title="BridgeCraft v2.3 — Actionable Behavioral Co-Pilot &amp; Executive Alignment Engine">v2.3</span>
                             <span id="header-domain-badge" class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full border border-indigo-500/40 bg-indigo-500/20 text-indigo-300">IT Ops</span>
                         </h1>
                         <span id="app-tagline" class="hidden sm:inline-block text-xs theme-tagline font-medium tracking-wide">Incident De-Escalation &amp; Communication Console</span>
@@ -239,7 +259,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] px-2 py-0.5 rounded bg-slate-800/90 border border-slate-700/60 mr-1 flex items-center gap-1 shadow-sm">
                     <span class="text-slate-400">🎯</span> Operational Lens:
                 </span>
-                <div class="inline-flex rounded-lg p-0.5 bg-slate-900/90 border border-slate-700/80 shadow-sm" id="lens-selector-group">
+                <div class="inline-flex flex-wrap rounded-lg p-0.5 bg-slate-900/90 border border-slate-700/80 shadow-sm" id="lens-selector-group">
                     <button type="button" onclick="setDomainLens('it_ops')" id="btn-lens-it_ops" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center bg-indigo-600 text-white shadow-sm" title="IT Operations, Incident Command &amp; War Rooms">
                         <span class="mr-1">🏢</span> IT Ops
                     </button>
@@ -251,6 +271,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </button>
                     <button type="button" onclick="setDomainLens('counseling_crisis')" id="btn-lens-counseling_crisis" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Mental Health Triage, Crisis Hotline &amp; Somatic Grounding">
                         <span class="mr-1">🩺</span> Crisis Counseling
+                    </button>
+                    <button type="button" onclick="setDomainLens('power_defense')" id="btn-lens-power_defense" class="lens-tab px-2.5 py-1 rounded-md transition-all font-medium flex items-center text-slate-400 hover:text-slate-200" title="Executive Alignment, Unfunded Scope Governance &amp; Transactional Analysis">
+                        <span class="mr-1">🛡️</span> Upward Defense
                     </button>
                 </div>
             </div>
@@ -510,6 +533,34 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
         </div>
 
+        <!-- VIEW 1B: UPWARD DEFENSE WORKBENCH (replaces the PCM console when the Upward Defense lens is active) -->
+        <div id="view-defense" class="hidden space-y-6">
+            <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700 space-y-3">
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2"><span>🛡️</span> Upward Defense Workbench</h2>
+                        <p class="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
+                            Spot the move, name the game, hold the line &mdash; with a written trail. Cues describe <em>behavior</em>, not intent:
+                            every counter here works whether the pressure was calculated or genuine.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-end gap-3 text-[11px] text-slate-400">
+                        <label class="flex flex-col gap-1">Your field
+                            <select id="def-domain" onchange="defSetDomain(this.value)" class="bg-slate-900 border border-slate-600 rounded-md py-1 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
+                        </label>
+                        <label class="flex flex-col gap-1">Tone
+                            <select id="def-tone" onchange="defSetTone(this.value)" class="bg-slate-900 border border-slate-600 rounded-md py-1 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option value="standard">Standard</option>
+                                <option value="deferential">High-deference (formal hierarchy)</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <nav id="def-subnav" class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-700/60"></nav>
+            </div>
+            <div id="def-panel" class="space-y-4"></div>
+        </div>
+
         <!-- VIEW 2: THE FIELD ARCHIVE -->
         <div id="view-dossier" class="hidden space-y-6">
             <div class="bg-slate-800 rounded-xl p-5 shadow-lg border border-slate-700 space-y-4">
@@ -549,6 +600,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <option value="crm_sales">💼 CRM &amp; Sales</option>
                         <option value="financial_hardship">💳 Banking Hardship</option>
                         <option value="counseling_crisis">🩺 Crisis Counseling</option>
+                        <option value="power_defense">🛡️ Upward Defense</option>
                     </select>
                     <select id="dossier-context-filter" onchange="renderDossier()" class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-3 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <option value="ALL">All Contexts</option>
@@ -556,6 +608,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <option value="Live-Fire Drill / Training">Live-Fire Drills Only</option>
                         <option value="1-on-1 Coaching">1-on-1s Only</option>
                         <option value="Customer Escalation">Customer Escalations</option>
+                        <option value="Unfunded Scope Mandate">Scope &amp; Priority Escalations</option>
                     </select>
                 </div>
             </div>
@@ -598,7 +651,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <!-- Manual Header -->
                 <div class="border-b border-slate-700 pb-6">
                     <div class="flex flex-wrap items-center gap-2 mb-2">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-900/60 text-indigo-300 border border-indigo-700/50">Version 2.0</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-900/60 text-indigo-300 border border-indigo-700/50">Version 2.3</span>
                         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-900/40 text-emerald-300 border border-emerald-700/40">100% Client-Side Privacy</span>
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Strategic Field Manual</h2>
@@ -643,7 +696,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <strong class="text-slate-100 text-sm">Switch Operational Lenses</strong>
                             </div>
                             <p class="text-slate-300 leading-relaxed">
-                                Use the top <strong>Operational Lens</strong> bar to tailor vocabulary and de-escalation scripts to your scenario: <strong>IT Ops</strong> (Sev-1 outages), <strong>CRM &amp; Sales</strong> (churn &amp; renewal saves), <strong>Banking Hardship</strong>, or <strong>Crisis Counseling</strong>.
+                                Use the top <strong>Operational Lens</strong> bar to tailor vocabulary and scripts: <strong>IT Ops</strong> (Sev-1 outages), <strong>CRM &amp; Sales</strong> (churn saves), <strong>Banking Hardship</strong>, <strong>Crisis Counseling</strong>, or <strong>Upward Defense</strong> (executive alignment &amp; scope governance).
                             </p>
                             <span class="text-[11px] text-emerald-400 font-semibold block pt-0.5">Tip: Switching lenses dynamically adapts all observation cues, scripts, and action templates.</span>
                         </div>
@@ -910,11 +963,11 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </ol>
                 </section>
 
-                <!-- Section 6: Four Operational Frames & Domain Adaptation -->
+                <!-- Section 6: Five Operational Frames & Domain Adaptation -->
                 <section class="space-y-3">
                     <h3 class="text-lg font-bold theme-accent-text flex items-center">
                         <span class="w-6 h-6 rounded-full bg-indigo-900/60 theme-accent-text text-xs flex items-center justify-center mr-2 border border-indigo-700/50">6</span>
-                        Four Operational Frames: Domain-Specific De-Escalation
+                        Five Operational Frames: Domain-Specific De-Escalation &amp; Defense
                     </h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
                         Different organizations and crisis contexts require tailored communication cues and specific de-escalation battlecards. Use the top <strong>Operational Lens Switcher</strong> to instantly pivot BridgeCraft:
@@ -935,6 +988,10 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-700 space-y-1">
                             <strong class="text-purple-300 text-sm block">🩺 Counseling, Clinical Crisis &amp; Mental Health</strong>
                             <p class="text-slate-400">Tailored for crisis intake triage, acute distress de-escalation, non-stigmatizing presence, somatic grounding, and emotional safety.</p>
+                        </div>
+                        <div class="bg-slate-900/80 p-3.5 rounded-xl border border-amber-500/40 sm:col-span-2 space-y-1">
+                            <strong class="text-amber-300 text-sm block">🛡️ Executive Alignment &amp; Upward Defense (Navigating Power Asymmetry &amp; Transactional Games)</strong>
+                            <p class="text-slate-400">Tailored for navigating unfunded executive scope mandates, strategic urgency theater, and transactional compliance games (Berne's <em>NIGYSOB</em> &amp; <em>Why Don't You, Yes But</em>, Karpman's Drama Triangle, and documented influence tactics such as fear-then-relief and door-in-the-face) where apparent "Phase distress" is used as an instrumental lever. Replaces standard emotional appeasement with <strong>Aligned Deference</strong>, <strong>Written Capacity Trade-Off Ledgers</strong>, and <strong>Cross-Functional Peer Governance</strong>. This lens opens its own workbench: a Live Card, a cue-to-game Decoder, a Games Library, Training scenarios, and an Escalation check.</p>
                         </div>
                     </div>
                 </section>
@@ -1473,6 +1530,67 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     { type: 'Promoter (High D)', color: 'text-rose-300', audio: 'Demands instant relief, hostile toward slow questions, high flight urge.', medium: 'Affect: Restless pacing, clenched fists, demanding immediate action.' },
                     { type: 'Imaginer (High C/S)', color: 'text-cyan-300', audio: 'Monosyllabic whispers, long vacant silences, delayed processing.', medium: 'Affect: Dissociation, staring into distance, numbness, motor freeze.' }
                 ]
+            },
+            power_defense: {
+                id: 'power_defense',
+                name: 'Executive Alignment & Upward Defense',
+                shortBadge: 'Upward Defense',
+                badgeClass: 'border-amber-500/40 bg-amber-500/20 text-amber-300',
+                themeClass: 'theme-power_defense',
+                tagline: 'Executive Scope Governance, Transactional Game Decoder & Upward Alignment Console',
+                stakeholderLabel: 'Executive Sponsor / Senior Stakeholder / Escalation Lead',
+                subjectPlaceholder: 'e.g., Richard (VP Product), Skip-Level Director, Steering Committee Lead',
+                level1Subtitle: 'Baseline Operating Filter • How they structure authority, priorities, and governance when calm',
+                calibrateBtnText: 'Calibrate Upward Alignment & Scope Playbook',
+                resultCardHeader: 'Upward Alignment & Scope Governance Playbook',
+                actionBoxTitle: 'Written Capacity Trade-Off & Charter Alignment Memo',
+                obsModeLabels: {
+                    audio: '1-on-1 Voice / Unrecorded Sync',
+                    video: 'Executive Review / Video Sync',
+                    audioSub: 'Verbal pressure cues, presupposition framing, and unfunded scope demands.',
+                    videoSub: 'High-authority posturing, performative urgency, and status-leverage dynamics.',
+                    audioTag: '🎧 Unrecorded Sync & Verbal Framing Mode',
+                    videoTag: '🏛️ Executive Review & Status-Leverage Mode'
+                },
+                contexts: [
+                    'Unfunded Scope Mandate',
+                    'Skip-Level Priority Override',
+                    'Executive Escalation / 1-on-1',
+                    'Cross-Functional Boundary Test',
+                    'Post-Meeting Governance Alignment',
+                    'Retroactive SLA / Spec Shift'
+                ],
+                category3Chips: {
+                    audio: {
+                        title: 'Pressure Delivery & Verbal Framing Style',
+                        sub: 'How they leverage authority, urgency, or disappointment to drive immediate compliance.',
+                        chip1: 'Calculated & Interrogative',
+                        chip1Title: 'Clipped diagnostic questions / Presupposition framing ("Why isn\'t this already in flight?")',
+                        chip2: 'Critical-Parent & Guilt-Binding',
+                        chip2Title: 'Expressing personal disappointment or questioning commitment to force over-accommodation',
+                        chip3: 'High-Volume & Artificial Urgency',
+                        chip3Title: 'Sharp vocal escalation, manufactured crisis framing, or implied status consequences'
+                    },
+                    video: {
+                        title: 'Executive Presence & Room Control',
+                        sub: 'How they use physical space, status cues, and intensity to dominate the frame.',
+                        chip1: 'Stone-Faced & Evaluative',
+                        chip1Title: 'Unblinking silence, arms crossed, withholding approval to induce anxious over-promising',
+                        chip2: 'Paternalistic & Patronizing',
+                        chip2Title: 'Leaning in, lecturing on loyalty or career trajectory while bypassing capacity data',
+                        chip3: 'Kinetic & High-Intensity',
+                        chip3Title: 'Sharp table gestures, interrupting, high-decibel urgency ("Contrast-Effect" pressure)'
+                    }
+                },
+                cheatSheetTitle: 'Upward Defense Quick Decoder: Spotting Instrumental Power Games (Transactional Analysis)',
+                cheatSheetItems: [
+                    { type: 'Thinker Mask ("The Retroactive Audit")', color: 'text-blue-300', audio: 'Demands unchartered granularity on the spot to frame the team as unprepared.', medium: 'Game: Blemish / NIGYSOB — uses moving goalposts to justify overriding team autonomy.' },
+                    { type: 'Persister Mask ("Critical Parent / NIGYSOB")', color: 'text-purple-300', audio: 'Questions your commitment, loyalty, or standards before introducing net-new scope.', medium: 'Game: Moral Leverage — induces guilt so boundary-setting feels like disloyalty.' },
+                    { type: 'Harmonizer Mask ("Velvet Leverage")', color: 'text-emerald-300', audio: 'Frames compliance as "protecting your standing/reputation" within the division.', medium: 'Game: Relational Bind — blends personal concern with implied organizational risk.' },
+                    { type: 'Rebel Mask ("The Presupposition Trap")', color: 'text-amber-300', audio: 'Treats a brand-new idea as an overdue deliverable ("Why isn\'t this already live?").', medium: 'Game: False Premise — bypasses intake governance by assuming prior agreement.' },
+                    { type: 'Promoter Mask ("Contrast-Effect Urgency")', color: 'text-rose-300', audio: 'Opens with sharp escalation, then pivots to an unvetted mandate as the "only fix".', medium: 'Game: Fear-Then-Relief — spikes cortisol so the target agrees just to lower tension.' },
+                    { type: 'Imaginer Mask ("Ambiguous Delegation")', color: 'text-cyan-300', audio: 'Gives vague verbal directives while avoiding written sign-off on resource trade-offs.', medium: 'Game: Plausible Deniability — leaves scope unwritten so delivery risk stays on you.' }
+                ]
             }
         };
 
@@ -1559,6 +1677,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "Try not to analyze your panic so much."
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (COGNITIVE STABILIZATION)\nTriage ID: [Identifier]\nObserved State: Cognitive hyper-arousal, analytical catastrophizing.\n\nSTABILIZATION PROTOCOL (STRUCTURED REALITY TESTING):\n1. Anchor in Present Verifiable Facts:\n   • "I am currently safe in this space."\n   • "My physiological response is adrenaline; it peaks in 10 minutes and subsides."\n2. Cognitive Thought Record:\n   • Identified Catastrophe: [Belief]\n   • Concrete Evidence For: [Evidence]\n   • Concrete Evidence Against: [Counter-evidence]\n3. 3-Step Action Sequence:\n   • Step 1: Slow exhale (count to 6).\n   • Step 2: Drink 4 oz of cold water.\n   • Step 3: Write down one immediate next task.`
+                    },
+                    power_defense: {
+                        templateTitle: "Capacity & Trade-Off Alignment Brief (Counter-Retroactive Spec Audit)",
+                        templateName: "Written Trade-Off Ledger",
+                        doSay: [
+                            "I hear the priority you are placing on [Initiative X]. Prior to this review, our documented sprint charter allocated 100% of engineering capacity to [Deliverable A & B].",
+                            "To execute [Initiative X] with high reliability, I will send a 1-page capacity ledger within the hour so you can sign off on which existing commitment we pause.",
+                            "I want to ensure our execution matches your exact specification—let's capture the scope and timeline in a shared written tracker right now."
+                        ],
+                        dontSay: [
+                            "I'm so sorry we didn't track that unchartered metric! I'll make the team work all weekend to do both!",
+                            "You never told us to track that! Why are you moving the goalposts on something that wasn't in the charter?!",
+                            "That requirement makes no architectural sense.",
+                            "Boundary Statement: 'I respect your direction to prioritize [Initiative X], and we can begin scoping it at 2:00 PM once we have written confirmation of which Q3 deliverable moves to the backlog.'"
+                        ],
+                        actionTemplate: `Subject: Priority Alignment & Capacity Sign-Off — [Initiative X] vs. Current Charter\nCC: [Peer Manager / PMO Lead]\n\n[Executive Sponsor Name],\n\nThank you for your direct feedback today regarding [Initiative X]. I want to ensure our teams execute in strict alignment with your priorities.\n\n1. BASELINE CHARTER FACT-CHECK (PRE-MEETING STATE):\n• Prior to today's discussion, 100% of team capacity (6 FTEs) was formally allocated to [Deliverable A] and [Deliverable B] per the approved Q3 roadmap.\n• [Initiative X] is a net-new workstream requiring an estimated [N] engineering weeks.\n\n2. CAPACITY & TRADE-OFF MATRIX (REQUIRED FOR EXECUTION):\n• Option 1 (Immediate Pivot to [Initiative X]): Reallocate 3 engineers today. Impact: [Deliverable A] slips by 3 weeks.\n• Option 2 (Protect Current Commitments): Hold [Deliverable A] on schedule; initiate [Initiative X] scoping in Sprint [N+1].\n\n3. NEXT STEP & WRITTEN CONFIRMATION:\n• Please reply to confirm whether you prefer Option 1 or Option 2 so [Peer Manager Name] and I can update the official portfolio tracker accordingly.\n\nRespectfully,\n[Your Name]\n[Title]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -1644,6 +1778,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "None of that matters in the real world."
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (VALUES & MORAL VALIDATION)\nTriage ID: [Identifier]\nObserved State: Moral exhaustion, intense guilt, perceived failure of principles.\n\nSTABILIZATION PROTOCOL (INTEGRITY-ALIGNED GROUNDING):\n1. Validation of Conviction:\n   • "Your grief and stress show how deeply you value integrity and the people in your care."\n   • "Carrying high standards does not mean you are required to be invulnerable."\n2. Ethical Reframing:\n   • Accepting help right now is an act of preserving your ability to live your values long-term.\n3. Collaborative Plan:\n   • Identify one core boundary that protects your well-being today.\n   • Agree to an ethical respite: pause decision-making on long-term conflicts for 24 hours.`
+                    },
+                    power_defense: {
+                        templateTitle: "Standards & Charter Alignment Memo (Counter-Critical Parent / NIGYSOB)",
+                        templateName: "Charter & Governance Shield",
+                        doSay: [
+                            "I take our operational standards and our commitment to division goals very seriously. That is why the team has been 100% focused on delivering the signed Q3 charter.",
+                            "Because I share your bar for delivery integrity, I will not make an unvetted verbal commitment in the room that risks production stability.",
+                            "Let me put the resource trade-offs for [Initiative X] in writing by 3:00 PM so we can formally update the governance charter together."
+                        ],
+                        dontSay: [
+                            "I'm so sorry I let you down! Please tell me how I can prove my commitment!",
+                            "You're playing a transactional game and blaming us for following the roadmap!",
+                            "I'll quietly pull engineers off compliance work so we can squeeze this in.",
+                            "Boundary Statement: 'Because I take your delivery standards seriously, I will not commit the team to an unvetted timeline verbally; I will send a formal governance trade-off memo today.'"
+                        ],
+                        actionTemplate: `Subject: Upholding Delivery Standards & Charter Alignment — [Initiative X]\nCC: [Peer Manager / PMO Lead]\n\nDear [Executive Sponsor Name],\n\nThank you for sharing your expectations today. I hold our team's execution and our alignment with organizational priorities to the highest standard.\n\nTo ensure we never compromise engineering quality or make unbacked verbal promises:\n1. Governance Baseline: To date, our squad has executed strictly against the approved Q3 Charter ([Deliverable A], currently 100% on track).\n2. Formal Scope Addition ([Initiative X]): Introducing [Initiative X] as an immediate P0 requires a formal charter revision so we do not degrade production reliability.\n3. Principled Path Forward:\n   • Path A: Authorize a formal scope change pausing [Deliverable A] so our engineers can deliver [Initiative X] to production standards.\n   • Path B: Maintain our current charter commitment and schedule [Initiative X] architecture review for [Date].\n\n[Peer Manager Name] and I have aligned our squads to await your written sign-off on Path A or Path B.\n\nRespectfully,\n[Your Name]\n[Title]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -1729,6 +1879,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "Why are you crying so much over this?"
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (AFFECTIVE CO-REGULATION)\nTriage ID: [Identifier]\nObserved State: Acute emotional dysregulation, weeping, shame, panic.\n\nSTABILIZATION PROTOCOL (RELATIONAL & SENSORY HOLDING):\n1. Somatic Co-Regulation:\n   • Paced breathing: "Inhale warmth for 4... Hold gently... Exhale release for 6."\n   • Soft tone modulation, low pitch, warm vocal cadence.\n2. Relational Affirmation:\n   • "You are not a burden. I am glad you reached out today."\n   • "You are worthy of care and tenderness right now."\n3. Safe Sensory Anchoring:\n   • Wrap in a soft blanket or hold a warm mug of tea.\n   • Hand over heart: feel the physical warmth and steady heartbeat.`
+                    },
+                    power_defense: {
+                        templateTitle: "Relational Leverage Defense ('Velvet Leverage' Neutralization)",
+                        templateName: "Polite Refusal of Relational Guilt",
+                        doSay: [
+                            "I appreciate your perspective on our team's visibility and standing across the division. To make sure we deliver reliably, let's document the exact scope for [Initiative X].",
+                            "I want to ensure our squads are completely aligned—I'll coordinate with [Peer Manager Name] and send a joint resource plan this afternoon.",
+                            "Thank you for sharing how important [Initiative X] is to the leadership team. Let me put the staffing options on paper so we protect overall delivery."
+                        ],
+                        dontSay: [
+                            "I don't want to hurt my standing here—I'll just absorb the extra scope quietly!",
+                            "Are you implying my role is at risk if I don't bypass the roadmap?!",
+                            "I'll take this on off-the-books and hide it from the other leads so you're happy.",
+                            "Boundary Statement: 'I value our working relationship and our division's reputation, and the best way to protect our delivery is to send a joint written staffing plan with [Peer Manager] for your sign-off.'"
+                        ],
+                        actionTemplate: `Subject: Team Alignment & Joint Delivery Plan — [Initiative X]\nCC: [Peer Manager / PMO Lead]\n\nDear [Executive Sponsor Name],\n\nThank you for meeting with me today and emphasizing how important [Initiative X] is for our division.\n\nBecause I care deeply about our team's reliability and sustainable execution, [Peer Manager Name] and I have reviewed our combined squad bandwidth to ensure we support your goals responsibly:\n\n1. Cross-Functional Management Alignment:\n   • [Peer Manager Name] and I manage interdependent delivery queues and are coordinating this intake together so no single squad is silently overloaded.\n2. Sustainable Staffing Options:\n   • Option A: Pause [Deliverable B] across both squads to free 2 engineers for [Initiative X] starting Monday.\n   • Option B: Complete current sprint commitments first and begin [Initiative X] discovery on [Date].\n3. Shared Governance Check-In:\n   • [Peer Manager Name] and I will both join Friday's status review to walk through the written tracker with you.\n\nWarm regards,\n[Your Name] & [Peer Manager Name]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -1818,6 +1984,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "Boundary Statement: 'You are completely free to feel and express your frustration, but our work stops if physical safety lines are crossed.'"
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (AUTONOMY & CREATIVE EXPRESSION)\nTriage ID: [Identifier]\nObserved State: Defiant distress, cynicism, authority resistance, agitation.\n\nSTABILIZATION PROTOCOL (NON-AUTHORITARIAN PACING):\n1. Agency & Autonomy Grant:\n   • "You don't have to sit still. Stand up, shake out your arms, or pace if your body needs to move."\n   • "You can say whatever words you need to say—no filtering or politeness required here."\n2. Metaphor-Based Grounding:\n   • "If this emotional storm was a ridiculous cartoon monster, what would it look like?"\n   • Channel kinetic frustration into high-energy physical discharge (tearing paper, wall push-ups).\n3. Binary Micro-Choices:\n   • "Do you want to keep talking about this, or take a 2-minute break and listen to your favorite song?"`
+                    },
+                    power_defense: {
+                        templateTitle: "Scope-Locking Protocol (Counter-Presupposition Framing)",
+                        templateName: "Presupposition Deflection Memo",
+                        doSay: [
+                            "When you ask why [Initiative X] isn't already in flight, it sounds like you're looking for a fast prototype—let's define what a 48-hour proof-of-concept looks like versus full build.",
+                            "That's a bold new direction. Before we pull engineers off the main release, let's capture the exact acceptance criteria in writing so the target doesn't shift.",
+                            "We can either spin up a 2-day sandbox spike or keep the squad on the core release—which option would you like to authorize?"
+                        ],
+                        dontSay: [
+                            "Why are you asking why it isn't done when you just brought it up five minutes ago?!",
+                            "Fine, we'll drop everything and chase this unchartered idea with zero specs!",
+                            "Everyone knows this scope is completely unrealistic.",
+                            "Boundary Statement: 'I'm glad to explore a fast prototype for [Initiative X], and we will kick that off as soon as we lock the written scope and pause [Deliverable A].'"
+                        ],
+                        actionTemplate: `Subject: Scoping & Prototype Options — [Initiative X] ("Fast Spike" vs. Full Build)\nCC: [Peer Manager / PMO Lead]\n\nHi [Executive Sponsor Name],\n\nFollowing up on our discussion today regarding [Initiative X]. Since this is a net-new initiative outside our current sprint backlog, I have structured two concrete options to get you fast visibility without derailing production:\n\n1. OPTION A — 48-Hour Time-Boxed Spike (Zero Roadmap Slip):\n   • 1 Senior Engineer time-boxed for 2 days to produce an architecture feasibility brief.\n   • Core release ([Deliverable A]) remains on schedule.\n\n2. OPTION B — Full Engineering Pivot (Requires Roadmap Trade-Off):\n   • Reassign 4 engineers to build [Initiative X] immediately.\n   • Requires formal sign-off to move [Deliverable A] out of Q3.\n\nPlease reply with "Option A" or "Option B" so [Peer Manager Name] and I can lock the sprint board.\n\nBest,\n[Your Name]\n[Title]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -1907,6 +2089,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "Boundary Statement: 'I am here to work with you through this crisis, but I will not engage if you threaten staff or damage equipment.'"
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (ACTION & STABILIZATION LEADERSHIP)\nTriage ID: [Identifier]\nObserved State: Fight/Flight escalation, demanding immediate control, high urgency.\n\nSTABILIZATION PROTOCOL (DECISIVE PHYSICAL ANCHORING):\n1. Immediate Action Mandate:\n   • "Stand up. Push hard against the wall with both hands for 10 seconds. Feel your strength."\n   • "Splash freezing cold water on your face right now. Trigger the dive reflex."\n2. Concrete Tactical Win:\n   • Focus exclusively on the immediate 15-minute horizon.\n   • Secure physical environment: remove sharp objects, lock door, drink water.\n3. Contract for Immediate Safety:\n   • Unambiguous, clear commitment: "You and I agree: No harmful actions for the next 2 hours. We talk again at [Time]."`
+                    },
+                    power_defense: {
+                        templateTitle: "Aligned Deference & Trade-Off Memo (Counter-Artificial Urgency / Pressure)",
+                        templateName: "Aligned Deference & Trade-Off Lock",
+                        doSay: [
+                            "I hear the urgency around [Initiative X]. Because our squad is 100% allocated to the Q3 launch you approved, I will send a 3-bullet trade-off memo by 2:00 PM so you can choose which deliverable we pause.",
+                            "I want to make sure your priority is executed properly rather than giving an unbacked 'yes' in the room. Let me review the capacity numbers with [Peer Manager] and put two formal options on your desk today.",
+                            "Understood that [Initiative X] is now a top priority. Prior to this meeting it was outside our signed charter—I will document the headcount and schedule impact right after this call for your formal sign-off."
+                        ],
+                        dontSay: [
+                            "Okay, I'm sorry! We'll start [Initiative X] immediately and figure out how to do everything at once!",
+                            "Why are you raising your voice and pressuring us when we're already at 100% capacity?!",
+                            "Why haven't we started? Because this wasn't on the roadmap until two minutes ago!",
+                            "Boundary Statement: 'I understand the urgency of [Initiative X]; I will deliver the written resource trade-off memo by 2:00 PM so you can formally authorize which current P0 we pause.'"
+                        ],
+                        actionTemplate: `Subject: Priority Alignment & Executive Trade-Off Sign-Off — [Initiative X]\nCC: [Peer Manager / PMO Lead], [Director / Portfolio Tracker]\n\nDear [Executive Sponsor Name],\n\nThank you for your time today and for emphasizing the urgency of [Initiative X]. I want to ensure our teams execute in strict alignment with your priorities.\n\n[ALIGNED DEFERENCE & CAPACITY GOVERNANCE]:\n1. Current Signed Baseline:\n   • Prior to today's review, 100% of our engineering headcount was allocated to [Primary Deliverable A] and [Primary Deliverable B] per the approved Q3 division roadmap.\n\n2. Resource & Schedule Trade-Off Required for [Initiative X]:\n   • Because [Initiative X] is a net-new unchartered mandate requiring ~[N] engineering weeks, executing it immediately requires a formal priority swap:\n   • OPTION 1 (Immediate Pivot to [Initiative X]): Reassign [N] engineers to [Initiative X] effective tomorrow. Result: [Primary Deliverable A] moves out of Q3 by [N] weeks.\n   • OPTION 2 (Hold Q3 Commitments): Keep 100% of team on [Primary Deliverable A] through launch, and schedule [Initiative X] scoping for [Date].\n\n3. Cross-Functional Alignment & Next Step:\n   • I have looped in [Peer Manager Name] so our peer squads remain synchronized on division capacity.\n   • Please reply to confirm Option 1 or Option 2 so we can log the formal roadmap change today.\n\nRespectfully,\n[Your Name]\n[Title]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -1992,6 +2190,22 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             "You need to snap out of it!"
                         ],
                         actionTemplate: `CRISIS INTERVENTION READOUT (DISSOCIATION & GENTLE PRESENCE)\nTriage ID: [Identifier]\nObserved State: Dissociation, hypo-arousal, motor freeze, mutism, staring.\n\nSTABILIZATION PROTOCOL (MINIMAL-STIMULATION ANCHORING):\n1. Low Sensory Presence:\n   • Lower voice volume, speak slowly with long comfortable pauses.\n   • Do NOT demand eye contact or verbal explanations.\n2. Non-Demanding Sensory Prompts:\n   • "Feel the weight of your shoes on the ground."\n   • "Notice the temperature of the air on your hands."\n   • "Can you tap one finger against your leg? Just one tap."\n3. Safe Gradual Re-Entry:\n   • Offer gentle binary prompts: "Nod yes if you would like me to keep talking."\n   • Gentle orientation to the room: name 1 object in sight.`
+                    },
+                    power_defense: {
+                        templateTitle: "Written Specification Lock (Counter-Ambiguous Delegation)",
+                        templateName: "Default-State Written Lock",
+                        doSay: [
+                            "I want to make sure our team executes exactly what you have in mind. Since we didn't cover the detailed spec today, I will send a 3-point written assumption memo this afternoon.",
+                            "Unless you reply to redirect us by 5:00 PM today, we will proceed with our existing approved Q3 charter as the default state.",
+                            "No need for another meeting—a simple one-word reply to my afternoon email will lock the priority."
+                        ],
+                        dontSay: [
+                            "Why are you withholding the requirements?! Tell us what you want us to build!",
+                            "We'll just guess what you want and make the team build three versions in parallel!",
+                            "I feel like you're setting us up to fail on purpose!",
+                            "Boundary Statement: 'To protect delivery accuracy, I will send our written baseline assumptions by 3:00 PM; we will hold our current charter unless we receive written sign-off to pivot.'"
+                        ],
+                        actionTemplate: `Subject: Written Baseline & Default Execution Plan — [Initiative X]\nCC: [Peer Manager / PMO Lead]\n\nDear [Executive Sponsor Name],\n\nFollowing our brief check-in today, I want to ensure there is zero ambiguity regarding our team's execution plan.\n\n1. DOCUMENTED DEFAULT STATE:\n   • Unless directed otherwise in writing, our squad and [Peer Manager Name]'s team will remain 100% allocated to the approved Q3 Charter ([Deliverable A]).\n\n2. REQUIREMENTS NEEDED TO INITIATE [INITIATIVE X]:\n   • Written acceptance criteria and target milestone date.\n   • Written authorization to pause [Deliverable A] to free engineering capacity.\n\nNo action is required on your part if you wish us to remain on our current Q3 Charter. If you would like us to pivot to [Initiative X], please reply confirming the priority swap.\n\nRespectfully,\n[Your Name]\n[Title]`
                     }
                 },
                 get incident() { return this.playbooks[currentLens || 'it_ops'] || this.playbooks['it_ops']; }
@@ -2159,6 +2373,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     if (clean === 'crm' || clean === 'sales') return 'crm_sales';
                     if (clean === 'banking' || clean === 'hardship' || clean === 'finance') return 'financial_hardship';
                     if (clean === 'counseling' || clean === 'crisis' || clean === 'mental_health') return 'counseling_crisis';
+                    if (clean === 'power' || clean === 'upward' || clean === 'defense' || clean === 'power_defense') return 'power_defense';
                     if (clean === 'it' || clean === 'ops') return 'it_ops';
                 }
                 return localStorage.getItem('bridgecraft_active_lens') || 'it_ops';
@@ -2464,7 +2679,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             // 3. Update Domain Lens Selector Buttons
             document.querySelectorAll('.lens-tab').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'text-white', 'shadow-sm');
+                btn.classList.remove('bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'bg-amber-600', 'text-white', 'shadow-sm');
                 btn.classList.add('text-slate-400', 'hover:text-slate-200');
             });
             const activeLensBtn = document.getElementById(`btn-lens-${lensKey}`);
@@ -2472,7 +2687,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 activeLensBtn.classList.remove('text-slate-400', 'hover:text-slate-200');
                 const activeColor = lensKey === 'crm_sales' ? 'bg-rose-600' :
                                    lensKey === 'financial_hardship' ? 'bg-emerald-600' :
-                                   lensKey === 'counseling_crisis' ? 'bg-purple-600' : 'bg-indigo-600';
+                                   lensKey === 'counseling_crisis' ? 'bg-purple-600' :
+                                   lensKey === 'power_defense' ? 'bg-amber-600' : 'bg-indigo-600';
                 activeLensBtn.classList.add(activeColor, 'text-white', 'shadow-sm');
             }
 
@@ -2519,6 +2735,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
             if (!document.getElementById('view-dossier').classList.contains('hidden')) {
                 renderDossier();
             }
+
+            // 12. Swap between the PCM console and the Upward Defense workbench
+            if (typeof syncDefenseView === 'function') syncDefenseView();
         }
 
         function populateContextSelect() {
@@ -2700,7 +2919,8 @@ employer, client, or third party. See LICENSE file for full legal terms.
 
             const activeColor = currentLens === 'crm_sales' ? 'bg-rose-600' :
                                currentLens === 'financial_hardship' ? 'bg-emerald-600' :
-                               currentLens === 'counseling_crisis' ? 'bg-purple-600' : 'bg-indigo-600';
+                               currentLens === 'counseling_crisis' ? 'bg-purple-600' :
+                               currentLens === 'power_defense' ? 'bg-amber-600' : 'bg-indigo-600';
 
             if (mode === 'audio') {
                 if (btnAudio) {
@@ -2771,7 +2991,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 const isSelected = btnEl.classList.contains('chip-selected');
 
                 document.querySelectorAll(`.chip[data-category="${category}"]`).forEach(btn => {
-                    btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'border-indigo-500', 'text-white');
+                    btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'bg-amber-600', 'border-indigo-500', 'text-white');
                     btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
                     btn.setAttribute('aria-checked', 'false');
                 });
@@ -3053,8 +3273,9 @@ employer, client, or third party. See LICENSE file for full legal terms.
         }
 
         function switchTab(tabId) {
+            window.__bcTab = tabId;
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('theme-btn-accent', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'text-white', 'shadow-sm');
+                btn.classList.remove('theme-btn-accent', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'bg-amber-600', 'text-white', 'shadow-sm');
                 btn.classList.add('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
             });
             const activeBtn = document.getElementById(`tab-${tabId}`);
@@ -3079,6 +3300,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             } else if (tabId === 'coaching') {
                 renderCoachingConsole();
             }
+            if (typeof syncDefenseView === 'function') syncDefenseView();
         }
 
         function calculateTopMatch(categoryScores, engineKey, primaryFactor) {
@@ -3318,7 +3540,115 @@ employer, client, or third party. See LICENSE file for full legal terms.
             }
         };
 
+        // ================= UPWARD DEFENSE: TRANSACTIONAL GAME & SCOPE GOVERNANCE ENGINE =================
+        const POWER_DEFENSE_RADAR = {
+            triggers: {
+                thinker: {
+                    name: "Retroactive Spec Audit (Blemish / NIGYSOB)",
+                    badge: "🎭 Game: Retroactive Spec Shift",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    tell: "Instrumental Pressure: Moving goalposts or demanding unchartered granularity to frame the team as unprepared.",
+                    action: "Do NOT apologize for unchartered scope. Convert the verbal request into a written capacity trade-off ledger within 60 minutes."
+                },
+                persister: {
+                    name: "Critical Parent Framing (Guilt-Shame Frame)",
+                    badge: "🎭 Game: Critical Parent / Standards",
+                    style: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    tell: "Instrumental Pressure: Questioning team dedication or expressing personal disappointment to induce guilt and bypass governance.",
+                    action: "Step out of the guilt frame. Anchor respectfully to your 100% execution on the signed Q3 charter and require written sign-off to reprioritize."
+                },
+                harmonizer: {
+                    name: "Relational Leverage ('Velvet Bind')",
+                    badge: "🎭 Game: Relational / Reputation Bind",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "Instrumental Pressure: Framing unchartered scope as 'helpful advice' to protect your standing or reputation in the division.",
+                    action: "Avoid absorbing hidden work off-the-books. Loop in your Peer Manager / PMO lead and reply with a joint, sustainable staffing memo."
+                },
+                rebel: {
+                    name: "Presupposition Framing ('Already Overdue')",
+                    badge: "🎭 Game: Presupposition Framing",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    tell: "Instrumental Pressure: Treating a net-new concept as if it were already assigned ('Why isn't this in flight yet?') to skip scoping.",
+                    action: "Clarify the baseline calmly: state the prior approved roadmap, then offer a 48-hour time-boxed spike vs. full roadmap swap in writing."
+                },
+                promoter: {
+                    name: "Contrast-Effect / Artificial Urgency",
+                    badge: "🎭 Game: Artificial Urgency / Pressure",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "Instrumental Pressure: Opening with sharp escalation to create tension, then presenting an unvetted mandate as the immediate relief path.",
+                    action: "Use Aligned Deference: keep tone composed ('I hear the priority on this'), make zero unvetted verbal commitments, and send a written trade-off matrix."
+                },
+                imaginer: {
+                    name: "Ambiguous Delegation & Withheld Sign-Off",
+                    badge: "🎭 Game: Ambiguous Delegation",
+                    style: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+                    tell: "Instrumental Pressure: Giving vague verbal mandates while declining to put resource trade-offs or acceptance criteria in writing.",
+                    action: "Send a calm 'Default State' email: document your current charter and state that the squad will remain on it unless redirected in writing."
+                }
+            },
+            traps: {
+                promoter: {
+                    roleName: "The Artificial-Urgency Driver",
+                    badge: "Compliance Hook: Tension-Relief Reflex",
+                    style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                    tell: "Leverages high-intensity escalation and status pressure to force an immediate verbal 'yes' before capacity impact is evaluated.",
+                    baitTrap: "Do NOT agree to an unvetted timeline just to de-escalate the room, and do NOT debate capacity numbers while tension is elevated.",
+                    pivotStance: "Aligned Deference (Composed Tone + Written Trade-Off)",
+                    breakerScript: "I hear how critical [Initiative X] is to the division, and I want to make sure we don't give you an unbacked commitment. I will review our sprint load with [Peer Manager] and send two written trade-off options by 2:00 PM for your sign-off."
+                },
+                persister: {
+                    roleName: "The Critical-Parent Evaluator",
+                    badge: "Compliance Hook: Loyalty / Guilt Bind",
+                    style: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    tell: "Frames standard resource boundaries as a lack of commitment or alignment with leadership expectations.",
+                    baitTrap: "Do NOT apologize for executing the signed roadmap, and do NOT over-promise weekend overtime to prove loyalty.",
+                    pivotStance: "Charter-Anchored Stewardship",
+                    breakerScript: "I take our commitment to division priorities and delivery standards very seriously. Prior to today, 100% of our capacity was locked to the signed Q3 charter—let me send you a formal priority swap memo this afternoon."
+                },
+                default: {
+                    roleName: "The Presupposition Framer",
+                    badge: "Compliance Hook: Assumed Mandate",
+                    style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                    tell: "Presupposes a brand-new initiative was already expected ('Why isn't this underway?') to bypass normal intake governance.",
+                    baitTrap: "Do NOT accept a false premise that the team dropped the ball, and do NOT quietly overload your squad.",
+                    pivotStance: "Cross-Functional Peer Alignment",
+                    breakerScript: "Because [Initiative X] is a net-new addition to our signed Q3 charter, [Peer Manager] and I will put the resource trade-offs in writing by 2:00 PM so you can authorize which deliverable we pause."
+                }
+            },
+            stance: {
+                badge: "Aligned Deference & Written Governance",
+                style: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                action: "Acknowledge executive priority in tone ('Yes, I hear the urgency'), hold scope boundaries in substance, and require written trade-off sign-off."
+            },
+            bandwidth: {
+                state: "Cortisol Spike Check (Pause Before Promising)",
+                style: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+                tell: "High-authority pressure triggers a natural 'fawn/comply' reflex to end tension quickly. Slow your cadence, buy 2 hours, and align with peers."
+            },
+            habitTell: {
+                thinker: { name: "Retroactive Spec Shifting", cue: "Requesting metrics or deliverables outside the signed charter." },
+                persister: { name: "Critical-Parent Framing", cue: "Questioning dedication or standards before introducing unfunded scope." },
+                harmonizer: { name: "Relational Guilt Leverage", cue: "Framing extra scope as 'protecting your team's standing or visibility.'" },
+                rebel: { name: "Presupposition Framing", cue: "Asking why a newly introduced idea isn't already completed." },
+                promoter: { name: "Contrast-Effect Escalation", cue: "Sharp vocal intensity followed by an immediate unfunded mandate." },
+                imaginer: { name: "Unwritten Scope Delegation", cue: "Declining to document acceptance criteria or trade-offs in writing." }
+            }
+        };
+
         function getActionableBehavioralProfile(baseKey, phaseKey, currentSelections) {
+            if (currentLens === 'power_defense') {
+                const trigger = POWER_DEFENSE_RADAR.triggers[phaseKey] || POWER_DEFENSE_RADAR.triggers.promoter;
+                const trap = POWER_DEFENSE_RADAR.traps[phaseKey] || POWER_DEFENSE_RADAR.traps.default;
+                const habit = POWER_DEFENSE_RADAR.habitTell[phaseKey] || POWER_DEFENSE_RADAR.habitTell.promoter;
+                return {
+                    trigger,
+                    trap,
+                    stance: POWER_DEFENSE_RADAR.stance,
+                    bandwidth: POWER_DEFENSE_RADAR.bandwidth,
+                    habit
+                };
+            }
+
             const trigger = ACTIONABLE_BEHAVIORAL_ENGINE.triggers[phaseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.triggers[baseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.triggers.thinker;
             const habit = ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[baseKey] || ACTIONABLE_BEHAVIORAL_ENGINE.habitTell.thinker;
 
@@ -3415,7 +3745,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 <!-- DUAL-LENS DISC ALIGNMENT BANNER -->
                 <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">DISC Leadership &amp; Operational Alignment</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">${currentLens === 'power_defense' ? 'Executive Baseline vs. Instrumental Pressure Mask' : 'DISC Leadership &amp; Operational Alignment'}</span>
                         <span class="text-xs text-slate-400 font-mono">Dual-Lens Synthesis &bull; ${cfg.shortBadge}</span>
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
@@ -3427,7 +3757,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <span class="text-slate-500 font-bold">➔</span>
                         <div class="flex items-center space-x-2">
-                            <span class="text-xs text-slate-400 uppercase font-semibold">Operational Distress:</span>
+                            <span class="text-xs text-slate-400 uppercase font-semibold">${currentLens === 'power_defense' ? 'Instrumental Pressure Mask:' : 'Operational Distress:'}</span>
                             <span class="px-3 py-1 rounded-full text-xs font-bold border ${isPure ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : currentAnalysis.phase.disc.style}">
                                 ${currentAnalysis.phase.disc.badge} — ${currentAnalysis.phase.disc.label}
                             </span>
@@ -3435,21 +3765,48 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     </div>
                 </div>
 
+                ${currentLens === 'power_defense' ? `
+                <!-- TRANSACTIONAL GAME & SCOPE GOVERNANCE PROTOCOL -->
+                <div class="bg-gradient-to-r from-amber-950/60 via-slate-900/95 to-rose-950/50 p-4 rounded-xl border border-amber-500/50 shadow-lg space-y-2.5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-amber-500/30 pb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-base">🛡️</span>
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300">Executive Alignment &amp; Scope Governance Protocol</span>
+                        </div>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-200 border border-amber-500/40 font-semibold">Phase = Instrumental Leverage (Transactional Game)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs leading-relaxed">
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-amber-500/20 space-y-1">
+                            <strong class="text-amber-300 block uppercase text-[10px] tracking-wider">1. Spot the Transactional Game:</strong>
+                            <p class="text-slate-300 text-[11px]">High-intensity urgency, <em>Critical Parent</em> framing, or presupposition questions are often used instrumentally to bypass standard intake governance. Recognize the pattern objectively so you don't over-promise on the spot.</p>
+                        </div>
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-emerald-500/20 space-y-1">
+                            <strong class="text-emerald-300 block uppercase text-[10px] tracking-wider">2. Aligned Deference ("Yes, And..."):</strong>
+                            <p class="text-slate-300 text-[11px]">Never debate authority or capacity limits verbally while tension is high. Validate the executive priority in tone while routing the commitment into a <strong>written capacity trade-off ledger</strong>.</p>
+                        </div>
+                        <div class="bg-slate-950/70 p-3 rounded-lg border border-indigo-500/20 space-y-1">
+                            <strong class="text-indigo-300 block uppercase text-[10px] tracking-wider">3. Cross-Functional Peer Alignment:</strong>
+                            <p class="text-slate-300 text-[11px]">Unfunded mandates thrive in isolated 1-on-1 channels. <strong>Coordinate with peer managers &amp; PMO leads:</strong> CC peer leads on the written trade-off options and review scope changes jointly.</p>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+
                 <!-- ACTIONABLE BEHAVIORAL RADAR (ZERO JARGON) -->
                 <div class="bg-gradient-to-br from-slate-900/95 via-slate-900/80 to-indigo-950/40 p-4 rounded-xl border border-slate-700/80 space-y-3 shadow-md">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800 pb-2">
                         <div class="flex items-center space-x-2">
                             <span class="text-xs font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
-                                <span>⚡</span> Frontline Behavioral Radar
+                                <span>⚡</span> ${currentLens === 'power_defense' ? 'Transactional Game &amp; Scope Governance Radar' : 'Frontline Behavioral Radar'}
                             </span>
-                            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-950/70 text-indigo-300 border border-indigo-500/30 font-semibold">What Drives Them &bull; What Traps You</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-950/70 text-indigo-300 border border-indigo-500/30 font-semibold">${currentLens === 'power_defense' ? 'The Pressure Frame &bull; The Governance Pivot' : 'What Drives Them &bull; What Traps You'}</span>
                         </div>
-                        <span class="text-[11px] text-slate-400 font-mono">Real-Time De-Escalation Guidance</span>
+                        <span class="text-[11px] text-slate-400 font-mono">${currentLens === 'power_defense' ? 'Upward Alignment &amp; Written Trade-Offs' : 'Real-Time De-Escalation Guidance'}</span>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
                         <!-- CORE TRIGGER -->
                         <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">⚡ Core Trigger</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">${currentLens === 'power_defense' ? '🎭 Transactional Frame' : '⚡ Core Trigger'}</span>
                             <div class="flex items-center">
                                 <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.trigger.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.trigger.badge)}: ${escapeHtml(actionProfile.trigger.tell)}">
                                     ${actionProfile.trigger.badge}
@@ -3459,7 +3816,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <!-- CONFLICT TRAP -->
                         <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">🛡️ Conflict Trap</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">${currentLens === 'power_defense' ? '🪤 Compliance Hook' : '🛡️ Conflict Trap'}</span>
                             <div class="flex items-center">
                                 <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.trap.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.trap.badge)} (${escapeHtml(actionProfile.trap.roleName)}): ${escapeHtml(actionProfile.trap.tell)}">
                                     ${actionProfile.trap.badge}
@@ -3469,7 +3826,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <!-- NEGOTIATION STANCE -->
                         <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">⚔️ Negotiation Stance</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">${currentLens === 'power_defense' ? '🥋 Upward Counter-Stance' : '⚔️ Negotiation Stance'}</span>
                             <div class="flex items-center">
                                 <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.stance.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.stance.badge)}: ${escapeHtml(actionProfile.stance.action)}">
                                     ${actionProfile.stance.badge}
@@ -3479,7 +3836,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </div>
                         <!-- BRAIN BANDWIDTH -->
                         <div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-1.5 group hover:border-slate-700 transition-colors">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">🧠 Brain Bandwidth</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">${currentLens === 'power_defense' ? '🧠 Pacing &amp; Reflex Check' : '🧠 Brain Bandwidth'}</span>
                             <div class="flex items-center">
                                 <span class="px-2 py-0.5 rounded text-xs font-bold border ${actionProfile.bandwidth.style} inline-block leading-normal break-words max-w-full text-left" title="${escapeHtml(actionProfile.bandwidth.state)}: ${escapeHtml(actionProfile.bandwidth.tell)}">
                                     ${actionProfile.bandwidth.state}
@@ -3576,12 +3933,12 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.base.baseComm}</p>
                     </div>
                     <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/80 shadow-sm space-y-1">
-                        <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">Current Driver (Phase)</h4>
+                        <h4 class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">${currentLens === 'power_defense' ? 'Ostensible Driver (Phase Frame)' : 'Current Driver (Phase)'}</h4>
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.phaseDriver}</p>
                     </div>
                     <div class="bg-gradient-to-br from-rose-950/40 to-slate-900/90 p-4 rounded-xl border border-rose-500/40 shadow-sm space-y-1">
                         <h4 class="text-xs text-rose-400 uppercase font-bold tracking-wider mb-1 flex items-center gap-1.5">
-                            <span>⚠️</span> <span>Distress Tell (Phase)</span>
+                            <span>⚠️</span> <span>${currentLens === 'power_defense' ? 'Pressure Escalation Tell (Phase)' : 'Distress Tell (Phase)'}</span>
                         </h4>
                         <p class="text-slate-200 text-sm leading-relaxed">${currentAnalysis.phase.distress}</p>
                     </div>
@@ -3632,7 +3989,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                             <div class="flex items-center justify-between border-b border-indigo-900/50 pb-1.5">
                                 <div class="flex items-center space-x-1.5">
                                     <span class="text-sm">🛡️</span>
-                                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">De-Escalation Circuit Breaker</span>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-300">${currentLens === 'power_defense' ? 'Aligned Deference Circuit Breaker' : 'De-Escalation Circuit Breaker'}</span>
                                 </div>
                                 <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-200 border border-indigo-500/30">Pivot Stance: ${actionProfile.trap.pivotStance}</span>
                             </div>
@@ -3653,16 +4010,16 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <div class="flex items-center justify-between border-b border-blue-900/50 pb-1.5">
                                     <div class="flex items-center space-x-1.5">
                                         <span class="text-sm">⚡</span>
-                                        <span class="text-xs font-bold uppercase tracking-wider text-blue-300">De-Escalation Antidote</span>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-blue-300">${currentLens === 'power_defense' ? 'Scope Governance Antidote (Written Ledger)' : 'De-Escalation Antidote'}</span>
                                     </div>
                                     <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/60 text-blue-200 border border-blue-500/30">${actionProfile.trigger.name}</span>
                                 </div>
                                 <div class="text-[11px] text-slate-200 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 space-y-1 leading-relaxed">
-                                    <strong class="text-blue-400 font-semibold block">The Move That Calms Them:</strong>
+                                    <strong class="text-blue-400 font-semibold block">${currentLens === 'power_defense' ? 'The Move That Restores Governance:' : 'The Move That Calms Them:'}</strong>
                                     <span>${escapeHtml(actionProfile.trigger.action)}</span>
                                 </div>
                                 <div class="text-[11px] text-slate-400 pt-1 flex items-start space-x-1.5">
-                                    <span><strong>Stress Habit to Spot:</strong> <code class="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">${actionProfile.habit.name}</code> &mdash; ${escapeHtml(actionProfile.habit.cue)}</span>
+                                    <span><strong>${currentLens === 'power_defense' ? 'Pressure Tell to Spot:' : 'Stress Habit to Spot:'}</strong> <code class="text-indigo-300 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">${actionProfile.habit.name}</code> &mdash; ${escapeHtml(actionProfile.habit.cue)}</span>
                                 </div>
                             </div>
                         </div>
@@ -3689,7 +4046,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <div>
                         <span class="text-xs font-bold uppercase tracking-wider theme-accent-text block mb-1">Tactical Synthesis &amp; Psychological Dynamic</span>
                         <p class="text-xs text-slate-300 leading-relaxed">
-                            Baseline communication channel is <strong>${currentAnalysis.base.disc.label}</strong> (${currentAnalysis.base.disc.summary}). Under acute ${cfg.shortBadge} friction, distress behaviors shift toward <strong>${currentAnalysis.phase.disc.label}</strong> (${currentAnalysis.phase.disc.summary}).
+                            Baseline communication channel is <strong>${currentAnalysis.base.disc.label}</strong> (${currentAnalysis.base.disc.summary}). Under acute ${cfg.shortBadge} friction, ${currentLens === 'power_defense' ? 'instrumental pressure framing adopts the mask of' : 'distress behaviors shift toward'} <strong>${currentAnalysis.phase.disc.label}</strong> (${currentAnalysis.phase.disc.summary}).
                         </p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-800/80">
@@ -3773,7 +4130,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             document.getElementById('subject-name').value = '';
             handleSubjectInput('');
             document.querySelectorAll('.chip').forEach(btn => {
-                btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'border-indigo-500', 'text-white');
+                btn.classList.remove('chip-selected', 'bg-indigo-600', 'bg-rose-600', 'bg-emerald-600', 'bg-purple-600', 'bg-amber-600', 'border-indigo-500', 'text-white');
                 btn.classList.add('bg-slate-700/50', 'border-slate-600', 'text-slate-200');
                 btn.setAttribute('aria-checked', 'false');
             });
@@ -4554,6 +4911,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
             const marcusId = 'sub_sample_marcus';
             const eleanorId = 'sub_sample_eleanor';
             const davidKId = 'sub_sample_davidk';
+            const richardId = 'sub_sample_richard';
 
             dossier.subjects[sarahId] = {
                 id: sarahId,
@@ -4625,6 +4983,32 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 aliases: ["David K.", "Client 104", "Intake D.K."],
                 notes: "Triage caller presenting with acute panic and dissociation.",
                 createdAt: new Date(Date.now() - 86400000 * 1).toISOString()
+            };
+
+            dossier.subjects[richardId] = {
+                id: richardId,
+                canonicalName: "Richard Cross (VP Product)",
+                aliases: ["Richard Cross (VP Product)", "Richard Cross", "VP Product"],
+                notes: "Executive sponsor who frequently uses artificial urgency, Critical-Parent framing, and presupposition questions in 1-on-1 syncs to push unfunded scope outside the quarterly charter.",
+                hotButtons: [
+                    "Pushes net-new scope in informal 1-on-1s to bypass PMO intake governance",
+                    "Uses presupposition framing ('Why isn't this workstream already in flight?')",
+                    "Frames standard capacity trade-offs as a lack of strategic alignment"
+                ],
+                signatureQuotes: [
+                    "I expected more proactive ownership on this initiative from your group.",
+                    "Other teams find a way to absorb high-visibility priorities without making excuses.",
+                    "Why isn't this workstream already underway?"
+                ],
+                personalTalkTracks: [
+                    {
+                        id: "tt_richard_1",
+                        trigger: "When pushing an unchartered initiative via presupposition framing",
+                        script: "I hear the priority on [Initiative X]. Prior to today, 100% of our squad was locked to the signed Q3 charter. I will align with [Peer Manager] and send you a 2-option written capacity trade-off memo by 2:00 PM for your formal sign-off.",
+                        avoid: "Never apologize for following the signed roadmap or agree verbally to absorb unchartered work without a written trade-off."
+                    }
+                ],
+                createdAt: new Date().toISOString()
             };
 
             dossier.observations = [
@@ -4705,6 +5089,19 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     phaseKey: "harmonizer",
                     lensId: "counseling_crisis",
                     notes: "Hyper-ventilating and expressing deep shame. Responded immediately to sensory co-regulation and unconditional emotional validation."
+                },
+                {
+                    id: 'obs_sample_7',
+                    subjectId: richardId,
+                    rawSubjectInput: "Richard (VP Product)",
+                    observerName: "Platform Engineering Leads",
+                    context: "Unfunded Scope Mandate",
+                    timestamp: new Date().toISOString(),
+                    selections: { tempo: "Fast / Urgent", focus: "Ideas / Concepts", posture: "In-Motion / Fidgety", motivator: "Status / Wins", stressor: "Loss of Control", conflict: "Dominates / Escalates" },
+                    baseKey: "persister",
+                    phaseKey: "promoter",
+                    lensId: "power_defense",
+                    notes: "Opened skip-level sync with Critical-Parent framing and artificial urgency, then used presupposition framing to push an unchartered migration without headcount. Resolved via Aligned Deference and a joint written capacity trade-off ledger."
                 }
             ];
 
@@ -5182,6 +5579,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
         function populateCodex() {
             const codexGrid = document.getElementById('codex-grid');
             if (!codexGrid) return;
+            if (currentLens === 'power_defense' && typeof defRenderLibraryInto === 'function') { codexGrid.innerHTML = ''; defRenderLibraryInto(codexGrid); return; }
             const cfg = DOMAIN_CONFIGS[currentLens] || DOMAIN_CONFIGS['it_ops'];
             let html = '';
             
@@ -5271,18 +5669,18 @@ employer, client, or third party. See LICENSE file for full legal terms.
                     <!-- FRONTLINE ACTIONABLE PROFILE -->
                     <div class="pt-2 border-t border-slate-800 space-y-2">
                         <span class="text-xs font-bold uppercase tracking-wide text-indigo-300 block flex items-center gap-1.5">
-                            <span>⚡</span> Frontline De-Escalation Profile
+                            <span>⚡</span> ${currentLens === 'power_defense' ? 'Transactional Game &amp; Scope Governance Profile' : 'Frontline De-Escalation Profile'}
                         </span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                             <div class="bg-slate-950/70 p-2.5 rounded border border-slate-800 space-y-1">
-                                <span class="text-[10px] font-bold uppercase text-slate-400 block">Core Stress Trigger:</span>
-                                <span class="font-semibold text-slate-200">${ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key].name : ''}</span>
-                                <p class="text-[11px] text-slate-400 leading-snug"><strong class="text-blue-400 font-semibold">Antidote:</strong> ${ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key].action : ''}</p>
+                                <span class="text-[10px] font-bold uppercase text-slate-400 block">${currentLens === 'power_defense' ? 'Transactional Frame:' : 'Core Stress Trigger:'}</span>
+                                <span class="font-semibold text-slate-200">${(currentLens === 'power_defense' ? POWER_DEFENSE_RADAR.triggers[key] : ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key])?.name || ''}</span>
+                                <p class="text-[11px] text-slate-400 leading-snug"><strong class="text-blue-400 font-semibold">${currentLens === 'power_defense' ? 'Governance Pivot:' : 'Antidote:'}</strong> ${(currentLens === 'power_defense' ? POWER_DEFENSE_RADAR.triggers[key] : ACTIONABLE_BEHAVIORAL_ENGINE.triggers[key])?.action || ''}</p>
                             </div>
                             <div class="bg-slate-950/70 p-2.5 rounded border border-slate-800 space-y-1">
-                                <span class="text-[10px] font-bold uppercase text-slate-400 block">Stress Habit &amp; Tell:</span>
-                                <span class="font-semibold text-indigo-300">${ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key].name : ''}</span>
-                                <p class="text-[11px] text-slate-400 leading-snug">${ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key] ? ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key].cue : ''}</p>
+                                <span class="text-[10px] font-bold uppercase text-slate-400 block">${currentLens === 'power_defense' ? 'Pressure Tell:' : 'Stress Habit &amp; Tell:'}</span>
+                                <span class="font-semibold text-indigo-300">${(currentLens === 'power_defense' ? POWER_DEFENSE_RADAR.habitTell[key] : ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key])?.name || ''}</span>
+                                <p class="text-[11px] text-slate-400 leading-snug">${(currentLens === 'power_defense' ? POWER_DEFENSE_RADAR.habitTell[key] : ACTIONABLE_BEHAVIORAL_ENGINE.habitTell[key])?.cue || ''}</p>
                             </div>
                         </div>
                     </div>
@@ -5307,6 +5705,1026 @@ employer, client, or third party. See LICENSE file for full legal terms.
                 exportStandaloneLensApp();
             }
         });
+    </script>
+    <script id="defense-module">
+// ============================================================================
+// UPWARD DEFENSE WORKBENCH — DATA CATALOG
+// ----------------------------------------------------------------------------
+// HOW TO EXTEND (no code changes needed outside this block):
+//   1. New observable behavior  -> add [id, label] to a group in DEF_CUE_GROUPS.
+//   2. New game / tactic        -> add an object to DEF_GAMES. 'cues' is a list of
+//                                  [cueId, weight] pairs (weight 1-3 = how diagnostic
+//                                  that cue is for the game). 'memo' must be a key of
+//                                  DEF_MEMO_KINDS. defValidateCatalog() warns in the
+//                                  console about unknown cue ids or missing fields.
+//   3. New training scenario    -> add an object to DEF_SCENARIOS (answer = game id or 'none').
+//   4. Users can also add games at runtime from Games Library > "Add a custom game" (JSON,
+//      stored in localStorage only).
+// ============================================================================
+
+const DEF_CUE_GROUPS = [
+    { id: 'say', title: 'What they SAY', cues: [
+        ['v_whynot', "Asks why a newly raised item isn't already done or underway"],
+        ['v_disappoint', "Expresses disappointment in you or questions your commitment"],
+        ['v_comparison', "Compares you unfavorably with peers or other teams"],
+        ['v_vague', "Gives a vague verbal directive with no acceptance criteria"],
+        ['v_nowrite', "Discourages or avoids putting it in writing"],
+        ['v_urgent', "Demands an immediate yes or decision in the room"],
+        ['v_deadline', "States a hard deadline with no business reason given"],
+        ['v_career', "Alludes to your standing, reputation, or job security"],
+        ['v_goalpost', "Changes the success criteria after you delivered to the earlier ones"],
+        ['v_gotcha', "Asks for detail you could not have prepared, then points out the gap"],
+        ['v_small_big', "Starts with a small ask, then keeps expanding it"],
+        ['v_big_small', "Opens with an extreme ask, then 'compromises' to the real one"],
+        ['v_blame', "Turns your concern around and blames you for raising it"],
+        ['v_pit', "Asks you to keep something from peers or your manager ('between us')"],
+        ['v_help', "Presents as your protector or ally, then asks for a favor"],
+        ['v_public', "Criticizes you in front of others"],
+        ['v_yesbut', "Rejects every option you offer without saying what would work"]
+    ]},
+    { id: 'deliver', title: 'How they DELIVER it', cues: [
+        ['n_spike', "Sudden spike in intensity (volume, sharp gestures, hard tone)"],
+        ['n_relief', "Intensity followed by abrupt warmth or an easy exit if you agree"],
+        ['n_silence', "Prolonged silence, cold stare, or withholding replies"],
+        ['n_paternal', "Paternalistic 'concerned' tone while applying pressure"],
+        ['n_private', "Raised privately: no witnesses, no agenda, no ticket"]
+    ]},
+    { id: 'structure', title: 'How the request is STRUCTURED', cues: [
+        ['s_noauth', "No ticket, charter, budget, or approver behind the request"],
+        ['s_capacity', "Ignores the capacity or commitments you have already stated"],
+        ['s_repeat', "The same pattern has shown up across several meetings"]
+    ]}
+];
+
+const DEF_CUES = {};
+DEF_CUE_GROUPS.forEach(g => g.cues.forEach(([id, label]) => { DEF_CUES[id] = { label: label, group: g.id }; }));
+
+const DEF_DOMAINS = {
+    general: { label: 'General business', res: 'team capacity', commit: '[Commitment A] and [Commitment B]', base: 'the approved plan', unit: 'person-weeks', slip: '[Commitment A] slips by [N] weeks', tracker: 'the shared plan' },
+    eng: { label: 'Engineering / Product', res: 'engineering capacity', commit: '[Deliverable A] and [Deliverable B]', base: 'the approved roadmap', unit: 'engineering weeks', slip: '[Deliverable A] moves out of this quarter by [N] weeks', tracker: 'the portfolio tracker' },
+    ops: { label: 'Operations / Support', res: 'staffing and queue coverage', commit: '[SLA target] and [backlog target]', base: 'the approved staffing plan', unit: 'agent-hours', slip: '[SLA target] drops to [X]% for [N] weeks', tracker: 'the staffing plan' },
+    fin: { label: 'Finance / Compliance', res: 'team hours and review capacity', commit: '[close / audit deliverables]', base: 'the approved calendar', unit: 'review hours', slip: '[close / audit milestone] moves by [N] days', tracker: 'the controls calendar' },
+    sales: { label: 'Sales / Customer Success', res: 'account-team time', commit: '[Renewal A] and [Onboarding B]', base: 'the approved account plan', unit: 'account-hours', slip: '[Renewal A] coverage drops for [N] weeks', tracker: 'the account plan' }
+};
+
+const DEF_MEMO_KINDS = {
+    tradeoff: 'Priority & trade-off sign-off',
+    confirm: 'Confirming a verbal request',
+    criteria: 'Acceptance criteria request',
+    default: 'Default-state / plan of record',
+    joint: 'Joint plan with a peer',
+    factlog: 'Private incident record (do not send)'
+};
+
+const DEF_FAMILIES = {
+    ta: 'Transactional Analysis (Berne)',
+    karpman: 'Drama Triangle (Karpman)',
+    influence: 'Documented influence tactics',
+    scope: 'Scope & governance tactics'
+};
+
+const DEF_GAMES = [
+    {
+        id: 'nigysob', name: "Now I've Got You (NIGYSOB)", family: 'ta',
+        source: "Eric Berne, Games People Play (1964): 'Now I've Got You, You SOB'. Also covers the related 'Blemish' pattern of nitpicking to find fault.",
+        cues: [['v_gotcha', 2], ['v_public', 1], ['v_goalpost', 1], ['n_spike', 1], ['v_blame', 1]],
+        summary: "They wait for, or set up, a gap (an unlisted metric, a typo, a missed detail), then pounce and treat it as proof you are failing.",
+        payoff: "A justification to take control, punish, or reduce your autonomy.",
+        hook: "Over-apologizing, defending your character, or agreeing to extra oversight.",
+        innocent: "Was the requirement written down and visible beforehand? If yes, this may be a fair quality catch. Fix it and move on.",
+        counter: "Separate the fact from the verdict: acknowledge the specific gap, decline the generalization, and ask for the standard in writing going forward.",
+        live: "You're right that field is missing from this version. I'll add it by [time]. So I deliver to your standard next time, could you send me the criteria you'll review against?",
+        memo: 'criteria',
+        avoid: "Do not accept 'always' or 'never' character claims; do not over-explain."
+    },
+    {
+        id: 'yesbut', name: "Why Don't You... Yes, But", family: 'ta',
+        source: "Eric Berne, Games People Play (1964).",
+        cues: [['v_yesbut', 2], ['v_vague', 1], ['v_goalpost', 1]],
+        summary: "They ask you to propose solutions, then reject each one without stating criteria, keeping you busy while they stay uncommitted.",
+        payoff: "Keeps control, avoids making a decision, and quietly shows you as inadequate.",
+        hook: "Producing ever more options and working harder to please.",
+        innocent: "Are they rejecting for stated reasons (budget, risk, timing) that you can address? If yes, that is ordinary iteration.",
+        counter: "Ask for the decision criteria, then present two options scored against them and request a choice by a set time.",
+        live: "Help me narrow this. What would a good answer need to satisfy: cost, timeline, risk? I'll bring two options scored against that by [time] and you pick.",
+        memo: 'criteria',
+        avoid: "Do not keep generating options without agreed criteria."
+    },
+    {
+        id: 'guilt_shame', name: "Disappointed-Parent Frame (Critical Parent hook)", family: 'ta',
+        source: "Transactional Analysis ego-state model (Berne): a Critical Parent stance hooking your Adapted Child. This is an ego-state pattern, not one of Berne's catalogued games.",
+        cues: [['v_disappoint', 2], ['v_comparison', 2], ['n_paternal', 1], ['v_public', 1]],
+        summary: "Disappointment, comparison to peers, or doubts about your commitment make normal limits feel like disloyalty.",
+        payoff: "Voluntary over-commitment that nobody had to ask for explicitly.",
+        hook: "Proving yourself by absorbing extra work or apologizing for things that were not failures.",
+        innocent: "Is the disappointment tied to a specific, checkable shortfall? If so, address that fact. If it is general, it is a frame.",
+        counter: "Respond Adult-to-Adult: acknowledge the feeling, restate your actual commitments with facts, and turn the request into a trade-off conversation.",
+        live: "I hear that you're disappointed, and I want to get this right. Here is where we stand on [commitments]. If [Request] is the new priority, tell me which of those we pause.",
+        memo: 'tradeoff',
+        avoid: "Do not compete with the comparison or argue about your loyalty."
+    },
+    {
+        id: 'rescuer_switch', name: "Persecutor-to-Rescuer Switch", family: 'karpman',
+        source: "Stephen Karpman, the Drama Triangle (1968): roles shift between Persecutor, Rescuer, and Victim.",
+        cues: [['v_help', 2], ['n_relief', 1], ['v_pit', 1], ['n_private', 1], ['n_paternal', 1], ['v_career', 1]],
+        summary: "They alternate pressure with warmth ('I'm on your side') to build a protective bond, then ask for favors, secrecy, or unlogged work.",
+        payoff: "Obligation and silence: you feel you owe them and will not push back.",
+        hook: "Gratitude and relief turning into an unspoken debt.",
+        innocent: "Is the support given with no strings, and would they be comfortable with it being written down and shared? If so it may be genuine mentoring.",
+        counter: "Accept the support, keep the substance transparent: anything agreed privately is confirmed in writing and shared with the relevant peer or manager.",
+        live: "I appreciate that. To make sure I do right by it, I'll write up what we agreed and copy [peer] so everyone is aligned.",
+        memo: 'joint',
+        avoid: "Do not agree to keep requests confidential from your own team or peers."
+    },
+    {
+        id: 'fear_relief', name: "Fear-Then-Relief", family: 'influence',
+        source: "Dolinski & Nawrat (1998): compliance rises when fear is abruptly followed by relief.",
+        cues: [['n_spike', 2], ['n_relief', 2], ['v_urgent', 1]],
+        summary: "A burst of intensity is followed abruptly by warmth or an easy way out if you agree.",
+        payoff: "A fast, unthinking 'yes' given to end the tension.",
+        hook: "Agreeing during the relief window just to make the discomfort stop.",
+        innocent: "Did the intensity relate to a real, stated problem, and did it ease without demanding a specific agreement? Then it is plain frustration, not tactics.",
+        counter: "Lower your own arousal first (slow exhale, slower pace), accept the warmth without the commitment, and move the decision into writing.",
+        live: "Thanks, I want to give you a real answer rather than a quick one. I'll confirm the plan and trade-offs in writing by [time].",
+        memo: 'tradeoff',
+        avoid: "Do not negotiate while your heart rate is spiking, and do not treat the relief as consent."
+    },
+    {
+        id: 'urgency', name: "Artificial Urgency", family: 'influence',
+        source: "Robert Cialdini, Influence: the scarcity / time-pressure principle.",
+        cues: [['v_urgent', 2], ['v_deadline', 2], ['s_noauth', 1], ['s_capacity', 1]],
+        summary: "A deadline or 'right now' is asserted without a business reason, approver, or consequence, to compress your judgment.",
+        payoff: "A commitment made before you can check capacity or authority.",
+        hook: "Skipping verification in order to look responsive.",
+        innocent: "Is there a clear external driver (outage, regulatory date, customer event) and an owner? If yes it is real: act, then reconcile the impact right after.",
+        counter: "Ask for the driver and the cost of slipping, then offer a time-boxed first step with the rest scheduled through a trade-off.",
+        live: "What is driving the date, and what happens if it slips a few days? I can start [small step] today and confirm the rest with trade-offs by [time].",
+        memo: 'tradeoff',
+        avoid: "Do not invent urgency of your own to match theirs."
+    },
+    {
+        id: 'loaded_q', name: "Loaded Question ('Why isn't this done?')", family: 'scope',
+        source: "Loaded-question / presupposition (rhetoric and linguistics).",
+        cues: [['v_whynot', 2], ['s_noauth', 2], ['v_blame', 1]],
+        summary: "The question assumes something false so any answer concedes you were late on something never assigned.",
+        payoff: "A defensive posture and a bypass of intake or planning.",
+        hook: "Explaining, apologizing, and accepting a start date you never agreed to.",
+        innocent: "Was it actually assigned earlier (ticket, meeting notes)? If so the question is fair. Answer plainly.",
+        counter: "Do not answer the premise. State the baseline calmly, date-stamp when the request reached you, and offer next steps.",
+        live: "This is new to me as of today. My commitments through [date] are [commitments]. Here is what I can do with [Request] and what it would displace.",
+        memo: 'tradeoff',
+        avoid: "Do not argue 'you never told me' as an accusation; simply date-stamp it."
+    },
+    {
+        id: 'goalposts', name: "Moving the Goalposts", family: 'scope',
+        source: "Moving-the-goalposts fallacy; acceptance-criteria and change-control practice.",
+        cues: [['v_goalpost', 2], ['s_repeat', 2], ['v_gotcha', 1]],
+        summary: "Success criteria change after you delivered to the earlier ones, so you are always behind.",
+        payoff: "Perpetual leverage and the ability to call any result a miss.",
+        hook: "Chasing a moving target and absorbing the rework.",
+        innocent: "Did new information genuinely change the requirements, and was the change communicated openly? Then it is a legitimate change request.",
+        counter: "Convert the criteria into written acceptance criteria with a date and approver, and treat later changes as change requests with impact.",
+        live: "Let's capture the criteria so we both know what done looks like. I'll send a one-page version today, and any change after that we log with its impact.",
+        memo: 'criteria',
+        avoid: "Do not quietly absorb rework without logging the change."
+    },
+    {
+        id: 'verbal_only', name: "Verbal-Only Mandate (Plausible Deniability)", family: 'scope',
+        source: "Governance and audit-trail practice; plausible deniability.",
+        cues: [['v_nowrite', 2], ['v_vague', 2], ['s_noauth', 2], ['n_private', 1]],
+        summary: "Direction is given verbally, vaguely, and privately, with discouragement from writing it down, leaving the risk with you.",
+        payoff: "Deniability: if it works they own it, if it fails you do.",
+        hook: "Starting work on unwritten instructions.",
+        innocent: "Is it genuinely tiny and urgent with them willing to confirm afterward? Then a quick confirmation email is still fine.",
+        counter: "Confirm in writing as a neutral recap of what you understood and state a default: you proceed on that basis unless they reply.",
+        live: "To make sure I act on exactly what you intend, I'll send a quick recap. Unless you tell me otherwise, I'll proceed on that.",
+        memo: 'confirm',
+        avoid: "Do not start work on instructions that only exist in your memory."
+    },
+    {
+        id: 'dif', name: "Door-in-the-Face (Big Ask, Then 'Compromise')", family: 'influence',
+        source: "Cialdini et al. (1975), door-in-the-face; the contrast principle in Influence.",
+        cues: [['v_big_small', 3], ['s_capacity', 1]],
+        summary: "An outsized ask is made first so the smaller ask feels like a concession you owe in return.",
+        payoff: "Agreement to the 'reasonable' real ask without evaluating it on its merits.",
+        hook: "Reciprocity pressure to meet them halfway.",
+        innocent: "Is the second ask a reasoned reduction after your pushback? That is fine. Still price it.",
+        counter: "Evaluate the second ask independently and price it with the same trade-off ledger.",
+        live: "Thanks for narrowing it. Taking it on its own merits, here is what [smaller ask] would cost and what it would displace.",
+        memo: 'tradeoff',
+        avoid: "Do not let the first ask set your reference point."
+    },
+    {
+        id: 'fif', name: "Foot-in-the-Door (Scope Creep by Steps)", family: 'influence',
+        source: "Freedman & Fraser (1966), foot-in-the-door; Cialdini's commitment and consistency principle.",
+        cues: [['v_small_big', 3], ['s_noauth', 1], ['s_repeat', 1]],
+        summary: "A small, easy ask grows step by step until you own a major workstream that nobody approved.",
+        payoff: "Scope absorbed through consistency with your earlier 'yes'.",
+        hook: "'Since you're already in there...': each step feels consistent with the last.",
+        innocent: "Were the added steps visible and approved? Then it is planned growth.",
+        counter: "Re-baseline at every expansion: state the cumulative total and ask for explicit approval.",
+        live: "This has grown from [original] to [current]. Let's re-baseline: the total is now [N], and I need approval and a trade-off to continue.",
+        memo: 'tradeoff',
+        avoid: "Do not treat each increment as too small to mention."
+    },
+    {
+        id: 'darvo', name: "DARVO (Deny, Attack, Reverse Victim & Offender)", family: 'influence',
+        source: "Jennifer Freyd (1997), DARVO pattern.",
+        cues: [['v_blame', 3], ['v_public', 1], ['v_disappoint', 1]],
+        summary: "When you raise a concern they deny it, attack your motives or attitude, and recast themselves as the one wronged.",
+        payoff: "Silencing objections and shifting blame.",
+        hook: "Defending yourself and abandoning the original concern.",
+        innocent: "Do they address your concern on substance before criticizing? Then it is disagreement, not DARVO.",
+        counter: "Stay on the factual issue, name the pattern neutrally, and record the exchange.",
+        live: "I want to stay on the issue: [concern in one sentence]. I'm not questioning anyone's motives; I need a decision on it.",
+        memo: 'factlog',
+        avoid: "Do not litigate your character or counter-attack."
+    },
+    {
+        id: 'divide', name: "Divide & Isolate (Triangulation)", family: 'karpman',
+        source: "Triangulation (Bowen family-systems theory; common workplace usage).",
+        cues: [['v_pit', 2], ['n_private', 2], ['v_comparison', 1], ['v_help', 1]],
+        summary: "Private asks, comparisons to peers, and 'keep this between us' separate you from the people who could verify or share the load.",
+        payoff: "Control through information asymmetry; you carry hidden work.",
+        hook: "Loyalty to a private deal and reluctance to loop others in.",
+        innocent: "Is the confidentiality limited to a legitimate matter (personnel, M&A) and not your own workload or capacity? Then it is appropriate.",
+        counter: "Make the work visible: include the peer or PMO in the follow-up and decline confidentiality about capacity.",
+        live: "I'd like to include [peer] so we get the capacity right. I'll send a joint note with options.",
+        memo: 'joint',
+        avoid: "Do not agree to hide workload or capacity changes from the people affected."
+    },
+    {
+        id: 'stonewall', name: "Stonewalling / Silent Treatment", family: 'influence',
+        source: "John Gottman's research on stonewalling; passive-aggressive withholding.",
+        cues: [['n_silence', 3], ['v_vague', 1], ['v_nowrite', 1]],
+        summary: "Silence, slow replies, or cold withdrawal leave you guessing, then you are faulted for missing unstated expectations.",
+        payoff: "You over-deliver trying to guess, and any outcome can be called a miss.",
+        hook: "Anxiety turning into unpaid extra scope.",
+        innocent: "Is the person simply overloaded or reflective? Check once, directly, before assuming a game.",
+        counter: "State a default plan in writing with a time limit and ask a closed question.",
+        live: "I'll proceed with [default plan] unless I hear otherwise by [time]. Is that acceptable, yes or no?",
+        memo: 'default',
+        avoid: "Do not build three versions to cover every guess."
+    },
+    {
+        id: 'veiled_threat', name: "Veiled Consequence / Status Leverage", family: 'influence',
+        source: "Implied-consequence and status-leverage tactics from the influence and coercion literature.",
+        cues: [['v_career', 3], ['n_paternal', 1], ['v_disappoint', 1], ['n_private', 1]],
+        summary: "Your standing, reputation, or job security is alluded to in a 'concerned' tone, linking compliance to future consequences.",
+        payoff: "Compliance through fear of consequences while remaining deniable.",
+        hook: "Fear of retaliation making you agree or stay silent.",
+        innocent: "Is it a factual heads-up about a real process (for example a reorg timeline) with no link to what you do or do not agree to? Then it is not a threat. Ask to be sure.",
+        counter: "Do not bargain with the implied consequence. Return to the work request, quote it back neutrally, document it, and review the Escalation panel.",
+        live: "I want to make sure I understand: is my response to [Request] connected to my standing or role? I'd like to keep this about the work. Here is what I can commit to.",
+        memo: 'factlog',
+        escalate: true,
+        avoid: "Do not plead, bargain, or promise extra work in response to an implied consequence."
+    }
+];
+
+const DEF_SCENARIOS = [
+    { id: 's1', title: 'Quarterly review', answer: 'nigysob',
+      text: "In the quarterly review a VP asks for a regional cost split that is not in the agreed template. You offer to follow up. 'So you came unprepared again. I knew it. This goes in your file.'",
+      cues: ['v_gotcha', 'v_public'],
+      why: "The gap was never in the agreed standard, yet it is used as proof of a pattern ('again') with a punishment attached. That is the pounce of NIGYSOB." },
+    { id: 's2', title: 'The hallway question', answer: 'loaded_q',
+      text: "A director stops you in the corridor: 'Why isn't the vendor integration live yet?' It was never assigned to your team and there is no ticket.",
+      cues: ['v_whynot', 's_noauth'],
+      why: "The question presupposes an assignment that does not exist. Any answer ('sorry, we'll hurry') accepts the premise." },
+    { id: 's3', title: 'The hot-then-warm exec', answer: 'fear_relief',
+      text: "An exec raises their voice for a minute about a missed number, then suddenly softens: 'Look, I'm on your side. Just say you'll own the fix and we're good.'",
+      cues: ['n_spike', 'n_relief', 'v_urgent'],
+      why: "Intensity followed by abrupt relief tied to a specific agreement is the classic fear-then-relief structure." },
+    { id: 's4', title: 'The pilot ask', answer: 'dif',
+      text: "You are asked for three engineer-months to run a pilot. You balk. 'Fine, then just give me one engineer for three weeks, it's the least you can do.'",
+      cues: ['v_big_small'],
+      why: "The outsized first ask makes the second feel like a concession you owe. Price the smaller ask on its own merits." },
+    { id: 's5', title: 'A quick look', answer: 'fif',
+      text: "Week 1: 'Could you take a quick one-hour look?' Week 2: 'While you're in there, also fix the export.' Week 4: you are running a full workstream with no ticket.",
+      cues: ['v_small_big', 's_noauth', 's_repeat'],
+      why: "Small asks that expand step by step, each consistent with the last, are foot-in-the-door scope creep." },
+    { id: 's6', title: 'Just get started', answer: 'verbal_only',
+      text: "'Just get started, don't bother with a ticket, I'll square it with finance later. No need to email me about it.'",
+      cues: ['v_nowrite', 'v_vague', 's_noauth'],
+      why: "Unwritten, unfunded, and discouraged from documentation: the risk lands on you if it goes wrong." },
+    { id: 's7', title: 'Raising a concern', answer: 'darvo',
+      text: "You point out the deadline conflicts with a signed commitment. 'I can't believe you're making excuses. Frankly your attitude is why this team is behind.'",
+      cues: ['v_blame'],
+      why: "The concern is denied, your motives are attacked, and the speaker becomes the injured party. That is DARVO." },
+    { id: 's8', title: 'Between us', answer: 'divide',
+      text: "'Between us, Priya's team isn't pulling their weight. I need you to quietly cover part of their work. Don't mention this to her.'",
+      cues: ['v_pit', 'n_private', 'v_comparison'],
+      why: "Private, comparative, and secret about workload: it isolates you from the person who could share or verify the load." },
+    { id: 's9', title: '2 a.m. outage', answer: 'none',
+      text: "Production is down and costing about $40k an hour. A senior executive says: 'I need your best engineer on this now. Priya will co-lead. I'll sort the sprint impact with you tomorrow.' Scope, owner, and reason are all stated.",
+      cues: ['v_urgent'],
+      why: "There is a clear external driver, a named owner, a stated scope, and an offer to reconcile impact later. This is genuine urgency. Act first and log the displaced work afterward." },
+    { id: 's10', title: 'Friday deadline', answer: 'none',
+      text: "Your manager, visibly stressed, says: 'I need this by Friday because the board meets Monday. Tell me what you'd need, I'm open to trimming scope.'",
+      cues: ['v_deadline'],
+      why: "A reason is stated, and they invite negotiation. Genuine pressure is not a game. Respond with options and trade-offs, not suspicion." },
+    { id: 's11', title: 'Reorg remarks', answer: 'veiled_threat',
+      text: "'You've got a lot of goodwill with leadership right now. It would be a shame if this slipped and it colored how the next reorg sees your group.' Said quietly, with a concerned tone.",
+      cues: ['v_career', 'n_paternal', 'n_private'],
+      why: "Compliance is linked to future standing without any explicit threat. Document verbatim and review the Escalation panel; do not bargain." },
+    { id: 's12', title: 'The silent reply', answer: 'stonewall',
+      text: "After you send a proposal there is a week of silence. In the meeting you get a cold stare and 'I expected you to know what I wanted.'",
+      cues: ['n_silence', 'v_vague'],
+      why: "Withholding then blaming you for unstated expectations is stonewalling. Set a written default and ask a closed question." },
+    { id: 's13', title: 'The new yardstick', answer: 'goalposts',
+      text: "You delivered to the metrics agreed in January. In the June review, 'success' is a different metric and you are told you missed.",
+      cues: ['v_goalpost', 's_repeat'],
+      why: "The criteria changed after delivery and it is a pattern. Pin the acceptance criteria and log changes." },
+    { id: 's14', title: 'Options, options', answer: 'yesbut',
+      text: "'Come to me with options.' You bring three. 'No, that won't work.' You bring two more. 'No.' No criteria are ever stated.",
+      cues: ['v_yesbut'],
+      why: "Asking for solutions and rejecting each without criteria keeps them uncommitted and keeps you producing." },
+    { id: 's15', title: 'Let down', answer: 'guilt_shame',
+      text: "'Honestly, I'm disappointed. Marcus's team would have found a way. I thought you were more committed.'",
+      cues: ['v_disappoint', 'v_comparison'],
+      why: "Disappointment and a peer comparison, with no specific shortfall named, aim to make your limits feel like disloyalty." },
+    { id: 's16', title: 'By end of day', answer: 'urgency',
+      text: "'I need a yes by end of day. It's just important.' No driver, no consequence, no ticket, and it collides with your stated commitments.",
+      cues: ['v_urgent', 'v_deadline', 's_noauth', 's_capacity'],
+      why: "A hard date with no reason or approver is the signature of manufactured time pressure." }
+];
+
+const DEF_ESCALATION_ITEMS = [
+    { id: 'e1', sev: 'high', text: "Explicit or implied threat to my job, pay, immigration status, safety, or personal life" },
+    { id: 'e3', sev: 'high', text: "Physical intimidation (blocking, throwing things, touching, cornering)" },
+    { id: 'e4', sev: 'high', text: "Asked to falsify records, hide information, or break a law or policy" },
+    { id: 'e5', sev: 'high', text: "Retaliation after I raised a concern, complaint, or boundary" },
+    { id: 'e6', sev: 'high', text: "Remarks about a protected characteristic (age, gender, religion, ethnicity or origin, disability, etc.)" },
+    { id: 'e7', sev: 'medium', text: "Public humiliation in front of colleagues" },
+    { id: 'e8', sev: 'medium', text: "Repeated pattern even after I stated a boundary in writing" },
+    { id: 'e9', sev: 'medium', text: "Asked to keep my workload or capacity secret from peers or my manager" },
+    { id: 'e10', sev: 'medium', text: "Compensation, assignments, or reviews tied to saying yes" }
+];
+
+// ============================================================================
+// UPWARD DEFENSE WORKBENCH — LOGIC & RENDERING
+// ============================================================================
+
+const DEF_STORE_KEY = 'bridgecraft_defense_prefs';
+const DEF_CUSTOM_KEY = 'bridgecraft_custom_games';
+const defCopyStore = {};
+const defState = {
+    tab: 'live',
+    domain: 'general',
+    tone: 'standard',
+    cues: new Set(),
+    ctx: { req: '', boss: '', peer: '' },
+    esc: new Set(),
+    libSearch: '',
+    train: { order: [], pos: 0, score: 0, answered: 0, current: null, picked: null, mode: 'quiz', fcIdx: 0, fcOpen: false },
+    ready: false
+};
+
+function defEsc(s) {
+    return (typeof escapeHtml === 'function') ? escapeHtml(String(s == null ? '' : s)) :
+        String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function defCustomGames() {
+    try {
+        const raw = JSON.parse(localStorage.getItem(DEF_CUSTOM_KEY) || '[]');
+        return Array.isArray(raw) ? raw.map(g => Object.assign({}, g, { custom: true })) : [];
+    } catch (e) { return []; }
+}
+
+function defAllGames() { return DEF_GAMES.concat(defCustomGames()); }
+
+function defValidateGame(g, existingIds) {
+    const problems = [];
+    ['id', 'name', 'summary', 'payoff', 'hook', 'innocent', 'counter', 'live'].forEach(f => {
+        if (!g || typeof g[f] !== 'string' || !g[f].trim()) problems.push("missing text field '" + f + "'");
+    });
+    if (g && existingIds && existingIds.indexOf(g.id) !== -1) problems.push("duplicate id '" + g.id + "'");
+    if (!g || !Array.isArray(g.cues) || !g.cues.length) {
+        problems.push("'cues' must be a list of [cueId, weight]");
+    } else {
+        g.cues.forEach(c => {
+            if (!Array.isArray(c) || !DEF_CUES[c[0]]) problems.push("unknown cue id '" + (Array.isArray(c) ? c[0] : c) + "'");
+            else if (typeof c[1] !== 'number' || c[1] < 1 || c[1] > 3) problems.push("weight for '" + c[0] + "' must be 1-3");
+        });
+    }
+    if (g && g.memo && !DEF_MEMO_KINDS[g.memo]) problems.push("unknown memo kind '" + g.memo + "'");
+    return problems;
+}
+
+function defValidateCatalog() {
+    const ids = [];
+    const report = [];
+    DEF_GAMES.forEach(g => {
+        const p = defValidateGame(g, ids);
+        ids.push(g.id);
+        if (p.length) report.push(g.id + ': ' + p.join('; '));
+    });
+    DEF_SCENARIOS.forEach(s => {
+        if (s.answer !== 'none' && !DEF_GAMES.some(g => g.id === s.answer)) report.push('scenario ' + s.id + ': unknown answer ' + s.answer);
+        (s.cues || []).forEach(c => { if (!DEF_CUES[c]) report.push('scenario ' + s.id + ': unknown cue ' + c); });
+    });
+    if (report.length && window.console) console.warn('Upward Defense catalog problems:\n' + report.join('\n'));
+    return report;
+}
+
+function defLoadPrefs() {
+    try {
+        const p = JSON.parse(localStorage.getItem(DEF_STORE_KEY) || '{}');
+        if (p.domain && DEF_DOMAINS[p.domain]) defState.domain = p.domain;
+        if (p.tone === 'standard' || p.tone === 'deferential') defState.tone = p.tone;
+    } catch (e) {}
+}
+
+function defSavePrefs() {
+    try { localStorage.setItem(DEF_STORE_KEY, JSON.stringify({ domain: defState.domain, tone: defState.tone })); } catch (e) {}
+}
+
+function defInit() {
+    if (defState.ready) { defRenderNav(); return; }
+    defState.ready = true;
+    defLoadPrefs();
+    defValidateCatalog();
+    const dom = document.getElementById('def-domain');
+    if (dom) {
+        dom.innerHTML = Object.keys(DEF_DOMAINS).map(k => '<option value="' + k + '">' + defEsc(DEF_DOMAINS[k].label) + '</option>').join('');
+        dom.value = defState.domain;
+    }
+    const tone = document.getElementById('def-tone');
+    if (tone) tone.value = defState.tone;
+    try {
+        const qs = new URLSearchParams(window.location.search);
+        const t = qs.get('def');
+        if (t && DEF_TABS.some(x => x[0] === t)) defState.tab = t;
+        (qs.get('cues') || '').split(',').forEach(c => { if (DEF_CUES[c]) defState.cues.add(c); });
+    } catch (e) {}
+    defShow(defState.tab, true);
+}
+
+function defSetDomain(v) { if (DEF_DOMAINS[v]) { defState.domain = v; defSavePrefs(); defRefresh(); } }
+function defSetTone(v) { defState.tone = (v === 'deferential') ? 'deferential' : 'standard'; defSavePrefs(); defRefresh(); }
+function defRefresh() { defShow(defState.tab, true); }
+
+const DEF_TABS = [
+    ['live', '⚡ Live Card'],
+    ['decode', '🔎 Decode'],
+    ['library', '📚 Games Library'],
+    ['training', '🎓 Training'],
+    ['escalation', '🚨 Escalation']
+];
+
+function defRenderNav() {
+    const nav = document.getElementById('def-subnav');
+    if (!nav) return;
+    nav.innerHTML = DEF_TABS.map(([id, label]) => {
+        const active = id === defState.tab;
+        const cls = active ? 'bg-amber-600 text-white shadow-sm' : 'bg-slate-900/70 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700';
+        const warn = (id === 'escalation') ? ' ring-1 ring-rose-500/40' : '';
+        return '<button type="button" onclick="defShow(\'' + id + '\')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ' + cls + warn + '">' + label + '</button>';
+    }).join('');
+}
+
+function defShow(tab, keepScroll) {
+    defState.tab = tab;
+    defRenderNav();
+    const panel = document.getElementById('def-panel');
+    if (!panel) return;
+    if (tab === 'live') defRenderLive(panel);
+    else if (tab === 'decode') defRenderDecode(panel);
+    else if (tab === 'library') { panel.innerHTML = ''; defRenderLibraryInto(panel); }
+    else if (tab === 'training') defRenderTraining(panel);
+    else if (tab === 'escalation') defRenderEscalation(panel);
+    if (!keepScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------- shared helpers ----------
+function defCtx() {
+    return {
+        req: (defState.ctx.req || '').trim() || '[Request]',
+        boss: (defState.ctx.boss || '').trim() || '[Their name]',
+        peer: (defState.ctx.peer || '').trim() || '[Peer / PMO lead]'
+    };
+}
+
+function defSub(text) {
+    const c = defCtx();
+    return String(text).replace(/\[Request\]/g, c.req).replace(/\[peer\]/g, c.peer);
+}
+
+function defLive(g) {
+    const base = defSub(g.live);
+    return defState.tone === 'deferential' ? 'Thank you for trusting me with this. ' + base : base;
+}
+
+function defCopy(key) {
+    const t = defCopyStore[key];
+    if (!t) return;
+    const done = () => { if (typeof showToast === 'function') showToast('Copied to clipboard'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done);
+    else { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
+}
+
+function defCopyBtn(key, label) {
+    return '<button type="button" onclick="defCopy(\'' + key + '\')" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 transition-colors">' + (label || 'Copy') + '</button>';
+}
+
+// ---------- memo builder (domain-neutral, vocabulary swapped by field) ----------
+function defMemo(kind) {
+    const c = defCtx();
+    const v = DEF_DOMAINS[defState.domain] || DEF_DOMAINS.general;
+    const open = defState.tone === 'deferential'
+        ? 'Thank you for your time and guidance today. I am writing to respectfully confirm my understanding so that I can act on it correctly.'
+        : 'Following up on our conversation to make sure I act on it correctly.';
+    const close = defState.tone === 'deferential' ? 'With respect and thanks,' : 'Thanks,';
+    if (kind === 'tradeoff') {
+        return 'Subject: Priority alignment and trade-off for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
+            '\n\n1. CURRENT BASELINE\n   Before today, ' + v.res + ' was committed to ' + v.commit + ' per ' + v.base + '.' +
+            '\n\n2. THE REQUEST\n   ' + c.req + ' is new work, estimated at [N] ' + v.unit + '.' +
+            '\n\n3. OPTIONS\n   Option 1: start ' + c.req + ' now. Impact: ' + v.slip + '.' +
+            '\n   Option 2: keep current commitments and begin ' + c.req + ' on [date].' +
+            '\n   Option 3: a time-boxed first step of [N] days, then decide.' +
+            '\n\n4. NEXT STEP\n   Please reply with 1, 2, or 3 so I can update ' + v.tracker + '.' +
+            '\n\n' + close + '\n[Your name]';
+    }
+    if (kind === 'confirm') {
+        return 'Subject: Confirming our conversation: ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
+            '\n\nWhat I understood:\n   - Request: ' + c.req + '\n   - Approver: ' + c.boss + '\n   - Scope (included / excluded): [ ]\n   - Due date: [ ]\n   - Where the ' + v.res + ' comes from: [ ]' +
+            '\n\nIf any of this differs, please reply by [time]. Otherwise I will proceed on this basis and treat it as approved.' +
+            '\n\n' + close + '\n[Your name]';
+    }
+    if (kind === 'criteria') {
+        return 'Subject: Acceptance criteria for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
+            '\n\nSo that I deliver to your standard:\n   1. "Done" means: [ ]\n   2. Measured by: [ ]\n   3. Due: [date]\n   4. Approver: ' + c.boss +
+            '\n\nAny change after this point I will log as a change request with its impact on ' + v.res + ' (' + v.base + ').' +
+            '\n\n' + close + '\n[Your name]';
+    }
+    if (kind === 'default') {
+        return 'Subject: Plan of record for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
+            '\n\nUnless I am redirected in writing by [time], ' + v.res + ' stays on ' + v.commit + ' per ' + v.base + '.' +
+            '\n\nTo begin ' + c.req + ' I need: (a) written acceptance criteria and a target date, and (b) authorization to pause [item].' +
+            '\n\nNo reply is needed if the current plan is right.' +
+            '\n\n' + close + '\n[Your name]';
+    }
+    if (kind === 'joint') {
+        return 'Subject: Joint capacity plan for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
+            '\n\n' + c.peer + ' and I coordinated so that no single team is silently overloaded.' +
+            '\n\n1. BASELINE: ' + v.commit + ' per ' + v.base + '.' +
+            '\n2. REQUEST: ' + c.req + ' (est. [N] ' + v.unit + ').' +
+            '\n3. OPTIONS: (A) pause [item] across both teams to fund it; (B) finish current commitments, then start on [date].' +
+            '\n4. REVIEW: both of us will attend [meeting] to walk through ' + v.tracker + ' with you.' +
+            '\n\n' + close + '\n[Your name] and ' + c.peer;
+    }
+    if (kind === 'factlog') {
+        return 'PRIVATE INCIDENT RECORD (do not send; store according to your company policy)\n\n' +
+            'Date / time / place: \nWho was present: \nExact words, as best recalled (quote them): \nObservable behavior (tone, volume, gestures, silence): \nWhat was requested: \nWhat I said or did: \nFollow-up I sent (date / to whom): \nPeople who can corroborate: \nEarlier similar incidents (dates): \n\nRecord facts and quotes, not interpretations.';
+    }
+    return '';
+}
+
+// ---------- LIVE CARD ----------
+function defRenderLive(panel) {
+    const d = defState.tone === 'deferential';
+    const lines = {
+        pause: d ? 'Thank you. May I take a moment to note this accurately?' : "Let me make sure I have this right.",
+        ack: d ? 'I understand how important [Request] is to you.' : "I hear that [Request] is a priority.",
+        pin: d ? 'With your permission, I will send a short note by [time] so you can confirm the best option.' : "I'll send you the options and trade-offs by [time] so you can decide.",
+        exit1: "I want to give you a real answer, not a quick one. I'll come back to you by [time].",
+        exit2: "Let me check shared capacity with [peer] and confirm in writing."
+    };
+    Object.keys(lines).forEach(k => { defCopyStore['live_' + k] = defSub(lines[k]); });
+    const step = (n, title, color, body, key) =>
+        '<div class="bg-slate-950/70 p-4 rounded-xl border ' + color + ' space-y-2">' +
+        '<div class="flex items-center justify-between"><span class="text-sm font-extrabold text-white">' + n + '. ' + title + '</span>' + defCopyBtn('live_' + key) + '</div>' +
+        '<p class="text-xs text-slate-400 leading-relaxed">' + body + '</p>' +
+        '<p class="text-sm text-slate-100 italic bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">"' + defEsc(defSub(lines[key])) + '"</p></div>';
+    panel.innerHTML =
+        '<div class="bg-gradient-to-r from-amber-950/50 via-slate-900 to-slate-900 p-5 rounded-xl border border-amber-500/40 space-y-4">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div>' +
+        '<h3 class="text-lg font-extrabold text-amber-300">Pause &rarr; Acknowledge &rarr; Pin it</h3>' +
+        '<p class="text-xs text-slate-400">The 30-second rule for the moment pressure lands. Works whether the pressure is real or staged.</p></div>' +
+        '<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-200 border border-amber-500/40">Read this before the meeting, not during</span></div>' +
+        '<div class="grid grid-cols-1 md:grid-cols-3 gap-3">' +
+        step(1, 'PAUSE', 'border-sky-500/30', 'Slow exhale, feet flat, slow your pace, pick up a pen. Your body will want to agree to end the discomfort. Delay is a legitimate move.', 'pause') +
+        step(2, 'ACKNOWLEDGE', 'border-emerald-500/30', 'Acknowledge the priority, not the blame. You can respect the person and still not accept the premise.', 'ack') +
+        step(3, 'PIN IT', 'border-amber-500/30', 'No yes, no no, no dates or numbers in the room. Convert it to a written decision they make, with a time you control.', 'pin') +
+        '</div>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">' +
+        '<div class="bg-rose-950/30 p-3 rounded-lg border border-rose-800/50 space-y-1.5"><strong class="text-rose-300 uppercase text-[10px] tracking-wider">Never, in the room</strong><ul class="space-y-1 text-slate-300 list-disc list-inside">' +
+        '<li>Apologize for something you did not fail to do</li><li>Accept a premise you never agreed to</li><li>Give numbers, dates, or promises</li><li>Argue about character, loyalty, or motives</li><li>Agree to hide capacity changes from peers or your manager</li></ul></div>' +
+        '<div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-2"><strong class="text-slate-300 uppercase text-[10px] tracking-wider">Exit lines when you are cornered</strong>' +
+        '<div class="flex items-start justify-between gap-2"><p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit1)) + '"</p>' + defCopyBtn('live_exit1') + '</div>' +
+        '<div class="flex items-start justify-between gap-2"><p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit2)) + '"</p>' + defCopyBtn('live_exit2') + '</div></div></div>' +
+        '<div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 text-xs space-y-1.5"><strong class="text-slate-300 uppercase text-[10px] tracking-wider">Within the hour afterward</strong>' +
+        '<ol class="list-decimal list-inside text-slate-300 space-y-1"><li>Write down exact words and what you saw (private record).</li><li>Send the recap or trade-off note so a written trail exists.</li><li>Loop in a peer or PMO so the work is visible.</li><li>Not sure what happened? Decode it below. Anything that feels like a threat: open Escalation.</li></ol>' +
+        '<div class="flex flex-wrap gap-2 pt-1"><button type="button" onclick="defShow(\'decode\')" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Decode what happened</button>' +
+        '<button type="button" onclick="defShow(\'escalation\')" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-rose-700 hover:bg-rose-600 text-white">Open Escalation</button></div></div>' +
+        '</div>';
+}
+
+// ---------- DECODE ----------
+function defMatches() {
+    const sel = defState.cues;
+    if (!sel.size) return [];
+    const out = [];
+    defAllGames().forEach(g => {
+        let score = 0, max = 0;
+        const hit = [], miss = [];
+        g.cues.forEach(([id, w]) => { max += w; if (sel.has(id)) { score += w; hit.push(id); } else miss.push(id); });
+        if (score > 0) out.push({ g: g, score: score, max: max, hit: hit, miss: miss, ratio: score / max });
+    });
+    out.sort((a, b) => (b.score - a.score) || (b.ratio - a.ratio));
+    return out;
+}
+
+function defConfidence(m) {
+    if (m.hit.length >= 2 && m.score >= 4) return ['Strong match', 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'];
+    if (m.score >= 3) return ['Probable', 'bg-amber-500/20 text-amber-300 border-amber-500/40'];
+    return ['Possible', 'bg-slate-600/30 text-slate-300 border-slate-500/40'];
+}
+
+function defRenderDecode(panel) {
+    const groups = DEF_CUE_GROUPS.map(gr =>
+        '<div class="space-y-1.5"><span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">' + gr.title + '</span><div class="flex flex-wrap gap-1.5">' +
+        gr.cues.map(([id, label]) => '<button type="button" data-cue="' + id + '" onclick="defToggleCue(\'' + id + '\')" class="def-chip px-2.5 py-1 rounded-full text-[11px] border transition-colors ' + defChipClass(id) + '">' + defEsc(label) + '</button>').join('') +
+        '</div></div>').join('');
+    panel.innerHTML =
+        '<div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-4">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><h3 class="text-base font-bold text-white">What did you observe?</h3>' +
+        '<p class="text-xs text-slate-400">Tap 2&ndash;4 behaviors. Describe what they <em>did</em>, not what you think they meant.</p></div>' +
+        '<button type="button" onclick="defClearCues()" class="text-xs px-2.5 py-1 rounded bg-slate-900 border border-slate-700 text-slate-300 hover:text-white">Clear</button></div>' +
+        '<div class="space-y-3">' + groups + '</div>' +
+        '<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-slate-700/60 text-xs">' +
+        '<label class="flex flex-col gap-1 text-slate-400">Request / topic (fills your scripts)<input id="def-in-req" value="' + defEsc(defState.ctx.req) + '" oninput="defCtxInput()" placeholder="e.g., the migration" class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></label>' +
+        '<label class="flex flex-col gap-1 text-slate-400">Their name / role<input id="def-in-boss" value="' + defEsc(defState.ctx.boss) + '" oninput="defCtxInput()" placeholder="e.g., Richard" class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></label>' +
+        '<label class="flex flex-col gap-1 text-slate-400">Peer to copy<input id="def-in-peer" value="' + defEsc(defState.ctx.peer) + '" oninput="defCtxInput()" placeholder="e.g., Priya" class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></label>' +
+        '</div></div>' +
+        '<div id="def-results" class="space-y-4"></div>';
+    defRenderResults();
+}
+
+function defChipClass(id) {
+    return defState.cues.has(id)
+        ? 'bg-amber-600 border-amber-400 text-white font-semibold'
+        : 'bg-slate-900/70 border-slate-600 text-slate-300 hover:border-slate-400';
+}
+
+function defToggleCue(id) {
+    if (defState.cues.has(id)) defState.cues.delete(id); else defState.cues.add(id);
+    document.querySelectorAll('.def-chip').forEach(b => {
+        b.className = 'def-chip px-2.5 py-1 rounded-full text-[11px] border transition-colors ' + defChipClass(b.getAttribute('data-cue'));
+    });
+    defRenderResults();
+}
+
+function defClearCues() { defState.cues.clear(); defShow('decode', true); }
+
+function defCtxInput() {
+    defState.ctx.req = (document.getElementById('def-in-req') || {}).value || '';
+    defState.ctx.boss = (document.getElementById('def-in-boss') || {}).value || '';
+    defState.ctx.peer = (document.getElementById('def-in-peer') || {}).value || '';
+    defRenderResults();
+}
+
+function defRenderResults() {
+    const box = document.getElementById('def-results');
+    if (!box) return;
+    const sel = defState.cues;
+    if (!sel.size) {
+        box.innerHTML = '<div class="bg-slate-900/60 p-4 rounded-xl border border-dashed border-slate-700 text-xs text-slate-400">Select what you observed above and the likely games, your counter-moves, and a ready-to-send note will appear here.</div>';
+        return;
+    }
+    const matches = defMatches();
+    const top = matches.slice(0, 3);
+    const rest = matches.slice(3);
+    const flagThreat = sel.has('v_career') || matches.some(m => m.g.escalate && m.score >= 3);
+    let html = '';
+    html += '<div class="bg-slate-900/70 p-3 rounded-xl border border-slate-700 text-xs text-slate-300 leading-relaxed">' +
+        '<strong class="text-amber-300">Reality check:</strong> these are patterns in behavior, not a verdict on the person. Each match lists an <em>innocent alternative</em>; ask yourself that question first. The written counter-move is safe either way.</div>';
+    if (flagThreat) {
+        html += '<div class="bg-rose-950/40 p-3 rounded-xl border border-rose-500/50 text-xs text-rose-100 flex items-start justify-between gap-3"><span><strong>Possible veiled threat to your standing.</strong> Write down the exact words and review your options before responding.</span>' +
+            '<button type="button" onclick="defShow(\'escalation\')" class="shrink-0 px-2.5 py-1 rounded bg-rose-700 hover:bg-rose-600 text-white font-semibold">Open Escalation</button></div>';
+    }
+    if (sel.size === 1) {
+        html += '<div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700 text-xs text-slate-400">Only one cue selected. Add one or two more for a more reliable match.</div>';
+    }
+    if (sel.has('s_repeat')) {
+        html += '<div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700 text-xs text-slate-400">A repeating pattern strengthens the case. Keep dated notes (Escalation &rarr; private record).</div>';
+    }
+    if (!top.length) {
+        html += '<div class="text-xs text-slate-400">No catalogued game matches those cues. This may be ordinary friction. Use the Live Card and keep the exchange in writing.</div>';
+    }
+    top.forEach(m => { html += defGameCard(m.g, m, true); });
+    if (rest.length) {
+        html += '<div class="text-[11px] text-slate-400">Also possible: ' + rest.map(m => defEsc(m.g.name)).join(' &bull; ') + '</div>';
+    }
+    box.innerHTML = html;
+}
+
+function defGameCard(g, m, open) {
+    const kLive = 'live_' + g.id, kMemo = 'memo_' + g.id;
+    defCopyStore[kLive] = defLive(g);
+    const memoText = defMemo(g.memo || 'tradeoff');
+    defCopyStore[kMemo] = memoText;
+    let badge = '';
+    if (m) {
+        const conf = defConfidence(m);
+        badge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ' + conf[1] + '">' + conf[0] + '</span>';
+    }
+    const matched = m ? m.hit.map(id => '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-200 border border-amber-500/30 text-[10px]">' + defEsc(DEF_CUES[id].label) + '</span>').join(' ') : '';
+    const alsoLook = m && m.miss.length ? '<p class="text-[11px] text-slate-500">Also look for: ' + m.miss.map(id => defEsc(DEF_CUES[id].label)).join('; ') + '</p>' : '';
+    const fam = DEF_FAMILIES[g.family] || '';
+    const row = (label, color, text) => '<div><span class="text-[10px] font-bold uppercase tracking-wider ' + color + '">' + label + '</span><p class="text-xs text-slate-200 leading-relaxed mt-0.5">' + defEsc(text) + '</p></div>';
+    return '<details ' + (open ? 'open' : '') + ' class="bg-slate-900/80 rounded-xl border border-slate-700 group">' +
+        '<summary class="cursor-pointer list-none p-4 flex flex-wrap items-center justify-between gap-2"><div>' +
+        '<span class="text-sm font-bold text-white">' + defEsc(g.name) + '</span>' +
+        '<span class="block text-[10px] text-slate-500 mt-0.5">' + defEsc(fam) + (g.custom ? ' &bull; custom' : '') + '</span></div>' +
+        '<div class="flex items-center gap-2">' + badge + (g.escalate ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-rose-500/20 text-rose-300 border-rose-500/40">Review escalation</span>' : '') + '</div></summary>' +
+        '<div class="px-4 pb-4 space-y-3 border-t border-slate-800 pt-3">' +
+        (matched ? '<div class="flex flex-wrap gap-1.5">' + matched + '</div>' : '') + alsoLook +
+        '<p class="text-xs text-slate-300 leading-relaxed">' + defEsc(g.summary) + '</p>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' +
+        row('What it is designed to get', 'text-rose-300', g.payoff) +
+        row('The hook it relies on in you', 'text-purple-300', g.hook) +
+        '</div>' +
+        '<div class="bg-sky-950/30 p-2.5 rounded-lg border border-sky-800/40"><span class="text-[10px] font-bold uppercase tracking-wider text-sky-300">Could this be innocent? Test it</span><p class="text-xs text-slate-200 mt-0.5">' + defEsc(g.innocent) + '</p></div>' +
+        row('Counter-move', 'text-emerald-300', g.counter) +
+        '<div class="bg-emerald-950/30 p-3 rounded-lg border border-emerald-800/50 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-emerald-300">Say this, live</span>' + defCopyBtn(kLive) + '</div>' +
+        '<p class="text-sm text-slate-100 italic">"' + defEsc(defCopyStore[kLive]) + '"</p></div>' +
+        (g.avoid ? '<p class="text-xs text-rose-200"><strong class="text-rose-300">Avoid:</strong> ' + defEsc(g.avoid) + '</p>' : '') +
+        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_MEMO_KINDS[g.memo || 'tradeoff']) + '</span>' + defCopyBtn(kMemo, 'Copy note') + '</div>' +
+        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto">' + defEsc(memoText) + '</pre></div>' +
+        '<p class="text-[10px] text-slate-500">Source: ' + defEsc(g.source || '') + '</p>' +
+        '</div></details>';
+}
+
+// ---------- LIBRARY (also used by the Codex tab for this lens) ----------
+function defRenderLibraryInto(container) {
+    const q = (defState.libSearch || '').toLowerCase();
+    const games = defAllGames().filter(g => !q || (g.name + ' ' + g.summary + ' ' + (g.source || '')).toLowerCase().indexOf(q) !== -1);
+    const byFam = {};
+    games.forEach(g => { (byFam[g.family] = byFam[g.family] || []).push(g); });
+    let html = '<div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-4">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><h3 class="text-base font-bold text-white">Games Library</h3>' +
+        '<p class="text-xs text-slate-400">' + defAllGames().length + ' patterns. Some are formal Transactional Analysis games; others are documented influence effects. Labels are for recognizing a move, not diagnosing a person.</p></div>' +
+        '<input id="def-lib-search" type="text" value="' + defEsc(defState.libSearch) + '" oninput="defLibSearch(this.value)" placeholder="Search games..." class="bg-slate-900 border border-slate-600 rounded-md py-1.5 px-3 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></div>' +
+        '<div id="def-lib-body" class="space-y-4">' + defLibBody(byFam) + '</div></div>';
+    html += defCueMapHtml();
+    html += defCustomHtml();
+    const wrap = document.createElement('div');
+    wrap.className = 'space-y-4 md:col-span-2';
+    wrap.innerHTML = html;
+    container.appendChild(wrap);
+}
+
+function defLibBody(byFam) {
+    const fams = Object.keys(DEF_FAMILIES).filter(f => byFam[f]);
+    Object.keys(byFam).forEach(f => { if (fams.indexOf(f) === -1) fams.push(f); });
+    if (!fams.length) return '<p class="text-xs text-slate-400">No games match that search.</p>';
+    return fams.map(f => '<div class="space-y-2"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_FAMILIES[f] || f) + '</span>' +
+        byFam[f].map(g => defGameCard(g, null, false)).join('') + '</div>').join('');
+}
+
+function defLibSearch(v) {
+    defState.libSearch = v;
+    const q = v.toLowerCase();
+    const byFam = {};
+    defAllGames().filter(g => !q || (g.name + ' ' + g.summary + ' ' + (g.source || '')).toLowerCase().indexOf(q) !== -1)
+        .forEach(g => { (byFam[g.family] = byFam[g.family] || []).push(g); });
+    const body = document.getElementById('def-lib-body');
+    if (body) body.innerHTML = defLibBody(byFam);
+}
+
+function defCueMapHtml() {
+    const games = defAllGames();
+    const rows = DEF_CUE_GROUPS.map(gr =>
+        '<tr class="bg-slate-900/60"><td colspan="2" class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">' + gr.title + '</td></tr>' +
+        gr.cues.map(([id, label]) => {
+            const linked = games.filter(g => g.cues.some(c => c[0] === id))
+                .map(g => { const w = g.cues.find(c => c[0] === id)[1]; return defEsc(g.name) + ' <span class="text-slate-500">(' + w + ')</span>'; });
+            return '<tr class="border-t border-slate-800"><td class="px-2 py-1.5 text-slate-200 align-top w-1/2">' + defEsc(label) + '</td><td class="px-2 py-1.5 text-slate-300">' + (linked.join(' &bull; ') || '<span class="text-slate-500">no game linked yet</span>') + '</td></tr>';
+        }).join('')).join('');
+    return '<details class="bg-slate-800 rounded-xl border border-slate-700"><summary class="cursor-pointer p-4 text-sm font-bold text-white">Cue &rarr; Game map <span class="text-xs font-normal text-slate-400">(number = how diagnostic the cue is, 1&ndash;3)</span></summary>' +
+        '<div class="px-4 pb-4 overflow-x-auto"><table class="w-full text-xs"><thead><tr class="text-left text-slate-400"><th class="px-2 py-1">Observed behavior</th><th class="px-2 py-1">Games it points to</th></tr></thead><tbody>' + rows + '</tbody></table></div></details>';
+}
+
+function defCustomHtml() {
+    const example = JSON.stringify({
+        id: 'my_game', name: 'My custom game', family: 'scope',
+        cues: [['v_vague', 2], ['n_private', 1]],
+        summary: 'What it looks like.', payoff: 'What it is designed to get.', hook: 'The reaction it relies on.',
+        innocent: 'How to test whether it is innocent.', counter: 'The principle for countering it.',
+        live: 'A short line to say live.', memo: 'confirm', source: 'Where this comes from'
+    }, null, 2);
+    const mine = defCustomGames();
+    return '<details class="bg-slate-800 rounded-xl border border-slate-700"><summary class="cursor-pointer p-4 text-sm font-bold text-white">Add a custom game <span class="text-xs font-normal text-slate-400">(stored only in this browser)</span></summary>' +
+        '<div class="px-4 pb-4 space-y-2">' +
+        '<p class="text-xs text-slate-400">Valid cue ids: ' + Object.keys(DEF_CUES).map(defEsc).join(', ') + '. Memo kinds: ' + Object.keys(DEF_MEMO_KINDS).join(', ') + '. Families: ' + Object.keys(DEF_FAMILIES).join(', ') + '.</p>' +
+        '<textarea id="def-custom-json" rows="12" class="w-full bg-slate-950 border border-slate-700 rounded-md p-2 text-[11px] font-mono text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500">' + defEsc(example) + '</textarea>' +
+        '<div class="flex flex-wrap items-center gap-2"><button type="button" onclick="defAddCustom()" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Validate &amp; add</button>' +
+        '<button type="button" onclick="defExportCustom()" class="px-3 py-1.5 rounded-md text-xs bg-slate-900 border border-slate-700 text-slate-200">Copy my custom games (JSON)</button>' +
+        (mine.length ? '<button type="button" onclick="defClearCustom()" class="px-3 py-1.5 rounded-md text-xs bg-slate-900 border border-rose-700/60 text-rose-300">Remove all custom games (' + mine.length + ')</button>' : '') + '</div>' +
+        '<p id="def-custom-msg" class="text-xs"></p></div></details>';
+}
+
+function defAddCustom() {
+    const msg = document.getElementById('def-custom-msg');
+    let g;
+    try { g = JSON.parse(document.getElementById('def-custom-json').value); }
+    catch (e) { if (msg) { msg.className = 'text-xs text-rose-300'; msg.textContent = 'Not valid JSON: ' + e.message; } return; }
+    if (!g.family || !DEF_FAMILIES[g.family]) g.family = 'scope';
+    if (!g.memo) g.memo = 'tradeoff';
+    const ids = defAllGames().map(x => x.id);
+    const problems = defValidateGame(g, ids);
+    if (problems.length) { if (msg) { msg.className = 'text-xs text-rose-300'; msg.textContent = 'Fix: ' + problems.join('; '); } return; }
+    const list = defCustomGames().map(x => { const c = Object.assign({}, x); delete c.custom; return c; });
+    list.push(g);
+    localStorage.setItem(DEF_CUSTOM_KEY, JSON.stringify(list));
+    if (msg) { msg.className = 'text-xs text-emerald-300'; msg.textContent = 'Added. It now participates in Decode matching.'; }
+    defShow('library', true);
+}
+
+function defExportCustom() {
+    defCopyStore.custom_export = JSON.stringify(defCustomGames().map(x => { const c = Object.assign({}, x); delete c.custom; return c; }), null, 2);
+    defCopy('custom_export');
+}
+
+function defClearCustom() {
+    if (!confirm('Remove all custom games from this browser?')) return;
+    localStorage.removeItem(DEF_CUSTOM_KEY);
+    defShow('library', true);
+}
+
+// ---------- TRAINING ----------
+function defShuffle(a) { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; } return r; }
+
+function defRenderTraining(panel) {
+    const t = defState.train;
+    const tabs = '<div class="flex gap-1.5">' + [['quiz', 'Name the game'], ['cards', 'Flashcards']].map(([id, label]) =>
+        '<button type="button" onclick="defTrainMode(\'' + id + '\')" class="px-3 py-1.5 rounded-md text-xs font-semibold ' + (t.mode === id ? 'bg-amber-600 text-white' : 'bg-slate-900 border border-slate-700 text-slate-300 hover:text-white') + '">' + label + '</button>').join('') + '</div>';
+    panel.innerHTML = '<div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-4">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><h3 class="text-base font-bold text-white">Training</h3>' +
+        '<p class="text-xs text-slate-400">Practice naming the move before you need to. Some scenarios are genuine requests, because over-diagnosing is also a failure.</p></div>' + tabs + '</div>' +
+        '<div id="def-train-body"></div></div>';
+    if (t.mode === 'cards') defRenderCards(); else defRenderQuiz();
+}
+
+function defTrainMode(m) { defState.train.mode = m; defShow('training', true); }
+
+function defNextScenario() {
+    const t = defState.train;
+    if (!t.order.length || t.pos >= t.order.length) { t.order = defShuffle(DEF_SCENARIOS.map(s => s.id)); t.pos = 0; }
+    const sc = DEF_SCENARIOS.find(s => s.id === t.order[t.pos]);
+    t.pos++;
+    const games = defAllGames().map(g => g.id).filter(id => id !== sc.answer);
+    const opts = [sc.answer];
+    if (sc.answer !== 'none') opts.push('none');
+    defShuffle(games).forEach(id => { if (opts.length < 4 && opts.indexOf(id) === -1) opts.push(id); });
+    t.current = { sc: sc, options: defShuffle(opts) };
+    t.picked = null;
+}
+
+function defOptLabel(id) {
+    if (id === 'none') return 'No game: likely a genuine request';
+    const g = defAllGames().find(x => x.id === id);
+    return g ? g.name : id;
+}
+
+function defRenderQuiz() {
+    const t = defState.train;
+    const body = document.getElementById('def-train-body');
+    if (!body) return;
+    if (!t.current) defNextScenario();
+    const cur = t.current, sc = cur.sc;
+    let html = '<div class="flex items-center justify-between text-xs text-slate-400"><span>Scenario: <strong class="text-slate-200">' + defEsc(sc.title) + '</strong></span><span>Score: <strong class="text-amber-300">' + t.score + ' / ' + t.answered + '</strong></span></div>' +
+        '<blockquote class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 text-sm text-slate-100 leading-relaxed italic">' + defEsc(sc.text) + '</blockquote>' +
+        '<p class="text-xs font-semibold text-slate-300">What is going on here?</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">';
+    cur.options.forEach(id => {
+        let cls = 'bg-slate-900 border-slate-600 text-slate-200 hover:border-amber-400';
+        if (t.picked) {
+            if (id === sc.answer) cls = 'bg-emerald-900/40 border-emerald-500 text-emerald-100';
+            else if (id === t.picked) cls = 'bg-rose-900/40 border-rose-500 text-rose-100';
+            else cls = 'bg-slate-900/50 border-slate-700 text-slate-500';
+        }
+        html += '<button type="button" ' + (t.picked ? 'disabled' : '') + ' onclick="defAnswer(\'' + id + '\')" class="text-left text-xs p-3 rounded-lg border transition-colors ' + cls + '">' + defEsc(defOptLabel(id)) + '</button>';
+    });
+    html += '</div>';
+    if (t.picked) {
+        const ok = t.picked === sc.answer;
+        const g = sc.answer === 'none' ? null : defAllGames().find(x => x.id === sc.answer);
+        html += '<div class="space-y-2 p-4 rounded-xl border ' + (ok ? 'border-emerald-500/50 bg-emerald-950/20' : 'border-rose-500/50 bg-rose-950/20') + '">' +
+            '<strong class="text-sm ' + (ok ? 'text-emerald-300' : 'text-rose-300') + '">' + (ok ? 'Correct' : 'Not quite. Answer: ' + defEsc(defOptLabel(sc.answer))) + '</strong>' +
+            '<p class="text-xs text-slate-200 leading-relaxed">' + defEsc(sc.why) + '</p>' +
+            '<p class="text-[11px] text-slate-400">Cues to notice: ' + sc.cues.map(c => defEsc(DEF_CUES[c].label)).join('; ') + '</p>' +
+            (g ? '<p class="text-xs text-emerald-200"><strong>Best response:</strong> "' + defEsc(defLive(g)) + '"</p>'
+               : '<p class="text-xs text-emerald-200"><strong>Best response:</strong> Treat it as genuine. Act on the urgent need first, then reconcile the displaced work in writing afterward. Same ledger, no accusation.</p>') +
+            '<button type="button" onclick="defQuizNext()" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Next scenario</button></div>';
+    }
+    body.innerHTML = html;
+}
+
+function defAnswer(id) {
+    const t = defState.train;
+    if (t.picked) return;
+    t.picked = id;
+    t.answered++;
+    if (id === t.current.sc.answer) t.score++;
+    defRenderQuiz();
+}
+
+function defQuizNext() { defNextScenario(); defRenderQuiz(); }
+
+function defRenderCards() {
+    const t = defState.train;
+    const body = document.getElementById('def-train-body');
+    const games = defAllGames();
+    if (!body || !games.length) return;
+    if (t.fcIdx >= games.length) t.fcIdx = 0;
+    const g = games[t.fcIdx];
+    body.innerHTML = '<div class="flex items-center justify-between text-xs text-slate-400"><span>Card ' + (t.fcIdx + 1) + ' of ' + games.length + '</span><span>Recall the cues, the payoff, and your counter before you reveal.</span></div>' +
+        '<div class="bg-slate-950/70 p-5 rounded-xl border border-slate-800 space-y-3"><h4 class="text-lg font-bold text-amber-300">' + defEsc(g.name) + '</h4>' +
+        (t.fcOpen ?
+            '<p class="text-xs text-slate-300">' + defEsc(g.summary) + '</p>' +
+            '<p class="text-xs text-slate-300"><strong class="text-slate-100">Cues:</strong> ' + g.cues.map(c => defEsc(DEF_CUES[c[0]].label)).join('; ') + '</p>' +
+            '<p class="text-xs text-slate-300"><strong class="text-rose-300">Designed to get:</strong> ' + defEsc(g.payoff) + '</p>' +
+            '<p class="text-xs text-slate-300"><strong class="text-sky-300">Innocent test:</strong> ' + defEsc(g.innocent) + '</p>' +
+            '<p class="text-xs text-slate-300"><strong class="text-emerald-300">Counter:</strong> ' + defEsc(g.counter) + '</p>' +
+            '<p class="text-xs text-emerald-200 italic">"' + defEsc(defLive(g)) + '"</p>'
+            : '<p class="text-xs text-slate-500">Tap Reveal to check yourself.</p>') +
+        '</div><div class="flex gap-2"><button type="button" onclick="defCardFlip()" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-slate-900 border border-slate-600 text-slate-200">' + (t.fcOpen ? 'Hide' : 'Reveal') + '</button>' +
+        '<button type="button" onclick="defCardNext()" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Next card</button></div>';
+}
+
+function defCardFlip() { defState.train.fcOpen = !defState.train.fcOpen; defRenderCards(); }
+function defCardNext() { defState.train.fcIdx++; defState.train.fcOpen = false; defRenderCards(); }
+
+// ---------- ESCALATION ----------
+function defRenderEscalation(panel) {
+    const items = DEF_ESCALATION_ITEMS.map(it =>
+        '<label class="flex items-start gap-2 p-2 rounded-lg border border-slate-700 bg-slate-900/60 text-xs text-slate-200 cursor-pointer hover:border-slate-500">' +
+        '<input type="checkbox" class="mt-0.5" ' + (defState.esc.has(it.id) ? 'checked' : '') + ' onchange="defToggleEsc(\'' + it.id + '\')">' +
+        '<span><span class="text-[10px] font-bold uppercase ' + (it.sev === 'high' ? 'text-rose-300' : 'text-amber-300') + '">' + (it.sev === 'high' ? 'Serious' : 'Warning sign') + '</span><br>' + defEsc(it.text) + '</span></label>').join('');
+    defCopyStore.factlog = defMemo('factlog');
+    panel.innerHTML = '<div class="bg-slate-800 rounded-xl p-5 border border-rose-500/30 space-y-4">' +
+        '<div><h3 class="text-base font-bold text-white">When it stops being a game</h3>' +
+        '<p class="text-xs text-slate-400 leading-relaxed">Managing a tactic is one thing. Threats, retaliation, or intimidation are not yours to manage alone. Tick anything that applies.</p></div>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">' + items + '</div>' +
+        '<div id="def-esc-result"></div>' +
+        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Private incident record (template)</span>' + defCopyBtn('factlog', 'Copy template') + '</div>' +
+        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">' + defEsc(defCopyStore.factlog) + '</pre></div>' +
+        '<p class="text-[11px] text-slate-500">This tool offers general guidance, not legal advice. Rules and protections vary by country and employer. Follow your company policy on handling confidential information when keeping records.</p></div>';
+    defRenderEscResult();
+}
+
+function defToggleEsc(id) { if (defState.esc.has(id)) defState.esc.delete(id); else defState.esc.add(id); defRenderEscResult(); }
+
+function defRenderEscResult() {
+    const box = document.getElementById('def-esc-result');
+    if (!box) return;
+    const sel = DEF_ESCALATION_ITEMS.filter(i => defState.esc.has(i.id));
+    const high = sel.filter(i => i.sev === 'high').length;
+    const med = sel.filter(i => i.sev === 'medium').length;
+    const steps = (list) => '<ol class="list-decimal list-inside text-xs text-slate-200 space-y-1 mt-2">' + list.map(s => '<li>' + s + '</li>').join('') + '</ol>';
+    if (high > 0) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-rose-500/60 bg-rose-950/40"><strong class="text-rose-300 text-sm">Escalate: do not handle this alone.</strong>' +
+            steps([
+                "If you feel physically unsafe, leave and tell someone you trust right away.",
+                "Write down the exact words, date, time, place, and witnesses now (use the private template below).",
+                "Do not retaliate, bargain, or delete anything. Keep your replies brief, factual, and polite.",
+                "Report through your company's HR / employee-relations, ethics or compliance hotline, or a skip-level leader you trust. Use the channel that is independent of the person involved.",
+                "Consider confidential support: an employee assistance program, a union or employee representative, or an employment lawyer. In many places there are protections against retaliation.",
+                "If a peer is also affected, agree to each record and report your own account."
+            ]) + '</div>';
+    } else if (med >= 2) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-amber-500/60 bg-amber-950/30"><strong class="text-amber-300 text-sm">Document and consult.</strong>' +
+            steps([
+                "Keep a dated private record of each incident and quote exact words.",
+                "Keep using written confirmations so there is a trail.",
+                "Quietly consult HR, a mentor, or a trusted skip-level for guidance before the pattern escalates."
+            ]) + '</div>';
+    } else if (sel.length) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-sky-500/40 bg-sky-950/20"><strong class="text-sky-300 text-sm">Keep managing it, and keep notes.</strong><p class="text-xs text-slate-300 mt-1">One warning sign is worth recording. If it repeats or another box applies, return here.</p></div>';
+    } else {
+        box.innerHTML = '<div class="p-3 rounded-xl border border-dashed border-slate-700 text-xs text-slate-400">Nothing ticked yet.</div>';
+    }
+}
+
+// ---------- integration with the main console ----------
+function syncDefenseView() {
+    const dv = document.getElementById('view-defense');
+    const pv = document.getElementById('view-profiler');
+    if (!dv || !pv) return;
+    const tab = window.__bcTab || 'profiler';
+    if (tab !== 'profiler') { dv.classList.add('hidden'); return; }
+    if (typeof currentLens !== 'undefined' && currentLens === 'power_defense') {
+        pv.classList.add('hidden');
+        dv.classList.remove('hidden');
+        defInit();
+    } else {
+        dv.classList.add('hidden');
+        pv.classList.remove('hidden');
+    }
+}
+
     </script>
 </body>
 </html>
