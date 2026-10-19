@@ -6067,7 +6067,6 @@ const DEF_ESCALATION_ITEMS = [
 
 const DEF_STORE_KEY = 'bridgecraft_defense_prefs';
 const DEF_CUSTOM_KEY = 'bridgecraft_custom_games';
-const defCopyStore = {};
 const defState = {
     tab: 'live',
     domain: 'general',
@@ -6216,18 +6215,6 @@ function defLive(g) {
     return defState.tone === 'deferential' ? 'Thank you for trusting me with this. ' + base : base;
 }
 
-function defCopy(key) {
-    const t = defCopyStore[key];
-    if (!t) return;
-    const done = () => { if (typeof showToast === 'function') showToast('Copied to clipboard'); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done);
-    else { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
-}
-
-function defCopyBtn(key, label) {
-    return '<button type="button" onclick="defCopy(\'' + key + '\')" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 transition-colors">' + (label || 'Copy') + '</button>';
-}
-
 // ---------- memo builder (domain-neutral, vocabulary swapped by field) ----------
 function defMemo(kind) {
     const c = defCtx();
@@ -6291,10 +6278,9 @@ function defRenderLive(panel) {
         exit1: "I want to give you a real answer, not a quick one. I'll come back to you by [time].",
         exit2: "Let me check shared capacity with [peer] and confirm in writing."
     };
-    Object.keys(lines).forEach(k => { defCopyStore['live_' + k] = defSub(lines[k]); });
     const step = (n, title, color, body, key) =>
         '<div class="bg-slate-950/70 p-4 rounded-xl border ' + color + ' space-y-2">' +
-        '<div class="flex items-center justify-between"><span class="text-sm font-extrabold text-white">' + n + '. ' + title + '</span>' + defCopyBtn('live_' + key) + '</div>' +
+        '<div><span class="text-sm font-extrabold text-white">' + n + '. ' + title + '</span></div>' +
         '<p class="text-xs text-slate-400 leading-relaxed">' + body + '</p>' +
         '<p class="text-sm text-slate-100 italic bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">"' + defEsc(defSub(lines[key])) + '"</p></div>';
     panel.innerHTML =
@@ -6312,8 +6298,8 @@ function defRenderLive(panel) {
         '<div class="bg-rose-950/30 p-3 rounded-lg border border-rose-800/50 space-y-1.5"><strong class="text-rose-300 uppercase text-[10px] tracking-wider">Never, in the room</strong><ul class="space-y-1 text-slate-300 list-disc list-inside">' +
         '<li>Apologize for something you did not fail to do</li><li>Accept a premise you never agreed to</li><li>Give numbers, dates, or promises</li><li>Argue about character, loyalty, or motives</li><li>Agree to hide capacity changes from peers or your manager</li></ul></div>' +
         '<div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 space-y-2"><strong class="text-slate-300 uppercase text-[10px] tracking-wider">Exit lines when you are cornered</strong>' +
-        '<div class="flex items-start justify-between gap-2"><p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit1)) + '"</p>' + defCopyBtn('live_exit1') + '</div>' +
-        '<div class="flex items-start justify-between gap-2"><p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit2)) + '"</p>' + defCopyBtn('live_exit2') + '</div></div></div>' +
+        '<p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit1)) + '"</p>' +
+        '<p class="text-slate-200 italic">"' + defEsc(defSub(lines.exit2)) + '"</p></div></div>' +
         '<div class="bg-slate-950/70 p-3 rounded-lg border border-slate-800 text-xs space-y-1.5"><strong class="text-slate-300 uppercase text-[10px] tracking-wider">Within the hour afterward</strong>' +
         '<ol class="list-decimal list-inside text-slate-300 space-y-1"><li>Write down exact words and what you saw (private record).</li><li>Send the recap or trade-off note so a written trail exists.</li><li>Loop in a peer or PMO so the work is visible.</li><li>Not sure what happened? Decode it below. Anything that feels like a threat: open Escalation.</li></ol>' +
         '<div class="flex flex-wrap gap-2 pt-1"><button type="button" onclick="defShow(\'decode\')" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Decode what happened</button>' +
@@ -6421,10 +6407,8 @@ function defRenderResults() {
 }
 
 function defGameCard(g, m, open) {
-    const kLive = 'live_' + g.id, kMemo = 'memo_' + g.id;
-    defCopyStore[kLive] = defLive(g);
+    const liveText = defLive(g);
     const memoText = defMemo(g.memo || 'tradeoff');
-    defCopyStore[kMemo] = memoText;
     let badge = '';
     if (m) {
         const conf = defConfidence(m);
@@ -6448,10 +6432,10 @@ function defGameCard(g, m, open) {
         '</div>' +
         '<div class="bg-sky-950/30 p-2.5 rounded-lg border border-sky-800/40"><span class="text-[10px] font-bold uppercase tracking-wider text-sky-300">Could this be innocent? Test it</span><p class="text-xs text-slate-200 mt-0.5">' + defEsc(g.innocent) + '</p></div>' +
         row('Counter-move', 'text-emerald-300', g.counter) +
-        '<div class="bg-emerald-950/30 p-3 rounded-lg border border-emerald-800/50 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-emerald-300">Say this, live</span>' + defCopyBtn(kLive) + '</div>' +
-        '<p class="text-sm text-slate-100 italic">"' + defEsc(defCopyStore[kLive]) + '"</p></div>' +
+        '<div class="bg-emerald-950/30 p-3 rounded-lg border border-emerald-800/50 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-emerald-300">Say this, live</span></div>' +
+        '<p class="text-sm text-slate-100 italic">"' + defEsc(liveText) + '"</p></div>' +
         (g.avoid ? '<p class="text-xs text-rose-200"><strong class="text-rose-300">Avoid:</strong> ' + defEsc(g.avoid) + '</p>' : '') +
-        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_MEMO_KINDS[g.memo || 'tradeoff']) + '</span>' + defCopyBtn(kMemo, 'Copy note') + '</div>' +
+        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_MEMO_KINDS[g.memo || 'tradeoff']) + '</span></div>' +
         '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto">' + defEsc(memoText) + '</pre></div>' +
         '<p class="text-[10px] text-slate-500">Source: ' + defEsc(g.source || '') + '</p>' +
         '</div></details>';
@@ -6521,7 +6505,6 @@ function defCustomHtml() {
         '<p class="text-xs text-slate-400">Valid cue ids: ' + Object.keys(DEF_CUES).map(defEsc).join(', ') + '. Memo kinds: ' + Object.keys(DEF_MEMO_KINDS).join(', ') + '. Families: ' + Object.keys(DEF_FAMILIES).join(', ') + '.</p>' +
         '<textarea id="def-custom-json" rows="12" class="w-full bg-slate-950 border border-slate-700 rounded-md p-2 text-[11px] font-mono text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500">' + defEsc(example) + '</textarea>' +
         '<div class="flex flex-wrap items-center gap-2"><button type="button" onclick="defAddCustom()" class="px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white">Validate &amp; add</button>' +
-        '<button type="button" onclick="defExportCustom()" class="px-3 py-1.5 rounded-md text-xs bg-slate-900 border border-slate-700 text-slate-200">Copy my custom games (JSON)</button>' +
         (mine.length ? '<button type="button" onclick="defClearCustom()" class="px-3 py-1.5 rounded-md text-xs bg-slate-900 border border-rose-700/60 text-rose-300">Remove all custom games (' + mine.length + ')</button>' : '') + '</div>' +
         '<p id="def-custom-msg" class="text-xs"></p></div></details>';
 }
@@ -6541,11 +6524,6 @@ function defAddCustom() {
     localStorage.setItem(DEF_CUSTOM_KEY, JSON.stringify(list));
     if (msg) { msg.className = 'text-xs text-emerald-300'; msg.textContent = 'Added. It now participates in Decode matching.'; }
     defShow('library', true);
-}
-
-function defExportCustom() {
-    defCopyStore.custom_export = JSON.stringify(defCustomGames().map(x => { const c = Object.assign({}, x); delete c.custom; return c; }), null, 2);
-    defCopy('custom_export');
 }
 
 function defClearCustom() {
@@ -6663,14 +6641,14 @@ function defRenderEscalation(panel) {
         '<label class="flex items-start gap-2 p-2 rounded-lg border border-slate-700 bg-slate-900/60 text-xs text-slate-200 cursor-pointer hover:border-slate-500">' +
         '<input type="checkbox" class="mt-0.5" ' + (defState.esc.has(it.id) ? 'checked' : '') + ' onchange="defToggleEsc(\'' + it.id + '\')">' +
         '<span><span class="text-[10px] font-bold uppercase ' + (it.sev === 'high' ? 'text-rose-300' : 'text-amber-300') + '">' + (it.sev === 'high' ? 'Serious' : 'Warning sign') + '</span><br>' + defEsc(it.text) + '</span></label>').join('');
-    defCopyStore.factlog = defMemo('factlog');
+    const factlogText = defMemo('factlog');
     panel.innerHTML = '<div class="bg-slate-800 rounded-xl p-5 border border-rose-500/30 space-y-4">' +
         '<div><h3 class="text-base font-bold text-white">When it stops being a game</h3>' +
         '<p class="text-xs text-slate-400 leading-relaxed">Managing a tactic is one thing. Threats, retaliation, or intimidation are not yours to manage alone. Tick anything that applies.</p></div>' +
         '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">' + items + '</div>' +
         '<div id="def-esc-result"></div>' +
-        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Private incident record (template)</span>' + defCopyBtn('factlog', 'Copy template') + '</div>' +
-        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">' + defEsc(defCopyStore.factlog) + '</pre></div>' +
+        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Private incident record (template)</span></div>' +
+        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">' + defEsc(factlogText) + '</pre></div>' +
         '<p class="text-[11px] text-slate-500">This tool offers general guidance, not legal advice. Rules and protections vary by country and employer. Follow your company policy on handling confidential information when keeping records.</p></div>';
     defRenderEscResult();
 }
