@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.0] - 2026-10-19 — *Upward Defense Lens, Flashcard Drills & Field Documentation*
+
+Introduced dedicated Upward Defense operational lens to equip managers and team leads against transactional compliance games, coercive power asymmetries, and staged urgency. Added an interactive 5-tab workbench including 30-second Live Card, multi-cue Decoder with innocent alternative checks, 15-game catalog, interactive Scenario Practice, active-recall Flashcard Drills, and an objective Escalation checklist with private incident logging.
+
+### Added
+- **Upward Defense Operational Lens (?lens=power_defense):** Dedicated workbench swapping into active view with Live Card, Decode, Games Library, Training, and Escalation tabs.
+- **Interactive Flashcard Training:** Active-recall training loop testing recognition of cues, designed payoffs, innocent alternative tests, and spoken counters.
+- **Multi-Cue Decoder & Innocent Alternative Checks:** 25 observable cues across What They Say, How They Deliver, and How It Is Structured, with automatic reality check against legitimate organizational crises.
+- **Domain-Neutral Trade-Off Memos:** Auto-generated written governance memos across Engineering, IT Ops, Finance, Sales, and General vocabularies.
+- **Field Documentation:** Expanded in-app Strategic Field Manual, README.md, and BRIDGE_CRAFT_MASTER_GUIDE.md with comprehensive operational and training protocols.
+
+---
+
 ## [2.2.0] - 2026-10-14 - *Frontline Behavioral Radar & Interface Decluttering*
 
 Introduced real-time zero-jargon Frontline Behavioral Radar, De-Escalation Circuit Breaker, and Core Trigger Antidotes. Polished behavioral microcopy across all operational lenses and removed redundant script copy buttons to preserve a clean, uncluttered interface during active incident management.

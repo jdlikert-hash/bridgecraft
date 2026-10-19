@@ -20,7 +20,7 @@ This document is engineered to serve as both an exhaustive operational master gu
 - **Chapter 8: Tactical De-Escalation Rehearsal Sandbox — Client-Side AI Handoff & Roleplay**
 - **Chapter 9: The Field Archive — Multi-Observer Intelligence & Situational Adaptation**
 - **Chapter 10: The Codex — Customizing Tactical Battlecards & Domain Playbooks**
-- **Chapter 11: Four Operational Frames — IT Ops, CRM Sales, Financial Hardship, and Crisis**
+- **Chapter 11: Five Operational Frames — IT Ops, CRM Sales, Financial Hardship, Crisis, and Upward Defense**
 - **Chapter 12: Ethical Safeguards, The Anti-Cloning Standard & Master FAQ**
 
 ---
@@ -488,7 +488,7 @@ To counteract this dynamic without escalating into hostility, BridgeCraft embeds
 
 ---
 
-## 🌐 Chapter 11: Four Operational Frames — IT Ops, CRM Sales, Financial Hardship, and Crisis
+## 🌐 Chapter 11: Five Operational Frames — IT Ops, CRM Sales, Financial Hardship, Crisis, and Upward Defense
 
 BridgeCraft is not limited to engineering outages. Clicking any lens in the top header dynamically transforms the entire application's vocabulary, indicators, and templates:
 
@@ -512,14 +512,28 @@ BridgeCraft is not limited to engineering outages. Clicking any lens in the top 
 - **Core Use Cases:** Acute emotional dysregulation, panic hotlines, trauma-informed stabilization.
 - **Primary Templates:** Somatic Grounding Protocols, Structured Reality Testing Notes.
 
-### 11.5 URL Deep-Linking
+### 11.5 🛡️ Executive Alignment & Upward Defense (`power_defense`)
+- **Primary Channels:** Executive 1-on-1s, skip-level alignment reviews, sudden unscheduled calls, capacity negotiations.
+- **Core Use Cases:** Navigating coercive senior power dynamics, strategic urgency theater, unfunded scope mandates, and transactional compliance games (Berne's TA, Karpman Drama Triangle, Cialdini influence principles).
+- **The Theoretical Shift:** Standard PCM assumes distress is genuine; Upward Defense addresses situations where *apparent distress is an instrumental act* designed to bypass governance and force uncommitted delivery.
+- **The 5-Tab Workbench Architecture:**
+  1. **⚡ Live Card:** 30-second grounding protocol (Pause &rarr; Acknowledge &rarr; Pin It) with Standard vs. High-Deference tone toggle and clean exit lines.
+  2. **🔍 Multi-Cue Decoder:** Diagnoses 25 observable cues across What They Say, How They Deliver, and How It Is Structured. Includes diagnostic confidence scoring, domain-neutral confirmation memos (Engineering, IT Ops, Finance, Sales, General), and the critical **Innocent Alternative Reality Check** to prevent false-positive paranoia.
+  3. **📚 Games Library:** 15 cataloged games with complete breakdowns of payoff, psychological hook, innocent alternative test, and counter-moves. Features a local JSON builder for adding custom organization-specific tactics.
+  4. **🎯 Training Module (Scenarios & Flashcards):**
+     - **Scenario Practice:** 16 multi-step workplace dilemmas (including positive/innocent requests) to train calibrated recognition under pressure.
+     - **Interactive Flashcards:** Active-recall drill loop (Prompt &rarr; Mental Rehearsal of Cues, Payoff & Counter &rarr; Reveal &rarr; Next Card).
+  5. **🛡️ Escalation & Private Incident Record:** 10-point severity matrix separating interpersonal game tactics from actionable HR/legal threats, paired with an evidentiary incident log template (quotes, physical behaviors, witnesses; strictly zero emotional adjectives).
+
+### 11.6 URL Deep-Linking
 Directly bookmark or link your operational domain using URL query parameters:
 - `bridgecraft.html?lens=it_ops` (or `?lens=it`)
 - `bridgecraft.html?lens=crm_sales` (or `?lens=crm`)
 - `bridgecraft.html?lens=financial_hardship` (or `?lens=banking`)
 - `bridgecraft.html?lens=counseling_crisis` (or `?lens=counseling`)
+- `bridgecraft.html?lens=power_defense` (or `?lens=defense`) (Executive Alignment & Upward Defense)
 
-### 11.6 Accusation Audits in High-Friction Operational Lenses (The Voss Doctrine)
+### 11.7 Accusation Audits in High-Friction Operational Lenses (The Voss Doctrine)
 In high-stakes negotiation (*Never Split the Difference*, Christopher Voss), an **Accusation Audit** is the practice of pre-emptively articulating the other party's worst-case fears, suspicions, and negative thoughts about you before they have the chance to express them.
 
 By voicing their unspoken accusations upfront, the operator accomplishes three psychological breakthroughs:

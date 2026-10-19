@@ -129,6 +129,7 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
 | **💼 Customer Success & Enterprise CRM** (`crm_sales`) | Executive video calls (Zoom/Meet), high-priority email threads, QBRs, customer save meetings | Furious Sales VPs, contract renewal churn risks, SLA breach executive escalations | Executive Account Save Email & Partnership Alignment Memos |
 | **💳 Banking Hardship & Loss Mitigation** (`financial_hardship`) | Inbound phone queues, loss mitigation intake, borrower desk interviews, certified mail notices | Imminent foreclosure, loan modification workouts, CFPB compliance, borrower distress | Borrower Stabilization Script & 3-Step Loss Mitigation Plan |
 | **🩺 Crisis Counseling & Mental Health** (`counseling_crisis`) | Crisis hotlines, SMS/chat triage portals, walk-in intake, clinical debriefs | Acute emotional dysregulation, panic hotline intake, trauma-informed triage | Somatic Grounding Protocol & Structured Reality Testing Note |
+| **🛡️ Executive Alignment & Upward Defense** (`power_defense`) | Private 1-on-1s, executive reviews, skip-level escalations, capacity negotiations | Coercive power dynamics, staged urgency, unfunded scope mandates, transactional compliance games | Live 30s Card, Multi-Cue Decoder, Domain Trade-Off Memos & Private Incident Log |
 
 ### URL Deep-Linking & Standalone Deployment:
 - **Instant Domain Switching:** Click any lens on the top Operational Lens strip to morph the entire application in real time.
@@ -137,7 +138,56 @@ BridgeCraft provides four specialized operational frames ("lenses"), each featur
   - `?lens=crm` or `?lens=crm_sales` (Customer Success & CRM)
   - `?lens=banking` or `?lens=financial_hardship` (Banking Hardship & Loss Mitigation)
   - `?lens=counseling` or `?lens=counseling_crisis` (Crisis Counseling & Mental Health)
+  - `?lens=power_defense` or `?lens=defense` (Executive Alignment & Upward Defense)
 - **Standalone Domain App Export:** Click **Export Domain App** in the header to download a zero-dependency single HTML file pre-configured and locked to that specific domain for offline team distribution.
+
+---
+
+## 5.5 Upward Defense Workbench: Navigating Power Dynamics & Transactional Games
+
+When communicating downward or across peers, standard Process Communication Model (PCM) de-escalation assumes distress is authentic: an engineer panicked by moving deadlines needs structured certainty; an overwhelmed account manager needs relational support.
+
+However, in corporate power asymmetries, **apparent "Phase distress" from senior stakeholders is frequently an instrumental tactic**—a transactional game designed to extract uncommitted scope, bypass governance, or force immediate compliance through manufactured fear or urgency. Standard PCM emotional appeasement fails here because accommodating manufactured panic rewards the tactic, leading to manager burnout and hidden team overload.
+
+The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **Aligned Deference, Objective Multi-Cue Diagnosis, Written Trade-Off Ledgers, and Cross-Functional Governance**.
+
+### The 5 Workbench Modules:
+
+1. **⚡ The Live Card (In-the-Room 30-Second Micro-Loop):**
+   - **Pause:** Slow your breathing, keep feet flat, pick up a pen. Delay is an operational defense. Your body will naturally want to agree to relieve discomfort.
+   - **Acknowledge:** Validate the priority, not the blame or false premise (*"I hear that [Request] is an executive priority"*).
+   - **Pin It:** Never commit to dates, numbers, or scope in the room. Offer to send written trade-off options by a specific time you control.
+   - **Tone Modulation (Standard vs. High-Deference):** Toggle High-Deference when operating in strict hierarchical or high power-distance environments. Frame capacity constraints as a respectful consultation (*"To ensure I do not compromise your committed deliverables..."*) without showing defiance.
+   - **Exit Lines:** Scripted boundary phrases to pause the discussion when cornered without escalating tension.
+
+2. **🔍 Diagnostic Decoder (Multi-Cue Diagnostic Engine):**
+   - Ticks 2–4 observable markers across three distinct categories:
+     - *What they Say:* Vague directives, past grievance lists, unwritten promises, "take one for the team".
+     - *How they Deliver:* Manufactured urgency, sudden volume/temper displays, private 1-on-1 pressure.
+     - *How it is Structured:* Verbal-only mandates, bypassing PMO/lead, dividing peers, shifting criteria.
+   - Calculates diagnostic confidence against the 15-game taxonomy.
+   - **The Innocent Alternative Check:** Highlights explicit operational checks (*"Could this be innocent?"*) to differentiate legitimate organizational fire drills from manipulative games, preventing hyper-vigilant misattribution.
+   - **Domain-Neutral Confirmation Memos:** Auto-generates structured written plans of record across 5 specialized vocabularies: Engineering (PRs, sprints, tech debt), IT Operations (tickets, SLAs, incidents), Finance (budgets, forecasts, audits), Sales (pipeline, accounts, deals), and General Business.
+
+3. **📚 Games Library (15 Documented Patterns):**
+   - **Transactional Analysis (Eric Berne):** *NIGYSOB ("Now I've Got You, Son of a Bitch")*, *Why Don't You / Yes But*, *Guilt / Debt Induction*.
+   - **Karpman Drama Triangle (Stephen Karpman):** *Persecutor-to-Rescuer Switch*, *Divide and Conquer*.
+   - **Influence & Compliance Tactics (Robert Cialdini & Social Psychology):** *Fear-then-Relief*, *Forced Urgency*, *Door-in-the-Face*, *Foot-in-the-Door*, *DARVO*, *Stonewalling*, *Veiled Threat*.
+   - **Scope Governance:** *Loaded Question*, *Moving Goalposts*, *Verbal-Only Mandate*.
+   - **Custom Game JSON Builder:** Allows teams to add custom organizational games that persist locally and participate in live cue decoding.
+
+4. **🎯 Training Drills: Scenarios & Interactive Flashcards:**
+   - **Scenario Practice ("Name the Game"):** 16 realistic, multi-role workplace scenarios (including genuine, innocent requests as negative controls). Operators evaluate dialogue, identify matching games, and receive instant feedback.
+   - **Interactive Flashcards (Active-Recall Drills):**
+     - Card prompt displays the game name.
+     - The operator mentally rehearses: *What cues indicate this game? What payoff is the stakeholder seeking? How do I test innocence? What is my spoken counter?*
+     - Click **Reveal** to inspect the cues, payoff, innocent test, and exact spoken counter-line.
+     - Click **Next card** to cycle through the catalog.
+     - *Recommended drill frequency:* Run 5 flashcards weekly or right before major stakeholder negotiations.
+
+5. **🛡️ Escalation & Objective Incident Logging:**
+   - **10-Point Severity Matrix:** Evaluates observed behaviors against clear thresholds: Serious (requires immediate escalation through independent channels like ethics hotlines or HR), Warning Signs (requires written records and mentor consultation), or Routine Tactic (manage with written confirmation).
+   - **Objective Incident Record Protocol:** Template for logging private incident notes that meet evidentiary standards—recording exact quotes, physical body language, times, locations, and corroborating witnesses while strictly omitting subjective emotional adjectives.
 
 ---
 
