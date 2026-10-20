@@ -545,9 +545,6 @@ employer, client, or third party. See LICENSE file for full legal terms.
                         </p>
                     </div>
                     <div class="flex flex-wrap items-end gap-3 text-[11px] text-slate-400">
-                        <label class="flex flex-col gap-1">Your field
-                            <select id="def-domain" onchange="defSetDomain(this.value)" class="bg-slate-900 border border-slate-600 rounded-md py-1 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
-                        </label>
                         <label class="flex flex-col gap-1">Tone
                             <select id="def-tone" onchange="defSetTone(this.value)" class="bg-slate-900 border border-slate-600 rounded-md py-1 px-2 text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
                                 <option value="standard">Standard</option>
@@ -1060,7 +1057,7 @@ employer, client, or third party. See LICENSE file for full legal terms.
                                 <li><em>How it is STRUCTURED:</em> (e.g., verbal-only mandates, skipping written approvals, dividing peers).</li>
                             </ul>
                             <p class="text-slate-300 leading-relaxed pt-1">
-                                The engine computes diagnostic confidence and surfaces the best matching games. Each match highlights the <strong>payoff</strong> they seek, your <strong>psychological hook</strong>, the exact <strong>live counter-phrase</strong>, and an auto-generated <strong>written confirmation memo</strong> formatted in your domain vocabulary (Engineering, IT Ops, Finance, Sales, or General).
+                                The engine computes diagnostic confidence and surfaces the best matching games. Each match highlights the <strong>payoff</strong> they seek, your <strong>psychological hook</strong>, the exact <strong>live counter-phrase</strong>, and an auto-generated <strong>written confirmation memo</strong> formatted with clean, universally adaptable professional business phrasing.
                             </p>
                             <div class="p-2 rounded bg-sky-950/40 border border-sky-800/40 text-[11px] text-sky-200">
                                 <strong>The Innocent Alternative Check:</strong> Every game includes a test to verify whether the request might be legitimate (e.g., genuine organizational crisis). Always test innocence before assuming tactical manipulation.
@@ -5908,14 +5905,6 @@ const DEF_CUE_GROUPS = [
 const DEF_CUES = {};
 DEF_CUE_GROUPS.forEach(g => g.cues.forEach(([id, label]) => { DEF_CUES[id] = { label: label, group: g.id }; }));
 
-const DEF_DOMAINS = {
-    general: { label: 'General business', res: 'team capacity', commit: '[Commitment A] and [Commitment B]', base: 'the approved plan', unit: 'person-weeks', slip: '[Commitment A] slips by [N] weeks', tracker: 'the shared plan' },
-    eng: { label: 'Engineering / Product', res: 'engineering capacity', commit: '[Deliverable A] and [Deliverable B]', base: 'the approved roadmap', unit: 'engineering weeks', slip: '[Deliverable A] moves out of this quarter by [N] weeks', tracker: 'the portfolio tracker' },
-    ops: { label: 'Operations / Support', res: 'staffing and queue coverage', commit: '[SLA target] and [backlog target]', base: 'the approved staffing plan', unit: 'agent-hours', slip: '[SLA target] drops to [X]% for [N] weeks', tracker: 'the staffing plan' },
-    fin: { label: 'Finance / Compliance', res: 'team hours and review capacity', commit: '[close / audit deliverables]', base: 'the approved calendar', unit: 'review hours', slip: '[close / audit milestone] moves by [N] days', tracker: 'the controls calendar' },
-    sales: { label: 'Sales / Customer Success', res: 'account-team time', commit: '[Renewal A] and [Onboarding B]', base: 'the approved account plan', unit: 'account-hours', slip: '[Renewal A] coverage drops for [N] weeks', tracker: 'the account plan' }
-};
-
 const DEF_MEMO_KINDS = {
     tradeoff: 'Priority & trade-off sign-off',
     confirm: 'Confirming a verbal request',
@@ -6411,7 +6400,6 @@ const DEF_STORE_KEY = 'bridgecraft_defense_prefs';
 const DEF_CUSTOM_KEY = 'bridgecraft_custom_games';
 const defState = {
     tab: 'live',
-    domain: 'general',
     tone: 'standard',
     cues: new Set(),
     ctx: { req: '', boss: '', peer: '' },
@@ -6472,13 +6460,12 @@ function defValidateCatalog() {
 function defLoadPrefs() {
     try {
         const p = JSON.parse(localStorage.getItem(DEF_STORE_KEY) || '{}');
-        if (p.domain && DEF_DOMAINS[p.domain]) defState.domain = p.domain;
         if (p.tone === 'standard' || p.tone === 'deferential') defState.tone = p.tone;
     } catch (e) {}
 }
 
 function defSavePrefs() {
-    try { localStorage.setItem(DEF_STORE_KEY, JSON.stringify({ domain: defState.domain, tone: defState.tone })); } catch (e) {}
+    try { localStorage.setItem(DEF_STORE_KEY, JSON.stringify({ tone: defState.tone })); } catch (e) {}
 }
 
 function defInit() {
@@ -6486,12 +6473,7 @@ function defInit() {
     defState.ready = true;
     defLoadPrefs();
     defValidateCatalog();
-    const dom = document.getElementById('def-domain');
-    if (dom) {
-        dom.innerHTML = Object.keys(DEF_DOMAINS).map(k => '<option value="' + k + '">' + defEsc(DEF_DOMAINS[k].label) + '</option>').join('');
-        dom.value = defState.domain;
-    }
-    const tone = document.getElementById('def-tone');
+        const tone = document.getElementById('def-tone');
     if (tone) tone.value = defState.tone;
     try {
         const qs = new URLSearchParams(window.location.search);
@@ -6502,7 +6484,6 @@ function defInit() {
     defShow(defState.tab, true);
 }
 
-function defSetDomain(v) { if (DEF_DOMAINS[v]) { defState.domain = v; defSavePrefs(); defRefresh(); } }
 function defSetTone(v) { defState.tone = (v === 'deferential') ? 'deferential' : 'standard'; defSavePrefs(); defRefresh(); }
 function defRefresh() { defShow(defState.tab, true); }
 
@@ -6591,10 +6572,9 @@ function defLive(g) {
     return defSub(g.live);
 }
 
-// ---------- memo builder (domain-neutral, vocabulary swapped by field) ----------
+// ---------- memo builder (universal professional business phrasing) ----------
 function defMemo(kind) {
     const c = defCtx();
-    const v = DEF_DOMAINS[defState.domain] || DEF_DOMAINS.general;
     const isDef = defState.tone === 'deferential';
     const opens = {
         tradeoff: isDef
@@ -6617,40 +6597,40 @@ function defMemo(kind) {
     const close = isDef ? 'With respect and thanks,' : 'Thanks,';
     if (kind === 'tradeoff') {
         return 'Subject: Priority alignment and trade-off for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
-            '\n\n1. CURRENT BASELINE\n   Before today, ' + v.res + ' was committed to ' + v.commit + ' per ' + v.base + '.' +
-            '\n\n2. THE REQUEST\n   ' + c.req + ' is new work, estimated at [N] ' + v.unit + '.' +
-            '\n\n3. OPTIONS\n   Option 1: start ' + c.req + ' now. Impact: ' + v.slip + '.' +
-            '\n   Option 2: keep current commitments and begin ' + c.req + ' on [date].' +
-            '\n   Option 3: a time-boxed first step of [N] days, then decide.' +
-            '\n\n4. NEXT STEP\n   Please reply with 1, 2, or 3 so I can update ' + v.tracker + '.' +
+            '\n\n1. CURRENT BASELINE\n   Before today, team capacity was committed to [Commitment A] and [Commitment B] per the approved plan.' +
+            '\n\n2. THE REQUEST\n   ' + c.req + ' is new work, estimated at [N] days / weeks of effort.' +
+            '\n\n3. OPTIONS\n   Option 1: Start ' + c.req + ' now. Impact: [Commitment A] slips by [N] weeks.' +
+            '\n   Option 2: Maintain current commitments and begin ' + c.req + ' on [date].' +
+            '\n   Option 3: Authorize a time-boxed first step of [N] days, then re-evaluate.' +
+            '\n\n4. NEXT STEP\n   Please reply with 1, 2, or 3 so I can update the shared tracking plan.' +
             '\n\n' + close + '\n[Your name]';
     }
     if (kind === 'confirm') {
         return 'Subject: Confirming our conversation: ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
-            '\n\nWhat I understood:\n   - Request: ' + c.req + '\n   - Approver: ' + c.boss + '\n   - Scope (included / excluded): [ ]\n   - Due date: [ ]\n   - Where the ' + v.res + ' comes from: [ ]' +
+            '\n\nWhat I understood:\n   - Request: ' + c.req + '\n   - Approver: ' + c.boss + '\n   - Scope (included / excluded): [ ]\n   - Due date: [ ]\n   - Source of team capacity / trade-off: [ ]' +
             '\n\nIf any of this differs, please reply by [time]. Otherwise I will proceed on this basis and treat it as approved.' +
             '\n\n' + close + '\n[Your name]';
     }
     if (kind === 'criteria') {
         return 'Subject: Acceptance criteria for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
-            '\n\nSo that I deliver to your standard:\n   1. "Done" means: [ ]\n   2. Measured by: [ ]\n   3. Due: [date]\n   4. Approver: ' + c.boss +
-            '\n\nAny change after this point I will log as a change request with its impact on ' + v.res + ' (' + v.base + ').' +
+            '\n\nSo that I deliver to your standard:\n   1. "Done" means: [ ]\n   2. Measured by: [ ]\n   3. Due date: [date]\n   4. Approver: ' + c.boss +
+            '\n\nAny change after this point I will log as a change request with its impact on team capacity and the approved plan.' +
             '\n\n' + close + '\n[Your name]';
     }
     if (kind === 'default') {
         return 'Subject: Plan of record for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
-            '\n\nUnless I am redirected in writing by [time], ' + v.res + ' stays on ' + v.commit + ' per ' + v.base + '.' +
-            '\n\nTo begin ' + c.req + ' I need: (a) written acceptance criteria and a target date, and (b) authorization to pause [item].' +
+            '\n\nUnless I am redirected in writing by [time], team capacity remains dedicated to [Commitment A] and [Commitment B] per the approved plan.' +
+            '\n\nTo begin ' + c.req + ' I need: (a) written acceptance criteria and a target date, and (b) authorization to pause [Commitment A].' +
             '\n\nNo reply is needed if the current plan is right.' +
             '\n\n' + close + '\n[Your name]';
     }
     if (kind === 'joint') {
         return 'Subject: Joint capacity plan for ' + c.req + '\nTo: ' + c.boss + '\nCC: ' + c.peer + '\n\n' + open +
             '\n\n' + c.peer + ' and I coordinated so that no single team is silently overloaded.' +
-            '\n\n1. BASELINE: ' + v.commit + ' per ' + v.base + '.' +
-            '\n2. REQUEST: ' + c.req + ' (est. [N] ' + v.unit + ').' +
+            '\n\n1. BASELINE: [Commitment A] and [Commitment B] per the approved plan.' +
+            '\n2. REQUEST: ' + c.req + ' (est. [N] days / weeks of effort).' +
             '\n3. OPTIONS: (A) pause [item] across both teams to fund it; (B) finish current commitments, then start on [date].' +
-            '\n4. REVIEW: both of us will attend [meeting] to walk through ' + v.tracker + ' with you.' +
+            '\n4. REVIEW: Both of us will attend [meeting] to walk through the shared tracking plan with you.' +
             '\n\n' + close + '\n[Your name] and ' + c.peer;
     }
     if (kind === 'factlog') {

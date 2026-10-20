@@ -15,7 +15,7 @@ Introduced dedicated Upward Defense operational lens to equip managers and team 
 - **Upward Defense Operational Lens (?lens=power_defense):** Dedicated workbench swapping into active view with Live Card, Decode, Games Library, Training, and Escalation tabs.
 - **Interactive Flashcard Training:** Active-recall training loop testing recognition of cues, designed payoffs, innocent alternative tests, and spoken counters.
 - **Multi-Cue Decoder & Innocent Alternative Checks:** 25 observable cues across What They Say, How They Deliver, and How It Is Structured, with automatic reality check against legitimate organizational crises.
-- **Domain-Neutral Trade-Off Memos:** Auto-generated written governance memos across Engineering, IT Ops, Finance, Sales, and General vocabularies.
+- **Universal Professional Governance Memos:** Streamlined written memo templates under universally applicable business phrasing (team capacity, approved plan, committed deliverables) and eliminated redundant "Your field" dropdown from the Upward Defense workbench.
 - **Field Documentation:** Expanded in-app Strategic Field Manual, README.md, and BRIDGE_CRAFT_MASTER_GUIDE.md with comprehensive operational and training protocols.
 
 ---

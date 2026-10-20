@@ -167,7 +167,7 @@ The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **
      - *How it is Structured:* Verbal-only mandates, bypassing PMO/lead, dividing peers, shifting criteria.
    - Calculates diagnostic confidence against the 27-game taxonomy.
    - **The Innocent Alternative Check:** Highlights explicit operational checks (*"Could this be innocent?"*) to differentiate legitimate organizational fire drills from manipulative games, preventing hyper-vigilant misattribution.
-   - **Domain-Neutral Confirmation Memos:** Auto-generates structured written plans of record across 5 specialized vocabularies: Engineering (PRs, sprints, tech debt), IT Operations (tickets, SLAs, incidents), Finance (budgets, forecasts, audits), Sales (pipeline, accounts, deals), and General Business.
+   - **Domain-Neutral Confirmation Memos:** Auto-generates structured, universally adaptable written plans of record and trade-off ledgers suitable for any organizational encounter (engineering, operations, finance, sales, general management).
 
 3. **📚 Games Library (27 Documented Patterns across TA, Karpman, Influence, and Scope):**
    - **Transactional Analysis (Eric Berne):** *NIGYSOB ("Now I've Got You, Son of a Bitch")*, *Why Don't You / Yes But*, *Guilt / Debt Induction*.
