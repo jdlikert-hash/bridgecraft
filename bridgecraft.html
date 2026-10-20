@@ -6622,6 +6622,15 @@ function defMatches() {
     return out;
 }
 
+function defAccordionToggle(el) {
+    if (!el.open) return;
+    const group = el.getAttribute('name');
+    if (!group) return;
+    document.querySelectorAll('details[name="' + group + '"]').forEach(d => {
+        if (d !== el && d.open) d.open = false;
+    });
+}
+
 function defConfidence(m) {
     if (m.hit.length >= 2 && m.score >= 4) return ['Strong match', 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'];
     if (m.score >= 3) return ['Probable', 'bg-amber-500/20 text-amber-300 border-amber-500/40'];
@@ -6699,14 +6708,14 @@ function defRenderResults() {
     if (!top.length) {
         html += '<div class="text-xs text-slate-400">No catalogued game matches those cues. This may be ordinary friction. Use the Live Card and keep the exchange in writing.</div>';
     }
-    top.forEach(m => { html += defGameCard(m.g, m, true); });
+    top.forEach((m, idx) => { html += defGameCard(m.g, m, idx === 0, 'def-decode-matches'); });
     if (rest.length) {
         html += '<div class="text-[11px] text-slate-400">Also possible: ' + rest.map(m => defEsc(m.g.name)).join(' &bull; ') + '</div>';
     }
     box.innerHTML = html;
 }
 
-function defGameCard(g, m, open) {
+function defGameCard(g, m, open, groupName) {
     const liveText = defLive(g);
     const memoText = defMemo(g.memo || 'tradeoff');
     let badge = '';
@@ -6718,11 +6727,13 @@ function defGameCard(g, m, open) {
     const alsoLook = m && m.miss.length ? '<p class="text-[11px] text-slate-500">Also look for: ' + m.miss.map(id => defEsc(DEF_CUES[id].label)).join('; ') + '</p>' : '';
     const fam = DEF_FAMILIES[g.family] || '';
     const row = (label, color, text) => '<div><span class="text-[10px] font-bold uppercase tracking-wider ' + color + '">' + label + '</span><p class="text-xs text-slate-200 leading-relaxed mt-0.5">' + defEsc(text) + '</p></div>';
-    return '<details ' + (open ? 'open' : '') + ' class="bg-slate-900/80 rounded-xl border border-slate-700 group">' +
+    const groupAttr = groupName ? ' name="' + defEsc(groupName) + '" ontoggle="defAccordionToggle(this)"' : '';
+    return '<details ' + (open ? 'open ' : '') + groupAttr + ' class="bg-slate-900/80 rounded-xl border border-slate-700 group def-game-card">' +
         '<summary class="cursor-pointer list-none p-4 flex flex-wrap items-center justify-between gap-2"><div>' +
-        '<span class="text-sm font-bold text-white">' + defEsc(g.name) + '</span>' +
+        '<span class="text-sm font-bold text-white group-hover:text-amber-200 transition-colors">' + defEsc(g.name) + '</span>' +
         '<span class="block text-[10px] text-slate-500 mt-0.5">' + defEsc(fam) + (g.custom ? ' &bull; custom' : '') + '</span></div>' +
-        '<div class="flex items-center gap-2">' + badge + (g.escalate ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-rose-500/20 text-rose-300 border-rose-500/40">Review escalation</span>' : '') + '</div></summary>' +
+        '<div class="flex items-center gap-2">' + badge + (g.escalate ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-rose-500/20 text-rose-300 border-rose-500/40">Review escalation</span>' : '') +
+        '<span class="text-xs text-slate-500 group-open:rotate-180 transition-transform">▼</span></div></summary>' +
         '<div class="px-4 pb-4 space-y-3 border-t border-slate-800 pt-3">' +
         (matched ? '<div class="flex flex-wrap gap-1.5">' + matched + '</div>' : '') + alsoLook +
         '<p class="text-xs text-slate-300 leading-relaxed">' + defEsc(g.summary) + '</p>' +
@@ -6735,8 +6746,13 @@ function defGameCard(g, m, open) {
         '<div class="bg-emerald-950/30 p-3 rounded-lg border border-emerald-800/50 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-emerald-300">Say this, live</span></div>' +
         '<p class="text-sm text-slate-100 italic">"' + defEsc(liveText) + '"</p></div>' +
         (g.avoid ? '<p class="text-xs text-rose-200"><strong class="text-rose-300">Avoid:</strong> ' + defEsc(g.avoid) + '</p>' : '') +
-        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_MEMO_KINDS[g.memo || 'tradeoff']) + '</span></div>' +
-        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto">' + defEsc(memoText) + '</pre></div>' +
+        '<details class="bg-slate-950/80 rounded-lg border border-slate-800 group/memo overflow-hidden">' +
+        '<summary class="cursor-pointer list-none p-3 flex items-center justify-between text-[11px] font-semibold text-amber-300 hover:text-amber-200 transition-colors select-none">' +
+        '<span class="flex items-center gap-1.5"><span>📝</span><span>' + defEsc(DEF_MEMO_KINDS[g.memo || 'tradeoff']) + '</span></span>' +
+        '<span class="text-[10px] text-slate-400 font-normal">Click to view / copy follow-up draft ▼</span></summary>' +
+        '<div class="p-3 pt-0 space-y-2 border-t border-slate-800/80 mt-2">' +
+        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto bg-slate-900/90 p-2.5 rounded border border-slate-800 select-all">' + defEsc(memoText) + '</pre>' +
+        '</div></details>' +
         '<p class="text-[10px] text-slate-500">Source: ' + defEsc(g.source || '') + '</p>' +
         '</div></details>';
 }
@@ -6765,7 +6781,7 @@ function defLibBody(byFam) {
     Object.keys(byFam).forEach(f => { if (fams.indexOf(f) === -1) fams.push(f); });
     if (!fams.length) return '<p class="text-xs text-slate-400">No games match that search.</p>';
     return fams.map(f => '<div class="space-y-2"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">' + defEsc(DEF_FAMILIES[f] || f) + '</span>' +
-        byFam[f].map(g => defGameCard(g, null, false)).join('') + '</div>').join('');
+        byFam[f].map(g => defGameCard(g, null, false, 'def-lib-matches')).join('') + '</div>').join('');
 }
 
 function defLibSearch(v) {

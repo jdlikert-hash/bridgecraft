@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.2] - 2026-10-20 — *Decode Section Streamlining & Mutex Accordion*
+
+Redesigned Diagnostic Decoder results to eliminate vertical text bloat during post-encounter debriefs.
+
+### Changed
+- **Single-Open Mutex Accordion:** Only the top-scoring candidate game opens by default upon cue selection; secondary and tertiary matches remain collapsed. Opening a different candidate automatically collapses the previous one (`name="def-decode-matches"` with cross-browser `defAccordionToggle`).
+- **Collapsible Governance Memo Drawers:** Nested lengthy written email templates inside interactive memo drawers (`[ 📝 View / copy follow-up draft ▼ ]`), reducing card height by ~60% and focusing the debrief experience on tactical dynamics (payoff, hook, innocent alternative, and spoken counters).
+- **Games Library Alignment:** Applied mutex group behavior and collapsed memo drawers across the 27-game catalog for clean, low-scroll exploration.
+
+---
+
 ## [2.3.1] - 2026-10-20 — *Executive Tone Unification & Workbench Header Decluttering*
 
 Consolidated verbal counters, grounding cards, and written governance memos across Upward Defense into a unified, high-EQ executive baseline. Removed the global "Tone" dropdown from the workbench header for a distraction-free, configuration-less user interface.
