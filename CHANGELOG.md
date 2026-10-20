@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.1] - 2026-10-20 — *Executive Tone Unification & Workbench Header Decluttering*
+
+Consolidated verbal counters, grounding cards, and written governance memos across Upward Defense into a unified, high-EQ executive baseline. Removed the global "Tone" dropdown from the workbench header for a distraction-free, configuration-less user interface.
+
+### Changed
+- **Executive-Ready Phrasing Baseline:** Baked polished, high-deference counters directly into all 27 catalog games, in-the-room Live Card steps, and written governance memos—holding strict capacity and governance boundaries while honoring executive relationships.
+- **Interface Decluttering:** Removed the global "Tone" dropdown selector (`Standard` vs. `High-deference (formal hierarchy)`) and associated preference persistence, rendering a clean workbench header displaying only the title, badge, and navigation tabs.
+- **Documentation Alignment:** Synchronized README, Master Guide, in-app Field Guide, and file trio (`bridgecraft.html`, `index.html`, `the_behavioral_profiler.html`).
+
+---
+
 ## [2.3.0] - 2026-10-19 — *Upward Defense Lens, Flashcard Drills & Field Documentation*
 
 Introduced dedicated Upward Defense operational lens to equip managers and team leads against transactional compliance games, coercive power asymmetries, and staged urgency. Added an interactive 5-tab workbench including 30-second Live Card, multi-cue Decoder with innocent alternative checks, 15-game catalog, interactive Scenario Practice, active-recall Flashcard Drills, and an objective Escalation checklist with private incident logging.

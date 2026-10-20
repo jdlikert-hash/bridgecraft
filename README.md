@@ -157,7 +157,7 @@ The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **
    - **Pause:** Slow your breathing, keep feet flat, pick up a pen. Delay is an operational defense. Your body will naturally want to agree to relieve discomfort.
    - **Acknowledge:** Validate the priority, not the blame or false premise (*"I hear that [Request] is an executive priority"*).
    - **Pin It:** Never commit to dates, numbers, or scope in the room. Offer to send written trade-off options by a specific time you control.
-   - **Tone Modulation (Standard vs. High-Deference):** Toggle High-Deference when operating in strict hierarchical or high power-distance environments. Frame capacity constraints as a respectful consultation (*"To ensure I do not compromise your committed deliverables..."*) without showing defiance.
+   - **Executive-Ready Phrasing:** Grounding scripts and governance memos use a unified, high-EQ executive baseline—framing capacity constraints as a respectful consultation (*"To ensure our team executes against your priorities without jeopardizing existing commitments..."*) without showing defiance or requiring pre-configuration.
    - **Exit Lines:** Scripted boundary phrases to pause the discussion when cornered without escalating tension.
 
 2. **🔍 Diagnostic Decoder (Multi-Cue Diagnostic Engine):**

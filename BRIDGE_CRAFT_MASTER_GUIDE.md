@@ -517,8 +517,8 @@ BridgeCraft is not limited to engineering outages. Clicking any lens in the top 
 - **Core Use Cases:** Navigating coercive senior power dynamics, strategic urgency theater, unfunded scope mandates, and transactional compliance games (Berne's TA, Karpman Drama Triangle, Cialdini influence principles).
 - **The Theoretical Shift:** Standard PCM assumes distress is genuine; Upward Defense addresses situations where *apparent distress is an instrumental act* designed to bypass governance and force uncommitted delivery.
 - **The 5-Tab Workbench Architecture:**
-  1. **⚡ Live Card:** 30-second grounding protocol (Pause &rarr; Acknowledge &rarr; Pin It) with Standard vs. High-Deference tone toggle and clean exit lines.
-  2. **🔍 Multi-Cue Decoder:** Diagnoses 25 observable cues across What They Say, How They Deliver, and How It Is Structured. Includes diagnostic confidence scoring, universally adaptable written confirmation memos and trade-off ledgers, and the critical **Innocent Alternative Reality Check** to prevent false-positive paranoia.
+  1. **⚡ Live Card:** 30-second grounding protocol (Pause &rarr; Acknowledge &rarr; Pin It) with unified executive-ready phrasing and clean exit lines.
+  2. **🔍 Multi-Cue Decoder:** Diagnoses 37 observable cues across What They Say, How They Deliver, and How It Is Structured. Includes diagnostic confidence scoring, universally adaptable written confirmation memos and trade-off ledgers, and the critical **Innocent Alternative Reality Check** to prevent false-positive paranoia.
   3. **📚 Games Library:** 27 cataloged games with complete breakdowns of payoff, psychological hook, innocent alternative test, and counter-moves. Features a local JSON builder for adding custom organization-specific tactics.
   4. **🎯 Training Module (Scenarios & Flashcards):**
      - **Scenario Practice:** 22 multi-step workplace dilemmas (including positive/innocent requests) to train calibrated recognition under pressure.
