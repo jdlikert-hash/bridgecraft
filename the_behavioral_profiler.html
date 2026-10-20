@@ -6373,15 +6373,24 @@ const DEF_SCENARIOS = [
 ];
 
 const DEF_ESCALATION_ITEMS = [
-    { id: 'e1', sev: 'high', text: "Explicit or implied threat to my job, pay, immigration status, safety, or personal life" },
-    { id: 'e3', sev: 'high', text: "Physical intimidation (blocking, throwing things, touching, cornering)" },
-    { id: 'e4', sev: 'high', text: "Asked to falsify records, hide information, or break a law or policy" },
-    { id: 'e5', sev: 'high', text: "Retaliation after I raised a concern, complaint, or boundary" },
-    { id: 'e6', sev: 'high', text: "Remarks about a protected characteristic (age, gender, religion, ethnicity or origin, disability, etc.)" },
-    { id: 'e7', sev: 'medium', text: "Public humiliation in front of colleagues" },
-    { id: 'e8', sev: 'medium', text: "Repeated pattern even after I stated a boundary in writing" },
-    { id: 'e9', sev: 'medium', text: "Asked to keep my workload or capacity secret from peers or my manager" },
-    { id: 'e10', sev: 'medium', text: "Compensation, assignments, or reviews tied to saying yes" }
+    // TIER 1: RED - SEVERE (Zero-Tolerance Circuit Breakers)
+    { id: 'e1', sev: 'red', text: "Explicit or implied threat to job, compensation, immigration/visa status, physical safety, or personal life" },
+    { id: 'e2', sev: 'red', text: "Physical intimidation, blocking exits, throwing objects, unwanted physical contact, or cornering" },
+    { id: 'e3', sev: 'red', text: "Directed to falsify financial or operational records, conceal audit data, or violate a law or corporate policy" },
+    { id: 'e4', sev: 'red', text: "Retaliation or punitive action following a raised concern, compliance disclosure, or formal boundary" },
+    { id: 'e5', sev: 'red', text: "Discriminatory comments, slurs, or harassment targeting a protected characteristic (race, gender, age, disability, religion, etc.)" },
+
+    // TIER 2: ORANGE - PROBLEMATIC (Managerial Misconduct & Bad-Faith Dynamics)
+    { id: 'e6', sev: 'orange', text: "Public berating, shouting, or deliberate humiliation in front of colleagues or clients" },
+    { id: 'e7', sev: 'orange', text: "Repeated violation of written agreements, project baselines, or stated boundaries" },
+    { id: 'e8', sev: 'orange', text: "Directed to keep assignments, uncommitted workload, or executive demands secret from your team or manager" },
+    { id: 'e9', sev: 'orange', text: "Performance evaluations, project allocations, or compensation explicitly conditioned on informal personal favors or 'saying yes'" },
+
+    // TIER 3: YELLOW - CRINGE (Boundary-Pushing Friction & Petty Tactics)
+    { id: 'e10', sev: 'yellow', text: "Theatrical sighing, eye-rolling, sarcastic jabs, or condescending side comments in meetings" },
+    { id: 'e11', sev: 'yellow', text: "Late Friday afternoon 'urgent emergency' dumps framed as personal favors to bypass intake review" },
+    { id: 'e12', sev: 'yellow', text: "Dramatic emotional guilt trips ('I guess I won\'t be able to sleep this weekend because your team won\'t help')" },
+    { id: 'e13', sev: 'yellow', text: "Selectively claiming credit for your deliverables while offloading blame for upstream blockers" }
 ];
 
 // ============================================================================
@@ -6953,52 +6962,109 @@ function defCardNext() { defState.train.fcIdx++; defState.train.fcOpen = false; 
 
 // ---------- ESCALATION ----------
 function defRenderEscalation(panel) {
-    const items = DEF_ESCALATION_ITEMS.map(it =>
-        '<label class="flex items-start gap-2 p-2 rounded-lg border border-slate-700 bg-slate-900/60 text-xs text-slate-200 cursor-pointer hover:border-slate-500">' +
-        '<input type="checkbox" class="mt-0.5" ' + (defState.esc.has(it.id) ? 'checked' : '') + ' onchange="defToggleEsc(\'' + it.id + '\')">' +
-        '<span><span class="text-[10px] font-bold uppercase ' + (it.sev === 'high' ? 'text-rose-300' : 'text-amber-300') + '">' + (it.sev === 'high' ? 'Serious' : 'Warning sign') + '</span><br>' + defEsc(it.text) + '</span></label>').join('');
+    const renderTier = (tierKey, title, badgeColor, borderColor, subtext) => {
+        const tierItems = DEF_ESCALATION_ITEMS.filter(it => it.sev === tierKey);
+        return '<div class="rounded-xl border ' + borderColor + ' p-4 space-y-2.5">' +
+            '<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">' +
+            '<span class="text-xs font-bold uppercase tracking-wider ' + badgeColor + '">' + title + '</span>' +
+            '<span class="text-[11px] text-slate-400">' + subtext + '</span></div>' +
+            '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">' +
+            tierItems.map(it => {
+                const checked = defState.esc.has(it.id);
+                return '<label class="flex items-start gap-2.5 p-2.5 rounded-lg border transition-colors ' +
+                    (checked ? 'border-amber-400 bg-slate-900 font-medium text-white shadow-sm' : 'border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700') +
+                    ' text-xs cursor-pointer select-none">' +
+                    '<input type="checkbox" class="mt-0.5 accent-amber-500 rounded" ' + (checked ? 'checked' : '') + ' onchange="defToggleEsc(\'' + it.id + '\')">' +
+                    '<span class="leading-relaxed">' + defEsc(it.text) + '</span></label>';
+            }).join('') +
+            '</div></div>';
+    };
+
+    const redTier = renderTier('red', '🛑 Severe (Zero-Tolerance Circuit Breaker)', 'text-rose-400', 'border-rose-500/40 bg-rose-950/15', 'A single check trips the circuit breaker immediately. Do not handle interpersonally.');
+    const orangeTier = renderTier('orange', '⚠️ Problematic (Bad-Faith Management)', 'text-amber-400', 'border-amber-500/30 bg-amber-950/15', 'Cumulative misconduct. 1 = Document privately; 2+ = Consult skip-level or HR.');
+    const yellowTier = renderTier('yellow', '🟡 \'Cringe\' (Boundary-Pushing Friction)', 'text-yellow-300', 'border-yellow-500/30 bg-yellow-950/15', 'Petty tactics. Manage with Live Card scripts and written trade-offs.');
+
     const factlogText = defMemo('factlog');
-    panel.innerHTML = '<div class="bg-slate-800 rounded-xl p-5 border border-rose-500/30 space-y-4">' +
-        '<div><h3 class="text-base font-bold text-white">When it stops being a game</h3>' +
-        '<p class="text-xs text-slate-400 leading-relaxed">Managing a tactic is one thing. Threats, retaliation, or intimidation are not yours to manage alone. Tick anything that applies.</p></div>' +
-        '<div class="grid grid-cols-1 md:grid-cols-2 gap-2">' + items + '</div>' +
+    panel.innerHTML = '<div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-5">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div><h3 class="text-base font-bold text-white">When It Stops Being a Game</h3>' +
+        '<p class="text-xs text-slate-400 leading-relaxed max-w-2xl">Upward Defense scripts are for managing interpersonal workplace tactics. Harassment, threats, and illegal directives are not games to negotiate. Calibrate the situation below:</p></div>' +
+        '<button type="button" onclick="defClearEsc()" class="text-xs px-2.5 py-1 rounded bg-slate-900 border border-slate-700 text-slate-300 hover:text-white">Clear all</button></div>' +
         '<div id="def-esc-result"></div>' +
-        '<div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 space-y-1.5"><div><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Private incident record (template)</span></div>' +
-        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">' + defEsc(factlogText) + '</pre></div>' +
-        '<p class="text-[11px] text-slate-500">This tool offers general guidance, not legal advice. Rules and protections vary by country and employer. Follow your company policy on handling confidential information when keeping records.</p></div>';
+        '<div class="space-y-3.5">' + redTier + orangeTier + yellowTier + '</div>' +
+        '<details class="bg-slate-950/80 rounded-lg border border-slate-800 group/factlog overflow-hidden">' +
+        '<summary class="cursor-pointer list-none p-3.5 flex items-center justify-between text-xs font-semibold text-amber-300 hover:text-amber-200 transition-colors select-none">' +
+        '<span class="flex items-center gap-2"><span>📋</span><span>Private Incident Record Template (for HR / Legal Dossier)</span></span>' +
+        '<span class="text-[11px] text-slate-400 font-normal">Click to view / copy template ▼</span></summary>' +
+        '<div class="p-3.5 pt-0 space-y-2 border-t border-slate-800/80 mt-2">' +
+        '<pre class="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-auto bg-slate-900/90 p-3 rounded border border-slate-800 select-all">' + defEsc(factlogText) + '</pre>' +
+        '</div></details>' +
+        '<p class="text-[11px] text-slate-500">This tool offers organizational and psychological triage guidance, not formal legal counsel. Employment protections vary by jurisdiction and contract. Follow your company policy on handling proprietary information when storing private records.</p></div>';
     defRenderEscResult();
 }
 
-function defToggleEsc(id) { if (defState.esc.has(id)) defState.esc.delete(id); else defState.esc.add(id); defRenderEscResult(); }
+function defToggleEsc(id) {
+    if (defState.esc.has(id)) defState.esc.delete(id); else defState.esc.add(id);
+    defRenderEscalation(document.getElementById('def-panel'));
+}
+
+function defClearEsc() {
+    defState.esc.clear();
+    defRenderEscalation(document.getElementById('def-panel'));
+}
 
 function defRenderEscResult() {
     const box = document.getElementById('def-esc-result');
     if (!box) return;
     const sel = DEF_ESCALATION_ITEMS.filter(i => defState.esc.has(i.id));
-    const high = sel.filter(i => i.sev === 'high').length;
-    const med = sel.filter(i => i.sev === 'medium').length;
-    const steps = (list) => '<ol class="list-decimal list-inside text-xs text-slate-200 space-y-1 mt-2">' + list.map(s => '<li>' + s + '</li>').join('') + '</ol>';
-    if (high > 0) {
-        box.innerHTML = '<div class="p-4 rounded-xl border border-rose-500/60 bg-rose-950/40"><strong class="text-rose-300 text-sm">Escalate: do not handle this alone.</strong>' +
+    const redCount = sel.filter(i => i.sev === 'red').length;
+    const orangeCount = sel.filter(i => i.sev === 'orange').length;
+    const yellowCount = sel.filter(i => i.sev === 'yellow').length;
+
+    const steps = (list) => '<ol class="list-decimal list-inside text-xs text-slate-200 space-y-1.5 mt-2">' + list.map(s => '<li class="leading-relaxed">' + s + '</li>').join('') + '</ol>';
+
+    if (redCount > 0) {
+        const extraCount = orangeCount + yellowCount;
+        const extraNote = extraCount > 0
+            ? '<div class="mt-2 text-[11px] text-rose-200/80 font-mono">📁 ' + extraCount + ' secondary behavior(s) tagged as corroborating evidence for your incident dossier.</div>'
+            : '';
+        box.innerHTML = '<div class="p-5 rounded-xl border-2 border-rose-500/80 bg-rose-950/50 shadow-lg shadow-rose-950/50 space-y-2">' +
+            '<div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10px] tracking-wider uppercase animate-pulse">Critical Strike</span>' +
+            '<strong class="text-rose-200 text-sm">CIRCUIT BREAKER TRIPPED — DO NOT HANDLE INTERPERSONALLY</strong></div>' +
+            '<p class="text-xs text-rose-100 leading-relaxed"><strong>A single Red Line violation is sufficient for formal escalation.</strong> Stop using conversational counter-moves, emotional de-escalation, or negotiation memos. This is not a transactional game; this is a formal compliance, ethics, or legal violation.</p>' +
             steps([
-                "If you feel physically unsafe, leave and tell someone you trust right away.",
-                "Write down the exact words, date, time, place, and witnesses now (use the private template below).",
-                "Do not retaliate, bargain, or delete anything. Keep your replies brief, factual, and polite.",
-                "Report through your company's HR / employee-relations, ethics or compliance hotline, or a skip-level leader you trust. Use the channel that is independent of the person involved.",
-                "Consider confidential support: an employee assistance program, a union or employee representative, or an employment lawyer. In many places there are protections against retaliation.",
-                "If a peer is also affected, agree to each record and report your own account."
-            ]) + '</div>';
-    } else if (med >= 2) {
-        box.innerHTML = '<div class="p-4 rounded-xl border border-amber-500/60 bg-amber-950/30"><strong class="text-amber-300 text-sm">Document and consult.</strong>' +
+                "<strong>Safety First:</strong> If you feel physically cornered, threatened, or unsafe, remove yourself from the space immediately and inform someone you trust.",
+                "<strong>Log Exact Words:</strong> Record dates, exact quotes, timestamps, and all present witnesses immediately (use the Private Incident Record template below).",
+                "<strong>Do Not Bargain or Retaliate:</strong> Cease verbal debate. Keep all future communication strictly in writing, brief, polite, and fact-focused.",
+                "<strong>Report Independently:</strong> File a formal report through an independent channel: Ethics/Compliance Hotline, Employee Relations, or a trusted skip-level leader outside the perpetrator's reporting chain.",
+                "<strong>Seek Protected External Support:</strong> Contact your Employee Assistance Program (EAP), a union/employee representative, or an employment attorney. Good-faith reporting is legally protected against retaliation in many jurisdictions."
+            ]) + extraNote + '</div>';
+    } else if (orangeCount >= 2) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-amber-500/70 bg-amber-950/35 space-y-1.5">' +
+            '<div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-amber-600 text-white font-bold text-[10px] tracking-wider uppercase">Pattern Detected</span>' +
+            '<strong class="text-amber-300 text-sm">MANAGERIAL MISCONDUCT — DOCUMENT & CONSULT</strong></div>' +
+            '<p class="text-xs text-amber-100/90 leading-relaxed">Multiple bad-faith management behaviors confirmed (' + orangeCount + ' observed). This exceeds ordinary workplace friction.</p>' +
             steps([
-                "Keep a dated private record of each incident and quote exact words.",
-                "Keep using written confirmations so there is a trail.",
-                "Quietly consult HR, a mentor, or a trusted skip-level for guidance before the pattern escalates."
+                "<strong>Maintain a Timeline:</strong> Keep a dated private log quoting exact statements and noting affected colleagues.",
+                "<strong>Enforce Written Baselines:</strong> Stop accepting verbal-only directives. Route every request through a written Plan of Record memo.",
+                "<strong>Schedule Guidance:</strong> Meet with a trusted skip-level mentor or HR business partner to review your documented timeline before the dynamic worsens."
             ]) + '</div>';
-    } else if (sel.length) {
-        box.innerHTML = '<div class="p-4 rounded-xl border border-sky-500/40 bg-sky-950/20"><strong class="text-sky-300 text-sm">Keep managing it, and keep notes.</strong><p class="text-xs text-slate-300 mt-1">One warning sign is worth recording. If it repeats or another box applies, return here.</p></div>';
+    } else if (orangeCount === 1) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-amber-500/40 bg-amber-950/20 space-y-1">' +
+            '<strong class="text-amber-300 text-sm">⚠️ Isolated Warning Sign Logged</strong>' +
+            '<p class="text-xs text-slate-300 leading-relaxed">One bad-faith management behavior logged. Maintain a private dated note quoting the exact statement. If this behavior repeats or a second indicator appears, escalate to external consultation.</p></div>';
+    } else if (yellowCount > 0) {
+        box.innerHTML = '<div class="p-4 rounded-xl border border-yellow-500/40 bg-yellow-950/20 space-y-1.5">' +
+            '<div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-yellow-600 text-slate-950 font-bold text-[10px] tracking-wider uppercase">Interpersonal Friction</span>' +
+            '<strong class="text-yellow-300 text-sm">PETTY TACTICS / CRINGE — MANAGE WITH WORKBENCH SCRIPTS</strong></div>' +
+            '<p class="text-xs text-slate-300 leading-relaxed">These behaviors are annoying, theatrical, and unprofessional, but remain within the boundary of manageable workplace tactics:</p>' +
+            steps([
+                "<strong>Do Not Take the Bait:</strong> Refuse to absorb manufactured guilt, dramatic sighs, or theatrical panic.",
+                "<strong>Deploy the ⚡ Live Card:</strong> Use scripted verbal grounding (<em>'I hear that this is a priority; I will follow up with capacity options by [time]'</em>).",
+                "<strong>Pin to Trade-offs:</strong> Route the request into a written Trade-Off Memo (<em>Plan of Record</em>).",
+                "<strong>Monitor for Escalation:</strong> If behavior crosses into public humiliation, personal threats, or retaliation, return to this screen immediately."
+            ]) + '</div>';
     } else {
-        box.innerHTML = '<div class="p-3 rounded-xl border border-dashed border-slate-700 text-xs text-slate-400">Nothing ticked yet.</div>';
+        box.innerHTML = '<div class="p-3.5 rounded-xl border border-dashed border-slate-700 text-xs text-slate-400">Select any observed behaviors below to calibrate the appropriate response protocol.</div>';
     }
 }
 

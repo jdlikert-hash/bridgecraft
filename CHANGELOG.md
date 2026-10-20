@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.3] - 2026-10-20 — *3-Tier Escalation Calibration: Red, Orange & Yellow*
+
+Overhauled the Upward Defense Escalation module with a 3-tier severity architecture (Red, Orange, Yellow) and a critical circuit-breaker mechanism.
+
+### Added
+- **3-Tier Severity Calibration:**
+  - **Red (Severe / Zero-Tolerance Circuit Breaker):** Direct threats to employment/safety, physical intimidation, illegal falsification directives, retaliation, and protected-class discrimination. A single check immediately trips the emergency protocol (*"Do not handle interpersonally"*).
+  - **Orange (Problematic / Bad-Faith Management):** Public humiliation, repeated boundary violations, demanded secrecy, and coerced compliance. 1 check = document privately; 2+ checks = formal skip-level/HR consultation.
+  - **Yellow ('Cringe' / Boundary-Pushing Friction):** Theatrical sighs/eye-rolling, late-Friday emergency dumps, dramatic guilt trips, and credit-grabbing. Manageable via Live Card counters and written trade-offs.
+- **Circuit Breaker Action Readout:** Dynamically recalibrates based on the highest active tier. When a Red Line is tripped, any additional Orange or Yellow selections are automatically logged as corroborating evidence for the incident dossier rather than diluting the severity.
+- **Collapsible Incident Record Drawer:** Nested the private incident record template into a clean, collapsible drawer.
+
+---
+
 ## [2.3.2] - 2026-10-20 — *Decode Section Streamlining & Mutex Accordion*
 
 Redesigned Diagnostic Decoder results to eliminate vertical text bloat during post-encounter debriefs.

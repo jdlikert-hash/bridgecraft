@@ -523,7 +523,7 @@ BridgeCraft is not limited to engineering outages. Clicking any lens in the top 
   4. **🎯 Training Module (Scenarios & Flashcards):**
      - **Scenario Practice:** 22 multi-step workplace dilemmas (including positive/innocent requests) to train calibrated recognition under pressure.
      - **Interactive Flashcards:** Active-recall drill loop (Prompt &rarr; Mental Rehearsal of Cues, Payoff & Counter &rarr; Reveal &rarr; Next Card).
-  5. **🛡️ Escalation & Private Incident Record:** 10-point severity matrix separating interpersonal game tactics from actionable HR/legal threats, paired with an evidentiary incident log template (quotes, physical behaviors, witnesses; strictly zero emotional adjectives).
+  5. **🛡️ Escalation & Private Incident Record:** 3-tier severity calibration (Red Zero-Tolerance Circuit Breakers, Orange Problematic Misconduct, and Yellow Cringe Boundary-Pushing) paired with an evidentiary incident log template (quotes, physical behaviors, witnesses; strictly zero emotional adjectives).
 
 ### 11.6 URL Deep-Linking
 Directly bookmark or link your operational domain using URL query parameters:

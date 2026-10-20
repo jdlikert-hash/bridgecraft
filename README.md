@@ -186,7 +186,7 @@ The **Upward Defense** lens (`?lens=power_defense`) replaces appeasement with **
      - *Recommended drill frequency:* Run 5 flashcards weekly or right before major stakeholder negotiations.
 
 5. **🛡️ Escalation & Objective Incident Logging:**
-   - **10-Point Severity Matrix:** Evaluates observed behaviors against clear thresholds: Serious (requires immediate escalation through independent channels like ethics hotlines or HR), Warning Signs (requires written records and mentor consultation), or Routine Tactic (manage with written confirmation).
+   - **3-Tier Severity Calibration:** Evaluates observed behaviors across three color-coded tiers: **Red (Severe / Zero-Tolerance Circuit Breakers)** where a single check trips the emergency protocol (stop managing interpersonally; report through independent compliance/HR channels); **Orange (Problematic / Bad-Faith Patterns)** requiring documented skip-level consultation; and **Yellow ('Cringe' / Boundary-Pushing Friction)** managed directly with Live Card scripts and written trade-offs.
    - **Objective Incident Record Protocol:** Template for logging private incident notes that meet evidentiary standards—recording exact quotes, physical body language, times, locations, and corroborating witnesses while strictly omitting subjective emotional adjectives.
 
 ---
